@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4871931259455769849}
   - component: {fileID: 3025239217972735829}
   - component: {fileID: 8430359477232300389}
-  - component: {fileID: 2752657975570142860}
   m_Layer: 0
   m_Name: Barril
   m_TagString: Untagged
@@ -27,8 +26,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3827089417102592634}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -14.728523, y: -4.096612, z: 10}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1264,17 +1263,3 @@ MonoBehaviour:
   - a: 29
     b: 31
   m_SelectedVertices: 2100000023000000250000002700000001000000030000000500000007000000090000000b0000000d0000000f00000011000000130000001500000017000000190000001b0000001d0000001f000000
---- !u!64 &2752657975570142860
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3827089417102592634}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 0}
