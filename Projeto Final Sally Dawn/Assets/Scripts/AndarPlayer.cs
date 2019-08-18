@@ -92,6 +92,7 @@ public class AndarPlayer : MonoBehaviour
         Vector3 v = Vector3.right * horizontal * moveSpeed;
         v.y = rb.velocity.y;
         rb.velocity = v;
+       
 
 
         Vector3 targetOlhar = transform.position;
