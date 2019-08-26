@@ -15,11 +15,11 @@ MonoBehaviour:
   array:
   - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
   - {fileID: 2100000, guid: dbfac0345a0619c46aa47b43fa8b0e40, type: 2}
-  - {fileID: 2100000, guid: e2aeabeee27ca604c8d5cc2d979b660b, type: 2}
-  - {fileID: 2100000, guid: 14101fc77ec0cae449cb88b119b14b18, type: 2}
-  - {fileID: 2100000, guid: b3c38ce0b3830484788a8195e8db1aab, type: 2}
-  - {fileID: 2100000, guid: 58fbc4412c92b6d46a7e05b39843a254, type: 2}
-  - {fileID: 2100000, guid: 127e25704d9d88a4185e27a4e8e0dce8, type: 2}
-  - {fileID: 2100000, guid: 3e684dbf6a2c5384b9c0608d5e6be919, type: 2}
-  - {fileID: 2100000, guid: 6ef515df07ce2194ba9f2e03dfed8df4, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
