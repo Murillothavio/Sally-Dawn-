@@ -31,5 +31,5 @@ Material:
     - Vector1_C6B27DCB: 0.3
     - Vector1_ED243474: 2
     m_Colors:
-    - Vector2_E55DBAEC: {r: 7, g: 0, b: 0, a: 0}
+    - Vector2_E55DBAEC: {r: 2, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
