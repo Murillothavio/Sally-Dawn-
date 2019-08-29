@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class AndarPlayer : MonoBehaviour
 {
-    private bool Kfrente, Ktras, Kjump, pular;
+    private bool Kfrente, Ktras, Kjump, pular, Kagarrar, Ksegurar;
+    private bool Zona_agarrar, Zona_segurar, Zona_interagir;
+    private bool Segurando, Escalando;
     public float moveSpeed = 10, jumpforce = 10;
     [Range(5, 15)]
     public float walkSpeed = 10;
@@ -19,6 +21,7 @@ public class AndarPlayer : MonoBehaviour
     [Range(1,7)]
     public float lowJumpMultiplier = 2f;
     private Rigidbody rb;
+    private GameObject Filho;
     private Animator Acao;
     private bool Kbaixo;
     private Vector3 Virar;
@@ -36,7 +39,9 @@ public class AndarPlayer : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        Acao = GetComponent<Animator>();
+        Filho = GameObject.Find("SallyDawnMixamo@Idle");
+        Acao = Filho.GetComponent<Animator>();
+
        
     }
     void Update()
@@ -52,6 +57,10 @@ public class AndarPlayer : MonoBehaviour
             Ktras = true;
         if (Input.GetKeyDown(KeyCode.S))
             Kbaixo = true;
+        if (Input.GetKeyDown(KeyCode.Q))
+            Kagarrar = true;
+        if (Input.GetKeyDown(KeyCode.E))
+            Ksegurar = true;
         if (Input.GetKeyDown(KeyCode.Space))
             Kjump = true;
         else
@@ -63,94 +72,118 @@ public class AndarPlayer : MonoBehaviour
             Ktras = false;
         if (Input.GetKeyUp(KeyCode.S))
             Kbaixo = false;
-
+        if (Input.GetKeyUp(KeyCode.Q))
+            Kagarrar = false;
+        if (Input.GetKeyUp(KeyCode.E))
+            Ksegurar = false;
 
     }
     void Andar()
     {
-        #region andar
-        if (Kfrente)
-            horizontal = 1;
-        else if (Ktras)
-            horizontal = -1;
-        else
-            horizontal = Mathf.MoveTowards(horizontal, 0, 0.15f);
-
-        //if (horizontal == -1)
-        //    transform.Rotate(Vector3.up * 18);
-        //else if (horizontal == 1)
-        //    transform.Rotate(Vector3.zero);
-
-
-        if (horizontal != 0 && !Kbaixo)
-            moveSpeed = Mathf.MoveTowards(moveSpeed, runSpeed, currentSpeed);
-        else if (Kbaixo)
-            moveSpeed = Mathf.MoveTowards(moveSpeed, crawlSpeed,currentSpeed);
-        else
-            moveSpeed = Mathf.MoveTowards(moveSpeed, walkSpeed, currentSpeed * 3.5f);
-
-        Vector3 v = Vector3.right * horizontal * moveSpeed;
-        v.y = rb.velocity.y;
-        rb.velocity = v;
-       
-
-
-        Vector3 targetOlhar = transform.position;
-        targetOlhar.x += horizontal * moveSpeed;
-        transform.LookAt(targetOlhar);
-        //Debug.Log(Virar == targetOlhar);
-        //if (horizontal != 0)
-        //    Acao.SetBool("Virar", Virar == targetOlhar);
-        //Virar = transform.position;
-        //Virar.x += horizontal * moveSpeed;
-
-        #endregion
-        #region Pulo
-        var vel = rb.velocity;
-        //Collider[] Grounds = Physics.OverlapBox(GroundCenter, GroundSize / 2, Quaternion.identity, mask);
-        //isGrounded = Grounds != nulll;
-        Vector3 origem = transform.position + GroundCenter;
-        isGrounded = Physics.Raycast(origem, Vector3.down, GroundSize.y, mask);
-
-        if (isGrounded) currentJump = 0;
-        if (Kjump && !Kbaixo && (isGrounded || MaxJump > currentJump))
-        {
-            pular = true;
-            currentJump++;
-        }
+        Segurando = (Zona_segurar && Ksegurar);
+        Escalando = (Zona_agarrar && Kagarrar);
+        if (Escalando)
+            Debug.Log("escala porr");
+        else if (Segurando)
+            Debug.Log("seguar");
         else
         {
-            pular = false;
-        }
-        if (pular)    JumpDelay = 0;
-        if (JumpDelay >= 0)
-        {
-            JumpDelay += Time.deltaTime;
-            moveSpeed = 0;
-        }
+            #region andar
+            if (Kfrente)
+                horizontal = 1;
+            else if (Ktras)
+                horizontal = -1;
+            else
+                horizontal = Mathf.MoveTowards(horizontal, 0, 0.15f);
+
+            //if (horizontal == -1)
+            //    transform.Rotate(Vector3.up * 18);
+            //else if (horizontal == 1)
+            //    transform.Rotate(Vector3.zero);
+
+
+            if (horizontal != 0 && !Kbaixo)
+                moveSpeed = Mathf.MoveTowards(moveSpeed, runSpeed, currentSpeed);
+            else if (Kbaixo)
+                moveSpeed = Mathf.MoveTowards(moveSpeed, crawlSpeed, currentSpeed);
+            else
+                moveSpeed = Mathf.MoveTowards(moveSpeed, walkSpeed, currentSpeed * 3.5f);
+
+            Vector3 v = Vector3.right * horizontal * moveSpeed;
+            v.y = rb.velocity.y;
+            rb.velocity = v;
+
+
+
+            Vector3 targetOlhar = transform.position;
+            targetOlhar.x += horizontal * moveSpeed;
+            transform.LookAt(targetOlhar);
+            //Debug.Log(Virar == targetOlhar);
+            //if (horizontal != 0)
+            //    Acao.SetBool("Virar", Virar == targetOlhar);
+            //Virar = transform.position;
+            //Virar.x += horizontal * moveSpeed;
+
+            #endregion
+            #region Pulo
+            var vel = rb.velocity;
+            //Collider[] Grounds = Physics.OverlapBox(GroundCenter, GroundSize / 2, Quaternion.identity, mask);
+            //isGrounded = Grounds != nulll;
+            Vector3 origem = transform.position + GroundCenter;
+            isGrounded = Physics.Raycast(origem, Vector3.down, GroundSize.y, mask);
+
+            if (isGrounded) currentJump = 0;
+            //    Debug.Log("Kjump && !Kbaixo && (isGrounded || MaxJump > currentJump)");
+            //  Debug.Log(MaxJump > currentJump);
+            //Debug.Log(Kjump && !Kbaixo && (isGrounded || MaxJump > currentJump));
+            if (Kjump && !Kbaixo && (isGrounded || MaxJump > currentJump))
+            {
+                pular = true;
+                currentJump++;
+            }
+            else
+            {
+                pular = false;
+            }
+            if (pular) JumpDelay = 0;
+            if (JumpDelay >= 0)
+            {
+                JumpDelay += Time.deltaTime;
+                moveSpeed = 0;
+            }
             if (JumpDelay > MaxJumpDelay)
-        {
-            moveSpeed = walkSpeed;
-            JumpDelay = -1;
-            vel.y = jumpforce;
+            {
+                Debug.Log(JumpDelay);
+                moveSpeed = walkSpeed;
+                JumpDelay = -1;
+                vel.y = jumpforce;
+                rb.velocity = vel;
+            }
+            //   Debug.Log(currentJump);
+            if (vel.y < 0) vel.y += Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+            else if (vel.y > 0 && !Input.GetButton("Jump")) vel.y += Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+
             rb.velocity = vel;
+            #endregion
         }
-        Debug.Log(currentJump);
-        if (vel.y < 0)                                              vel.y += Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
-        else if (vel.y > 0 && !Input.GetButton("Jump"))             vel.y += Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
-       
-        rb.velocity = vel;
-        #endregion
         #region Animaçoes
         Acao.SetBool("Agachado", Kbaixo);
         Acao.SetFloat("Queda", rb.velocity.y);
         Acao.SetBool("Pular", pular);
+        Acao.SetBool("Segura", Segurando);
+        Acao.SetBool("Agarra", Escalando);
         Acao.SetFloat("Wspeed", horizontal * horizontal * moveSpeed / runSpeed);
         Acao.SetBool("IsGround", isGrounded);
         #endregion
 
     }
 
+    private void OnCollisionStay(Collision collision)
+    {
+        Zona_agarrar = false;
+        Zona_interagir = false;
+        Zona_segurar = false;
+    }
     private void OnDrawGizmos()
     {
         Gizmos.color = new Color(0, 1, 0, .5f);
