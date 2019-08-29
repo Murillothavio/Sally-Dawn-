@@ -19,7 +19,6 @@ public class AndarPlayer : MonoBehaviour
     [Range(1,7)]
     public float lowJumpMultiplier = 2f;
     private Rigidbody rb;
-    private GameObject Filho;
     private Animator Acao;
     private bool Kbaixo;
     private Vector3 Virar;
@@ -37,9 +36,7 @@ public class AndarPlayer : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        Filho = GameObject.Find("SallyDawnMixamo@Idle");
-        Acao = Filho.GetComponent<Animator>();
-
+        Acao = GetComponent<Animator>();
        
     }
     void Update()
@@ -116,9 +113,6 @@ public class AndarPlayer : MonoBehaviour
         isGrounded = Physics.Raycast(origem, Vector3.down, GroundSize.y, mask);
 
         if (isGrounded) currentJump = 0;
-    //    Debug.Log("Kjump && !Kbaixo && (isGrounded || MaxJump > currentJump)");
-      //  Debug.Log(MaxJump > currentJump);
-        //Debug.Log(Kjump && !Kbaixo && (isGrounded || MaxJump > currentJump));
         if (Kjump && !Kbaixo && (isGrounded || MaxJump > currentJump))
         {
             pular = true;
@@ -136,13 +130,12 @@ public class AndarPlayer : MonoBehaviour
         }
             if (JumpDelay > MaxJumpDelay)
         {
-            Debug.Log(JumpDelay);
             moveSpeed = walkSpeed;
             JumpDelay = -1;
             vel.y = jumpforce;
             rb.velocity = vel;
         }
-     //   Debug.Log(currentJump);
+        Debug.Log(currentJump);
         if (vel.y < 0)                                              vel.y += Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         else if (vel.y > 0 && !Input.GetButton("Jump"))             vel.y += Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
        
@@ -150,7 +143,7 @@ public class AndarPlayer : MonoBehaviour
         #endregion
         #region Animaçoes
         Acao.SetBool("Agachado", Kbaixo);
-        Acao.SetFloat("Queda", rb.velocity.y);Debug.Log(rb.velocity.y);
+        Acao.SetFloat("Queda", rb.velocity.y);
         Acao.SetBool("Pular", pular);
         Acao.SetFloat("Wspeed", horizontal * horizontal * moveSpeed / runSpeed);
         Acao.SetBool("IsGround", isGrounded);
