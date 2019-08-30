@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class AndarPlayer : MonoBehaviour
 {
-    private bool Kfrente, Ktras, Kjump, pular, Kagarrar, Ksegurar;
+    private bool Kfrente, Ktras, Kjump, Kbaixo;
+    private bool pular, Kagarrar, Ksegurar, Kcima;
     private bool Zona_agarrar, Zona_segurar, Zona_interagir;
     private bool Segurando, Escalando;
     public float moveSpeed = 10, jumpforce = 10;
@@ -12,6 +13,8 @@ public class AndarPlayer : MonoBehaviour
     public float walkSpeed = 10;
     [Range(5, 15)]
     public float crawlSpeed = 7;
+    [Range(5, 15)]
+    public float climbSpeed = 8;
     [Range(15, 30)]
     public float runSpeed;
     [Range(0, 2)]
@@ -23,7 +26,6 @@ public class AndarPlayer : MonoBehaviour
     private Rigidbody rb;
     private GameObject Filho;
     private Animator Acao;
-    private bool Kbaixo;
     private Vector3 Virar;
     private float JumpDelay=-1;
     [Range(0, 2)]
@@ -31,6 +33,7 @@ public class AndarPlayer : MonoBehaviour
     private Vector3 GroundSize = new Vector3(1.16f, 1.5f,0);
     private Vector3 GroundCenter = new Vector3(0, -0.3f,0);
     public float horizontal = 0;
+    public float vertical = 0;
     public bool isGrounded;
     public LayerMask mask;
     private const int MaxJump = 1;
@@ -57,6 +60,8 @@ public class AndarPlayer : MonoBehaviour
             Ktras = true;
         if (Input.GetKeyDown(KeyCode.S))
             Kbaixo = true;
+        if (Input.GetKeyDown(KeyCode.W))
+            Kcima = true;
         if (Input.GetKeyDown(KeyCode.Q))
             Kagarrar = true;
         if (Input.GetKeyDown(KeyCode.E))
@@ -72,6 +77,8 @@ public class AndarPlayer : MonoBehaviour
             Ktras = false;
         if (Input.GetKeyUp(KeyCode.S))
             Kbaixo = false;
+        if (Input.GetKeyUp(KeyCode.W))
+            Kcima = false;
         if (Input.GetKeyUp(KeyCode.Q))
             Kagarrar = false;
         if (Input.GetKeyUp(KeyCode.E))
@@ -82,8 +89,42 @@ public class AndarPlayer : MonoBehaviour
     {
         Segurando = (Zona_segurar && Ksegurar);
         Escalando = (Zona_agarrar && Kagarrar);
+        if (Kcima)
+            vertical = 1;
+        else if (Kbaixo)
+            vertical = -1;
+        else
+            vertical = 0;
+        if (Kfrente)
+            horizontal = 1;
+        else if (Ktras)
+            horizontal = -1;
+        else
+            horizontal = Mathf.MoveTowards(horizontal, 0, 0.15f);
+
         if (Escalando)
+        {
             Debug.Log("escala porr");
+            if (Kcima)
+                vertical = 1;
+            else if (Kbaixo)
+                vertical = -1;
+            else
+                vertical = 0;
+
+            moveSpeed = Mathf.MoveTowards(moveSpeed, climbSpeed, currentSpeed);
+
+            Vector3 v = Vector3.up * vertical * moveSpeed;
+            //   v.y = rb.velocity.y;
+            rb.velocity = v;
+
+            Debug.Log(moveSpeed);
+
+            Vector3 targetOlhar = transform.position;
+            targetOlhar.x += horizontal * moveSpeed;
+            transform.LookAt(targetOlhar);
+
+        }
         else if (Segurando)
             Debug.Log("seguar");
         else
@@ -96,10 +137,7 @@ public class AndarPlayer : MonoBehaviour
             else
                 horizontal = Mathf.MoveTowards(horizontal, 0, 0.15f);
 
-            //if (horizontal == -1)
-            //    transform.Rotate(Vector3.up * 18);
-            //else if (horizontal == 1)
-            //    transform.Rotate(Vector3.zero);
+            
 
 
             if (horizontal != 0 && !Kbaixo)
@@ -178,12 +216,19 @@ public class AndarPlayer : MonoBehaviour
 
     }
 
-    private void OnCollisionStay(Collision collision)
+    private void OnTriggerStay(Collider other)
     {
-        Zona_agarrar = false;
+        if (other.gameObject.tag == "Zona_agarrar")
+            Zona_agarrar = true;
+        else
+            Zona_agarrar = false;
         Zona_interagir = false;
         Zona_segurar = false;
+
+      
+
     }
+    
     private void OnDrawGizmos()
     {
         Gizmos.color = new Color(0, 1, 0, .5f);
