@@ -33,6 +33,7 @@ public class AndarPlayer : MonoBehaviour
     private Vector3 GroundSize = new Vector3(1.16f, 1.5f,0);
     private Vector3 GroundCenter = new Vector3(0, -0.3f,0);
     public float horizontal = 0;
+    private float Arrastar;
     public float vertical = 0;
     public bool isGrounded;
     public LayerMask mask;
@@ -47,10 +48,33 @@ public class AndarPlayer : MonoBehaviour
 
        
     }
+    private void FixedUpdate()
+    {
+        Zona_agarrar = false;
+        Zona_interagir = false;
+        Zona_segurar = true;
+
+    }
     void Update()
     {
         Atualiza();
+        Coordena_Horizon_vertical();
         Andar();
+    }
+    void Coordena_Horizon_vertical()
+    {
+        if (Kcima)
+            vertical = 1;
+        else if (Kbaixo)
+            vertical = -1;
+        else
+            vertical = 0;
+        if (Kfrente)
+            horizontal = 1;
+        else if (Ktras)
+            horizontal = -1;
+        else
+            horizontal = Mathf.MoveTowards(horizontal, 0, 0.15f);
     }
     void Atualiza()
     {
@@ -89,18 +113,7 @@ public class AndarPlayer : MonoBehaviour
     {
         Segurando = (Zona_segurar && Ksegurar);
         Escalando = (Zona_agarrar && Kagarrar);
-        if (Kcima)
-            vertical = 1;
-        else if (Kbaixo)
-            vertical = -1;
-        else
-            vertical = 0;
-        if (Kfrente)
-            horizontal = 1;
-        else if (Ktras)
-            horizontal = -1;
-        else
-            horizontal = Mathf.MoveTowards(horizontal, 0, 0.15f);
+       
 
         if (Escalando)
         {
@@ -212,6 +225,7 @@ public class AndarPlayer : MonoBehaviour
         Acao.SetBool("Agarra", Escalando);
         Acao.SetFloat("Wspeed", horizontal * horizontal * moveSpeed / runSpeed);
         Acao.SetBool("IsGround", isGrounded);
+        Acao.SetFloat("VerticalSpeed", vertical);
         #endregion
 
     }
@@ -221,7 +235,10 @@ public class AndarPlayer : MonoBehaviour
         if (other.gameObject.tag == "Zona_agarrar")
             Zona_agarrar = true;
         else
+        {
             Zona_agarrar = false;
+            Debug.Log("faldal");
+        }
         Zona_interagir = false;
         Zona_segurar = false;
 
