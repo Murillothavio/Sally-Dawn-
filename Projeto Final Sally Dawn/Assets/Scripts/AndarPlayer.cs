@@ -4,19 +4,30 @@ using UnityEngine;
 
 public class AndarPlayer : MonoBehaviour
 {
+    public GameObject SaveTarget;
+    public Vector3 SafeZonePosition;
     private bool Kfrente, Ktras, Kjump, Kbaixo;
     private bool pular, Kagarrar, Ksegurar, Kcima;
-    private bool Zona_agarrar, Zona_segurar, Zona_interagir;
+    private bool Zona_agarrar, Zona_segurar, Zona_interagir, Zona_morrer;
+    public enum Zonas { Free, Agarrar, segurar, interagir, morrer, NotSafe}
+    public Zonas OndeTo;
     private bool Segurando, Escalando;
-    public float moveSpeed = 10, jumpforce = 10;
+    public bool isGrounded;
+    private Vector3 GroundSize = new Vector3(1.16f, 1.5f, 0);
+    private Vector3 GroundCenter = new Vector3(0, .3f, 0);
+    public float moveSpeed = 10;
+    [Range(5, 15)]
+    public float jumpforce = 10;
     [Range(5, 15)]
     public float walkSpeed = 10;
-    [Range(5, 15)]
+    [Range(5, 10)]
     public float crawlSpeed = 7;
-    [Range(5, 15)]
+    [Range(5, 10)]
     public float climbSpeed = 8;
-    [Range(15, 30)]
+    [Range(10, 30)]
     public float runSpeed;
+    [Range(5, 10)]
+    public float PullshSpeed;
     [Range(0, 2)]
     public float currentSpeed = .5f;
     [Range(1,7)]
@@ -24,18 +35,18 @@ public class AndarPlayer : MonoBehaviour
     [Range(1,7)]
     public float lowJumpMultiplier = 2f;
     private Rigidbody rb;
-    private GameObject Filho;
+    private GameObject Filho, caixote;
     private Animator Acao;
     private Vector3 Virar;
     private float JumpDelay=-1;
     [Range(0, 2)]
-    public float MaxJumpDelay=.2f;
-    private Vector3 GroundSize = new Vector3(1.16f, 1.5f,0);
-    private Vector3 GroundCenter = new Vector3(0, -0.3f,0);
+    public float MaxJumpDelay = .2f;
+    [Range(0, 2)]
+    public float DeathDelay = .2f;
+    private float CurrentDeathDelay = 0;
     public float horizontal = 0;
-    private float Arrastar;
+    public float Arrastar;
     public float vertical = 0;
-    public bool isGrounded;
     public LayerMask mask;
     private const int MaxJump = 1;
     private int currentJump = 0;
@@ -50,10 +61,15 @@ public class AndarPlayer : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        
+        if (isGrounded && OndeTo==Zonas.Free) 
+            SafeZonePosition = transform.position;
+        SaveTarget.transform.position = SafeZonePosition;
+
+        OndeTo = Zonas.Free;
         Zona_agarrar = false;
         Zona_interagir = false;
-        Zona_segurar = true;
-
+        Zona_segurar = false;
     }
     void Update()
     {
@@ -111,19 +127,21 @@ public class AndarPlayer : MonoBehaviour
     }
     void Andar()
     {
-        Segurando = (Zona_segurar && Ksegurar);
-        Escalando = (Zona_agarrar && Kagarrar);
-       
+        Segurando = (OndeTo==Zonas.segurar && Ksegurar);
+        Escalando = (OndeTo==Zonas.Agarrar && Kagarrar);
+
+        if (!Segurando && (horizontal<-0.5f||horizontal>.5f) )
+            Arrastar = horizontal;
 
         if (Escalando)
         {
             Debug.Log("escala porr");
-            if (Kcima)
-                vertical = 1;
-            else if (Kbaixo)
-                vertical = -1;
-            else
-                vertical = 0;
+            //       if (Kcima)
+            //         vertical = 1;
+            //   else if (Kbaixo)
+            //     vertical = -1;
+            //else
+            //  vertical = 0;
 
             moveSpeed = Mathf.MoveTowards(moveSpeed, climbSpeed, currentSpeed);
 
@@ -139,19 +157,34 @@ public class AndarPlayer : MonoBehaviour
 
         }
         else if (Segurando)
+        {
+            moveSpeed = Mathf.MoveTowards(moveSpeed,PullshSpeed, currentSpeed * 3.5f);
+            Vector3 v = Vector3.right * horizontal * moveSpeed;
+            v.y = rb.velocity.y;
+            rb.velocity = v;
+            caixote.GetComponent<Rigidbody>().velocity = v;
             Debug.Log("seguar");
+        }
+        else if (OndeTo==Zonas.morrer)
+        {
+            CurrentDeathDelay += Time.deltaTime;
+            if (CurrentDeathDelay > DeathDelay)
+            {
+                transform.position = SafeZonePosition;
+                rb.velocity = Vector3.zero;
+                CurrentDeathDelay = 0;
+            }
+
+        }
         else
         {
             #region andar
-            if (Kfrente)
-                horizontal = 1;
-            else if (Ktras)
-                horizontal = -1;
-            else
-                horizontal = Mathf.MoveTowards(horizontal, 0, 0.15f);
-
-            
-
+            //           if (Kfrente)
+            //             horizontal = 1;
+            //       else if (Ktras)
+            //         horizontal = -1;
+            //   else
+            //     horizontal = Mathf.MoveTowards(horizontal, 0, 0.15f);
 
             if (horizontal != 0 && !Kbaixo)
                 moveSpeed = Mathf.MoveTowards(moveSpeed, runSpeed, currentSpeed);
@@ -224,6 +257,7 @@ public class AndarPlayer : MonoBehaviour
         Acao.SetBool("Segura", Segurando);
         Acao.SetBool("Agarra", Escalando);
         Acao.SetFloat("Wspeed", horizontal * horizontal * moveSpeed / runSpeed);
+        Acao.SetFloat("Arrastar", horizontal * Arrastar);
         Acao.SetBool("IsGround", isGrounded);
         Acao.SetFloat("VerticalSpeed", vertical);
         #endregion
@@ -233,19 +267,24 @@ public class AndarPlayer : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Zona_agarrar")
-            Zona_agarrar = true;
-        else
+            OndeTo = Zonas.Agarrar;
+        //Zona_agarrar = true;
+        if (other.gameObject.tag == "Zona_morte")
+            OndeTo = Zonas.morrer;
+        //Zona_morrer = true;
+        if (other.gameObject.tag == "Zona_empurrar")
         {
-            Zona_agarrar = false;
-            Debug.Log("faldal");
+            OndeTo = Zonas.segurar;
+            Zona_segurar = true;
+            caixote = other.gameObject;
         }
-        Zona_interagir = false;
-        Zona_segurar = false;
-
-      
 
     }
-    
+    private void OnCollisionStay(Collision collision)
+    {
+        
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = new Color(0, 1, 0, .5f);
