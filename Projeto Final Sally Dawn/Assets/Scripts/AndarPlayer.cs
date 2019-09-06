@@ -9,7 +9,7 @@ public class AndarPlayer : MonoBehaviour
     private bool Kfrente, Ktras, Kjump, Kbaixo;
     private bool pular, Kagarrar, Ksegurar, Kcima;
     private bool Zona_agarrar, Zona_segurar, Zona_interagir, Zona_morrer;
-    public enum Zonas { Free, Agarrar, segurar, interagir, morrer, NotSafe}
+    public enum Zonas { Free, Agarrar, segurar, interagir, morrer, ItsSafe}
     public Zonas OndeTo;
     private bool Segurando, Escalando;
     public bool isGrounded;
@@ -62,7 +62,7 @@ public class AndarPlayer : MonoBehaviour
     private void FixedUpdate()
     {
         
-        if (isGrounded && OndeTo==Zonas.Free) 
+        if (isGrounded && OndeTo==Zonas.ItsSafe) 
             SafeZonePosition = transform.position;
         SaveTarget.transform.position = SafeZonePosition;
 
@@ -278,6 +278,8 @@ public class AndarPlayer : MonoBehaviour
             Zona_segurar = true;
             caixote = other.gameObject;
         }
+        if (other.gameObject.tag == "Zona_itssafe" && OndeTo==Zonas.Free)
+            OndeTo = Zonas.ItsSafe;
 
     }
     private void OnCollisionStay(Collision collision)
