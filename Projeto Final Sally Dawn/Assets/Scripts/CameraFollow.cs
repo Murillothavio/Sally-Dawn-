@@ -7,12 +7,16 @@ public class CameraFollow : MonoBehaviour
     //  public Controller2D target;
     public GameObject target;
     private CapsuleCollider targetcollider;
+    private CapsuleCollider focuCollider;
     public float verticalOffset;
-    public float lookAheadDstX;
+    public float AheadDstXPress=6;
+    public float AheadDstXSolt=16;
+    private float lookAheadDstX;
     public float lookSmoothTimeX;
     public float verticalSmoothTime;
     public Vector2 focusAreaSize;
-
+    public bool Presso;
+    public CapsuleCollider FocusObj;
     FocusArea focusArea;
 
     float currentLookAheadX;
@@ -30,11 +34,26 @@ public class CameraFollow : MonoBehaviour
     void Start()
     {
         focusArea = new FocusArea(targetcollider.bounds, focusAreaSize);
+
     }
 
     void LateUpdate()
     {
-         focusArea.Update(targetcollider.bounds);
+        Presso = target.GetComponent<AndarPlayer>().CameraPressa;
+        if (target.GetComponent<AndarPlayer>().NewFocus != null)
+            FocusObj = target.GetComponent<AndarPlayer>().NewFocus.GetComponent<CapsuleCollider>();
+
+        if (Presso)
+        {
+            focuCollider = FocusObj;
+            lookAheadDstX = AheadDstXPress;
+        }
+        else
+        {
+            focuCollider = targetcollider;
+            lookAheadDstX = AheadDstXSolt;
+        }
+        focusArea.Update(focuCollider.bounds);
 
         Vector2 focusPosition = focusArea.centre + Vector2.up * verticalOffset;
         #region "Calma"

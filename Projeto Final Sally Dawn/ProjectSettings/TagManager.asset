@@ -9,6 +9,7 @@ TagManager:
   - Zona_morte
   - Zona_notsafe
   - Zona_itssafe
+  - CameraFocus
   layers:
   - Default
   - TransparentFX

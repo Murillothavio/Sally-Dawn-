@@ -10,6 +10,11 @@ public class AndarPlayer : MonoBehaviour
     private bool pular, Kagarrar, Ksegurar, Kcima;
     private bool Zona_agarrar, Zona_segurar, Zona_interagir, Zona_morrer;
     public enum Zonas { Free, Agarrar, segurar, interagir, morrer, ItsSafe}
+    [HideInInspector]
+    public bool CameraPressa;
+    [HideInInspector]
+    public GameObject NewFocus;
+
     public Zonas OndeTo;
     private bool Segurando, Escalando;
     public bool isGrounded;
@@ -66,6 +71,7 @@ public class AndarPlayer : MonoBehaviour
             SafeZonePosition = transform.position;
         SaveTarget.transform.position = SafeZonePosition;
 
+        CameraPressa = false; 
         OndeTo = Zonas.Free;
         Zona_agarrar = false;
         Zona_interagir = false;
@@ -266,6 +272,11 @@ public class AndarPlayer : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        if (other.gameObject.tag== "CameraFocus")
+        {
+            CameraPressa = true;
+            NewFocus = other.gameObject;
+        }
         if (other.gameObject.tag == "Zona_agarrar")
             OndeTo = Zonas.Agarrar;
         //Zona_agarrar = true;
