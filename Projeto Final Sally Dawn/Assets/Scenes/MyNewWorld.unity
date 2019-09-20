@@ -10885,7 +10885,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 202970992}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
@@ -10987,7 +10987,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ambiente: 0
-  som: {fileID: 8300000, guid: 2e49d461f6c5e02478118a55836e0fff, type: 3}
+  som:
+  - {fileID: 8300000, guid: 2e49d461f6c5e02478118a55836e0fff, type: 3}
+  - {fileID: 0}
+  - {fileID: 8300000, guid: 3294148feda3fcf4190441e553fe5772, type: 3}
+  - {fileID: 8300000, guid: 4b95ad931dd182e489190adf21dead30, type: 3}
+  - {fileID: 8300000, guid: 807036a7d6ad90043ab9928577497f27, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1001 &202976678
 PrefabInstance:
   m_ObjectHideFlags: 0
