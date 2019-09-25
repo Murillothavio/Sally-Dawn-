@@ -16,7 +16,7 @@ public class AndarPlayer : MonoBehaviour
     public GameObject NewFocus;
 
     public Zonas OndeTo;
-    private bool Segurando, Escalando;
+    public bool Segurando, Escalando;
     public bool isGrounded;
     private Vector3 GroundSize = new Vector3(1.16f, 1.5f, 0);
     private Vector3 GroundCenter = new Vector3(0, .3f, 0);
@@ -141,7 +141,6 @@ public class AndarPlayer : MonoBehaviour
 
         if (Escalando)
         {
-            Debug.Log("escala porr");
             //       if (Kcima)
             //         vertical = 1;
             //   else if (Kbaixo)
@@ -169,7 +168,6 @@ public class AndarPlayer : MonoBehaviour
             v.y = rb.velocity.y;
             rb.velocity = v;
             caixote.GetComponent<Rigidbody>().velocity = v;
-            Debug.Log("seguar");
         }
         else if (OndeTo==Zonas.morrer)
         {
@@ -259,6 +257,8 @@ public class AndarPlayer : MonoBehaviour
         #region Animaçoes
         Acao.SetBool("Agachado", Kbaixo);
         Acao.SetFloat("Queda", rb.velocity.y);
+        if (pular)
+            Acao.SetTrigger("Jump");
         Acao.SetBool("Pular", pular);
         Acao.SetBool("Segura", Segurando);
         Acao.SetBool("Agarra", Escalando);
