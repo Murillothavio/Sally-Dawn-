@@ -10,13 +10,17 @@ public class AndarPlayer : MonoBehaviour
     private bool pular, Kagarrar, Ksegurar, Kcima;
     private bool Zona_agarrar, Zona_segurar, Zona_interagir, Zona_morrer;
     public enum Zonas { Free, Agarrar, segurar, interagir, morrer, ItsSafe}
+    public enum StateMachine { Walk, Agachado, Empurrando, Escalando, Pulando, Dancando, Caindo, Ocioso}
     [HideInInspector]
     public bool CameraPressa;
     [HideInInspector]
     public GameObject NewFocus;
 
     public Zonas OndeTo;
-    public bool Segurando, Escalando;
+    public StateMachine stateanima;
+    public float TempoOcioso;
+    public float MaxOcioso=30;
+    public bool Segurando, Escalando, Caindo;
     public bool isGrounded;
     private Vector3 GroundSize = new Vector3(1.16f, 1.5f, 0);
     private Vector3 GroundCenter = new Vector3(0, .3f, 0);
@@ -81,6 +85,7 @@ public class AndarPlayer : MonoBehaviour
     {
         Atualiza();
         Coordena_Horizon_vertical();
+        Estados();
         Andar();
     }
     void Coordena_Horizon_vertical()
@@ -131,14 +136,33 @@ public class AndarPlayer : MonoBehaviour
             Ksegurar = false;
 
     }
+    void Estados()
+    {
+        if (stateanima == StateMachine.Walk)
+        {
+            if (vertical == 0 && horizontal == 0)
+                TempoOcioso += Time.deltaTime;
+
+            else
+                TempoOcioso = 0;
+        }
+        Segurando = (OndeTo == Zonas.segurar && Ksegurar);
+        Escalando = (OndeTo == Zonas.Agarrar && Kagarrar);
+        if (OndeTo == Zonas.segurar && Ksegurar)
+            stateanima = StateMachine.Empurrando;
+        else if (OndeTo == Zonas.Agarrar && Kagarrar)
+            stateanima = StateMachine.Escalando;
+        else if (Kbaixo)
+            stateanima = StateMachine.Agachado;
+       else
+            stateanima = StateMachine.Walk;
+
+
+        if (!Segurando && (horizontal < -0.5f || horizontal > .5f))
+            Arrastar = horizontal;
+    }
     void Andar()
     {
-        Segurando = (OndeTo==Zonas.segurar && Ksegurar);
-        Escalando = (OndeTo==Zonas.Agarrar && Kagarrar);
-
-        if (!Segurando && (horizontal<-0.5f||horizontal>.5f) )
-            Arrastar = horizontal;
-
         if (Escalando)
         {
             //       if (Kcima)
@@ -199,7 +223,8 @@ public class AndarPlayer : MonoBehaviour
 
             Vector3 v = Vector3.right * horizontal * moveSpeed;
             v.y = rb.velocity.y;
-            rb.velocity = v;
+            if (!Caindo)
+                rb.velocity = v;
 
 
 
@@ -221,36 +246,33 @@ public class AndarPlayer : MonoBehaviour
             isGrounded = Physics.Raycast(origem, Vector3.down, GroundSize.y, mask);
 
             if (isGrounded) currentJump = 0;
-            //    Debug.Log("Kjump && !Kbaixo && (isGrounded || MaxJump > currentJump)");
-            //  Debug.Log(MaxJump > currentJump);
-            //Debug.Log(Kjump && !Kbaixo && (isGrounded || MaxJump > currentJump));
             if (Kjump && !Kbaixo && (isGrounded || MaxJump > currentJump))
             {
                 pular = true;
                 currentJump++;
             }
             else
-            {
                 pular = false;
-            }
-            if (pular) JumpDelay = 0;
-            if (JumpDelay >= 0)
+            if (pular)
+             //   JumpDelay = 0;
+            //if (JumpDelay >= 0)
+            //{
+            //    JumpDelay += Time.deltaTime;
+            //    moveSpeed = 0;
+            //}
+            //if (JumpDelay > MaxJumpDelay)
             {
-                JumpDelay += Time.deltaTime;
-                moveSpeed = 0;
-            }
-            if (JumpDelay > MaxJumpDelay)
-            {
-                Debug.Log(JumpDelay);
+           //     Debug.Log(JumpDelay);
                 moveSpeed = walkSpeed;
                 JumpDelay = -1;
                 vel.y = jumpforce;
                 rb.velocity = vel;
             }
-            //   Debug.Log(currentJump);
-            if (vel.y < 0) vel.y += Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
-            else if (vel.y > 0 && !Input.GetButton("Jump")) vel.y += Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
-
+            if (vel.y < 0)
+                vel.y += Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+            else if (vel.y > 0 && !Input.GetButton("Jump"))
+                vel.y += Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+            Caindo = (vel.y < 0)&&!isGrounded;
             rb.velocity = vel;
             #endregion
         }
