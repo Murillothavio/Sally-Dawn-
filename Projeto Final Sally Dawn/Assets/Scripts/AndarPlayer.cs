@@ -18,12 +18,13 @@ public class AndarPlayer : MonoBehaviour
 
     public Zonas OndeTo;
     public StateMachine stateanima;
+    #region config
     public float TempoOcioso;
-    public float MaxOcioso=30;
-    public bool Segurando, Escalando, Caindo;
-    public bool isGrounded;
-    private Vector3 GroundSize = new Vector3(1.16f, 1.5f, 0);
-    private Vector3 GroundCenter = new Vector3(0, .3f, 0);
+    public float MaxOcioso=10;
+    [Range(0,6)]
+    public float QlAnimaOcioso;
+    public float AnimaOcioso=5;
+    public bool Segurando, Escalando, Caindo;//*
     public float moveSpeed = 10;
     [Range(5, 15)]
     public float jumpforce = 10;
@@ -43,29 +44,34 @@ public class AndarPlayer : MonoBehaviour
     public float fallMultiplier = 2.5f;
     [Range(1,7)]
     public float lowJumpMultiplier = 2f;
+    #endregion
+
     private Rigidbody rb;
     private GameObject Filho, caixote;
     private Animator Acao;
-    private Vector3 Virar;
-    private float JumpDelay=-1;
-    [Range(0, 2)]
-    public float MaxJumpDelay = .2f;
     [Range(0, 2)]
     public float DeathDelay = .2f;
     private float CurrentDeathDelay = 0;
+    public bool isGrounded;
+    private Vector3 GroundSize = new Vector3(1.16f, 1.5f, 0);
+    private Vector3 GroundCenter = new Vector3(0, .3f, 0);
+
     public float horizontal = 0;
     public float Arrastar;
     public float vertical = 0;
     public LayerMask mask;
     private const int MaxJump = 1;
     private int currentJump = 0;
-    
+
+
+    private MoveConfig AtualConfig;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         Filho = GameObject.Find("SallyDawnMixamo@Idle");
         Acao = Filho.GetComponent<Animator>();
-
+    
        
     }
     private void FixedUpdate()
@@ -80,6 +86,10 @@ public class AndarPlayer : MonoBehaviour
         Zona_agarrar = false;
         Zona_interagir = false;
         Zona_segurar = false;
+    }
+    public void SetConfigFase(MoveConfig config)
+    {
+        AtualConfig = config;
     }
     void Update()
     {
@@ -138,14 +148,14 @@ public class AndarPlayer : MonoBehaviour
     }
     void Estados()
     {
-        if (stateanima == StateMachine.Walk)
-        {
-            if (vertical == 0 && horizontal == 0)
-                TempoOcioso += Time.deltaTime;
+        if ((stateanima == StateMachine.Walk || stateanima == StateMachine.Ocioso)
+            && (vertical == 0 && horizontal == 0))
+            TempoOcioso += Time.deltaTime;
+        else
+            TempoOcioso = 0;
+        if (TempoOcioso > MaxOcioso + AnimaOcioso)
+            TempoOcioso = 0;
 
-            else
-                TempoOcioso = 0;
-        }
         Segurando = (OndeTo == Zonas.segurar && Ksegurar);
         Escalando = (OndeTo == Zonas.Agarrar && Kagarrar);
         if (OndeTo == Zonas.segurar && Ksegurar)
@@ -157,10 +167,14 @@ public class AndarPlayer : MonoBehaviour
        else
             stateanima = StateMachine.Walk;
 
+        if (stateanima == StateMachine.Walk) 
+            if (TempoOcioso > MaxOcioso)
+                stateanima = StateMachine.Ocioso;
 
         if (!Segurando && (horizontal < -0.5f || horizontal > .5f))
             Arrastar = horizontal;
     }
+
     void Andar()
     {
         if (Escalando)
@@ -254,17 +268,9 @@ public class AndarPlayer : MonoBehaviour
             else
                 pular = false;
             if (pular)
-             //   JumpDelay = 0;
-            //if (JumpDelay >= 0)
-            //{
-            //    JumpDelay += Time.deltaTime;
-            //    moveSpeed = 0;
-            //}
-            //if (JumpDelay > MaxJumpDelay)
             {
-           //     Debug.Log(JumpDelay);
+                stateanima = StateMachine.Pulando;
                 moveSpeed = walkSpeed;
-                JumpDelay = -1;
                 vel.y = jumpforce;
                 rb.velocity = vel;
             }
@@ -273,6 +279,8 @@ public class AndarPlayer : MonoBehaviour
             else if (vel.y > 0 && !Input.GetButton("Jump"))
                 vel.y += Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
             Caindo = (vel.y < 0)&&!isGrounded;
+            if (Caindo)
+                stateanima = StateMachine.Caindo;
             rb.velocity = vel;
             #endregion
         }
@@ -284,6 +292,8 @@ public class AndarPlayer : MonoBehaviour
         Acao.SetBool("Pular", pular);
         Acao.SetBool("Segura", Segurando);
         Acao.SetBool("Agarra", Escalando);
+        Acao.SetBool("Dance", stateanima == StateMachine.Ocioso);
+        Acao.SetFloat("Dancas", ((int)QlAnimaOcioso));
         Acao.SetFloat("Wspeed", horizontal * horizontal * moveSpeed / runSpeed);
         Acao.SetFloat("Arrastar", horizontal * Arrastar);
         Acao.SetBool("IsGround", isGrounded);

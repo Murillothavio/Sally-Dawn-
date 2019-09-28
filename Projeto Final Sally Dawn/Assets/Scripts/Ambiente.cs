@@ -8,6 +8,34 @@ public class Ambiente : MonoBehaviour
     public Fase ambiente;
     public AudioClip[] som= new AudioClip[7];
     private AudioSource AudSrc;
+
+    #region config
+    public float TempoOcioso;
+    public float MaxOcioso = 10;
+    [Range(0, 6)]
+    public float QlAnimaOcioso;
+    public float AnimaOcioso = 5;
+    public bool Segurando, Escalando, Caindo;//*
+    public float moveSpeed = 10;
+    [Range(5, 15)]
+    public float jumpforce = 10;
+    [Range(5, 15)]
+    public float walkSpeed = 10;
+    [Range(5, 10)]
+    public float crawlSpeed = 7;
+    [Range(5, 10)]
+    public float climbSpeed = 8;
+    [Range(10, 30)]
+    public float runSpeed;
+    [Range(5, 10)]
+    public float PullshSpeed;
+    [Range(0, 2)]
+    public float currentSpeed = .5f;
+    [Range(1, 7)]
+    public float fallMultiplier = 2.5f;
+    [Range(1, 7)]
+    public float lowJumpMultiplier = 2f;
+    #endregion
     // Start is called before the first frame update
     void Start()
     {
