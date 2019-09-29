@@ -10856,27 +10856,21 @@ MonoBehaviour:
   CameraPressa: 0
   NewFocus: {fileID: 0}
   OndeTo: 0
+  stateanima: 0
+  TempoOcioso: 0
+  moveSpeed: 9
   Segurando: 0
   Escalando: 0
-  isGrounded: 0
-  moveSpeed: 8
-  jumpforce: 12
-  walkSpeed: 8
-  crawlSpeed: 7
-  climbSpeed: 7
-  runSpeed: 20
-  PullshSpeed: 5
-  currentSpeed: 0.3
-  fallMultiplier: 4
-  lowJumpMultiplier: 1.5
-  MaxJumpDelay: 0.02
+  Caindo: 0
   DeathDelay: 0.2
+  isGrounded: 0
   horizontal: 0
   Arrastar: 0
   vertical: 0
   mask:
     serializedVersion: 2
     m_Bits: 1
+  testette: 0
 --- !u!4 &202970997
 Transform:
   m_ObjectHideFlags: 0
@@ -11012,6 +11006,19 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 807036a7d6ad90043ab9928577497f27, type: 3}
   - {fileID: 0}
   - {fileID: 0}
+  Manual: 0
+  MaxOcioso: 5
+  QlAnimaOcioso: 0
+  AnimaOcioso: 15
+  jumpforce: 12
+  walkSpeed: 8
+  crawlSpeed: 7
+  climbSpeed: 7
+  runSpeed: 20
+  PullshSpeed: 5
+  currentSpeed: 0.3
+  fallMultiplier: 4
+  lowJumpMultiplier: 1.5
 --- !u!1001 &202976678
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44566,16 +44573,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 397003598}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 22faa7cf2e829de4ead2d3322a6aaf5e,
-        type: 3}
-      propertyPath: m_Name
-      value: Casa da vila (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 22faa7cf2e829de4ead2d3322a6aaf5e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 22faa7cf2e829de4ead2d3322a6aaf5e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -44645,6 +44642,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.x
       value: 1100
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 22faa7cf2e829de4ead2d3322a6aaf5e,
+        type: 3}
+      propertyPath: m_Name
+      value: Casa da vila (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 22faa7cf2e829de4ead2d3322a6aaf5e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22faa7cf2e829de4ead2d3322a6aaf5e, type: 3}

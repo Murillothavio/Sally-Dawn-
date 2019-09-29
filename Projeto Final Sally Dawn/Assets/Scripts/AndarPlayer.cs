@@ -18,32 +18,27 @@ public class AndarPlayer : MonoBehaviour
 
     public Zonas OndeTo;
     public StateMachine stateanima;
-    #region config
-    public float TempoOcioso;
-    public float MaxOcioso=10;
-    [Range(0,6)]
-    public float QlAnimaOcioso;
-    public float AnimaOcioso=5;
+    public float TempoOcioso, moveSpeed;
     public bool Segurando, Escalando, Caindo;//*
-    public float moveSpeed = 10;
-    [Range(5, 15)]
-    public float jumpforce = 10;
-    [Range(5, 15)]
-    public float walkSpeed = 10;
-    [Range(5, 10)]
-    public float crawlSpeed = 7;
-    [Range(5, 10)]
-    public float climbSpeed = 8;
-    [Range(10, 30)]
-    public float runSpeed;
-    [Range(5, 10)]
-    public float PullshSpeed;
-    [Range(0, 2)]
-    public float currentSpeed = .5f;
-    [Range(1,7)]
-    public float fallMultiplier = 2.5f;
-    [Range(1,7)]
-    public float lowJumpMultiplier = 2f;
+    #region config
+    //[Range(5, 15)]
+    //public float jumpforce = 10;//
+    //[Range(5, 15)]
+    //public float walkSpeed = 10;//
+    //[Range(5, 10)]
+    //public float crawlSpeed = 7;//
+    //[Range(5, 10)]
+    //public float climbSpeed = 8;//
+    //[Range(10, 30)]
+    //public float runSpeed;//
+    //[Range(5, 10)]
+    //public float PullshSpeed;//
+    //[Range(0, 2)]
+    //public float currentSpeed = .5f;//
+    //[Range(1,7)]
+    //public float fallMultiplier = 2.5f;//
+    //[Range(1,7)]
+    //public float lowJumpMultiplier = 2f;//
     #endregion
 
     private Rigidbody rb;
@@ -64,8 +59,10 @@ public class AndarPlayer : MonoBehaviour
     private int currentJump = 0;
 
 
-    private MoveConfig AtualConfig;
+    public MoveConfig AtualConfig;
 
+
+    public bool testette;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -89,14 +86,18 @@ public class AndarPlayer : MonoBehaviour
     }
     public void SetConfigFase(MoveConfig config)
     {
-        AtualConfig = config;
+        AtualConfig = config;      
+
     }
     void Update()
     {
+        if (AtualConfig == null)
+            AtualConfig = new MoveConfig();
         Atualiza();
         Coordena_Horizon_vertical();
         Estados();
         Andar();
+
     }
     void Coordena_Horizon_vertical()
     {
@@ -153,7 +154,7 @@ public class AndarPlayer : MonoBehaviour
             TempoOcioso += Time.deltaTime;
         else
             TempoOcioso = 0;
-        if (TempoOcioso > MaxOcioso + AnimaOcioso)
+        if (TempoOcioso > AtualConfig.MaxOcioso + AtualConfig.AnimaOcioso)
             TempoOcioso = 0;
 
         Segurando = (OndeTo == Zonas.segurar && Ksegurar);
@@ -168,7 +169,7 @@ public class AndarPlayer : MonoBehaviour
             stateanima = StateMachine.Walk;
 
         if (stateanima == StateMachine.Walk) 
-            if (TempoOcioso > MaxOcioso)
+            if (TempoOcioso > AtualConfig.MaxOcioso)
                 stateanima = StateMachine.Ocioso;
 
         if (!Segurando && (horizontal < -0.5f || horizontal > .5f))
@@ -186,7 +187,7 @@ public class AndarPlayer : MonoBehaviour
             //else
             //  vertical = 0;
 
-            moveSpeed = Mathf.MoveTowards(moveSpeed, climbSpeed, currentSpeed);
+            moveSpeed = Mathf.MoveTowards(moveSpeed, AtualConfig.climbSpeed, AtualConfig.currentSpeed);
 
             Vector3 v = Vector3.up * vertical * moveSpeed;
             //   v.y = rb.velocity.y;
@@ -201,7 +202,7 @@ public class AndarPlayer : MonoBehaviour
         }
         else if (Segurando)
         {
-            moveSpeed = Mathf.MoveTowards(moveSpeed,PullshSpeed, currentSpeed * 3.5f);
+            moveSpeed = Mathf.MoveTowards(moveSpeed, AtualConfig.PullshSpeed, AtualConfig.currentSpeed * 3.5f);
             Vector3 v = Vector3.right * horizontal * moveSpeed;
             v.y = rb.velocity.y;
             rb.velocity = v;
@@ -229,11 +230,11 @@ public class AndarPlayer : MonoBehaviour
             //     horizontal = Mathf.MoveTowards(horizontal, 0, 0.15f);
 
             if (horizontal != 0 && !Kbaixo)
-                moveSpeed = Mathf.MoveTowards(moveSpeed, runSpeed, currentSpeed);
+                moveSpeed = Mathf.MoveTowards(moveSpeed, AtualConfig.runSpeed, AtualConfig.currentSpeed);
             else if (Kbaixo)
-                moveSpeed = Mathf.MoveTowards(moveSpeed, crawlSpeed, currentSpeed);
+                moveSpeed = Mathf.MoveTowards(moveSpeed, AtualConfig.crawlSpeed, AtualConfig.currentSpeed);
             else
-                moveSpeed = Mathf.MoveTowards(moveSpeed, walkSpeed, currentSpeed * 3.5f);
+                moveSpeed = Mathf.MoveTowards(moveSpeed, AtualConfig.walkSpeed, AtualConfig.currentSpeed * 3.5f);
 
             Vector3 v = Vector3.right * horizontal * moveSpeed;
             v.y = rb.velocity.y;
@@ -270,14 +271,14 @@ public class AndarPlayer : MonoBehaviour
             if (pular)
             {
                 stateanima = StateMachine.Pulando;
-                moveSpeed = walkSpeed;
-                vel.y = jumpforce;
+                moveSpeed = AtualConfig.walkSpeed;
+                vel.y = AtualConfig.jumpforce;
                 rb.velocity = vel;
             }
             if (vel.y < 0)
-                vel.y += Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+                vel.y += Physics.gravity.y * (AtualConfig.fallMultiplier - 1) * Time.deltaTime;
             else if (vel.y > 0 && !Input.GetButton("Jump"))
-                vel.y += Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+                vel.y += Physics.gravity.y * (AtualConfig.lowJumpMultiplier - 1) * Time.deltaTime;
             Caindo = (vel.y < 0)&&!isGrounded;
             if (Caindo)
                 stateanima = StateMachine.Caindo;
@@ -285,6 +286,12 @@ public class AndarPlayer : MonoBehaviour
             #endregion
         }
         #region Animaçoes
+        SetAnimacoes();
+        #endregion
+
+    }
+    void SetAnimacoes()
+    {
         Acao.SetBool("Agachado", Kbaixo);
         Acao.SetFloat("Queda", rb.velocity.y);
         if (pular)
@@ -293,15 +300,12 @@ public class AndarPlayer : MonoBehaviour
         Acao.SetBool("Segura", Segurando);
         Acao.SetBool("Agarra", Escalando);
         Acao.SetBool("Dance", stateanima == StateMachine.Ocioso);
-        Acao.SetFloat("Dancas", ((int)QlAnimaOcioso));
-        Acao.SetFloat("Wspeed", horizontal * horizontal * moveSpeed / runSpeed);
+        Acao.SetFloat("Dancas", AtualConfig.QlAnimaOcioso);
+        Acao.SetFloat("Wspeed", horizontal * horizontal * moveSpeed / AtualConfig.runSpeed);
         Acao.SetFloat("Arrastar", horizontal * Arrastar);
         Acao.SetBool("IsGround", isGrounded);
         Acao.SetFloat("VerticalSpeed", vertical);
-        #endregion
-
     }
-
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag== "CameraFocus")
@@ -325,11 +329,7 @@ public class AndarPlayer : MonoBehaviour
             OndeTo = Zonas.ItsSafe;
 
     }
-    private void OnCollisionStay(Collision collision)
-    {
-        
-    }
-
+    
     private void OnDrawGizmos()
     {
         Gizmos.color = new Color(0, 1, 0, .5f);
