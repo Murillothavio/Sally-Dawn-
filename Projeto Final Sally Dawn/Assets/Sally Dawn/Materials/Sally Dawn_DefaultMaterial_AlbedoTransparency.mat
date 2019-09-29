@@ -109,8 +109,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _AORemapMax: 0.6352584
-    - _AORemapMin: 0.58903676
+    - _AORemapMax: 0.457839
+    - _AORemapMin: 0.4116174
     - _ATDistance: 1
     - _AlbedoAffectEmissive: 0
     - _AlphaCutoff: 0.5
@@ -179,9 +179,9 @@ Material:
     - _IridescenceThickness: 1
     - _LinkDetailsWithBase: 1
     - _MaterialID: 1
-    - _Metallic: 0.245
+    - _Metallic: 0.432
     - _NormalMapSpace: 0
-    - _NormalScale: 1.08
+    - _NormalScale: 0.59
     - _PPDLodThreshold: 5
     - _PPDMaxSamples: 15
     - _PPDMinSamples: 5
@@ -193,8 +193,8 @@ Material:
     - _ShiverDirectionality: 0.5
     - _ShiverDrag: 0.2
     - _Smoothness: 0.5
-    - _SmoothnessRemapMax: 0.4477319
-    - _SmoothnessRemapMin: 0.41310596
+    - _SmoothnessRemapMax: 0.33160287
+    - _SmoothnessRemapMin: 0.29697692
     - _SpecularAAScreenSpaceVariance: 0.1
     - _SpecularAAThreshold: 0.2
     - _SrcBlend: 1
