@@ -20,7 +20,7 @@ public class AndarPlayer : MonoBehaviour
     public StateMachine stateanima;
     public float TempoOcioso, moveSpeed;
     public bool Segurando, Escalando, Caindo;//*
-    #region config
+    #region config//
     //[Range(5, 15)]
     //public float jumpforce = 10;//
     //[Range(5, 15)]
@@ -42,7 +42,8 @@ public class AndarPlayer : MonoBehaviour
     #endregion
 
     private Rigidbody rb;
-    private GameObject Filho, caixote;
+    public GameObject Filho;
+    private GameObject caixote;
     private Animator Acao;
     [Range(0, 2)]
     public float DeathDelay = .2f;
@@ -66,7 +67,7 @@ public class AndarPlayer : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        Filho = GameObject.Find("SallyDawnMixamo@Idle");
+    //    Filho = GameObject.Find("SallyDawnMixamo@Idle");
         Acao = Filho.GetComponent<Animator>();
     
        
@@ -86,8 +87,9 @@ public class AndarPlayer : MonoBehaviour
     }
     public void SetConfigFase(MoveConfig config)
     {
-        AtualConfig = config;      
-
+        AtualConfig = config;
+        Filho = (AtualConfig.ModeloName);
+        Acao = Filho.GetComponent<Animator>();
     }
     void Update()
     {

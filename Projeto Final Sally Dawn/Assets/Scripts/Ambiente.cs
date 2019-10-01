@@ -10,6 +10,7 @@ public class Ambiente : MonoBehaviour
     private AudioSource AudSrc;
     private MoveConfig Atual, Pf, Af, Tf, Rf, Nf, Mf, Ef;
     private MoveConfig[] FaseConfig = new MoveConfig[7];
+    public GameObject[] Skins = new GameObject[7];
     public bool Manual = true;
     #region config
     public float MaxOcioso = 10;
@@ -48,7 +49,6 @@ public class Ambiente : MonoBehaviour
         Ef = new MoveConfig();
         AudSrc = GetComponent<AudioSource>();
         PublicMove();
-        FasesConfig();
 
     }
 
@@ -57,10 +57,11 @@ public class Ambiente : MonoBehaviour
     {
         #region FasesConfig();
         #region Neutro
+        Pf.ModeloName = Skins[0];
         //animaçao Idle
-        Pf.MaxOcioso = MaxOcioso;
+        Pf.MaxOcioso = 15;
         Pf.QlAnimaOcioso = 0;
-        Pf.AnimaOcioso = AnimaOcioso;
+        Pf.AnimaOcioso = 12;
         //velocidades
         Pf.walkSpeed = walkSpeed;
         Pf.crawlSpeed = crawlSpeed;
@@ -73,15 +74,16 @@ public class Ambiente : MonoBehaviour
         Pf.lowJumpMultiplier = lowJumpMultiplier;
         #endregion
         #region Alegre
+        Af.ModeloName = Skins[1];
         //animaçao Idle
-        Af.MaxOcioso = MaxOcioso;
+        Af.MaxOcioso = 10;
         Af.QlAnimaOcioso = 1;
-        Af.AnimaOcioso = AnimaOcioso;
+        Af.AnimaOcioso = 30;
         //velocidades
-        Af.walkSpeed = walkSpeed;
-        Af.crawlSpeed = crawlSpeed;
-        Af.climbSpeed = climbSpeed;
-        Af.runSpeed = runSpeed;
+        Af.walkSpeed = 10;
+        Af.crawlSpeed = 8;
+        Af.climbSpeed = 10;
+        Af.runSpeed = 25;
         Af.PullshSpeed = PullshSpeed;
         //pulo
         Af.jumpforce = jumpforce;
@@ -89,15 +91,16 @@ public class Ambiente : MonoBehaviour
         Af.lowJumpMultiplier = lowJumpMultiplier;
         #endregion
         #region Tristeza
+        Tf.ModeloName = Skins[2];
         //animaçao Idle
-        Tf.MaxOcioso = MaxOcioso;
+        Tf.MaxOcioso = 15;
         Tf.QlAnimaOcioso = 2;
-        Tf.AnimaOcioso = AnimaOcioso;
+        Tf.AnimaOcioso = 6.5f;
         //velocidades
-        Tf.walkSpeed = walkSpeed;
-        Tf.crawlSpeed = crawlSpeed;
-        Tf.climbSpeed = climbSpeed;
-        Tf.runSpeed = runSpeed;
+        Tf.walkSpeed = 7;
+        Tf.crawlSpeed = 5;
+        Tf.climbSpeed = 5;
+        Tf.runSpeed = 15;
         Tf.PullshSpeed = PullshSpeed;
         //pulo
         Tf.jumpforce = jumpforce;
@@ -105,10 +108,11 @@ public class Ambiente : MonoBehaviour
         Tf.lowJumpMultiplier = lowJumpMultiplier;
         #endregion
         #region Raiva
+        Rf.ModeloName = Skins[3];
         //animaçao Idle
-        Rf.MaxOcioso = MaxOcioso;
+        Rf.MaxOcioso = 15;
         Rf.QlAnimaOcioso = 3;
-        Rf.AnimaOcioso = AnimaOcioso;
+        Rf.AnimaOcioso = 20;
         //velocidades
         Rf.walkSpeed = walkSpeed;
         Rf.crawlSpeed = crawlSpeed;
@@ -121,14 +125,15 @@ public class Ambiente : MonoBehaviour
         Rf.lowJumpMultiplier = lowJumpMultiplier;
         #endregion
         #region Nojo
+        Nf.ModeloName = Skins[4];
         //animaçao Idle
-        Nf.MaxOcioso = MaxOcioso;
+        Nf.MaxOcioso = 7;
         Nf.QlAnimaOcioso = 4;
-        Nf.AnimaOcioso = AnimaOcioso;
+        Nf.AnimaOcioso = 4;
         //velocidades
         Nf.walkSpeed = walkSpeed;
-        Nf.crawlSpeed = crawlSpeed;
-        Nf.climbSpeed = climbSpeed;
+        Nf.crawlSpeed = 5;
+        Nf.climbSpeed = 7;
         Nf.runSpeed = runSpeed;
         Nf.PullshSpeed = PullshSpeed;
         //pulo
@@ -137,15 +142,16 @@ public class Ambiente : MonoBehaviour
         Nf.lowJumpMultiplier = lowJumpMultiplier;
         #endregion
         #region Medo
+        Mf.ModeloName = Skins[5];
         //animaçao Idle
-        Mf.MaxOcioso = MaxOcioso;
+        Mf.MaxOcioso = 5;
         Mf.QlAnimaOcioso = 5;
-        Mf.AnimaOcioso = AnimaOcioso;
+        Mf.AnimaOcioso = 4.5f;
         //velocidades
-        Mf.walkSpeed = walkSpeed;
+        Mf.walkSpeed = 7;
         Mf.crawlSpeed = crawlSpeed;
         Mf.climbSpeed = climbSpeed;
-        Mf.runSpeed = runSpeed;
+        Mf.runSpeed = 30;
         Mf.PullshSpeed = PullshSpeed;
         //pulo
         Mf.jumpforce = jumpforce;
@@ -153,10 +159,11 @@ public class Ambiente : MonoBehaviour
         Mf.lowJumpMultiplier = lowJumpMultiplier;
         #endregion
         #region Etereo
+        Ef.ModeloName = Skins[6];
         //animaçao Idle
-        Ef.MaxOcioso = MaxOcioso;
+        Ef.MaxOcioso = 15;
         Ef.QlAnimaOcioso = 6;
-        Ef.AnimaOcioso = AnimaOcioso;
+        Ef.AnimaOcioso = 4;
         //velocidades
         Ef.walkSpeed = walkSpeed;
         Ef.crawlSpeed = crawlSpeed;
@@ -180,11 +187,32 @@ public class Ambiente : MonoBehaviour
         TrocaAmbiente();
         TrocaConfig();
         TrocaSom(0);
+        #region FixedUpdate
         AudSrc.enabled = true;//mantm som ligado
         GetComponent<AndarPlayer>().SetConfigFase(Atual);
-
+        if (true)
+            //not null
+            if (Atual.ModeloName != null)
+            {
+                if (Pf.ModeloName != null)
+                    (Pf.ModeloName).SetActive(Pf.ModeloName == Atual.ModeloName);
+                if (Af.ModeloName != null)
+                    (Af.ModeloName).SetActive(Af.ModeloName == Atual.ModeloName);
+                if (Tf.ModeloName != null)
+                    (Tf.ModeloName).SetActive(Tf.ModeloName == Atual.ModeloName);
+                if (Rf.ModeloName != null)
+                    (Rf.ModeloName).SetActive(Rf.ModeloName == Atual.ModeloName);
+                if (Nf.ModeloName != null)
+                    (Nf.ModeloName).SetActive(Nf.ModeloName == Atual.ModeloName);
+                if (Mf.ModeloName != null)
+                    (Mf.ModeloName).SetActive(Mf.ModeloName == Atual.ModeloName);
+                if (Ef.ModeloName != null)
+                    (Ef.ModeloName).SetActive(Ef.ModeloName == Atual.ModeloName);
+            }
+          //  GameObject.Find(Atual.ModeloName).SetActive(true);
+        #endregion
     }
-    
+
     void PublicMove()
     {
         //animaçao Idle
@@ -280,8 +308,5 @@ public class Ambiente : MonoBehaviour
 
         AudSrc.clip = som[IdSom];
     }
-    void FasesConfig()
-    {
-        
-    }
+   
 }
