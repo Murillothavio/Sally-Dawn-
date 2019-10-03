@@ -15,8 +15,8 @@ public class MoveConfig //: MonoBehaviour
     public float walkSpeed = 10;
     public float crawlSpeed = 7;
     public float climbSpeed = 8;
-    public float runSpeed;
-    public float PullshSpeed;
+    public float runSpeed=20;
+    public float PullshSpeed=5;
     public float currentSpeed = .5f;
 
     public float fallMultiplier = 2.5f;

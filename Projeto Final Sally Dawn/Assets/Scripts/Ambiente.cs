@@ -8,10 +8,10 @@ public class Ambiente : MonoBehaviour
     public Fase ambiente;
     public AudioClip[] som= new AudioClip[7];
     private AudioSource AudSrc;
-    private MoveConfig Atual, Pf, Af, Tf, Rf, Nf, Mf, Ef;
-    private MoveConfig[] FaseConfig = new MoveConfig[7];
+    private MoveConfig Atual = new MoveConfig(), Pf = new MoveConfig(), Af = new MoveConfig(), Tf = new MoveConfig(), Rf = new MoveConfig(), Nf = new MoveConfig(), Mf = new MoveConfig(), Ef = new MoveConfig();
     public GameObject[] Skins = new GameObject[7];
     public bool Manual = true;
+    public bool notnull;
     #region config
     public float MaxOcioso = 10;
     [Range(0, 6)]
@@ -28,7 +28,7 @@ public class Ambiente : MonoBehaviour
     [Range(10, 30)]
     public float runSpeed;
     [Range(2, 10)]
-    public float PullshSpeed;
+    public float PullshSpeed = 5;
     [Range(0, 2)]
     public float currentSpeed = .5f;
     [Range(1, 7)]
@@ -51,131 +51,39 @@ public class Ambiente : MonoBehaviour
         PublicMove();
 
     }
-
+    void NotNull()
+    {
+        if (notnull)
+        {
+            notnull = false;
+            Atual = new MoveConfig();
+            Pf = new MoveConfig();
+            Af = new MoveConfig();
+            Tf = new MoveConfig();
+            Rf = new MoveConfig();
+            Nf = new MoveConfig();
+            Mf = new MoveConfig();
+            Ef = new MoveConfig();
+        }
+        //if (Pf.ModeloName == null)
+        //    Pf = new MoveConfig();
+        //if (Af.ModeloName == null)
+        //    Af = new MoveConfig();
+        //if (Tf.ModeloName == null)
+        //    Tf = new MoveConfig();
+        //if (Rf.ModeloName == null)
+        //    Rf = new MoveConfig();
+        //if (Nf.ModeloName == null)
+        //    Nf = new MoveConfig();
+        //if (Mf.ModeloName == null)
+        //    Mf = new MoveConfig();
+        //if (Ef.ModeloName == null)
+        //    Ef = new MoveConfig();
+    }
     // Update is called once per frame
     void Update()
     {
-        #region FasesConfig();
-        #region Neutro
-        Pf.ModeloName = Skins[0];
-        //animaçao Idle
-        Pf.MaxOcioso = 15;
-        Pf.QlAnimaOcioso = 0;
-        Pf.AnimaOcioso = 12;
-        //velocidades
-        Pf.walkSpeed = walkSpeed;
-        Pf.crawlSpeed = crawlSpeed;
-        Pf.climbSpeed = climbSpeed;
-        Pf.runSpeed = runSpeed;
-        Pf.PullshSpeed = PullshSpeed;
-        //pulo
-        Pf.jumpforce = jumpforce;
-        Pf.fallMultiplier = fallMultiplier;
-        Pf.lowJumpMultiplier = lowJumpMultiplier;
-        #endregion
-        #region Alegre
-        Af.ModeloName = Skins[1];
-        //animaçao Idle
-        Af.MaxOcioso = 10;
-        Af.QlAnimaOcioso = 1;
-        Af.AnimaOcioso = 30;
-        //velocidades
-        Af.walkSpeed = 10;
-        Af.crawlSpeed = 8;
-        Af.climbSpeed = 10;
-        Af.runSpeed = 25;
-        Af.PullshSpeed = PullshSpeed;
-        //pulo
-        Af.jumpforce = jumpforce;
-        Af.fallMultiplier = fallMultiplier;
-        Af.lowJumpMultiplier = lowJumpMultiplier;
-        #endregion
-        #region Tristeza
-        Tf.ModeloName = Skins[2];
-        //animaçao Idle
-        Tf.MaxOcioso = 15;
-        Tf.QlAnimaOcioso = 2;
-        Tf.AnimaOcioso = 6.5f;
-        //velocidades
-        Tf.walkSpeed = 7;
-        Tf.crawlSpeed = 5;
-        Tf.climbSpeed = 5;
-        Tf.runSpeed = 15;
-        Tf.PullshSpeed = PullshSpeed;
-        //pulo
-        Tf.jumpforce = jumpforce;
-        Tf.fallMultiplier = fallMultiplier;
-        Tf.lowJumpMultiplier = lowJumpMultiplier;
-        #endregion
-        #region Raiva
-        Rf.ModeloName = Skins[3];
-        //animaçao Idle
-        Rf.MaxOcioso = 15;
-        Rf.QlAnimaOcioso = 3;
-        Rf.AnimaOcioso = 20;
-        //velocidades
-        Rf.walkSpeed = walkSpeed;
-        Rf.crawlSpeed = crawlSpeed;
-        Rf.climbSpeed = climbSpeed;
-        Rf.runSpeed = runSpeed;
-        Rf.PullshSpeed = PullshSpeed;
-        //pulo
-        Rf.jumpforce = jumpforce;
-        Rf.fallMultiplier = fallMultiplier;
-        Rf.lowJumpMultiplier = lowJumpMultiplier;
-        #endregion
-        #region Nojo
-        Nf.ModeloName = Skins[4];
-        //animaçao Idle
-        Nf.MaxOcioso = 7;
-        Nf.QlAnimaOcioso = 4;
-        Nf.AnimaOcioso = 4;
-        //velocidades
-        Nf.walkSpeed = walkSpeed;
-        Nf.crawlSpeed = 5;
-        Nf.climbSpeed = 7;
-        Nf.runSpeed = runSpeed;
-        Nf.PullshSpeed = PullshSpeed;
-        //pulo
-        Nf.jumpforce = jumpforce;
-        Nf.fallMultiplier = fallMultiplier;
-        Nf.lowJumpMultiplier = lowJumpMultiplier;
-        #endregion
-        #region Medo
-        Mf.ModeloName = Skins[5];
-        //animaçao Idle
-        Mf.MaxOcioso = 5;
-        Mf.QlAnimaOcioso = 5;
-        Mf.AnimaOcioso = 4.5f;
-        //velocidades
-        Mf.walkSpeed = 7;
-        Mf.crawlSpeed = crawlSpeed;
-        Mf.climbSpeed = climbSpeed;
-        Mf.runSpeed = 30;
-        Mf.PullshSpeed = PullshSpeed;
-        //pulo
-        Mf.jumpforce = jumpforce;
-        Mf.fallMultiplier = fallMultiplier;
-        Mf.lowJumpMultiplier = lowJumpMultiplier;
-        #endregion
-        #region Etereo
-        Ef.ModeloName = Skins[6];
-        //animaçao Idle
-        Ef.MaxOcioso = 15;
-        Ef.QlAnimaOcioso = 6;
-        Ef.AnimaOcioso = 4;
-        //velocidades
-        Ef.walkSpeed = walkSpeed;
-        Ef.crawlSpeed = crawlSpeed;
-        Ef.climbSpeed = climbSpeed;
-        Ef.runSpeed = runSpeed;
-        Ef.PullshSpeed = PullshSpeed;
-        //pulo
-        Ef.jumpforce = jumpforce;
-        Ef.fallMultiplier = fallMultiplier;
-        Ef.lowJumpMultiplier = lowJumpMultiplier;
-        #endregion
-        #endregion
+        NotNull();
         #region Not Null
         if (Atual == null)
             Atual = new MoveConfig();
@@ -183,7 +91,131 @@ public class Ambiente : MonoBehaviour
         if (Manual)
             PublicMove();
         else
+        {
             AutomaticoMove();
+            #region FasesConfig();
+            #region Neutro
+            Pf.ModeloName = Skins[0];
+            //animaçao Idle
+            Pf.MaxOcioso = 15;
+            Pf.QlAnimaOcioso = 0;
+            Pf.AnimaOcioso = 12;
+            //velocidades
+            Pf.walkSpeed = walkSpeed;
+            Pf.crawlSpeed = crawlSpeed;
+            Pf.climbSpeed = climbSpeed;
+            Pf.runSpeed = runSpeed;
+            Pf.PullshSpeed = PullshSpeed;
+            //pulo
+            Pf.jumpforce = jumpforce;
+            Pf.fallMultiplier = fallMultiplier;
+            Pf.lowJumpMultiplier = lowJumpMultiplier;
+            #endregion
+            #region Alegre
+            Af.ModeloName = Skins[1];
+            //animaçao Idle
+            Af.MaxOcioso = 10;
+            Af.QlAnimaOcioso = 1;
+            Af.AnimaOcioso = 30;
+            //velocidades
+            Af.walkSpeed = 10;
+            Af.crawlSpeed = 8;
+            Af.climbSpeed = 10;
+            Af.runSpeed = 25;
+            Af.PullshSpeed = PullshSpeed;
+            //pulo
+            Af.jumpforce = jumpforce;
+            Af.fallMultiplier = fallMultiplier;
+            Af.lowJumpMultiplier = lowJumpMultiplier;
+            #endregion
+            #region Tristeza
+            Tf.ModeloName = Skins[2];
+            //animaçao Idle
+            Tf.MaxOcioso = 15;
+            Tf.QlAnimaOcioso = 2;
+            Tf.AnimaOcioso = 6.5f;
+            //velocidades
+            Tf.walkSpeed = 7;
+            Tf.crawlSpeed = 5;
+            Tf.climbSpeed = 5;
+            Tf.runSpeed = 15;
+            Tf.PullshSpeed = PullshSpeed;
+            //pulo
+            Tf.jumpforce = jumpforce;
+            Tf.fallMultiplier = fallMultiplier;
+            Tf.lowJumpMultiplier = lowJumpMultiplier;
+            #endregion
+            #region Raiva
+            Rf.ModeloName = Skins[3];
+            //animaçao Idle
+            Rf.MaxOcioso = 15;
+            Rf.QlAnimaOcioso = 3;
+            Rf.AnimaOcioso = 20;
+            //velocidades
+            Rf.walkSpeed = walkSpeed;
+            Rf.crawlSpeed = crawlSpeed;
+            Rf.climbSpeed = climbSpeed;
+            Rf.runSpeed = runSpeed;
+            Rf.PullshSpeed = PullshSpeed;
+            //pulo
+            Rf.jumpforce = jumpforce;
+            Rf.fallMultiplier = fallMultiplier;
+            Rf.lowJumpMultiplier = lowJumpMultiplier;
+            #endregion
+            #region Nojo
+            Nf.ModeloName = Skins[4];
+            //animaçao Idle
+            Nf.MaxOcioso = 7;
+            Nf.QlAnimaOcioso = 4;
+            Nf.AnimaOcioso = 4;
+            //velocidades
+            Nf.walkSpeed = walkSpeed;
+            Nf.crawlSpeed = 5;
+            Nf.climbSpeed = 7;
+            Nf.runSpeed = runSpeed;
+            Nf.PullshSpeed = PullshSpeed;
+            //pulo
+            Nf.jumpforce = jumpforce;
+            Nf.fallMultiplier = fallMultiplier;
+            Nf.lowJumpMultiplier = lowJumpMultiplier;
+            #endregion
+            #region Medo
+            Mf.ModeloName = Skins[5];
+            //animaçao Idle
+            Mf.MaxOcioso = 5;
+            Mf.QlAnimaOcioso = 5;
+            Mf.AnimaOcioso = 4.5f;
+            //velocidades
+            Mf.walkSpeed = 7;
+            Mf.crawlSpeed = crawlSpeed;
+            Mf.climbSpeed = climbSpeed;
+            Mf.runSpeed = 30;
+            Mf.PullshSpeed = PullshSpeed;
+            //pulo
+            Mf.jumpforce = jumpforce;
+            Mf.fallMultiplier = fallMultiplier;
+            Mf.lowJumpMultiplier = lowJumpMultiplier;
+            #endregion
+            #region Etereo
+            Ef.ModeloName = Skins[6];
+            //animaçao Idle
+            Ef.MaxOcioso = 15;
+            Ef.QlAnimaOcioso = 6;
+            Ef.AnimaOcioso = 4;
+            //velocidades
+            Ef.walkSpeed = walkSpeed;
+            Ef.crawlSpeed = crawlSpeed;
+            Ef.climbSpeed = climbSpeed;
+            Ef.runSpeed = runSpeed;
+            Ef.PullshSpeed = PullshSpeed;
+            //pulo
+            Ef.jumpforce = jumpforce;
+            Ef.fallMultiplier = fallMultiplier;
+            Ef.lowJumpMultiplier = lowJumpMultiplier;
+            #endregion
+            #endregion
+
+        }
         TrocaAmbiente();
         TrocaConfig();
         TrocaSom(0);
