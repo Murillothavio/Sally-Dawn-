@@ -167,6 +167,11 @@ public class AndarPlayer : MonoBehaviour
         Escalando = (OndeTo == Zonas.Agarrar && Kagarrar);
         if (OndeTo == Zonas.segurar && Ksegurar)
             stateanima = StateMachine.Empurrando;
+        if (OndeTo == Zonas.Agarrar && Kagarrar)
+            stateanima = StateMachine.Escalando;
+
+        if (OndeTo == Zonas.segurar && Ksegurar)
+            stateanima = StateMachine.Empurrando;
         else if (OndeTo == Zonas.Agarrar && Kagarrar)
             stateanima = StateMachine.Escalando;
         else if (Kbaixo)
@@ -184,7 +189,7 @@ public class AndarPlayer : MonoBehaviour
 
     void Andar()
     {
-        if (Escalando)
+        if (stateanima == StateMachine.Escalando)// (Escalando)
         {
             //       if (Kcima)
             //         vertical = 1;
@@ -206,7 +211,7 @@ public class AndarPlayer : MonoBehaviour
             transform.LookAt(targetOlhar);
 
         }
-        else if (Segurando)
+        else if (stateanima==StateMachine.Empurrando) //(Segurando)
         {
             moveSpeed = Mathf.MoveTowards(moveSpeed, AtualConfig.PullshSpeed, AtualConfig.currentSpeed * 3.5f);
             Vector3 v = Vector3.right * horizontal * moveSpeed;
@@ -266,7 +271,7 @@ public class AndarPlayer : MonoBehaviour
             //isGrounded = Grounds != nulll;
             Vector3 origem = transform.position + GroundCenter;
             isGrounded = Physics.Raycast(origem, Vector3.down, GroundSize.y, mask);
-        if (stateanima == StateMachine.Walk || stateanima == StateMachine.Ocioso || Segurando)
+        if (stateanima == StateMachine.Walk || stateanima == StateMachine.Ocioso || stateanima == StateMachine.Escalando)
         {
             if (isGrounded) currentJump = 0;
             if (Kjump && !Kbaixo && (isGrounded || MaxJump > currentJump))
@@ -321,8 +326,8 @@ public class AndarPlayer : MonoBehaviour
         if (pular)
             Acao.SetTrigger("Jump");
         Acao.SetBool("Pular", pular);
-        Acao.SetBool("Segura", Segurando);
-        Acao.SetBool("Agarra", Escalando);
+        Acao.SetBool("Segura", stateanima == StateMachine.Empurrando);// Segurando);
+        Acao.SetBool("Agarra", (stateanima == StateMachine.Escalando));// Escalando);
         Acao.SetBool("Dance", stateanima == StateMachine.Ocioso);
         Acao.SetFloat("Dancas", AtualConfig.QlAnimaOcioso);
         Acao.SetFloat("Wspeed", horizontal * horizontal * moveSpeed / AtualConfig.runSpeed);
