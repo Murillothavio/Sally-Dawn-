@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Ambiente : MonoBehaviour
 {
-    public enum Fase { Neutro, Alegre, Triste, Raiva, Nojo, Medo, Etereo}
+    public enum Fase { Neutro, Alegre, Triste, Raiva, Nojo, Medo, Etereo }
     public Fase ambiente;
-    public AudioClip[] som= new AudioClip[7];
+    public AudioClip[] som = new AudioClip[7];
     private AudioSource AudSrc;
+    private CriarFases cfs;
     private MoveConfig Atual = new MoveConfig(), Pf = new MoveConfig(), Af = new MoveConfig(), Tf = new MoveConfig(), Rf = new MoveConfig(), Nf = new MoveConfig(), Mf = new MoveConfig(), Ef = new MoveConfig();
     public GameObject[] Skins = new GameObject[7];
     public bool Manual = true;
@@ -39,6 +40,7 @@ public class Ambiente : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        cfs = GetComponent<CriarFases>();
         Atual = new MoveConfig();
         Pf = new MoveConfig();
         Af = new MoveConfig();
@@ -241,7 +243,7 @@ public class Ambiente : MonoBehaviour
                 if (Ef.ModeloName != null)
                     (Ef.ModeloName).SetActive(Ef.ModeloName == Atual.ModeloName);
             }
-          //  GameObject.Find(Atual.ModeloName).SetActive(true);
+        //  GameObject.Find(Atual.ModeloName).SetActive(true);
         #endregion
     }
 
@@ -305,24 +307,47 @@ public class Ambiente : MonoBehaviour
     }
     void TrocaConfig()
     {
+        int NumFases = 0;
         if (ambiente == Fase.Neutro)
+        {
             Atual = Pf;
+            NumFases = 0;
+        }
         else if (ambiente == Fase.Alegre)
+        {
             Atual = Af;
+            NumFases = 1;
+        }
         else if (ambiente == Fase.Triste)
+        {
             Atual = Tf;
+            NumFases = 2;
+        }
         else if (ambiente == Fase.Raiva)
+        {
             Atual = Rf;
+            NumFases = 3;
+        }
         else if (ambiente == Fase.Nojo)
+        {
             Atual = Nf;
+            NumFases = 4;
+        }
         else if (ambiente == Fase.Medo)
+        {
             Atual = Mf;
+            NumFases = 5;
+        }
         else if (ambiente == Fase.Etereo)
+        {
             Atual = Ef;
+            NumFases = 6;
+        }
+        cfs.faseIndex = NumFases;
     }
     void TrocaSom(int IdSom)
     {
-        
+
         if (ambiente == Fase.Neutro)
             IdSom = 0;
         else if (ambiente == Fase.Alegre)
@@ -340,5 +365,5 @@ public class Ambiente : MonoBehaviour
 
         AudSrc.clip = som[IdSom];
     }
-   
+
 }

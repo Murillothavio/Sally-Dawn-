@@ -1478,7 +1478,7 @@ MonoBehaviour:
   inAtivo: 0
   Vfase: []
   Vtrans: []
-  Fase: 0
+  faseIndex: 0
 --- !u!43 &218641120
 Mesh:
   m_ObjectHideFlags: 0
@@ -14408,7 +14408,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-81990
+  m_Name: pb_Mesh-28768
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -61772,6 +61772,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_PolyMesh.m_SubMeshes.Array.data[0].m_Indexes.Array.data[1067]
       value: 537
+      objectReference: {fileID: 0}
+    - target: {fileID: 206205681306314386, guid: 4d93f21080cf14548a47c1fc0fb88259,
+        type: 3}
+      propertyPath: m_PolyMesh.name
+      value: pb_Mesh-28768
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d93f21080cf14548a47c1fc0fb88259, type: 3}
