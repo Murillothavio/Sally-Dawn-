@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CriarFases : MonoBehaviour
 {
-    public bool inAtivo;
+    public bool inAtivo,Criar;
     public GameObject[] Vfase, Vtrans;
     [Range(0, 6)]
     public float faseIndex;
@@ -27,10 +27,9 @@ public class CriarFases : MonoBehaviour
         faseIndex = IndexFase;
         if (!inAtivo )
         {
-            if (Input.GetKeyDown(KeyCode.L))
+            if (Input.GetKeyDown(KeyCode.L)|| Criar)
                 ApagarBack();
-            if (Input.GetKeyDown(KeyCode.K))
-                CriarNext();
+            
         }
 
     }
@@ -56,6 +55,7 @@ public class CriarFases : MonoBehaviour
     }
     void CriarNext()
     {
+        Criar = false;
         Destroy(GameObject.Find(Vfase[IndexFase /*+ 1*/].name + "(Clone)"));
         if ((IndexFase<6))
         Destroy(GameObject.Find(Vtrans[IndexFase/* + 1*/].name + "(Clone)"));

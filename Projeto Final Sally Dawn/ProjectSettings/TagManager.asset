@@ -10,6 +10,8 @@ TagManager:
   - Zona_notsafe
   - Zona_itssafe
   - CameraFocus
+  - LocazicaoFase
+  - CriarFase
   layers:
   - Default
   - TransparentFX

@@ -365,5 +365,10 @@ public class Ambiente : MonoBehaviour
 
         AudSrc.clip = som[IdSom];
     }
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "LocazicaoFase")
+            ambiente = (Fase)other.gameObject.GetComponent<OndeEstaMarca>().ambiente;
+        gameObject.GetComponent<CriarFases>().Criar = (other.gameObject.tag == "CriarFase");
+    }
 }
