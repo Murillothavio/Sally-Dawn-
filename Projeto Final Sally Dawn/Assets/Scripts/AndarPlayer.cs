@@ -61,15 +61,22 @@ public class AndarPlayer : MonoBehaviour
     private float DeltaY;
 
     public MoveConfig AtualConfig = new MoveConfig();
-
+    private CapsuleCollider Corpo;
+    private float HeightCollider, CenterCollider, RadiusCollider;
+    private float HeightColliderCrawl = 2.13f;
+    private float CenterColliderCrawl = 0.71f;
+    private float RadiusColliderCrawl = 1;
+    [Range(0, 5)]
+    public float CurrentCollider = .5f;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-    //    Filho = GameObject.Find("SallyDawnMixamo@Idle");
         Acao = Filho.GetComponent<Animator>();
-    
-       
+        Corpo = GetComponent<CapsuleCollider>();
+        HeightCollider = Corpo.height;
+        CenterCollider = Corpo.center.y;
+        RadiusCollider = Corpo.radius;
     }
     private void FixedUpdate()
     {
@@ -102,6 +109,7 @@ public class AndarPlayer : MonoBehaviour
         Atualiza();
         Coordena_Horizon_vertical();
         Estados();
+        ColliderTamanho();
         Andar();
 
     }
@@ -186,18 +194,25 @@ public class AndarPlayer : MonoBehaviour
         if (!Segurando && (horizontal < -0.5f || horizontal > .5f))
             Arrastar = horizontal;
     }
-
+    void ColliderTamanho()
+    {
+        if (stateanima==StateMachine.Agachado)
+        {
+            Corpo.radius = Mathf.MoveTowards(Corpo.radius, RadiusColliderCrawl, CurrentCollider*2);
+            Corpo.center = new Vector3(Corpo.center.x, Mathf.MoveTowards(Corpo.center.y, CenterColliderCrawl, CurrentCollider), 0);
+            Corpo.height = Mathf.MoveTowards(Corpo.height, HeightColliderCrawl, CurrentCollider/2);
+        }
+        else
+        {
+            Corpo.radius = RadiusCollider;
+            Corpo.center = new Vector3(Corpo.center.x, CenterCollider, 0);
+            Corpo.height = HeightCollider;
+        }
+    }
     void Andar()
     {
-        if (stateanima == StateMachine.Escalando)// (Escalando)
+        if (stateanima == StateMachine.Escalando)
         {
-            //       if (Kcima)
-            //         vertical = 1;
-            //   else if (Kbaixo)
-            //     vertical = -1;
-            //else
-            //  vertical = 0;
-
             moveSpeed = Mathf.MoveTowards(moveSpeed, AtualConfig.climbSpeed, AtualConfig.currentSpeed);
 
             Vector3 v = Vector3.up * vertical * moveSpeed;
