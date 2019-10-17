@@ -38,7 +38,8 @@ public class Eventos : MonoBehaviour
         stg += PwrUp.Medo ? 1 : 0;
         stg += PwrUp.Etereo ? 1 : 0;
 
-        txt.text = stg;
+        if (txt != null)
+            txt.text = stg;
     }
     private void OnTriggerEnter(Collider other)
     {

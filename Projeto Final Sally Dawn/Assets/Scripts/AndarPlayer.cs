@@ -226,7 +226,7 @@ public class AndarPlayer : MonoBehaviour
             transform.LookAt(targetOlhar);
 
         }
-        else if (stateanima==StateMachine.Empurrando) //(Segurando)
+        else if (stateanima == StateMachine.Empurrando) //(Segurando)
         {
             moveSpeed = Mathf.MoveTowards(moveSpeed, AtualConfig.PullshSpeed, AtualConfig.currentSpeed * 3.5f);
             Vector3 v = Vector3.right * horizontal * moveSpeed;
@@ -280,12 +280,12 @@ public class AndarPlayer : MonoBehaviour
 
             #endregion
         }
-            #region Pulo
-            var vel = rb.velocity;
-            //Collider[] Grounds = Physics.OverlapBox(GroundCenter, GroundSize / 2, Quaternion.identity, mask);
-            //isGrounded = Grounds != nulll;
-            Vector3 origem = transform.position + GroundCenter;
-            isGrounded = Physics.Raycast(origem, Vector3.down, GroundSize.y, mask);
+        #region Pulo
+        var vel = rb.velocity;
+        //Collider[] Grounds = Physics.OverlapBox(GroundCenter, GroundSize / 2, Quaternion.identity, mask);
+        //isGrounded = Grounds != nulll;
+        Vector3 origem = transform.position + GroundCenter;
+        isGrounded = Physics.Raycast(origem, Vector3.down, GroundSize.y, mask);
         if (stateanima == StateMachine.Walk || stateanima == StateMachine.Ocioso || stateanima == StateMachine.Escalando)
         {
             if (isGrounded) currentJump = 0;
@@ -306,31 +306,31 @@ public class AndarPlayer : MonoBehaviour
         }
         if (vel.y < 0)
         {
-          //  Debug.Log("funciona esse caralho");
+            //  Debug.Log("funciona esse caralho");
             vel.y += Physics.gravity.y * (AtualConfig.fallMultiplier) * Time.deltaTime;
         }
         else if (vel.y > 0 && !Input.GetButton("Jump"))
         {
-         //   Debug.Log("entai vai tomar no cu");
+            //   Debug.Log("entai vai tomar no cu");
             vel.y += Physics.gravity.y * (AtualConfig.lowJumpMultiplier - 1) * Time.deltaTime;
         }
-      //  vel.y += Physics.gravity.y / 10;
-            Caindo = (vel.y < 0) && !isGrounded;
-            if (Caindo)
-                stateanima = StateMachine.Caindo;
-            rb.velocity = vel;
-           // if (!isGrounded)
-           // {
-           // Debug.Log("-------------");
-           //     Debug.Log( (AtualConfig.fallMultiplier ));
-           // Debug.Log((AtualConfig.lowJumpMultiplier - 1));
-           // Debug.Log(DeltaY - vel.y);
-           ////     Debug.Log(Physics.gravity);
-           // }
-            DeltaY = vel.y;
-        
-            #endregion
-        
+        //  vel.y += Physics.gravity.y / 10;
+        Caindo = (vel.y < 0) && !isGrounded;
+        if (Caindo)
+            stateanima = StateMachine.Caindo;
+        rb.velocity = vel;
+        // if (!isGrounded)
+        // {
+        // Debug.Log("-------------");
+        //     Debug.Log( (AtualConfig.fallMultiplier ));
+        // Debug.Log((AtualConfig.lowJumpMultiplier - 1));
+        // Debug.Log(DeltaY - vel.y);
+        ////     Debug.Log(Physics.gravity);
+        // }
+        DeltaY = vel.y;
+
+        #endregion
+
         SetAnimacoes();
 
     }
