@@ -12,6 +12,7 @@ TagManager:
   - CameraFocus
   - LocazicaoFase
   - CriarFase
+  - PlataformasMovel
   layers:
   - Default
   - TransparentFX
