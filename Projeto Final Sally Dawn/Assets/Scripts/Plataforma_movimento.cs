@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Plataforma_movimento : MonoBehaviour
 {
     #region Variavel
-
-    public Quaternion look;
+   
     private Rigidbody rb;
     private bool Estado = true;
     public bool Alternado = false;
@@ -23,7 +20,7 @@ public class Plataforma_movimento : MonoBehaviour
         public Vector3 CentroPonto;
         public float Velocidade;
         public float Raio;
-        
+
 
         public Plat(Vector3 _Direcao, float _TamanP, float _TamanN, float _velo, float _raio)
         {
@@ -36,37 +33,32 @@ public class Plataforma_movimento : MonoBehaviour
         }
 
     }
-
+    #region Plat default
+    /*
     public Plat Horizontalc = new Plat(Vector3.right, 20, 10, 8, 0);
     public Plat Verticalc = new Plat(Vector3.up, 20, 10, 15, 0);
     public Plat Crescentec = new Plat(new Vector3(0, 1, 1), 20, 10, 8, 0);
     public Plat Decrescentec = new Plat(new Vector3(0, 1, -1), 20, 10, 8, 0);
     public Plat Translacaoc = new Plat(Vector3.up, 0, 0, 190, 10);
     public Plat Horarioc = new Plat(Vector3.zero, 0, 0, 8, 0);
-    public Plat Anhorarioc = new Plat(Vector3.zero, 0, 0, -8, 0);
+    public Plat Anhorarioc = new Plat(Vector3.zero, 0, 0, -8, 0);*/
+    #endregion
 
     public Plat AaCaminho;
     public Plat BbCaminho;
     public Plat NwCaminho;
 
     public bool LookAt;
-    public Plat CaminhoInicial;
-    public Vector3 DirecaoInicial = Vector3.right;
-    public float TamanhoRightInicial = 20, TamanhoLeftInicial = 10, VelociadadeInicial = 8, RaioInicial = 0;
+    public Plat CaminhoRed;
+    public Vector3 DirecaoRed = Vector3.right;
+    public float TamanhoRightRed = 20, TamanhoLeftRed = 10, VelociadadeRed = 8, RaioRed = 0;
 
     public bool Dupla = true;
     public Plat CaminhoFinal;
-    public Vector3 DirecaoFinal = Vector3.up;
-    public float TamanhoRightFinal = 20, TamanhoLeftFinal = 10, VelociadadeFinal = 15, RaioFinal = 0;
+    public Vector3 DirecaoBlue = Vector3.up;
+    public float TamanhoRightBlue = 20, TamanhoLeftBlue = 10, VelociadadeBlue = 15, RaioBlue = 0;
 
-
-    /*Colocar ponto 0
-Direção a
-Direção b
-Translação
-Rotação
-Tamanho do caminho
-Velocidade*/
+   
     #endregion
 
     // Start is called before the first frame update
@@ -76,14 +68,34 @@ Velocidade*/
         Ponto0 = transform.position;
         PontoAtual = Ponto0;
 
-        CaminhoInicial = new Plat(DirecaoInicial, TamanhoRightInicial, TamanhoLeftInicial, VelociadadeInicial, RaioInicial);
-        CaminhoFinal = new Plat(DirecaoFinal, TamanhoRightFinal, TamanhoLeftFinal, VelociadadeFinal, RaioFinal);
-        AaCaminho = CaminhoInicial;
+
+
+        CaminhoRed = new Plat(DirecaoRed, TamanhoRightRed, TamanhoLeftRed, VelociadadeRed, RaioRed);
+        CaminhoFinal = new Plat(DirecaoBlue, TamanhoRightBlue, TamanhoLeftBlue, VelociadadeBlue, RaioBlue);
+
+
+        if (transform.childCount >= 2)
+        {
+            CaminhoRed = GetCaminho(transform.GetChild(0).gameObject, VelociadadeRed);
+            CaminhoFinal = GetCaminho(transform.GetChild(1).gameObject, VelociadadeBlue);
+        }
+        
+
+        AaCaminho = CaminhoRed;
         if (Dupla)
             BbCaminho = CaminhoFinal;
         else
-            BbCaminho = CaminhoInicial;
-        
+            BbCaminho = CaminhoRed;
+
+        DirecaoRed = AaCaminho.Direcao;
+        TamanhoRightRed = Vector3.Dot(DirecaoRed, AaCaminho.PontoInicial);
+        TamanhoLeftRed = Vector3.Dot(DirecaoRed, AaCaminho.PontoFinal);
+        RaioRed = AaCaminho.Raio;
+
+        DirecaoBlue = BbCaminho.Direcao;
+        TamanhoRightBlue = Vector3.Dot(DirecaoBlue, BbCaminho.PontoInicial);
+        TamanhoLeftBlue = Vector3.Dot(DirecaoBlue, BbCaminho.PontoFinal);
+        RaioRed = BbCaminho.Raio;
 
         AaCaminho.PontoFinal += Ponto0;
         AaCaminho.PontoInicial += Ponto0;
@@ -102,6 +114,70 @@ Velocidade*/
         else if (NwCaminho.Direcao.x != 0) Angu = Mathf.Acos(NwCaminho.Direcao.x) * Mathf.Rad2Deg;
     }
 
+    Plat GetCaminho(GameObject gb, float _velociadade)
+    {
+        Vector3 PontoLeft, PontoRight, PontoDelta, PontoCentro;
+        float AngDirecao, AngRaiz;
+        Vector3 _direcl, _direcao;
+        float _tamanhoright, _tamanholeft, _raio;
+
+
+        LineRenderer lr = gb.GetComponent<LineRenderer>();
+
+
+
+        PontoLeft = gb.transform.GetChild(0).transform.position - Ponto0;
+        PontoRight = gb.transform.GetChild(1).transform.position - Ponto0;
+        PontoCentro = gb.transform.GetChild(2).transform.position - Ponto0;
+        lr.SetPosition(0, PontoLeft);
+        lr.SetPosition(3, PontoRight);
+
+        PontoDelta = PontoRight - PontoLeft;
+
+        float ang = Mathf.Atan(PontoDelta.y / PontoDelta.x) * Mathf.Rad2Deg;
+        AngDirecao = Mathf.Abs(ang);
+        Debug.Log((ang / AngDirecao));
+        if (PontoDelta != Vector3.zero)
+            _direcao = new Vector3((AngDirecao < 60 ? 1 : 0) * (ang / AngDirecao), AngDirecao > 30 ? 1 : 0, 0);
+        else
+            _direcao = new Vector3(PontoCentro.y <= PontoCentro.x ? 1 : 0, PontoCentro.x <= PontoCentro.y ? 1 : 0, 0);
+
+        AngRaiz = AngDirecao - 45;
+        _direcl = new Vector3(AngRaiz < 0 ? 1 : 0, AngRaiz > 0 ? 1 : 0, 0);
+        AngRaiz = Mathf.Abs(AngRaiz);
+
+        _tamanhoright = Vector3.Dot(PontoRight, _direcl);
+        _tamanholeft = Vector3.Dot(PontoLeft, _direcl);
+        _raio = Vector3.Dot(_direcao, PontoCentro);
+
+
+
+        lr.SetPosition(0, PontoLeft);
+        lr.SetPosition(1, _direcao * _tamanholeft);
+        lr.SetPosition(2, _direcao * _tamanhoright);
+        lr.SetPosition(3, PontoRight);
+        //   _tamanhoright *= Mathf.Sqrt(1 + (AngRaiz < 15 ? 1 : 0));
+        //   _tamanholeft *= Mathf.Sqrt(1 + (AngRaiz < 15 ? 1 : 0));
+
+
+        //DirecaoInicial = _direcao;
+        //TamanhoRightInicial = _tamanhoright;
+        //TamanhoLeftInicial = _tamanholeft;
+        //VelociadadeInicial = _velociadade;
+        //RaioInicial = _raio;
+
+
+        //   new Plat(DirecaoInicial, TamanhoRightInicial, TamanhoLeftInicial, VelociadadeInicial, RaioInicial);
+        /*
+         public Vector3 PontoLeft, PontoRight, PontoDelta, PontoCentro;
+       public float AngDirecao, AngRaiz;
+       public Vector3 _direcl, _direcao, _ndirec;
+       public    float _tamanhoright, _tamanholeft, _raio;
+
+            */
+        return new Plat(_direcao, _tamanhoright, -_tamanholeft, _velociadade, _raio);
+
+    }
     void Update()
     {
         if (Mathf.Abs(PontoAtual.y - Ponto0.y) < 0.5f && Mathf.Abs(PontoAtual.z - Ponto0.z) < 0.5f && Mathf.Abs(PontoAtual.x - Ponto0.x) < 0.5f)
@@ -119,7 +195,7 @@ Velocidade*/
                 transform.position = Ponto0;
             }
 
-       
+
 
         if (NwCaminho.CentroPonto == Ponto0)
         {
@@ -144,7 +220,7 @@ Velocidade*/
             else
             {
                 #region Rotação
-                transform.Rotate(0,0,transform.rotation.x + NwCaminho.Velocidade * Time.deltaTime);
+                transform.Rotate(0, 0, transform.rotation.x + NwCaminho.Velocidade * Time.deltaTime);
                 #endregion
             }
         }
@@ -156,24 +232,15 @@ Velocidade*/
             NwCaminho.Direcao.x = Mathf.Cos(Angu * Mathf.Deg2Rad);
             PontoAtual = NwCaminho.CentroPonto + NwCaminho.Raio * NwCaminho.Direcao;
             if (LookAt)
-            {
-                transform.LookAt(NwCaminho.CentroPonto);
-                var  zzz = transform.rotation.z;
-                transform.Rotate(0, 0, 0);
-                look = transform.rotation;
-
-            }
-
-          //  transform.RotateAround(NwCaminho.CentroPonto, Vector3.forward, NwCaminho.Velocidade * Time.deltaTime);
-
+                transform.RotateAround(NwCaminho.CentroPonto, Vector3.forward, NwCaminho.Velocidade * Time.deltaTime);
             #endregion
         }
 
 
 
         transform.position = PontoAtual;
-        
-       
+
+
     }
 }
 
