@@ -8,7 +8,6 @@ public class Debugagem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PlataformasDuplas = GameObject.FindGameObjectsWithTag("PlataformasMovel");
     }
 
     // Update is called once per frame
@@ -16,12 +15,15 @@ public class Debugagem : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            PlataformasDuplas = GameObject.FindGameObjectsWithTag("PlataformasMovel");
+
             foreach (var item in PlataformasDuplas)
             {
-                if (item.GetComponent<Plataforma_movimento>().Alternado)
-                    item.GetComponent<Plataforma_movimento>().Alternado = false;
-                else
-                    item.GetComponent<Plataforma_movimento>().Alternado = true;
+                if (item.GetComponent<Plataforma_movimento>() != null)
+                    if (item.GetComponent<Plataforma_movimento>().Alternado)
+                        item.GetComponent<Plataforma_movimento>().Alternado = false;
+                    else
+                        item.GetComponent<Plataforma_movimento>().Alternado = true;
             }
         }
     }

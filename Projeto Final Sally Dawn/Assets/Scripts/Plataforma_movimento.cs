@@ -5,12 +5,17 @@ public class Plataforma_movimento : MonoBehaviour
     #region Variavel
    
     private Rigidbody rb;
+    [HideInInspector]
+    public GameObject MeuPai;
+    public float precisao = 1;
     private bool Estado = true;
     public bool Alternado = false;
-    private Vector3 Ponto0;
-    private Vector3 PontoAtual;
-    private Vector3 PontoGoTo;
+    public bool TaNoPonto, Movendo,Junto;
+    public Vector3 Ponto0;
+    public Vector3 PontoAtual;
+    public Vector3 PontoGoTo;
     private float Angu;
+
 
     public struct Plat
     {
@@ -24,6 +29,8 @@ public class Plataforma_movimento : MonoBehaviour
 
         public Plat(Vector3 _Direcao, float _TamanP, float _TamanN, float _velo, float _raio)
         {
+            if (_Direcao != Vector3.zero)
+                _velo = Mathf.Abs(_velo);
             this.Direcao = _Direcao;
             this.PontoFinal = _TamanP * _Direcao;
             this.PontoInicial = _TamanN * _Direcao * -1;
@@ -33,7 +40,6 @@ public class Plataforma_movimento : MonoBehaviour
         }
 
     }
-    #region Plat default
     /*
     public Plat Horizontalc = new Plat(Vector3.right, 20, 10, 8, 0);
     public Plat Verticalc = new Plat(Vector3.up, 20, 10, 15, 0);
@@ -42,8 +48,6 @@ public class Plataforma_movimento : MonoBehaviour
     public Plat Translacaoc = new Plat(Vector3.up, 0, 0, 190, 10);
     public Plat Horarioc = new Plat(Vector3.zero, 0, 0, 8, 0);
     public Plat Anhorarioc = new Plat(Vector3.zero, 0, 0, -8, 0);*/
-    #endregion
-
     public Plat AaCaminho;
     public Plat BbCaminho;
     public Plat NwCaminho;
@@ -54,11 +58,11 @@ public class Plataforma_movimento : MonoBehaviour
     public float TamanhoRightRed = 20, TamanhoLeftRed = 10, VelociadadeRed = 8, RaioRed = 0;
 
     public bool Dupla = true;
-    public Plat CaminhoFinal;
+    public Plat CaminhoBlue;
     public Vector3 DirecaoBlue = Vector3.up;
     public float TamanhoRightBlue = 20, TamanhoLeftBlue = 10, VelociadadeBlue = 15, RaioBlue = 0;
 
-   
+    public Vector3 ddddirecao , cccccccen, ddddddta;
     #endregion
 
     // Start is called before the first frame update
@@ -67,23 +71,24 @@ public class Plataforma_movimento : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         Ponto0 = transform.position;
         PontoAtual = Ponto0;
+        Movendo = true;
+        Junto = true;
 
 
-
-        CaminhoRed = new Plat(DirecaoRed, TamanhoRightRed, TamanhoLeftRed, VelociadadeRed, RaioRed);
-        CaminhoFinal = new Plat(DirecaoBlue, TamanhoRightBlue, TamanhoLeftBlue, VelociadadeBlue, RaioBlue);
+     //   CaminhoRed = new Plat(DirecaoRed, TamanhoRightRed, TamanhoLeftRed, VelociadadeRed, RaioRed);
+     //   CaminhoBlue = new Plat(DirecaoBlue, TamanhoRightBlue, TamanhoLeftBlue, VelociadadeBlue, RaioBlue);
 
 
         if (transform.childCount >= 2)
         {
             CaminhoRed = GetCaminho(transform.GetChild(0).gameObject, VelociadadeRed);
-            CaminhoFinal = GetCaminho(transform.GetChild(1).gameObject, VelociadadeBlue);
+            CaminhoBlue = GetCaminho(transform.GetChild(1).gameObject, VelociadadeBlue);
         }
         
 
         AaCaminho = CaminhoRed;
         if (Dupla)
-            BbCaminho = CaminhoFinal;
+            BbCaminho = CaminhoBlue;
         else
             BbCaminho = CaminhoRed;
 
@@ -95,7 +100,7 @@ public class Plataforma_movimento : MonoBehaviour
         DirecaoBlue = BbCaminho.Direcao;
         TamanhoRightBlue = Vector3.Dot(DirecaoBlue, BbCaminho.PontoInicial);
         TamanhoLeftBlue = Vector3.Dot(DirecaoBlue, BbCaminho.PontoFinal);
-        RaioRed = BbCaminho.Raio;
+        RaioBlue = BbCaminho.Raio;
 
         AaCaminho.PontoFinal += Ponto0;
         AaCaminho.PontoInicial += Ponto0;
@@ -133,14 +138,17 @@ public class Plataforma_movimento : MonoBehaviour
         lr.SetPosition(3, PontoRight);
 
         PontoDelta = PontoRight - PontoLeft;
-
+        ddddddta = PontoDelta;
         float ang = Mathf.Atan(PontoDelta.y / PontoDelta.x) * Mathf.Rad2Deg;
         AngDirecao = Mathf.Abs(ang);
-        Debug.Log((ang / AngDirecao));
+
+        Vector3 PClinha = new Vector3(Mathf.Abs(PontoCentro.x), Mathf.Abs(PontoCentro.y), 0);
         if (PontoDelta != Vector3.zero)
             _direcao = new Vector3((AngDirecao < 60 ? 1 : 0) * (ang / AngDirecao), AngDirecao > 30 ? 1 : 0, 0);
+        else if (PontoCentro != Vector3.zero)
+            _direcao = new Vector3(PClinha.y <= PClinha.x ? 1 : 0, PClinha.x <= PClinha.y ? 1 : 0, 0);
         else
-            _direcao = new Vector3(PontoCentro.y <= PontoCentro.x ? 1 : 0, PontoCentro.x <= PontoCentro.y ? 1 : 0, 0);
+            _direcao = Vector3.zero;
 
         AngRaiz = AngDirecao - 45;
         _direcl = new Vector3(AngRaiz < 0 ? 1 : 0, AngRaiz > 0 ? 1 : 0, 0);
@@ -149,7 +157,8 @@ public class Plataforma_movimento : MonoBehaviour
         _tamanhoright = Vector3.Dot(PontoRight, _direcl);
         _tamanholeft = Vector3.Dot(PontoLeft, _direcl);
         _raio = Vector3.Dot(_direcao, PontoCentro);
-
+        ddddirecao = _direcao;
+        cccccccen = PontoCentro;
 
 
         lr.SetPosition(0, PontoLeft);
@@ -180,7 +189,9 @@ public class Plataforma_movimento : MonoBehaviour
     }
     void Update()
     {
-        if (Mathf.Abs(PontoAtual.y - Ponto0.y) < 0.5f && Mathf.Abs(PontoAtual.z - Ponto0.z) < 0.5f && Mathf.Abs(PontoAtual.x - Ponto0.x) < 0.5f)
+        TaNoPonto = (Mathf.Abs(PontoAtual.y - Ponto0.y) < precisao && Mathf.Abs(PontoAtual.z - Ponto0.z) <precisao && Mathf.Abs(PontoAtual.x - Ponto0.x) < precisao);
+        if (TaNoPonto)
+        {
             //if ((int)PontoAtual.y == (int)Ponto0.y && (int)PontoAtual.z == (int)Ponto0.z && (int)PontoAtual.x == (int)Ponto0.x)
             if (Alternado)
             {
@@ -194,48 +205,52 @@ public class Plataforma_movimento : MonoBehaviour
                 else if (NwCaminho.Direcao.x != 0) Angu = Mathf.Acos(NwCaminho.Direcao.x) * Mathf.Rad2Deg;
                 transform.position = Ponto0;
             }
+            //if (MeuPai != null && Junto)
+            //    MeuPai.GetComponent<Plataforma_quadupla>().AtualizaBool(gameObject);
+        }
 
-
-
-        if (NwCaminho.CentroPonto == Ponto0)
+        if (Movendo)
         {
-            if (NwCaminho.Direcao != Vector3.zero)
+            Junto = true;
+            if (NwCaminho.CentroPonto == Ponto0)
             {
-                #region Andar Reto
-                if ((int)PontoAtual.z == (int)NwCaminho.PontoFinal.z
-                 && (int)PontoAtual.y == (int)NwCaminho.PontoFinal.y
-                 && (int)PontoAtual.x == (int)NwCaminho.PontoFinal.x)
-                    PontoGoTo = NwCaminho.PontoInicial;
+                if (NwCaminho.Direcao != Vector3.zero)
+                {
+                    #region Andar Reto
+                    if ((int)PontoAtual.z == (int)NwCaminho.PontoFinal.z
+                     && (int)PontoAtual.y == (int)NwCaminho.PontoFinal.y
+                     && (int)PontoAtual.x == (int)NwCaminho.PontoFinal.x)
+                        PontoGoTo = NwCaminho.PontoInicial;
 
-                else if ((int)PontoAtual.z == (int)NwCaminho.PontoInicial.z
-                      && (int)PontoAtual.y == (int)NwCaminho.PontoInicial.y
-                      && (int)PontoAtual.x == (int)NwCaminho.PontoInicial.x)
-                    PontoGoTo = NwCaminho.PontoFinal;
+                    else if ((int)PontoAtual.z == (int)NwCaminho.PontoInicial.z
+                          && (int)PontoAtual.y == (int)NwCaminho.PontoInicial.y
+                          && (int)PontoAtual.x == (int)NwCaminho.PontoInicial.x)
+                        PontoGoTo = NwCaminho.PontoFinal;
 
-                PontoAtual.z = Mathf.MoveTowards(PontoAtual.z, PontoGoTo.z, NwCaminho.Velocidade * Time.deltaTime);
-                PontoAtual.y = Mathf.MoveTowards(PontoAtual.y, PontoGoTo.y, NwCaminho.Velocidade * Time.deltaTime);
-                PontoAtual.x = Mathf.MoveTowards(PontoAtual.x, PontoGoTo.x, NwCaminho.Velocidade * Time.deltaTime);
-                #endregion
+                    PontoAtual.z = Mathf.MoveTowards(PontoAtual.z, PontoGoTo.z, NwCaminho.Velocidade * Time.deltaTime);
+                    PontoAtual.y = Mathf.MoveTowards(PontoAtual.y, PontoGoTo.y, NwCaminho.Velocidade * Time.deltaTime);
+                    PontoAtual.x = Mathf.MoveTowards(PontoAtual.x, PontoGoTo.x, NwCaminho.Velocidade * Time.deltaTime);
+                    #endregion
+                }
+                else
+                {
+                    #region Rotação
+                    transform.Rotate(0, 0, transform.rotation.x + NwCaminho.Velocidade * Time.deltaTime);
+                    #endregion
+                }
             }
             else
             {
-                #region Rotação
-                transform.Rotate(0, 0, transform.rotation.x + NwCaminho.Velocidade * Time.deltaTime);
+                #region Translação
+                Angu += NwCaminho.Velocidade * Time.deltaTime;
+                NwCaminho.Direcao.y = Mathf.Sin(Angu * Mathf.Deg2Rad);
+                NwCaminho.Direcao.x = Mathf.Cos(Angu * Mathf.Deg2Rad);
+                PontoAtual = NwCaminho.CentroPonto + NwCaminho.Raio * NwCaminho.Direcao;
+                if (LookAt)
+                    transform.RotateAround(NwCaminho.CentroPonto, Vector3.forward, NwCaminho.Velocidade * Time.deltaTime);
                 #endregion
             }
         }
-        else
-        {
-            #region Translação
-            Angu += NwCaminho.Velocidade * Time.deltaTime;
-            NwCaminho.Direcao.y = Mathf.Sin(Angu * Mathf.Deg2Rad);
-            NwCaminho.Direcao.x = Mathf.Cos(Angu * Mathf.Deg2Rad);
-            PontoAtual = NwCaminho.CentroPonto + NwCaminho.Raio * NwCaminho.Direcao;
-            if (LookAt)
-                transform.RotateAround(NwCaminho.CentroPonto, Vector3.forward, NwCaminho.Velocidade * Time.deltaTime);
-            #endregion
-        }
-
 
 
         transform.position = PontoAtual;
