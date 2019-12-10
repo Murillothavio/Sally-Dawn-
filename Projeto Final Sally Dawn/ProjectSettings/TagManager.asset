@@ -13,6 +13,8 @@ TagManager:
   - LocazicaoFase
   - CriarFase
   - PlataformasMovel
+  - PlataformaInvisivel
+  - PlataformaEscada
   layers:
   - Default
   - TransparentFX
