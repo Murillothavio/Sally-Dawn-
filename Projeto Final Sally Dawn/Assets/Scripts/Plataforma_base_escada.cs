@@ -4,17 +4,13 @@ using UnityEngine;
 
 public class Plataforma_base_escada : MonoBehaviour
 {
-    [HideInInspector]
     public Vector3 Altura, Distancia;
-    [HideInInspector]
     public GameObject[] Colunas = new GameObject[5];
-    public float DeltaTime;
-    public bool IsBlue;
-    public bool[] Ativo = new bool[5];
 
+    // Start is called before the first frame update
     void Awake()
     {
-        float Ha, Hb, Da, Db, angle;
+        float Ha, Hb, Da, Db;
         Ha = transform.GetChild(0).gameObject.transform.position.y;
         Hb = transform.GetChild(1).gameObject.transform.position.y;
 
@@ -31,30 +27,16 @@ public class Plataforma_base_escada : MonoBehaviour
         Db = Colunas[4].transform.position.x;
         Distancia = new Vector3(Da, Db, Mathf.Abs((Db - Da) / 4));
 
-        angle = Mathf.Atan(Altura.z/ Distancia.z);
-        angle *= Mathf.Rad2Deg;
         for (int i = 0; i < Colunas.Length; i++)
         {
             Colunas[i].GetComponent<Plataforma_escada>().PontoRed = new Vector3((Distancia.z * i) + Distancia.x, Altura.x + (Altura.z * i), 0);
             Colunas[i].GetComponent<Plataforma_escada>().PontoBlue = new Vector3((Distancia.z * i) + Distancia.x, Altura.y - (Altura.z * i), 0);
-            Colunas[i].GetComponent<Plataforma_escada>().AnguloRed = angle;
-            Colunas[i].GetComponent<Plataforma_escada>().AnguloBlue = -angle;
-            Colunas[i].GetComponent<Plataforma_escada>().DelaTime = DeltaTime;
         }
     }
 
-    void Start()
-    {
-        Destroy(transform.GetChild(0).gameObject);
-        Destroy(transform.GetChild(1).gameObject);
-    }
-
+    // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < Colunas.Length; i++)
-        {
-            Colunas[i].GetComponent<Plataforma_escada>().Ativo = Ativo[i];
-            Colunas[i].GetComponent<Plataforma_escada>().IsBlue = IsBlue;
-        }
+        
     }
 }

@@ -123,6 +123,8 @@ public class Plataforma_movimento : MonoBehaviour
             Destroy(gbBlue);
             Destroy(gbRed);
         }
+
+        //Destruir
     }
     Plat GetCaminho(GameObject gb, float _velociadade)
     {

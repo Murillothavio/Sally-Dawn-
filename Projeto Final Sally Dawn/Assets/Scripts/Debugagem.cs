@@ -6,14 +6,12 @@ public class Debugagem : MonoBehaviour
 {
     private GameObject[] PlataformasDuplas;
     private GameObject[] PlataformasInvi;
-    public GameObject[] PlataformaEscada;
     public bool Desativar, Deletar;
-
+    // Start is called before the first frame update
     void Start()
     {
             PlataformasInvi = GameObject.FindGameObjectsWithTag("PlataformaInvisivel");
             PlataformasDuplas = GameObject.FindGameObjectsWithTag("PlataformasMovel");
-            PlataformaEscada = GameObject.FindGameObjectsWithTag("PlataformaEscada");
     }
 
     // Update is called once per frame
@@ -27,24 +25,23 @@ public class Debugagem : MonoBehaviour
                         item.GetComponent<Plataforma_movimento>().Alternado = false;
                     else
                         item.GetComponent<Plataforma_movimento>().Alternado = true;
-            
+
+            /*foreach (var item in PlataformasInvi)
+                if (item.GetComponent<Plataforma_desAtivar>() != null)
+                    if (item.GetComponent<Plataforma_desAtivar>().Visivel)
+                        item.GetComponent<Plataforma_desAtivar>().Visivel = false;
+                    else
+                        item.GetComponent<Plataforma_desAtivar>().Visivel = true;*/
             foreach (var item in PlataformasInvi)
             {
                 bool Visivel = item.activeInHierarchy;
+                //if (item.GetComponent<Plataforma_desAtivar>() != null)
                     if (Visivel)
                         Visivel = false;
                     else
                         Visivel = true;
                 item.SetActive(Visivel);
             }
-
-            foreach (var item in PlataformaEscada)
-                if (item.GetComponent<Plataforma_base_escada>() != null)
-                    if (item.GetComponent<Plataforma_base_escada>().IsBlue)
-                        item.GetComponent<Plataforma_base_escada>().IsBlue = false;
-                    else
-                        item.GetComponent<Plataforma_base_escada>().IsBlue = true;
-
         }
     }
 }
