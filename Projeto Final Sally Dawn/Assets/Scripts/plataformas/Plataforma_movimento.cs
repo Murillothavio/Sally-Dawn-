@@ -5,7 +5,6 @@ public class Plataforma_movimento : MonoBehaviour
     #region Variavel
    // public bool THHHIS;
     private Rigidbody rb;
-    [HideInInspector]
     public GameObject MeuPai;
     public float precisao = 1;
     private bool Estado = true;
@@ -14,6 +13,7 @@ public class Plataforma_movimento : MonoBehaviour
     private Vector3 Ponto0, PontoAtual, PontoGoTo;
     private float Angle;
 
+    [System.Serializable]
     public struct Plat
     {
         public Vector3 Direcao;
@@ -49,8 +49,9 @@ public class Plataforma_movimento : MonoBehaviour
 
     public bool LookAt;
     public Plat CaminhoRed;
-    public Vector3 DirecaoRed = Vector3.right;
-    public float TamanhoRightRed = 20, TamanhoLeftRed = 10, VelociadadeRed = 8, RaioRed = 0;
+ //   public Vector3 DirecaoRed = Vector3.right;
+    public float VelociadadeRed = 8;
+    //public float TamanhoRightRed = 20, TamanhoLeftRed = 10,  RaioRed = 0;
 
     public float PauseTime = 0;
     private float pausetime;
@@ -58,8 +59,9 @@ public class Plataforma_movimento : MonoBehaviour
     public bool Parada, Espera;
     public bool Dupla = true;
     public Plat CaminhoBlue;
-    public Vector3 DirecaoBlue = Vector3.up;
-    public float TamanhoRightBlue = 20, TamanhoLeftBlue = 10, VelociadadeBlue = 15, RaioBlue = 0;
+//    public Vector3 DirecaoBlue = Vector3.up;
+    public float VelociadadeBlue = 15;
+   // public float TamanhoRightBlue = 20, TamanhoLeftBlue = 10, VelociadadeBlue = 15, RaioBlue = 0;
 
     //public Vector3 ddddirecao , cccccccen, ddddddta;
     #endregion
@@ -84,15 +86,15 @@ public class Plataforma_movimento : MonoBehaviour
         else
             BbCaminho = CaminhoRed;
 
-        DirecaoRed = AaCaminho.Direcao;
-        TamanhoRightRed = Vector3.Dot(DirecaoRed, AaCaminho.PontoInicial);
-        TamanhoLeftRed = Vector3.Dot(DirecaoRed, AaCaminho.PontoFinal);
-        RaioRed = AaCaminho.Raio;
+   //     DirecaoRed = AaCaminho.Direcao;
+//        TamanhoRightRed = Vector3.Dot(DirecaoRed, AaCaminho.PontoInicial);
+    //    TamanhoLeftRed = Vector3.Dot(DirecaoRed, AaCaminho.PontoFinal);
+      //  RaioRed = AaCaminho.Raio;
 
-        DirecaoBlue = BbCaminho.Direcao;
-        TamanhoRightBlue = Vector3.Dot(DirecaoBlue, BbCaminho.PontoInicial);
-        TamanhoLeftBlue = Vector3.Dot(DirecaoBlue, BbCaminho.PontoFinal);
-        RaioBlue = BbCaminho.Raio;
+   //     DirecaoBlue = BbCaminho.Direcao;
+  //      TamanhoRightBlue = Vector3.Dot(DirecaoBlue, BbCaminho.PontoInicial);
+    //    TamanhoLeftBlue = Vector3.Dot(DirecaoBlue, BbCaminho.PontoFinal);
+      //  RaioBlue = BbCaminho.Raio;
 
         AaCaminho.PontoFinal += Ponto0;
         AaCaminho.PontoInicial += Ponto0;
