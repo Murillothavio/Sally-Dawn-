@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Shader Graphs_AMB_Shader_SwampWaterCartoon
+  m_Shader: {fileID: -6465566751694194690, guid: c6b0da56485da364cb7db0833e1378f2,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap:
+    MotionVector: User
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Floats:
+    - Vector1_26E6C162: 1
+    - Vector1_68CBF1DB: 5
+    - Vector1_81EBE2D0: 3
+    - Vector1_99126EC4: 0.4
+    - Vector1_BE7E09A6: 50
+    - Vector1_DE60A141: 1
+    m_Colors:
+    - Color_3364FB94: {r: 0.027812349, g: 0.23584908, b: 0.0033374808, a: 0}
+    - Color_AEBBB724: {r: 0.03189604, g: 0.89626956, b: 0, a: 0}
+    - Vector2_B6254C06: {r: 0.1, g: 0.1, b: 0, a: 0}
