@@ -23,6 +23,8 @@ public class Plataforma_escada : MonoBehaviour
         Ponto0 = transform.position;
         PontoAtual = Ponto0;
         PontoAtual.x = PontoRed.x;
+        if (cmShake == null)
+            Debug.LogError("No Cam Shake");
     }
 
     void Update()
