@@ -43,15 +43,16 @@ public class Plataforma_movimento : MonoBehaviour
     public Plat Translacaoc = new Plat(Vector3.up, 0, 0, 190, 10);
     public Plat Horarioc = new Plat(Vector3.zero, 0, 0, 8, 0);
     public Plat Anhorarioc = new Plat(Vector3.zero, 0, 0, -8, 0);*/
+    [HideInInspector]
     public Plat AaCaminho;
+    [HideInInspector]
     public Plat BbCaminho;
+    [HideInInspector]
     public Plat NwCaminho;
 
     public bool LookAt;
     public Plat CaminhoRed;
- //   public Vector3 DirecaoRed = Vector3.right;
     public float VelociadadeRed = 8;
-    //public float TamanhoRightRed = 20, TamanhoLeftRed = 10,  RaioRed = 0;
 
     public float PauseTime = 0;
     private float pausetime;
@@ -59,11 +60,7 @@ public class Plataforma_movimento : MonoBehaviour
     public bool Parada, Espera;
     public bool Dupla = true;
     public Plat CaminhoBlue;
-//    public Vector3 DirecaoBlue = Vector3.up;
     public float VelociadadeBlue = 15;
-   // public float TamanhoRightBlue = 20, TamanhoLeftBlue = 10, VelociadadeBlue = 15, RaioBlue = 0;
-
-    //public Vector3 ddddirecao , cccccccen, ddddddta;
     #endregion
 
     // Start is called before the first frame update
@@ -85,16 +82,6 @@ public class Plataforma_movimento : MonoBehaviour
             BbCaminho = CaminhoBlue;
         else
             BbCaminho = CaminhoRed;
-
-   //     DirecaoRed = AaCaminho.Direcao;
-//        TamanhoRightRed = Vector3.Dot(DirecaoRed, AaCaminho.PontoInicial);
-    //    TamanhoLeftRed = Vector3.Dot(DirecaoRed, AaCaminho.PontoFinal);
-      //  RaioRed = AaCaminho.Raio;
-
-   //     DirecaoBlue = BbCaminho.Direcao;
-  //      TamanhoRightBlue = Vector3.Dot(DirecaoBlue, BbCaminho.PontoInicial);
-    //    TamanhoLeftBlue = Vector3.Dot(DirecaoBlue, BbCaminho.PontoFinal);
-      //  RaioBlue = BbCaminho.Raio;
 
         AaCaminho.PontoFinal += Ponto0;
         AaCaminho.PontoInicial += Ponto0;

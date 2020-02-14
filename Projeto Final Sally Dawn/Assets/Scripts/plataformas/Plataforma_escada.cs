@@ -6,7 +6,7 @@ public class Plataforma_escada : MonoBehaviour
 {
     public CameraShake cmShake;
     public float Shake;
-    private GameObject gbFilho;
+    private Transform gbFilho;
     public bool Ativo, IsBlue, Ativando = true;
     [HideInInspector]
     public Vector3 PontoAtual, PontoRed, PontoBlue, Ponto0;
@@ -17,9 +17,11 @@ public class Plataforma_escada : MonoBehaviour
 
     void Start()
     {
-        gbFilho = transform.GetChild(0).gameObject;
-        PontoRed.y += transform.position.y;
-        PontoBlue.y += transform.position.y;
+        gbFilho = transform.GetChild(0).gameObject.transform;
+        Transform gbColuna = transform.GetChild(1).gameObject.transform;
+        float DeltaColuna = gbFilho.position.y - gbColuna.position.y;
+        PontoRed.y += transform.position.y + DeltaColuna;
+        PontoBlue.y += transform.position.y + DeltaColuna;
         Ponto0 = transform.position;
         PontoAtual = Ponto0;
         PontoAtual.x = PontoRed.x;
@@ -50,7 +52,7 @@ public class Plataforma_escada : MonoBehaviour
 
         if (Ativando)
         {
-            VeloLinear = Mathf.Abs((Ponto0.y - PontoRed.y) / DelaTime);
+            VeloLinear = Mathf.Abs((Ponto0.y - PontoRed.y) / DelaTime);//TODO modificar
             VeloAngular = Mathf.Abs((0 - AnguloRed) / DelaTime);
         }
         else
@@ -60,8 +62,8 @@ public class Plataforma_escada : MonoBehaviour
         }
 
         if (GoToH == Ponto0.y)
-            Ativo = true;
-        else if ((PontoAtual == PontoBlue || PontoAtual == PontoRed) && (GoToH != Ponto0.y))
+            Ativando = true;
+        else if ((PontoAtual.y == PontoBlue.y || PontoAtual.y == PontoRed.y) && (GoToH != Ponto0.y))
             Ativando = false;
 
         PontoAtual.y = Mathf.MoveTowards(PontoAtual.y, GoToH, VeloLinear * Time.deltaTime);
@@ -71,6 +73,6 @@ public class Plataforma_escada : MonoBehaviour
             cmShake.shakeAmount = Shake / 100;
 
         transform.position = PontoAtual;
-        gbFilho.transform.rotation = Quaternion.Euler(Vector3.forward * AnguloAtual);
+        gbFilho.rotation = Quaternion.Euler(Vector3.forward * AnguloAtual);
     }
 }
