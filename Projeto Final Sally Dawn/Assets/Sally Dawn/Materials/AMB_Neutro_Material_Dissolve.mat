@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_AMB_Etereo_Material_Fundo
-  m_Shader: {fileID: -6465566751694194690, guid: cfae04f5bd1722a4a965f01ba1493ee5,
+  m_Name: AMB_Neutro_Material_Dissolve
+  m_Shader: {fileID: -6465566751694194690, guid: a0018afb65fdac143bbe7b25d2b2575e,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -23,6 +23,9 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Floats:
-    - Vector1_C3AD6ECD: 3
+    - Vector1_52D6B038: 0
+    - Vector1_B1A0DE7D: 20
+    - Vector1_F9E65AA9: -1
     m_Colors:
-    - Color_E2D08F10: {r: 0, g: 0.5019608, b: 0.9254902, a: 0}
+    - Color_15E68219: {r: 1, g: 0, b: 0, a: 0}
+    - Color_CEE569F4: {r: 0, g: 0.16061535, b: 1, a: 0}

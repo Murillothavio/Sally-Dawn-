@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: AMB_Neutro_Material_Tornado
+  m_Shader: {fileID: -6465566751694194690, guid: 0b432ef4b62b1504da5897d6c0bc29c4,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap:
+    MotionVector: User
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_D193D88D:
+        m_Texture: {fileID: 2800000, guid: e307403f57677c848ad039c6aaf4ceed, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_2DCBE4B0: 0.803
+    - Vector1_7082D1A2: 50
+    - Vector1_BB8B24A7: 1
+    - Vector1_F903E496: 10
+    m_Colors:
+    - Color_3F3CEE77: {r: 0.76919055, g: 1, b: 0.3066038, a: 0}
+    - Vector2_5752C63: {r: 0.2, g: 0.2, b: 1, a: 5}
+    - Vector4_99959F5D: {r: 0.6, g: 0.2, b: 1, a: 1}
+    - Vector4_E9DD0926: {r: 0.5, g: 0.5, b: 1, a: 1}
