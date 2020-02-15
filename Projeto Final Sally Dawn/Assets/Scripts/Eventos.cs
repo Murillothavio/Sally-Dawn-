@@ -12,11 +12,7 @@ public class Eventos : MonoBehaviour
 
     public Text txt;
     private string stg;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+   
 
     // Update is called once per frame
     void Update()

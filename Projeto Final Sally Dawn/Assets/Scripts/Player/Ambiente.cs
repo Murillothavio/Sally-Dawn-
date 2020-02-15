@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CriarFases))]
+[RequireComponent(typeof(AndarPlayer))]
 public class Ambiente : MonoBehaviour
 {
     public enum Fase { Neutro, Alegre, Triste, Raiva, Nojo, Medo, Etereo }
     public Fase ambiente;
+    [HideInInspector]
+    public Color CorAmbiente;
     public AudioClip[] som = new AudioClip[7];
     private AudioSource AudSrc;
     private CriarFases cfs;
@@ -218,7 +222,7 @@ public class Ambiente : MonoBehaviour
             #endregion
 
         }
-        TrocaAmbiente();
+   //     TrocaAmbiente();
         TrocaConfig();
         TrocaSom(0);
         #region FixedUpdate
@@ -244,6 +248,22 @@ public class Ambiente : MonoBehaviour
                     (Ef.ModeloName).SetActive(Ef.ModeloName == Atual.ModeloName);
             }
         //  GameObject.Find(Atual.ModeloName).SetActive(true);
+        #region Cor
+        if (ambiente == Fase.Neutro)
+            CorAmbiente = Color.white;
+        else if (ambiente == Fase.Alegre)
+            CorAmbiente = Color.yellow;
+        else if (ambiente == Fase.Triste)
+            CorAmbiente = Color.blue;
+        else if (ambiente == Fase.Raiva)
+            CorAmbiente = Color.red;
+        else if (ambiente == Fase.Nojo)
+            CorAmbiente = Color.green;
+        else if (ambiente == Fase.Medo)
+            CorAmbiente = new Color(0.3f, 0, 0.6f);
+        else if (ambiente == Fase.Etereo)
+            CorAmbiente = Color.magenta;
+        #endregion
         #endregion
     }
 
@@ -282,28 +302,23 @@ public class Ambiente : MonoBehaviour
         lowJumpMultiplier = Atual.lowJumpMultiplier;
 
     }
-    void TrocaAmbiente()
+    public void TrocaAmbiente()
     {
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            if (ambiente == Fase.Neutro)
-                ambiente = Fase.Alegre;
-            else if (ambiente == Fase.Alegre)
-                ambiente = Fase.Triste;
-            else if (ambiente == Fase.Triste)
-                ambiente = Fase.Raiva;
-            else if (ambiente == Fase.Raiva)
-                ambiente = Fase.Nojo;
-            else if (ambiente == Fase.Nojo)
-                ambiente = Fase.Medo;
-            else if (ambiente == Fase.Medo)
-                ambiente = Fase.Etereo;
-            else if (ambiente == Fase.Etereo)
-                ambiente = Fase.Neutro;
-            AudSrc.enabled = false;
-            Debug.Log("oi");
-        }
-
+        if (ambiente == Fase.Neutro)
+            ambiente = Fase.Alegre;
+        else if (ambiente == Fase.Alegre)
+            ambiente = Fase.Triste;
+        else if (ambiente == Fase.Triste)
+            ambiente = Fase.Raiva;
+        else if (ambiente == Fase.Raiva)
+            ambiente = Fase.Nojo;
+        else if (ambiente == Fase.Nojo)
+            ambiente = Fase.Medo;
+        else if (ambiente == Fase.Medo)
+            ambiente = Fase.Etereo;
+        else if (ambiente == Fase.Etereo)
+            ambiente = Fase.Neutro;
+        AudSrc.enabled = false;
     }
     void TrocaConfig()
     {
