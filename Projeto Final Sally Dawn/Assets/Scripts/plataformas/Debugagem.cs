@@ -14,9 +14,7 @@ public class Debugagem : MonoBehaviour
 
     void Start()
     {
-            PlataformasInvi = GameObject.FindGameObjectsWithTag("PlataformaInvisivel");
-            PlataformasDuplas = GameObject.FindGameObjectsWithTag("PlataformasMovel");
-            PlataformaEscada = GameObject.FindGameObjectsWithTag("PlataformaEscada");
+           
     }
 
     // Update is called once per frame
@@ -24,6 +22,9 @@ public class Debugagem : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            PlataformasInvi = GameObject.FindGameObjectsWithTag("PlataformaInvisivel");
+            PlataformasDuplas = GameObject.FindGameObjectsWithTag("PlataformasMovel");
+            PlataformaEscada = GameObject.FindGameObjectsWithTag("PlataformaEscada");
             foreach (var item in PlataformasDuplas)
                 if (item.GetComponent<Plataforma_movimento>() != null)
                     if (item.GetComponent<Plataforma_movimento>().Alternado)

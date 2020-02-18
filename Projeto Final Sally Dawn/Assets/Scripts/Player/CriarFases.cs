@@ -9,15 +9,17 @@ public class CriarFases : MonoBehaviour
     [Range(0, 6)]
     public float faseIndex;
     private int IndexFase;
-
-
-    // Start is called before the first frame update
+    //public KeyCode kc;
     void Start()
     {
         Vtrans = Resources.LoadAll<GameObject>("Pref_Trans");//Busca os prefabs
         Vfase = Resources.LoadAll<GameObject>("Pref_Fase");  //
         if (!inAtivo)
+        {
             ApagarBack();
+            GetComponent<Ambiente>().TrocaConfig();
+            Invoke("ApagarBack", 1f);
+        }
     }
 
     // Update is called once per frame
@@ -27,14 +29,18 @@ public class CriarFases : MonoBehaviour
         faseIndex = IndexFase;
         if (!inAtivo )
         {
-            if (Input.GetKeyDown(KeyCode.L)|| Criar)
+            if (Input.GetKeyDown(KeyCode.L) || Criar)
+            {
+                GetComponent<Ambiente>().TrocaConfig();
                 ApagarBack();
-            
+            }
+            Criar = false;
         }
 
     }
     void ApagarBack()
     {
+
         if (IndexFase == 0)
         {
             for (int i = 1; i < Vfase.Length; i++)

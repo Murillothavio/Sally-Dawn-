@@ -9,6 +9,7 @@ public class Codigos : MonoBehaviour
     public bool Pull;
     [SerializeField]
     private Color Local;
+    public Color[] Locais;
     [SerializeField]
     private string CodigoTxt;
     private float NextCod = 0;
@@ -61,7 +62,7 @@ public class Codigos : MonoBehaviour
             case 4:
                 CodigoTxt = "" + NextCod + "NEXT";
                 GetComponent<Ambiente>().TrocaAmbiente();
-                Invoke("LevarPonto", 2f);
+                Invoke("LevarPonto", 1f);
                 NextCod = 0;
                 break;
         }
@@ -75,7 +76,11 @@ public class Codigos : MonoBehaviour
     {
         if (Pull)
         {
-            Debug.Log("TODO");
+            for (int i = 0; i < Locais.Length; i++)
+            {
+                if (Locais[i] == Local)
+                    transform.position = PontosAmbiente[i].position;
+            }
         }
         else Debug.Log("nada");
     }

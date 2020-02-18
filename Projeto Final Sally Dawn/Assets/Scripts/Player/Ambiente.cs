@@ -10,6 +10,7 @@ public class Ambiente : MonoBehaviour
     public Fase ambiente;
     [HideInInspector]
     public Color CorAmbiente;
+    public float NumFases;
     public AudioClip[] som = new AudioClip[7];
     private AudioSource AudSrc;
     private CriarFases cfs;
@@ -223,13 +224,11 @@ public class Ambiente : MonoBehaviour
 
         }
    //     TrocaAmbiente();
-        TrocaConfig();
+    //    TrocaConfig();
         TrocaSom(0);
         #region FixedUpdate
         AudSrc.enabled = true;//mantm som ligado
         GetComponent<AndarPlayer>().SetConfigFase(Atual);
-        if (true)
-            //not null
             if (Atual.ModeloName != null)
             {
                 if (Pf.ModeloName != null)
@@ -252,7 +251,7 @@ public class Ambiente : MonoBehaviour
         if (ambiente == Fase.Neutro)
             CorAmbiente = Color.white;
         else if (ambiente == Fase.Alegre)
-            CorAmbiente = Color.yellow;
+            CorAmbiente = new Color(1, 1, 0);
         else if (ambiente == Fase.Triste)
             CorAmbiente = Color.blue;
         else if (ambiente == Fase.Raiva)
@@ -320,9 +319,10 @@ public class Ambiente : MonoBehaviour
             ambiente = Fase.Neutro;
         AudSrc.enabled = false;
     }
-    void TrocaConfig()
+    public void TrocaConfig()
     {
-        int NumFases = 0;
+        Debug.Log("AA");
+        NumFases = 0;
         if (ambiente == Fase.Neutro)
         {
             Atual = Pf;
@@ -358,6 +358,7 @@ public class Ambiente : MonoBehaviour
             Atual = Ef;
             NumFases = 6;
         }
+       // return NumFases;
         cfs.faseIndex = NumFases;
     }
     void TrocaSom(int IdSom)
