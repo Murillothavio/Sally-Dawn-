@@ -29,7 +29,7 @@ public class CriarFases : MonoBehaviour
         faseIndex = IndexFase;
         if (!inAtivo )
         {
-            if (Input.GetKeyDown(KeyCode.L) || Criar)
+            if (Criar)
             {
                 GetComponent<Ambiente>().TrocaConfig();
                 ApagarBack();

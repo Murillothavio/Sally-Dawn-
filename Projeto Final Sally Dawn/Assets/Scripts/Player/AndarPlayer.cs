@@ -44,6 +44,7 @@ public class AndarPlayer : MonoBehaviour
     private Rigidbody rb;
     public GameObject Filho;
     private GameObject caixote;
+    [SerializeField]
     private Animator Acao;
     [Range(0, 2)]
     public float DeathDelay = .2f;
@@ -93,7 +94,7 @@ public class AndarPlayer : MonoBehaviour
     }
     public void SetConfigFase(MoveConfig config)
     {
-        AtualConfig = new MoveConfig();
+     //   AtualConfig = new MoveConfig();
         AtualConfig = config;
         if (AtualConfig.ModeloName!=null)
             Filho = (AtualConfig.ModeloName);

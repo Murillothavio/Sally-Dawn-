@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class MoveConfig //: MonoBehaviour
 {
     public float MaxOcioso = 10;

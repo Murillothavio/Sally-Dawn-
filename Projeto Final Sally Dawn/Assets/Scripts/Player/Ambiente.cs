@@ -14,7 +14,8 @@ public class Ambiente : MonoBehaviour
     public AudioClip[] som = new AudioClip[7];
     private AudioSource AudSrc;
     private CriarFases cfs;
-    private MoveConfig Atual = new MoveConfig(), Pf = new MoveConfig(), Af = new MoveConfig(), Tf = new MoveConfig(), Rf = new MoveConfig(), Nf = new MoveConfig(), Mf = new MoveConfig(), Ef = new MoveConfig();
+    public MoveConfig Atual = new MoveConfig();
+    private MoveConfig Pf = new MoveConfig(), Af = new MoveConfig(), Tf = new MoveConfig(), Rf = new MoveConfig(), Nf = new MoveConfig(), Mf = new MoveConfig(), Ef = new MoveConfig();
     public GameObject[] Skins = new GameObject[7];
     public bool Manual = true;
     public bool notnull;
@@ -385,6 +386,9 @@ public class Ambiente : MonoBehaviour
     {
         if (other.gameObject.tag == "LocazicaoFase")
             ambiente = (Fase)other.gameObject.GetComponent<OndeEstaMarca>().ambiente;
+        if (other.gameObject.tag == "ChangeSkin")
+            TrocaConfig();
+
         gameObject.GetComponent<CriarFases>().Criar = (other.gameObject.tag == "CriarFase");
     }
 }

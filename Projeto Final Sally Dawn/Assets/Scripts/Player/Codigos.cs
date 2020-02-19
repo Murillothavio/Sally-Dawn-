@@ -14,9 +14,15 @@ public class Codigos : MonoBehaviour
     private string CodigoTxt;
     private float NextCod = 0;
     public Transform[] PontosAmbiente = new Transform[7];
+    [SerializeField]
+    private Vector3[] PontoscCord = new Vector3[7];
 
-    private void Start()
+    private void Awake()
     {
+        for (int i = 0; i < PontosAmbiente.Length; i++)
+        {
+            PontoscCord[i] = PontosAmbiente[i].position;
+        }
         LevarPonto();
     }
 
@@ -70,6 +76,8 @@ public class Codigos : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.O))
             GetComponent<Ambiente>().TrocaAmbiente();
+        if (Input.GetKeyDown(KeyCode.L))
+            GetComponent<CriarFases>().Criar = true;
     }
 
     void LevarPonto()
@@ -79,7 +87,7 @@ public class Codigos : MonoBehaviour
             for (int i = 0; i < Locais.Length; i++)
             {
                 if (Locais[i] == Local)
-                    transform.position = PontosAmbiente[i].position;
+                    transform.position = PontoscCord[i];
             }
         }
         else Debug.Log("nada");

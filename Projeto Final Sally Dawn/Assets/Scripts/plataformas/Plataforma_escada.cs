@@ -26,6 +26,8 @@ public class Plataforma_escada : MonoBehaviour
         PontoAtual = Ponto0;
         PontoAtual.x = PontoRed.x;
         if (cmShake == null)
+            cmShake = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShake>();
+        if (cmShake == null)
             Debug.LogError("No Cam Shake");
     }
 

@@ -15,6 +15,7 @@ TagManager:
   - PlataformasMovel
   - PlataformaInvisivel
   - PlataformaEscada
+  - ChangeSkin
   layers:
   - Default
   - TransparentFX
