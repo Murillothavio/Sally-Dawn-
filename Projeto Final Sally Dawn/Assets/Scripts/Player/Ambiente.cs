@@ -57,45 +57,12 @@ public class Ambiente : MonoBehaviour
         Ef = new MoveConfig();
         AudSrc = GetComponent<AudioSource>();
         PublicMove();
+        TrocaConfig();
 
     }
-    void NotNull()
-    {
-        if (notnull)
-        {
-            notnull = false;
-            Atual = new MoveConfig();
-            Pf = new MoveConfig();
-            Af = new MoveConfig();
-            Tf = new MoveConfig();
-            Rf = new MoveConfig();
-            Nf = new MoveConfig();
-            Mf = new MoveConfig();
-            Ef = new MoveConfig();
-        }
-        //if (Pf.ModeloName == null)
-        //    Pf = new MoveConfig();
-        //if (Af.ModeloName == null)
-        //    Af = new MoveConfig();
-        //if (Tf.ModeloName == null)
-        //    Tf = new MoveConfig();
-        //if (Rf.ModeloName == null)
-        //    Rf = new MoveConfig();
-        //if (Nf.ModeloName == null)
-        //    Nf = new MoveConfig();
-        //if (Mf.ModeloName == null)
-        //    Mf = new MoveConfig();
-        //if (Ef.ModeloName == null)
-        //    Ef = new MoveConfig();
-    }
-    // Update is called once per frame
+    
     void Update()
     {
-        NotNull();
-        #region Not Null
-        if (Atual == null)
-            Atual = new MoveConfig();
-        #endregion
         if (Manual)
             PublicMove();
         else
@@ -247,7 +214,6 @@ public class Ambiente : MonoBehaviour
                 if (Ef.ModeloName != null)
                     (Ef.ModeloName).SetActive(Ef.ModeloName == Atual.ModeloName);
             }
-        //  GameObject.Find(Atual.ModeloName).SetActive(true);
         #region Cor
         if (ambiente == Fase.Neutro)
             CorAmbiente = Color.white;

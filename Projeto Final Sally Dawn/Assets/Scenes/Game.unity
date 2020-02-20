@@ -36932,7 +36932,7 @@ PrefabInstance:
     - target: {fileID: 5477830422515885196, guid: 6e690949dedfe7f4f9bb5403ed90f8d2,
         type: 3}
       propertyPath: inAtivo
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5477830422515885196, guid: 6e690949dedfe7f4f9bb5403ed90f8d2,
         type: 3}
@@ -45431,7 +45431,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-3680
+  m_Name: pb_Mesh-209948
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

@@ -13,8 +13,8 @@ public class Codigos : MonoBehaviour
     [SerializeField]
     private string CodigoTxt;
     private float NextCod = 0;
+    [HideInInspector]
     public Transform[] PontosAmbiente = new Transform[7];
-    [SerializeField]
     private Vector3[] PontoscCord = new Vector3[7];
 
     private void Awake()

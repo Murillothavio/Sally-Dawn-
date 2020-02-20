@@ -5,6 +5,7 @@ using UnityEngine;
 public class CriarFases : MonoBehaviour
 {
     public bool inAtivo,Criar;
+    [HideInInspector]
     public GameObject[] Vfase, Vtrans;
     [Range(0, 6)]
     public float faseIndex;
