@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Controles))]
 public class AndarPlayer : MonoBehaviour
 {
     public Transform SaveTarget;
     private Vector3 SafeZonePosition;
     private bool Kfrente, Ktras, Kjump, Kbaixo;
     private bool pular, Kagarrar, Ksegurar, Kcima;
+    [HideInInspector]
+    public Controles cntr;
+
     private bool Zona_agarrar, Zona_segurar, Zona_interagir, Zona_morrer;
     public enum Zonas { Free, Agarrar, segurar, interagir, morrer, ItsSafe}
     public enum StateMachine { Walk, Agachado, Empurrando, Escalando, Pulando, Dancando, Caindo, Ocioso}
@@ -41,11 +45,13 @@ public class AndarPlayer : MonoBehaviour
     //public float lowJumpMultiplier = 2f;//
     #endregion
 
-    private Rigidbody rb;
-    public GameObject Filho;
+    [HideInInspector]
+    public Rigidbody rb;
+    [HideInInspector]
+    public GameObject ActiveSkin;
     private GameObject caixote;
-    [SerializeField]
-    private Animator Acao;
+    [HideInInspector]
+    public Animator Acao;
     [Range(0, 2)]
     public float DeathDelay = .2f;
     private float CurrentDeathDelay = 0;
@@ -62,7 +68,8 @@ public class AndarPlayer : MonoBehaviour
     private float DeltaY;
 
     public MoveConfig AtualConfig = new MoveConfig();
-    private CapsuleCollider Corpo;
+    
+    public CapsuleCollider Corpo;
     private float HeightCollider, CenterCollider, RadiusCollider;
     private float HeightColliderCrawl = 2.13f;
     private float CenterColliderCrawl = 0.71f;
@@ -73,8 +80,9 @@ public class AndarPlayer : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        Acao = Filho.GetComponent<Animator>();
+        Acao = ActiveSkin.GetComponent<Animator>();
         Corpo = GetComponent<CapsuleCollider>();
+        cntr = GetComponent<Controles>();
         HeightCollider = Corpo.height;
         CenterCollider = Corpo.center.y;
         RadiusCollider = Corpo.radius;
@@ -94,19 +102,16 @@ public class AndarPlayer : MonoBehaviour
     }
     public void SetConfigFase(MoveConfig config)
     {
-     //   AtualConfig = new MoveConfig();
         AtualConfig = config;
         if (AtualConfig.ModeloName!=null)
-            Filho = (AtualConfig.ModeloName);
-        if (Filho==null)
-            Filho = GameObject.Find("SD@Neutro");
-        Acao = Filho.GetComponent<Animator>();
+            ActiveSkin = (AtualConfig.ModeloName);
+        if (ActiveSkin==null)
+            ActiveSkin = GameObject.Find("SD@Neutro");
+        Acao = ActiveSkin.GetComponent<Animator>();
 
     }
     void Update()
     {
-        if (AtualConfig == null)
-            AtualConfig = new MoveConfig();
         Atualiza();
         Coordena_Horizon_vertical();
         Estados();
@@ -116,21 +121,17 @@ public class AndarPlayer : MonoBehaviour
     }
     void Coordena_Horizon_vertical()
     {
-        if (Kcima)
-            vertical = 1;
-        else if (Kbaixo)
-            vertical = -1;
-        else
-            vertical = 0;
-        if (Kfrente)
-            horizontal = 1;
-        else if (Ktras)
-            horizontal = -1;
-        else
-            horizontal = Mathf.MoveTowards(horizontal, 0, 0.15f);
+        horizontal = cntr.GetPressAxis(cntr.ControleAtual.HORIZONTAL_AXIS);
+        vertical = cntr.GetPressAxis(cntr.ControleAtual.VERTICAL_AXIS);
     }
     void Atualiza()
     {
+        for (int i = 0; i < cntr.Acoes.Length; i++)
+        {
+            if (cntr.GetPressButton(cntr.Acoes[i]))
+                Debug.Log(cntr.Acoes[i] + " press");
+        }
+
         if (Input.GetKeyDown(KeyCode.D))
             Kfrente = true;
         if (Input.GetKeyDown(KeyCode.A))
@@ -227,7 +228,7 @@ public class AndarPlayer : MonoBehaviour
             transform.LookAt(targetOlhar);
 
         }
-        else if (stateanima == StateMachine.Empurrando) //(Segurando)
+        else if (stateanima == StateMachine.Empurrando) 
         {
             moveSpeed = Mathf.MoveTowards(moveSpeed, AtualConfig.PullshSpeed, AtualConfig.currentSpeed * 3.5f);
             Vector3 v = Vector3.right * horizontal * moveSpeed;

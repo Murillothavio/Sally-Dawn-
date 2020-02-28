@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class MoveConfig //: MonoBehaviour
+public class MoveConfig 
 {
     public float MaxOcioso = 10;
     public float QlAnimaOcioso;

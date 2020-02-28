@@ -12,10 +12,11 @@ public class Controles : MonoBehaviour
         public string VERTICAL_AXIS, HORIZONTAL_AXIS;
         public KeyCode PULAR_BUTTON, INTERAGIR_BUTTON, AGACHAR_BUTTON, SEGURAR_BUTTON, AGARRAR_BUTTON, BOMBA_BUTTON;
     }
-    public enum Acoes { PULAR_BUTTON, INTERAGIR_BUTTON, AGACHAR_BUTTON, SEGURAR_BUTTON, AGARRAR_BUTTON, BOMBA_BUTTON }
-   // [HideInInspector]
+    public string[] Acoes = new string[]  
+    { "PULAR_BUTTON", "INTERAGIR_BUTTON", "AGACHAR_BUTTON", "SEGURAR_BUTTON", "AGARRAR_BUTTON", "BOMBA_BUTTON" };
+    // [HideInInspector]
     public Conjutos[] ControleOpcoes;
-    public enum GetConjunto { ConjuntoA,ConjuntoB,ConjuntoCustom}
+    public enum GetConjunto { ConjuntoA, ConjuntoB, ConjuntoCustom }
     public GetConjunto SetConjunto;
 
     public Conjutos ControleAtual;
@@ -30,7 +31,8 @@ public class Controles : MonoBehaviour
     void TrocarConjuto()
     {
         int indexConjuto = 0;
-        switch (SetConjunto) {
+        switch (SetConjunto)
+        {
             case GetConjunto.ConjuntoA:
                 indexConjuto = 0;
                 break;
@@ -50,26 +52,27 @@ public class Controles : MonoBehaviour
         Horizontal = Input.GetAxis(ControleAtual.HORIZONTAL_AXIS);
         Vertical = Input.GetAxis(ControleAtual.VERTICAL_AXIS);
     }
-    public bool GetPressButton(Acoes b) {
+    public bool GetPressButton(string b)
+    {
         KeyCode keypress = KeyCode.None;
         switch (b)
         {
-            case Acoes.AGACHAR_BUTTON:
+            case "AGACHAR_BUTTON":
                 keypress = ControleAtual.AGACHAR_BUTTON;
                 break;
-            case Acoes.AGARRAR_BUTTON:
+            case "AGARRAR_BUTTON":
                 keypress = ControleAtual.AGARRAR_BUTTON;
                 break;
-            case Acoes.BOMBA_BUTTON:
+            case "BOMBA_BUTTON":
                 keypress = ControleAtual.BOMBA_BUTTON;
                 break;
-            case Acoes.INTERAGIR_BUTTON:
+            case "INTERAGIR_BUTTON":
                 keypress = ControleAtual.INTERAGIR_BUTTON;
                 break;
-            case Acoes.PULAR_BUTTON:
+            case "PULAR_BUTTON":
                 keypress = ControleAtual.PULAR_BUTTON;
                 break;
-            case Acoes.SEGURAR_BUTTON:
+            case "SEGURAR_BUTTON":
                 keypress = ControleAtual.SEGURAR_BUTTON;
                 break;
         }
@@ -79,8 +82,20 @@ public class Controles : MonoBehaviour
             return false;
         }
         else
-            return (Input.GetKeyDown(keypress));
-        
-    }
+        {
+            if (keypress == ControleAtual.PULAR_BUTTON)
+                return (Input.GetKeyDown(keypress));
+            else
+                return (Input.GetKey(keypress));
+        }
 
+    }
+    public float GetPressAxis(string axis)
+    {
+        if (axis == ControleAtual.HORIZONTAL_AXIS)
+            return Horizontal;
+        else if (axis == ControleAtual.VERTICAL_AXIS)
+            return Vertical;
+        else return 0;
+    }
 }
