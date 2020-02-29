@@ -7,8 +7,9 @@ public class AndarPlayer : MonoBehaviour
 {
     public Transform SaveTarget;
     private Vector3 SafeZonePosition;
-    private bool Kfrente, Ktras, Kjump, Kbaixo;
-    private bool pular, Kagarrar, Ksegurar, Kcima;
+    private bool Kjump, Kbomba, Kinteragir, Kbaixo;
+    private bool pular, Kagarrar, Ksegurar;
+
     [HideInInspector]
     public Controles cntr;
 
@@ -58,7 +59,7 @@ public class AndarPlayer : MonoBehaviour
     public bool isGrounded;
     private Vector3 GroundSize = new Vector3(1.16f, 1.5f, 0);
     private Vector3 GroundCenter = new Vector3(0, .3f, 0);
-
+    [Range(1,10)] public float AjustDez;
     public float horizontal = 0;
     public float Arrastar;
     public float vertical = 0;
@@ -108,7 +109,6 @@ public class AndarPlayer : MonoBehaviour
         if (ActiveSkin==null)
             ActiveSkin = GameObject.Find("SD@Neutro");
         Acao = ActiveSkin.GetComponent<Animator>();
-
     }
     void Update()
     {
@@ -117,7 +117,6 @@ public class AndarPlayer : MonoBehaviour
         Estados();
         ColliderTamanho();
         Andar();
-
     }
     void Coordena_Horizon_vertical()
     {
@@ -128,40 +127,29 @@ public class AndarPlayer : MonoBehaviour
     {
         for (int i = 0; i < cntr.Acoes.Length; i++)
         {
-            if (cntr.GetPressButton(cntr.Acoes[i]))
-                Debug.Log(cntr.Acoes[i] + " press");
+            bool ItsPress = cntr.GetPressButton(cntr.Acoes[i]);
+            switch (cntr.Acoes[i])
+            {
+                case "AGACHAR_BUTTON":
+                    Kbaixo = ItsPress;
+                    break;
+                case "AGARRAR_BUTTON":
+                    Kagarrar = ItsPress;
+                    break;
+                case "BOMBA_BUTTON":
+                    Kbomba = ItsPress;
+                    break;
+                case "INTERAGIR_BUTTON":
+                    Kinteragir = ItsPress;
+                    break;
+                case "PULAR_BUTTON":
+                    Kjump = ItsPress;
+                    break;
+                case "SEGURAR_BUTTON":
+                    Ksegurar = ItsPress;
+                    break;
+            }
         }
-
-        if (Input.GetKeyDown(KeyCode.D))
-            Kfrente = true;
-        if (Input.GetKeyDown(KeyCode.A))
-            Ktras = true;
-        if (Input.GetKeyDown(KeyCode.S))
-            Kbaixo = true;
-        if (Input.GetKeyDown(KeyCode.W))
-            Kcima = true;
-        if (Input.GetKeyDown(KeyCode.Q))
-            Kagarrar = true;
-        if (Input.GetKeyDown(KeyCode.E))
-            Ksegurar = true;
-        if (Input.GetKeyDown(KeyCode.Space))
-            Kjump = true;
-        else
-            Kjump = false;
-
-        if (Input.GetKeyUp(KeyCode.D))
-            Kfrente = false;
-        if (Input.GetKeyUp(KeyCode.A))
-            Ktras = false;
-        if (Input.GetKeyUp(KeyCode.S))
-            Kbaixo = false;
-        if (Input.GetKeyUp(KeyCode.W))
-            Kcima = false;
-        if (Input.GetKeyUp(KeyCode.Q))
-            Kagarrar = false;
-        if (Input.GetKeyUp(KeyCode.E))
-            Ksegurar = false;
-
     }
     void Estados()
     {
@@ -217,7 +205,7 @@ public class AndarPlayer : MonoBehaviour
         {
             moveSpeed = Mathf.MoveTowards(moveSpeed, AtualConfig.climbSpeed, AtualConfig.currentSpeed);
 
-            Vector3 v = Vector3.up * vertical * moveSpeed;
+            Vector3 v = Vector3.up * vertical * moveSpeed * Time.deltaTime * (Mathf.Pow(AjustDez, 2));
             //   v.y = rb.velocity.y;
             rb.velocity = v;
 
@@ -250,13 +238,6 @@ public class AndarPlayer : MonoBehaviour
         else
         {
             #region andar
-            //           if (Kfrente)
-            //             horizontal = 1;
-            //       else if (Ktras)
-            //         horizontal = -1;
-            //   else
-            //     horizontal = Mathf.MoveTowards(horizontal, 0, 0.15f);
-
             if (horizontal != 0 && !Kbaixo)
                 moveSpeed = Mathf.MoveTowards(moveSpeed, AtualConfig.runSpeed, AtualConfig.currentSpeed);
             else if (Kbaixo)
@@ -264,7 +245,7 @@ public class AndarPlayer : MonoBehaviour
             else
                 moveSpeed = Mathf.MoveTowards(moveSpeed, AtualConfig.walkSpeed, AtualConfig.currentSpeed * 3.5f);
 
-            Vector3 v = Vector3.right * horizontal * moveSpeed;
+            Vector3 v = Vector3.right * horizontal * moveSpeed * Time.deltaTime *  (Mathf.Pow(AjustDez,2));
             v.y = rb.velocity.y;
             if (!Caindo)
                 rb.velocity = v;

@@ -14,206 +14,40 @@ public class Ambiente : MonoBehaviour
     public AudioClip[] som = new AudioClip[7];
     private AudioSource AudSrc;
     private CriarFases cfs;
-    public MoveConfig Atual = new MoveConfig();
-    private MoveConfig Pf = new MoveConfig(), Af = new MoveConfig(), Tf = new MoveConfig(), Rf = new MoveConfig(), Nf = new MoveConfig(), Mf = new MoveConfig(), Ef = new MoveConfig();
-    public GameObject[] Skins = new GameObject[7];
     public bool Manual = true;
-    public bool notnull;
-    #region config
-    public float MaxOcioso = 10;
-    [Range(0, 6)]
-    public float QlAnimaOcioso;
-    public float AnimaOcioso = 5;
-    [Range(5, 15)]
-    public float jumpforce = 10;
-    [Range(5, 15)]
-    public float walkSpeed = 10;
-    [Range(5, 10)]
-    public float crawlSpeed = 7;
-    [Range(5, 10)]
-    public float climbSpeed = 8;
-    [Range(10, 30)]
-    public float runSpeed;
-    [Range(2, 10)]
-    public float PullshSpeed = 5;
-    [Range(0, 2)]
-    public float currentSpeed = .5f;
-    [Range(1, 7)]
-    public float fallMultiplier = 2.5f;
-    [Range(1, 7)]
-    public float lowJumpMultiplier = 2f;
-    #endregion
-    // Start is called before the first frame update
+    public MoveConfig Atual = new MoveConfig();
+    [SerializeField]
+    private MoveConfig[] ConfgFases = new MoveConfig[7];
+    public GameObject[] Skins = new GameObject[7];
+
     void Start()
     {
         cfs = GetComponent<CriarFases>();
         Atual = new MoveConfig();
-        Pf = new MoveConfig();
-        Af = new MoveConfig();
-        Tf = new MoveConfig();
-        Rf = new MoveConfig();
-        Nf = new MoveConfig();
-        Mf = new MoveConfig();
-        Ef = new MoveConfig();
+
         AudSrc = GetComponent<AudioSource>();
-        PublicMove();
+        for (int i = 0; i < ConfgFases.Length; i++)
+        {
+            ConfgFases[i].ModeloName = Skins[i];
+            ConfgFases[i].QlAnimaOcioso = i;
+        }
         TrocaConfig();
 
     }
-    
+
     void Update()
     {
-        if (Manual)
-            PublicMove();
-        else
-        {
-            AutomaticoMove();
-            #region FasesConfig();
-            #region Neutro
-            Pf.ModeloName = Skins[0];
-            //animaçao Idle
-            Pf.MaxOcioso = 15;
-            Pf.QlAnimaOcioso = 0;
-            Pf.AnimaOcioso = 12;
-            //velocidades
-            Pf.walkSpeed = walkSpeed;
-            Pf.crawlSpeed = crawlSpeed;
-            Pf.climbSpeed = climbSpeed;
-            Pf.runSpeed = runSpeed;
-            Pf.PullshSpeed = PullshSpeed;
-            //pulo
-            Pf.jumpforce = jumpforce;
-            Pf.fallMultiplier = fallMultiplier;
-            Pf.lowJumpMultiplier = lowJumpMultiplier;
-            #endregion
-            #region Alegre
-            Af.ModeloName = Skins[1];
-            //animaçao Idle
-            Af.MaxOcioso = 10;
-            Af.QlAnimaOcioso = 1;
-            Af.AnimaOcioso = 30;
-            //velocidades
-            Af.walkSpeed = 10;
-            Af.crawlSpeed = 8;
-            Af.climbSpeed = 10;
-            Af.runSpeed = 25;
-            Af.PullshSpeed = PullshSpeed;
-            //pulo
-            Af.jumpforce = jumpforce;
-            Af.fallMultiplier = fallMultiplier;
-            Af.lowJumpMultiplier = lowJumpMultiplier;
-            #endregion
-            #region Tristeza
-            Tf.ModeloName = Skins[2];
-            //animaçao Idle
-            Tf.MaxOcioso = 15;
-            Tf.QlAnimaOcioso = 2;
-            Tf.AnimaOcioso = 6.5f;
-            //velocidades
-            Tf.walkSpeed = 7;
-            Tf.crawlSpeed = 5;
-            Tf.climbSpeed = 5;
-            Tf.runSpeed = 15;
-            Tf.PullshSpeed = PullshSpeed;
-            //pulo
-            Tf.jumpforce = jumpforce;
-            Tf.fallMultiplier = fallMultiplier;
-            Tf.lowJumpMultiplier = lowJumpMultiplier;
-            #endregion
-            #region Raiva
-            Rf.ModeloName = Skins[3];
-            //animaçao Idle
-            Rf.MaxOcioso = 15;
-            Rf.QlAnimaOcioso = 3;
-            Rf.AnimaOcioso = 20;
-            //velocidades
-            Rf.walkSpeed = walkSpeed;
-            Rf.crawlSpeed = crawlSpeed;
-            Rf.climbSpeed = climbSpeed;
-            Rf.runSpeed = runSpeed;
-            Rf.PullshSpeed = PullshSpeed;
-            //pulo
-            Rf.jumpforce = jumpforce;
-            Rf.fallMultiplier = fallMultiplier;
-            Rf.lowJumpMultiplier = lowJumpMultiplier;
-            #endregion
-            #region Nojo
-            Nf.ModeloName = Skins[4];
-            //animaçao Idle
-            Nf.MaxOcioso = 7;
-            Nf.QlAnimaOcioso = 4;
-            Nf.AnimaOcioso = 4;
-            //velocidades
-            Nf.walkSpeed = walkSpeed;
-            Nf.crawlSpeed = 5;
-            Nf.climbSpeed = 7;
-            Nf.runSpeed = runSpeed;
-            Nf.PullshSpeed = PullshSpeed;
-            //pulo
-            Nf.jumpforce = jumpforce;
-            Nf.fallMultiplier = fallMultiplier;
-            Nf.lowJumpMultiplier = lowJumpMultiplier;
-            #endregion
-            #region Medo
-            Mf.ModeloName = Skins[5];
-            //animaçao Idle
-            Mf.MaxOcioso = 5;
-            Mf.QlAnimaOcioso = 5;
-            Mf.AnimaOcioso = 4.5f;
-            //velocidades
-            Mf.walkSpeed = 7;
-            Mf.crawlSpeed = crawlSpeed;
-            Mf.climbSpeed = climbSpeed;
-            Mf.runSpeed = 30;
-            Mf.PullshSpeed = PullshSpeed;
-            //pulo
-            Mf.jumpforce = jumpforce;
-            Mf.fallMultiplier = fallMultiplier;
-            Mf.lowJumpMultiplier = lowJumpMultiplier;
-            #endregion
-            #region Etereo
-            Ef.ModeloName = Skins[6];
-            //animaçao Idle
-            Ef.MaxOcioso = 15;
-            Ef.QlAnimaOcioso = 6;
-            Ef.AnimaOcioso = 4;
-            //velocidades
-            Ef.walkSpeed = walkSpeed;
-            Ef.crawlSpeed = crawlSpeed;
-            Ef.climbSpeed = climbSpeed;
-            Ef.runSpeed = runSpeed;
-            Ef.PullshSpeed = PullshSpeed;
-            //pulo
-            Ef.jumpforce = jumpforce;
-            Ef.fallMultiplier = fallMultiplier;
-            Ef.lowJumpMultiplier = lowJumpMultiplier;
-            #endregion
-            #endregion
-
-        }
-   //     TrocaAmbiente();
-    //    TrocaConfig();
         TrocaSom(0);
         #region FixedUpdate
+        if (!Manual)
+            Atual = ConfgFases[(int)NumFases];
+
         AudSrc.enabled = true;//mantm som ligado
         GetComponent<AndarPlayer>().SetConfigFase(Atual);
-            if (Atual.ModeloName != null)
-            {
-                if (Pf.ModeloName != null)
-                    (Pf.ModeloName).SetActive(Pf.ModeloName == Atual.ModeloName);
-                if (Af.ModeloName != null)
-                    (Af.ModeloName).SetActive(Af.ModeloName == Atual.ModeloName);
-                if (Tf.ModeloName != null)
-                    (Tf.ModeloName).SetActive(Tf.ModeloName == Atual.ModeloName);
-                if (Rf.ModeloName != null)
-                    (Rf.ModeloName).SetActive(Rf.ModeloName == Atual.ModeloName);
-                if (Nf.ModeloName != null)
-                    (Nf.ModeloName).SetActive(Nf.ModeloName == Atual.ModeloName);
-                if (Mf.ModeloName != null)
-                    (Mf.ModeloName).SetActive(Mf.ModeloName == Atual.ModeloName);
-                if (Ef.ModeloName != null)
-                    (Ef.ModeloName).SetActive(Ef.ModeloName == Atual.ModeloName);
-            }
+        if (Atual.ModeloName != null)
+            for (int i = 0; i < ConfgFases.Length; i++)
+                if (ConfgFases[i].ModeloName != null)
+                    (ConfgFases[i].ModeloName).SetActive(ConfgFases[i].ModeloName == Atual.ModeloName);
         #region Cor
         if (ambiente == Fase.Neutro)
             CorAmbiente = Color.white;
@@ -231,42 +65,6 @@ public class Ambiente : MonoBehaviour
             CorAmbiente = Color.magenta;
         #endregion
         #endregion
-    }
-
-    void PublicMove()
-    {
-        //animaçao Idle
-        Atual.MaxOcioso = MaxOcioso;
-        Atual.QlAnimaOcioso = (int)QlAnimaOcioso;
-        Atual.AnimaOcioso = AnimaOcioso;
-        //velocidades
-        Atual.walkSpeed = walkSpeed;
-        Atual.crawlSpeed = crawlSpeed;
-        Atual.climbSpeed = climbSpeed;
-        Atual.runSpeed = runSpeed;
-        Atual.PullshSpeed = PullshSpeed;
-        //pulo
-        Atual.jumpforce = jumpforce;
-        Atual.fallMultiplier = fallMultiplier;
-        Atual.lowJumpMultiplier = lowJumpMultiplier;
-    }
-    void AutomaticoMove()
-    {
-        //animaçao Idle
-        MaxOcioso = Atual.MaxOcioso;
-        QlAnimaOcioso = (int)Atual.QlAnimaOcioso;
-        AnimaOcioso = Atual.AnimaOcioso;
-        //velocidades
-        walkSpeed = Atual.walkSpeed;
-        crawlSpeed = Atual.crawlSpeed;
-        climbSpeed = Atual.climbSpeed;
-        runSpeed = Atual.runSpeed;
-        PullshSpeed = Atual.PullshSpeed;
-        //pulo
-        jumpforce = Atual.jumpforce;
-        fallMultiplier = Atual.fallMultiplier;
-        lowJumpMultiplier = Atual.lowJumpMultiplier;
-
     }
     public void TrocaAmbiente()
     {
@@ -288,49 +86,27 @@ public class Ambiente : MonoBehaviour
     }
     public void TrocaConfig()
     {
-        Debug.Log("AA");
         NumFases = 0;
         if (ambiente == Fase.Neutro)
-        {
-            Atual = Pf;
             NumFases = 0;
-        }
         else if (ambiente == Fase.Alegre)
-        {
-            Atual = Af;
             NumFases = 1;
-        }
         else if (ambiente == Fase.Triste)
-        {
-            Atual = Tf;
             NumFases = 2;
-        }
         else if (ambiente == Fase.Raiva)
-        {
-            Atual = Rf;
             NumFases = 3;
-        }
         else if (ambiente == Fase.Nojo)
-        {
-            Atual = Nf;
             NumFases = 4;
-        }
         else if (ambiente == Fase.Medo)
-        {
-            Atual = Mf;
             NumFases = 5;
-        }
         else if (ambiente == Fase.Etereo)
-        {
-            Atual = Ef;
             NumFases = 6;
-        }
-       // return NumFases;
+        // return NumFases;
+        Atual = ConfgFases[(int)NumFases];
         cfs.faseIndex = NumFases;
     }
     void TrocaSom(int IdSom)
     {
-
         if (ambiente == Fase.Neutro)
             IdSom = 0;
         else if (ambiente == Fase.Alegre)
