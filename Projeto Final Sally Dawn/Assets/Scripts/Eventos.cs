@@ -5,26 +5,45 @@ using UnityEngine.UI;
 
 public class Eventos : MonoBehaviour
 {
-    public Emocoes Peças = new Emocoes();
+    [System.Serializable]
+    public class PrtMigO
+    {
+        [HideInInspector]
+        public string name;
+        public bool IsActive;
+        [HideInInspector]
+        public GameObject Equip;
+    }
+
+    public Emocoes Memorias = new Emocoes();
     public Emocoes PwrUp = new Emocoes();
     public enum Fase { Neutro, Alegre, Triste, Raiva, Nojo, Medo, Etereo }
     public Fase ambiente;
 
     public Text txt;
     private string stg;
-   
+    [HideInInspector]
+    public Transform SkinAtiva;
+    public string[] Equips;
+    public PrtMigO[] MigO;
 
+    private void Start()
+    {
+        MigO = new PrtMigO[Equips.Length];
+        
+    }
     // Update is called once per frame
     void Update()
     {
+        #region Txt
         stg = "E:";
-        stg += Peças.Neutro ? 1 : 0;
-        stg += Peças.Alegre ? 1 : 0;
-        stg += Peças.Triste ? 1 : 0;
-        stg += Peças.Raiva ? 1 : 0;
-        stg += Peças.Nojo ? 1 : 0;
-        stg += Peças.Medo ? 1 : 0;
-        stg += Peças.Etereo ? 1 : 0;
+        stg += Memorias.Neutro ? 1 : 0;
+        stg += Memorias.Alegre ? 1 : 0;
+        stg += Memorias.Triste ? 1 : 0;
+        stg += Memorias.Raiva ? 1 : 0;
+        stg += Memorias.Nojo ? 1 : 0;
+        stg += Memorias.Medo ? 1 : 0;
+        stg += Memorias.Etereo ? 1 : 0;
         stg += "// P: ";
         stg += PwrUp.Neutro ? 1 : 0;
         stg += PwrUp.Alegre ? 1 : 0;
@@ -36,6 +55,45 @@ public class Eventos : MonoBehaviour
 
         if (txt != null)
             txt.text = stg;
+        #endregion
+        for (int i = 0; i < Equips.Length; i++)
+        {
+            #region EditMig0
+            MigO[i].name = Equips[i];
+
+            MigO[i].Equip = null;
+            for (int j = 0; j < SkinAtiva.childCount; j++)
+                if (SkinAtiva.GetChild(j).name == MigO[i].name)
+                    MigO[i].Equip = SkinAtiva.GetChild(j).gameObject;
+            #endregion
+            #region BoolAticves
+            switch (MigO[i].name) {
+                case "Antenas":
+                    MigO[i].IsActive = PwrUp.Triste;
+                    break;
+                case "Bombas":
+                    MigO[i].IsActive = PwrUp.Raiva;
+                    break;
+                case "Detector":
+                    MigO[i].IsActive = PwrUp.Alegre;
+                    break;
+                case "Lanterna":
+                    MigO[i].IsActive = PwrUp.Medo;
+                    break;
+                case "Jatos":
+                    MigO[i].IsActive = PwrUp.Nojo;
+                    break;
+                case "Migo":
+                    MigO[i].IsActive = PwrUp.Neutro;
+                    break;
+            }
+            #endregion
+            #region AtivaPwrUp
+            if (MigO[i].Equip != null)
+                MigO[i].Equip.SetActive(MigO[i].IsActive);
+            #endregion
+        }
+
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -43,7 +101,7 @@ public class Eventos : MonoBehaviour
         {
             ambiente = (Fase)GetComponent<Ambiente>().ambiente;
             if (other.GetComponent<ItsItem>().typeItem == ItsItem.TypeItem.Emotion)
-                Coletar(Peças);
+                Coletar(Memorias);
             else
             if (other.GetComponent<ItsItem>().typeItem == ItsItem.TypeItem.PowerUp)
                 Coletar(PwrUp);

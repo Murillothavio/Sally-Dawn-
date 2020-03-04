@@ -9,6 +9,7 @@ public class Codigos : MonoBehaviour
     public bool Pull;
     [SerializeField]
     private Color Local;
+    [HideInInspector]
     public Color[] Locais;
     [SerializeField]
     private string CodigoTxt;
@@ -16,6 +17,9 @@ public class Codigos : MonoBehaviour
     [HideInInspector]
     public Transform[] PontosAmbiente = new Transform[7];
     private Vector3[] PontoscCord = new Vector3[7];
+
+    public KeyCode TrocarAmbiente, TrocarSkin, InstaciarFases;
+    public KeyCode[] PecasKey = new KeyCode[7];
 
     private void Awake()
     {
@@ -74,12 +78,65 @@ public class Codigos : MonoBehaviour
         }
         #endregion
 
-        if (Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKeyDown(TrocarAmbiente))
             GetComponent<Ambiente>().TrocaAmbiente();
-        if (Input.GetKeyDown(KeyCode.L))
-            GetComponent<CriarFases>().Criar = true;
-    }
+        
+        if (Input.GetKeyDown(TrocarSkin))
+            GetComponent<Ambiente>().TrocaConfig();
 
+        if (Input.GetKeyDown(InstaciarFases))
+            GetComponent<CriarFases>().Criar = true;
+
+        #region ColetaPcas
+        for (int i = 0; i < PecasKey.Length; i++)
+            if (Input.GetKeyDown(PecasKey[i]))
+                switch (i)
+                {
+                    case 0:
+                        if (GetComponent<Eventos>().PwrUp.Neutro)
+                            GetComponent<Eventos>().PwrUp.Neutro = false;
+                        else
+                            GetComponent<Eventos>().PwrUp.Neutro = true;
+                        break;
+                    case 1:
+                        if (GetComponent<Eventos>().PwrUp.Alegre)
+                            GetComponent<Eventos>().PwrUp.Alegre = false;
+                        else
+                            GetComponent<Eventos>().PwrUp.Alegre = true;
+                        break;
+                    case 2:
+                        if (GetComponent<Eventos>().PwrUp.Triste)
+                            GetComponent<Eventos>().PwrUp.Triste = false;
+                        else
+                            GetComponent<Eventos>().PwrUp.Triste = true;
+                        break;
+                    case 3:
+                        if (GetComponent<Eventos>().PwrUp.Raiva)
+                            GetComponent<Eventos>().PwrUp.Raiva = false;
+                        else
+                            GetComponent<Eventos>().PwrUp.Raiva = true;
+                        break;
+                    case 4:
+                        if (GetComponent<Eventos>().PwrUp.Nojo)
+                            GetComponent<Eventos>().PwrUp.Nojo = false;
+                        else
+                            GetComponent<Eventos>().PwrUp.Nojo = true;
+                        break;
+                    case 5:
+                        if (GetComponent<Eventos>().PwrUp.Medo)
+                            GetComponent<Eventos>().PwrUp.Medo = false;
+                        else
+                            GetComponent<Eventos>().PwrUp.Medo = true;
+                        break;
+                    case 6:
+                        if (GetComponent<Eventos>().PwrUp.Etereo)
+                            GetComponent<Eventos>().PwrUp.Etereo = false;
+                        else
+                            GetComponent<Eventos>().PwrUp.Etereo = true;
+                        break;
+                }
+        #endregion
+    }
     void LevarPonto()
     {
         if (Pull)

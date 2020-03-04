@@ -44,9 +44,12 @@ public class Ambiente : MonoBehaviour
         AudSrc.enabled = true;//mantm som ligado
         GetComponent<AndarPlayer>().SetConfigFase(Atual);
         if (Atual.ModeloName != null)
+        {
             for (int i = 0; i < ConfgFases.Length; i++)
                 if (ConfgFases[i].ModeloName != null)
                     (ConfgFases[i].ModeloName).SetActive(ConfgFases[i].ModeloName == Atual.ModeloName);
+            GetComponent<Eventos>().SkinAtiva = Atual.ModeloName.transform;
+        }
         #region Cor
         if (ambiente == Fase.Neutro)
             CorAmbiente = Color.white;
