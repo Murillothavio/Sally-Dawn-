@@ -23,7 +23,8 @@ public class AndarPlayer : MonoBehaviour
 
     public Zonas OndeTo;
     public StateMachine stateAnimacao;
-    [HideInInspector] public float TempoOcioso, moveSpeed;
+    [HideInInspector] public float TempoOcioso;//, moveSpeed;
+    [Range(0, 30)] public float moveSpeed;
     public bool Segurando, Escalando, Caindo;//*
     [HideInInspector] public Rigidbody rb;
     [HideInInspector] public GameObject ActiveSkin;
@@ -200,7 +201,7 @@ public class AndarPlayer : MonoBehaviour
             Vector3 v = Vector3.right * horizontal * moveSpeed;
             v.y = rb.velocity.y;
             rb.velocity = v;
-            caixote.GetComponent<Rigidbody>().velocity = v;
+           // caixote.GetComponent<Rigidbody>().velocity = v;
         }
         else if (OndeTo == Zonas.morrer)
         {

@@ -23,7 +23,6 @@ public class Ambiente : MonoBehaviour
     void Start()
     {
         cfs = GetComponent<CriarFases>();
-        Atual = new MoveConfig();
 
         AudSrc = GetComponent<AudioSource>();
         for (int i = 0; i < ConfgFases.Length; i++)
