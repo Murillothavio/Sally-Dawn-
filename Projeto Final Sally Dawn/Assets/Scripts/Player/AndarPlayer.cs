@@ -153,7 +153,7 @@ public class AndarPlayer : MonoBehaviour
             stateAnimacao = StateMachine.Escalando;
         else if (Kbaixo)
             stateAnimacao = StateMachine.Agachado;
-       else
+        else if (isGrounded && stateAnimacao != StateMachine.Pulando)
             stateAnimacao = StateMachine.Walk;
 
         if (stateAnimacao == StateMachine.Walk) 
@@ -226,10 +226,10 @@ public class AndarPlayer : MonoBehaviour
 
             Vector3 v = Vector3.right * horizontal * moveSpeed * Time.deltaTime *  (Mathf.Pow(AjustDez,2));
             v.y = rb.velocity.y;
-            if (!Caindo)
+            if (!Caindo && stateAnimacao!=StateMachine.Pulando)
                 rb.velocity = v;
 
-
+            Debug.Log((!Caindo) +" "+ (stateAnimacao != StateMachine.Pulando )+ ".");
 
             Vector3 targetOlhar = transform.position;
             targetOlhar.x += horizontal * moveSpeed;
@@ -248,7 +248,8 @@ public class AndarPlayer : MonoBehaviour
         //isGrounded = Grounds != nulll;
         Vector3 origem = transform.position + GroundCenter;
         isGrounded = Physics.Raycast(origem, Vector3.down, GroundSize.y, mask);
-        if (stateAnimacao == StateMachine.Walk || stateAnimacao == StateMachine.Ocioso || stateAnimacao == StateMachine.Escalando)
+        if (stateAnimacao == StateMachine.Walk || stateAnimacao == StateMachine.Ocioso || stateAnimacao == StateMachine.Escalando
+            || stateAnimacao == StateMachine.Pulando || stateAnimacao == StateMachine.Caindo)
         {
             if (isGrounded) currentJump = 0;
             if (Kjump && !Kbaixo && (isGrounded || MaxJump > currentJump))
@@ -268,12 +269,12 @@ public class AndarPlayer : MonoBehaviour
         }
         if (vel.y < 0)
         {
-            //  Debug.Log("funciona esse caralho");
+              Debug.Log("funciona esse caralho");
             vel.y += Physics.gravity.y * (AtualConfig.fallMultiplier) * Time.deltaTime;
         }
         else if (vel.y > 0 && !Input.GetButton("Jump"))
         {
-            //   Debug.Log("entai vai tomar no cu");
+               Debug.Log("entai vai tomar no cu");
             vel.y += Physics.gravity.y * (AtualConfig.lowJumpMultiplier - 1) * Time.deltaTime;
         }
         //  vel.y += Physics.gravity.y / 10;

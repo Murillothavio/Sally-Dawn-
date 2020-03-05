@@ -15,6 +15,8 @@ public class Ambiente : MonoBehaviour
     private AudioSource AudSrc;
     private CriarFases cfs;
     public bool Manual = true;
+    [HideInInspector]
+    public MoveConfig ManualConfig;
     public MoveConfig Atual = new MoveConfig();
     [SerializeField]
     private MoveConfig[] ConfgFases = new MoveConfig[7];
@@ -30,8 +32,9 @@ public class Ambiente : MonoBehaviour
             ConfgFases[i].ModeloName = Skins[i];
             ConfgFases[i].QlAnimaOcioso = i;
         }
+        ManualConfig.ModeloName = Skins[(int)NumFases];
+        ManualConfig.QlAnimaOcioso = NumFases;
         TrocaConfig();
-
     }
 
     void Update()
@@ -40,6 +43,8 @@ public class Ambiente : MonoBehaviour
         #region FixedUpdate
         if (!Manual)
             Atual = ConfgFases[(int)NumFases];
+        else
+            Atual = ManualConfig;
 
         AudSrc.enabled = true;//mantm som ligado
         GetComponent<AndarPlayer>().SetConfigFase(Atual);
