@@ -24,8 +24,19 @@ public class AndarPlayer : MonoBehaviour
     public Zonas OndeTo;
     public StateMachine stateAnimacao;
     [HideInInspector] public float TempoOcioso;//, moveSpeed;
+
+    [Header("Velocidade Atual e Velocidade Animacao")]
     [Range(0, 30)] public float moveSpeed;
+    [Range(0, 2)] public float SpeedAnimation;
+    [Header("Peso/Correcao Time.DeltaTime")]
+    [Range(10, 40)] public float PesoSpAnimation;
+    [Range(1, 10)] public float AjustDez;
+
+
+
     public bool Segurando, Escalando, Caindo;//*
+
+
     [HideInInspector] public Rigidbody rb;
     [HideInInspector] public GameObject ActiveSkin;
     private GameObject caixote;
@@ -34,12 +45,16 @@ public class AndarPlayer : MonoBehaviour
     [Range(0, 2)]
     public float DeathDelay = .2f;
     private float CurrentDeathDelay = 0;
+
     #region Ground
     public bool isGrounded;
     private Vector3 GroundSize = new Vector3(1.16f, 1.5f, 0);
     private Vector3 GroundCenter = new Vector3(0, .3f, 0);
+    [HideInInspector] public bool StopVelocidade;
+    private Vector3 Velocity;
     #endregion
-    [Range(1,10)] public float AjustDez;
+
+
     public float horizontal, Arrastar, vertical;
     public LayerMask mask;
     private const int MaxJump = 1;
@@ -294,6 +309,15 @@ public class AndarPlayer : MonoBehaviour
 
         #endregion
 
+        if (!isGrounded)
+            StopVelocidade = true;
+        else if (StopVelocidade)
+        {
+            StopVelocidade = false;
+            rb.velocity = Vector3.zero;
+        }
+        Velocity = rb.velocity;
+
         SetAnimacoes();
 
     }
@@ -314,6 +338,9 @@ public class AndarPlayer : MonoBehaviour
         Acao.SetFloat("VerticalSpeed", vertical);
         float sadwalk = (AtualConfig.QlAnimaOcioso == 2) ? 1 : 0;
         Acao.SetFloat("SadWalk", sadwalk);
+       // SpeedAnimation = ((moveSpeed - AtualConfig.walkSpeed) / (AtualConfig.runSpeed)) + 1;
+        SpeedAnimation = ((moveSpeed - 10) / PesoSpAnimation) + 1;
+        Acao.speed = SpeedAnimation;
     }
 
     private void OnTriggerStay(Collider other)
