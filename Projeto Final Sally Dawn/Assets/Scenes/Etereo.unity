@@ -132,6 +132,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sally Dawn Emocao Raiva
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 09e3de451b6a281459832bc214571ab5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -4568022825882892604, guid: 09e3de451b6a281459832bc214571ab5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -215,6 +220,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: sdRaivafbx@Defeated (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 35459e307976588459b1235754d6aa97,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7384133254626218795, guid: 35459e307976588459b1235754d6aa97,
         type: 3}
@@ -491,7 +501,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh49246
+  m_Name: pb_Mesh41124
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -660,11 +670,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sally Dawn Emocao Medo
       objectReference: {fileID: 0}
-    - target: {fileID: -8606938743516996852, guid: 010c135d97a7d09448ca9481ec3cff15,
+    - target: {fileID: -927199367670048503, guid: 010c135d97a7d09448ca9481ec3cff15,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: f0691f025796466478911b3c2ef022a6, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 010c135d97a7d09448ca9481ec3cff15,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -720,6 +730,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8606938743516996852, guid: 010c135d97a7d09448ca9481ec3cff15,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f0691f025796466478911b3c2ef022a6, type: 2}
     - target: {fileID: 5674019479646716510, guid: 010c135d97a7d09448ca9481ec3cff15,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -738,6 +753,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Sally Dawn Emocao Felicidade
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 5496ae770815e954da89cc4e50e93605,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 5496ae770815e954da89cc4e50e93605,
         type: 3}
@@ -1365,6 +1385,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sally Dawn Emocao Tristeza
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 4686029c260cc8b43bb70bab0391e677,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8784796144321793681, guid: 4686029c260cc8b43bb70bab0391e677,
         type: 3}
       propertyPath: m_IsActive
@@ -1440,11 +1465,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -596331407607767289, guid: 4686029c260cc8b43bb70bab0391e677,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: bc9bf165a703b204abe8f88c92c49c07, type: 2}
     - target: {fileID: 8035888221497138044, guid: 4686029c260cc8b43bb70bab0391e677,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1455,6 +1475,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -596331407607767289, guid: 4686029c260cc8b43bb70bab0391e677,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bc9bf165a703b204abe8f88c92c49c07, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4686029c260cc8b43bb70bab0391e677, type: 3}
 --- !u!1001 &1776099186
@@ -1468,6 +1493,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Sally Dawn Emocao Nojo
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 2499b82f90a7d3847bf2a19b2af6b957,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 2499b82f90a7d3847bf2a19b2af6b957,
         type: 3}
@@ -1552,6 +1582,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Sally Dawn Emocao Tristeza@Capoeira
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 3c3aab01565a3024f8336578b37a90b1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -6057140222963153312, guid: 3c3aab01565a3024f8336578b37a90b1,
         type: 3}
