@@ -7,17 +7,29 @@ public class CameraFollow : MonoBehaviour
     //  public Controller2D target;
     public GameObject target;
     private CapsuleCollider targetcollider;
+    [SerializeField]
     private CapsuleCollider focuCollider;
     public float verticalOffset;
-    public float AheadDstXPress=6;
-    public float AheadDstXSolt=16;
+    public float AheadDstXPress = 6;
+    public float AheadDstXSolt = 16;
     private float lookAheadDstX;
     public float lookSmoothTimeX;
     public float verticalSmoothTime;
     public Vector2 focusAreaSize;
-    public bool Presso;
+    public bool Preso, AnteriorPreso;
     public CapsuleCollider FocusObj;
     FocusArea focusArea;
+
+    public enum CameraEstado { estatica, MoveR, MovING }
+    public CameraEstado estado;
+
+    public float TempoPrender, TempoSoltar, TempoMove;
+    [SerializeField]
+    private Vector3 PontoInicial, PontoFinal, PontoAtual, PontoDelta, PontoSpeed;
+  //  private Vector3 PontoA, PontoB, PontoC, PontoD, PontoT, PontoCorrecao, PontoTarget;
+ //   [SerializeField]
+  //  private Vector3 CenterFocoPlayer, CenterZero, DeltaCenter, AtualCenter, PosiPlayer, PosiZero;
+    public Transform TheCollider;
 
     float currentLookAheadX;
     float targetLookAheadX;
@@ -30,29 +42,139 @@ public class CameraFollow : MonoBehaviour
     private void Awake()
     {
         targetcollider = target.GetComponent<CapsuleCollider>();
+        focuCollider = targetcollider;
+        lookAheadDstX = AheadDstXSolt;
     }
     void Start()
     {
         focusArea = new FocusArea(targetcollider.bounds, focusAreaSize);
-
+      
     }
 
-    void LateUpdate()
+    void Newfoco()
     {
-        Presso = target.GetComponent<AndarPlayer>().CameraPressa;
+        Preso = target.GetComponent<AndarPlayer>().CameraPressa;
         if (target.GetComponent<AndarPlayer>().NewFocus != null)
             FocusObj = target.GetComponent<AndarPlayer>().NewFocus.GetComponent<CapsuleCollider>();
 
-        if (Presso)
+        if(Preso!=AnteriorPreso)
         {
-            focuCollider = FocusObj;
-            lookAheadDstX = AheadDstXPress;
+            estado = CameraEstado.MoveR;
+            AnteriorPreso = Preso;
         }
-        else
+
+        switch (estado)
         {
-            focuCollider = targetcollider;
-            lookAheadDstX = AheadDstXSolt;
+            case CameraEstado.MoveR:
+                if (Preso)
+                {
+                    focuCollider = FocusObj;
+                    lookAheadDstX = AheadDstXPress;
+
+                    PontoInicial = CalcutarPonto(target);
+                    PontoFinal = Vector3.zero;
+                    TempoMove = TempoPrender;
+                }
+                else
+                {
+                    focuCollider = targetcollider;
+                    lookAheadDstX = AheadDstXSolt;
+                 
+                    PontoInicial = CalcutarPonto(FocusObj.gameObject);
+                    PontoFinal = CalcutarPonto(target);
+                    TempoMove = TempoSoltar;
+                }
+                PontoAtual = PontoInicial;
+                PontoDelta = PontoFinal - PontoInicial;
+                PontoSpeed = PontoDelta / TempoMove;
+                estado = CameraEstado.MovING;
+                break;
+            case CameraEstado.MovING:
+
+                PontoAtual.x = Mathf.MoveTowards(PontoAtual.x, PontoFinal.x, Mathf.Abs(PontoSpeed.x));
+                PontoAtual.y = Mathf.MoveTowards(PontoAtual.y, PontoFinal.y, Mathf.Abs(PontoSpeed.y));
+                PontoAtual.z = Mathf.MoveTowards(PontoAtual.z, PontoFinal.z, Mathf.Abs(PontoSpeed.z));
+
+              //  FocusObj.center = PontoAtual;
+                if(false)
+                if (PontoAtual == PontoFinal)//final==atual
+                    estado = CameraEstado.estatica;
+                break;
         }
+        TheCollider.position = PontoAtual + FocusObj.gameObject.transform.position;
+
+        //PontoInicial, PontoFinal, PontoAtual, PontoDelta, PontoSpeed;
+        /*
+                switch (estado)
+                {
+                    case CameraEstado.Solta:
+                        focuCollider = targetcollider;
+                        lookAheadDstX = AheadDstXSolt;
+                        if (Preso)
+                            estado = CameraEstado.PRENDER;
+                        break;
+                    case CameraEstado.Presa:
+                        focuCollider = FocusObj;
+                        lookAheadDstX = AheadDstXPress;
+                        if (!Preso)
+                            estado = CameraEstado.SOLTAR;
+                        break;
+
+                    case CameraEstado.PRENDER:
+                        focuCollider = FocusObj;
+                        lookAheadDstX = AheadDstXPress;
+                        PontoA = CalcutarPonto(target);
+                        PontoB = CalcutarPonto(FocusObj.gameObject);
+                        PontoD = PontoA - PontoB;
+                        PontoCorrecao = CalcutarPonto(FocusObj.gameObject);
+                        PontoTarget = CalcutarPonto(FocusObj.gameObject);
+                        estado = CameraEstado.ing; 
+                        break;
+                    case CameraEstado.SOLTAR:
+                        focuCollider = FocusObj;
+                        lookAheadDstX = AheadDstXPress;
+                        PontoA = CalcutarPonto(FocusObj.gameObject);
+                        PontoB = CalcutarPonto(target);
+                        PontoD = PontoA - PontoB;
+                        PontoCorrecao = CalcutarPonto(FocusObj.gameObject);
+                        estado = CameraEstado.ing;
+                        break;
+
+                    case CameraEstado.ing:
+                        float t;
+                        GameObject gb;
+
+                        if (Preso)
+                        {
+                            t = TempoPrender;
+                            if (PontoC == PontoT)
+                                estado = CameraEstado.Presa;
+                        }
+                        else
+                        {
+                            t = TempoSoltar;
+                            PontoTarget = CalcutarPonto(target);
+                            if (PontoC == PontoT)
+                                estado = CameraEstado.Solta;
+                        }
+
+                        PontoC = PontoCentral(PontoA, PontoB,  t);
+                        TheCollider.position = PontoC + FocusObj.gameObject.transform.position;
+                        break;
+                }
+                //FocusObj.center = PontoC;*/
+
+    }
+    Vector3 CalcutarPonto(GameObject P)
+    {
+        Debug.Log(P.name + " " + P.transform.position + " " + P.GetComponent<CapsuleCollider>().center + ".");
+        return P.transform.position + P.GetComponent<CapsuleCollider>().center - FocusObj.gameObject.transform.position;
+    }
+    
+
+    void LateUpdate()
+    {
+        Newfoco();
         focusArea.Update(focuCollider.bounds);
 
         Vector2 focusPosition = focusArea.centre + Vector2.up * verticalOffset;
@@ -60,29 +182,29 @@ public class CameraFollow : MonoBehaviour
         if (focusArea.velocity.x != 0)
         {
             lookAheadDirX = Mathf.Sign(focusArea.velocity.x);
-        //    if (Mathf.Sign(target.playerInput.x) == Mathf.Sign(focusArea.velocity.x) && target.playerInput.x != 0)
-        //    {
-        //        lookAheadStopped = false;
-                targetLookAheadX = lookAheadDirX * lookAheadDstX;
-        //    }
-        //    else
-        //    {
-        //        if (!lookAheadStopped)
-        //        {
-        //            lookAheadStopped = true;
-        //            targetLookAheadX = currentLookAheadX + (lookAheadDirX * lookAheadDstX - currentLookAheadX) / 4f;
-        //        }
-        //    }
+            //    if (Mathf.Sign(target.playerInput.x) == Mathf.Sign(focusArea.velocity.x) && target.playerInput.x != 0)
+            //    {
+            //        lookAheadStopped = false;
+            targetLookAheadX = lookAheadDirX * lookAheadDstX;
+            //    }
+            //    else
+            //    {
+            //        if (!lookAheadStopped)
+            //        {
+            //            lookAheadStopped = true;
+            //            targetLookAheadX = currentLookAheadX + (lookAheadDirX * lookAheadDstX - currentLookAheadX) / 4f;
+            //        }
+            //    }
         }
         #endregion
         //
 
-#region smooth
+        #region smooth
         currentLookAheadX = Mathf.SmoothDamp(currentLookAheadX, targetLookAheadX, ref smoothLookVelocityX, lookSmoothTimeX);
 
         focusPosition.y = Mathf.SmoothDamp(transform.position.y, focusPosition.y, ref smoothVelocityY, verticalSmoothTime);
         focusPosition += Vector2.right * currentLookAheadX;
-#endregion
+        #endregion
         transform.position = (Vector3)focusPosition + Vector3.forward * -25;
     }
 
@@ -117,9 +239,12 @@ public class CameraFollow : MonoBehaviour
         {
             #region Atualiza X
             float shiftX = 0;
-            if (targetBounds.min.x < left){
+            if (targetBounds.min.x < left)
+            {
                 shiftX = targetBounds.min.x - left;
-            }else if (targetBounds.max.x > right){
+            }
+            else if (targetBounds.max.x > right)
+            {
                 shiftX = targetBounds.max.x - right;
             }
 
@@ -128,9 +253,12 @@ public class CameraFollow : MonoBehaviour
             #endregion
             #region Atualiza Y
             float shiftY = 0;
-            if (targetBounds.min.y < bottom){
+            if (targetBounds.min.y < bottom)
+            {
                 shiftY = targetBounds.min.y - bottom;
-            } else if (targetBounds.max.y > top){
+            }
+            else if (targetBounds.max.y > top)
+            {
                 shiftY = targetBounds.max.y - top;
             }
             top += shiftY;

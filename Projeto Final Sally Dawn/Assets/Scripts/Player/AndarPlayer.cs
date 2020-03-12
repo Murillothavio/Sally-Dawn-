@@ -15,7 +15,7 @@ public class AndarPlayer : MonoBehaviour
 
     private bool Zona_agarrar, Zona_segurar, Zona_interagir, Zona_morrer;
     public enum Zonas { Free, Agarrar, segurar, interagir, morrer, ItsSafe}
-    public enum StateMachine { Walk, Agachado, Empurrando, Escalando, Pulando, Dancando, Caindo, Ocioso}
+    public enum StateMachine { None, Walk, Agachado, Empurrando, Escalando, Pulando, Dancando, Caindo, Ocioso}
     [HideInInspector]
     public bool CameraPressa;
     [HideInInspector]
@@ -58,6 +58,7 @@ public class AndarPlayer : MonoBehaviour
     public float horizontal, Arrastar, vertical;
     public LayerMask mask;
     private const int MaxJump = 1;
+    [SerializeField]
     private int currentJump = 0;
     private float DeltaY;
 
@@ -92,7 +93,7 @@ public class AndarPlayer : MonoBehaviour
             SafeZonePosition = transform.position;
         SaveTarget.position = SafeZonePosition;
 
-        CameraPressa = false; 
+        //CameraPressa = false; 
         OndeTo = Zonas.Free;
         Zona_agarrar = false;
         Zona_interagir = false;
@@ -157,23 +158,30 @@ public class AndarPlayer : MonoBehaviour
 
         Segurando = (OndeTo == Zonas.segurar && Ksegurar);
         Escalando = (OndeTo == Zonas.Agarrar && Kagarrar);
-        if (OndeTo == Zonas.segurar && Ksegurar)
-            stateAnimacao = StateMachine.Empurrando;
-        if (OndeTo == Zonas.Agarrar && Kagarrar)
-            stateAnimacao = StateMachine.Escalando;
+        //if (ondeto == zonas.segurar && ksegurar)
+        //    stateanimacao = statemachine.empurrando;
+        //if (ondeto == zonas.agarrar && kagarrar)
+        //    stateanimacao = statemachine.escalando;
 
-        if (OndeTo == Zonas.segurar && Ksegurar)
-            stateAnimacao = StateMachine.Empurrando;
-        else if (OndeTo == Zonas.Agarrar && Kagarrar)
-            stateAnimacao = StateMachine.Escalando;
-        else if (Kbaixo)
-            stateAnimacao = StateMachine.Agachado;
-        else if (isGrounded && stateAnimacao != StateMachine.Pulando)
+        stateAnimacao = StateMachine.None;
+        if (isGrounded && stateAnimacao != StateMachine.Pulando)
             stateAnimacao = StateMachine.Walk;
 
-        if (stateAnimacao == StateMachine.Walk) 
+        if (stateAnimacao == StateMachine.Walk)  
             if (TempoOcioso > AtualConfig.MaxOcioso)
                 stateAnimacao = StateMachine.Ocioso;
+
+        if (Kbaixo && (stateAnimacao == StateMachine.Walk || stateAnimacao == StateMachine.Ocioso))
+            stateAnimacao = StateMachine.Agachado;
+        if (!pular)
+        {
+            if (OndeTo == Zonas.segurar && Ksegurar)
+                stateAnimacao = StateMachine.Empurrando;
+            if (OndeTo == Zonas.Agarrar && Kagarrar)
+                stateAnimacao = StateMachine.Escalando;
+        }
+        if (Caindo)
+            stateAnimacao = StateMachine.Caindo;
 
         if (!Segurando && (horizontal < -0.5f || horizontal > .5f))
             Arrastar = horizontal;
@@ -197,7 +205,7 @@ public class AndarPlayer : MonoBehaviour
     {
         if (stateAnimacao == StateMachine.Escalando)
         {
-            moveSpeed = Mathf.MoveTowards(moveSpeed, AtualConfig.climbSpeed, AtualConfig.currentSpeed);
+            moveSpeed = Mathf.MoveTowards(moveSpeed, AtualConfig.climbSpeed, AtualConfig.currentSpeed * 4);
 
             Vector3 v = Vector3.up * vertical * moveSpeed * Time.deltaTime * (Mathf.Pow(AjustDez, 2));
             //   v.y = rb.velocity.y;
@@ -208,7 +216,6 @@ public class AndarPlayer : MonoBehaviour
             Vector3 targetOlhar = transform.position;
             targetOlhar.x += horizontal * moveSpeed;
             transform.LookAt(targetOlhar);
-
         }
         else if (stateAnimacao == StateMachine.Empurrando) 
         {
@@ -241,10 +248,10 @@ public class AndarPlayer : MonoBehaviour
 
             Vector3 v = Vector3.right * horizontal * moveSpeed * Time.deltaTime *  (Mathf.Pow(AjustDez,2));
             v.y = rb.velocity.y;
-            if (!Caindo && stateAnimacao!=StateMachine.Pulando)
+            if (!Caindo && (stateAnimacao != StateMachine.Pulando && stateAnimacao != StateMachine.None))
                 rb.velocity = v;
 
-            Debug.Log((!Caindo) +" "+ (stateAnimacao != StateMachine.Pulando )+ ".");
+         //   Debug.Log((!Caindo) +" "+ (stateAnimacao != StateMachine.Pulando )+ ".");
 
             Vector3 targetOlhar = transform.position;
             targetOlhar.x += horizontal * moveSpeed;
@@ -262,13 +269,15 @@ public class AndarPlayer : MonoBehaviour
         //Collider[] Grounds = Physics.OverlapBox(GroundCenter, GroundSize / 2, Quaternion.identity, mask);
         //isGrounded = Grounds != nulll;
         Vector3 origem = transform.position + GroundCenter;
-        isGrounded = Physics.Raycast(origem, Vector3.down, GroundSize.y, mask);
+        isGrounded = ((Physics.Raycast(origem, Vector3.down, GroundSize.y, mask)) || (stateAnimacao == StateMachine.Escalando));
         if (stateAnimacao == StateMachine.Walk || stateAnimacao == StateMachine.Ocioso || stateAnimacao == StateMachine.Escalando
-            || stateAnimacao == StateMachine.Pulando || stateAnimacao == StateMachine.Caindo)
+            || stateAnimacao == StateMachine.Pulando || stateAnimacao == StateMachine.Caindo || stateAnimacao==StateMachine.None)
         {
             if (isGrounded) currentJump = 0;
             if (Kjump && !Kbaixo && (isGrounded || MaxJump > currentJump))
             {
+            Debug.Log(Kjump + "&&" + !Kbaixo + "&& (" + isGrounded + "||" + (MaxJump > currentJump) + "). ="+
+                (Kjump && !Kbaixo && (isGrounded || MaxJump > currentJump)));
                 pular = true;
                 currentJump++;
             }
@@ -276,6 +285,11 @@ public class AndarPlayer : MonoBehaviour
                 pular = false;
             if (pular)
             {
+                if (stateAnimacao == StateMachine.Escalando)
+                {
+                    Vector3 v = Vector3.right * horizontal * moveSpeed * Time.deltaTime * (Mathf.Pow(AjustDez, 2));
+                    vel.x += v.x;
+                }
                 stateAnimacao = StateMachine.Pulando;
                 //      moveSpeed = AtualConfig.walkSpeed;
                 vel.y = AtualConfig.jumpforce;
@@ -345,11 +359,11 @@ public class AndarPlayer : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag== "CameraFocus")
-        {
-            CameraPressa = true;
-            NewFocus = other.gameObject;
-        }
+        //if (other.gameObject.tag== "CameraFocus")
+        //{
+        //    CameraPressa = true;
+        //    NewFocus = other.gameObject;
+        //}
         if (other.gameObject.tag == "Zona_agarrar")
             OndeTo = Zonas.Agarrar;
         //Zona_agarrar = true;
@@ -370,11 +384,21 @@ public class AndarPlayer : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("TODO: Prender");
+        if (other.gameObject.tag == "CameraFocus")
+        {
+            CameraPressa = true;
+            NewFocus = other.gameObject;
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         Debug.Log("TODO: Soltar");
+        if (other.gameObject.tag == "CameraFocus")
+        {
+            CameraPressa = false;
+            NewFocus = other.gameObject;
+        }
     }
     private void OnDrawGizmos()
     {
