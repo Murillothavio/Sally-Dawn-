@@ -62,41 +62,48 @@ public class CameraFollow : MonoBehaviour
             estado = CameraEstado.MoveR;
             AnteriorPreso = Preso;
         }
-
+        if (!Preso && estado == CameraEstado.estatica)
+        {
+            focuCollider = targetcollider;
+            lookAheadDstX = AheadDstXSolt;
+        } else
+        {
+            focuCollider = FocusObj;
+            lookAheadDstX = AheadDstXPress;
+        }
         switch (estado)
         {
             case CameraEstado.MoveR:
                 if (Preso)
                 {
-                    focuCollider = FocusObj;
-                    lookAheadDstX = AheadDstXPress;
-
-                    PontoInicial = CalcutarPonto(target);
-                    PontoFinal = Vector3.zero;
-                    TempoMove = TempoPrender;
+                    NovosPonts(CalcutarPonto(target), Vector3.zero, TempoPrender);
+         //           PontoInicial = CalcutarPonto(target);
+           //         PontoFinal = Vector3.zero;
+             //       TempoMove = TempoPrender;
                 }
                 else
                 {
-                    focuCollider = targetcollider;
-                    lookAheadDstX = AheadDstXSolt;
-                 
-                    PontoInicial = CalcutarPonto(FocusObj.gameObject);
-                    PontoFinal = CalcutarPonto(target);
-                    TempoMove = TempoSoltar;
+                    NovosPonts(CalcutarPonto(FocusObj.gameObject), CalcutarPonto(target), TempoSoltar);
+//                    PontoInicial = CalcutarPonto(FocusObj.gameObject);
+  //                  PontoFinal = CalcutarPonto(target);
+    //                TempoMove = TempoSoltar;
                 }
                 PontoAtual = PontoInicial;
-                PontoDelta = PontoFinal - PontoInicial;
-                PontoSpeed = PontoDelta / TempoMove;
+         //       PontoDelta = PontoFinal - PontoInicial;
+           //     PontoSpeed = PontoDelta * Time.deltaTime / TempoMove;
                 estado = CameraEstado.MovING;
                 break;
             case CameraEstado.MovING:
+                if(!Preso)
+                    NovosPonts(Vector3.zero, CalcutarPonto(target), TempoMove);
+
 
                 PontoAtual.x = Mathf.MoveTowards(PontoAtual.x, PontoFinal.x, Mathf.Abs(PontoSpeed.x));
                 PontoAtual.y = Mathf.MoveTowards(PontoAtual.y, PontoFinal.y, Mathf.Abs(PontoSpeed.y));
                 PontoAtual.z = Mathf.MoveTowards(PontoAtual.z, PontoFinal.z, Mathf.Abs(PontoSpeed.z));
 
-              //  FocusObj.center = PontoAtual;
-                if(false)
+                FocusObj.center = PontoAtual;
+
                 if (PontoAtual == PontoFinal)//final==atual
                     estado = CameraEstado.estatica;
                 break;
@@ -171,6 +178,15 @@ public class CameraFollow : MonoBehaviour
         return P.transform.position + P.GetComponent<CapsuleCollider>().center - FocusObj.gameObject.transform.position;
     }
     
+    void NovosPonts(Vector3 Pi, Vector3 Pf, float t)
+    {
+        PontoInicial = Pi;
+        PontoFinal = Pf;
+        TempoMove = t;
+        
+        PontoDelta = PontoFinal - PontoInicial;
+        PontoSpeed = PontoDelta * Time.deltaTime / TempoMove;
+    }
 
     void LateUpdate()
     {

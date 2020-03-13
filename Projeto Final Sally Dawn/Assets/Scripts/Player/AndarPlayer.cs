@@ -18,7 +18,7 @@ public class AndarPlayer : MonoBehaviour
     public enum StateMachine { None, Walk, Agachado, Empurrando, Escalando, Pulando, Dancando, Caindo, Ocioso}
     [HideInInspector]
     public bool CameraPressa;
-    [HideInInspector]
+ //   [HideInInspector]
     public GameObject NewFocus;
 
     public Zonas OndeTo;
@@ -246,7 +246,7 @@ public class AndarPlayer : MonoBehaviour
             else
                 moveSpeed = Mathf.MoveTowards(moveSpeed, AtualConfig.walkSpeed, AtualConfig.currentSpeed * 3.5f);
 
-            Vector3 v = Vector3.right * horizontal * moveSpeed * Time.deltaTime *  (Mathf.Pow(AjustDez,2));
+            Vector3 v = Vector3.right * horizontal * moveSpeed /* Time.deltaTime *  (Mathf.Pow(AjustDez,2))*/;
             v.y = rb.velocity.y;
             if (!Caindo && (stateAnimacao != StateMachine.Pulando && stateAnimacao != StateMachine.None))
                 rb.velocity = v;
@@ -387,7 +387,7 @@ public class AndarPlayer : MonoBehaviour
         if (other.gameObject.tag == "CameraFocus")
         {
             CameraPressa = true;
-            NewFocus = other.gameObject;
+            NewFocus = other.gameObject.transform.GetChild(0).gameObject;
         }
     }
 
@@ -397,7 +397,6 @@ public class AndarPlayer : MonoBehaviour
         if (other.gameObject.tag == "CameraFocus")
         {
             CameraPressa = false;
-            NewFocus = other.gameObject;
         }
     }
     private void OnDrawGizmos()
