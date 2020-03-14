@@ -6,5 +6,5 @@ public class ItsItem : MonoBehaviour
 {
     public enum TypeItem { PowerUp, Emotion}
     public TypeItem typeItem;
-    
+    public float LifeTime;
 }

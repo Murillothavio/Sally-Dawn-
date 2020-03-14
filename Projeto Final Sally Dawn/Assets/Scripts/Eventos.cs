@@ -14,6 +14,26 @@ public class Eventos : MonoBehaviour
         public GameObject Equip;
     }
 
+    [System.Serializable]
+    public class CineEventos
+    {
+        public string name;
+        public GameObject ColiderEvento;
+        public GameObject[] Ativars;
+        public float LifeTime;
+
+        public void Init()
+        {
+            if (ColiderEvento != null)
+            {
+                name = ColiderEvento.name;
+                Ativars = new GameObject[ColiderEvento.transform.childCount];
+                for (int i = 0; i < Ativars.Length; i++)
+                    Ativars[i] = ColiderEvento.transform.GetChild(i).gameObject;
+
+            }
+        }
+    }
     public Emocoes Memorias = new Emocoes();
     [HideInInspector]
     public Emocoes PwrUp = new Emocoes();
@@ -29,10 +49,14 @@ public class Eventos : MonoBehaviour
     public string[] Equips;
     public PrtMigO[] MigO;
 
+    public CineEventos[] Cine;
+
     private void Start()
     {
         MigO = new PrtMigO[Equips.Length];
-        
+        for (int i = 0; i < Cine.Length; i++)
+            Cine[i].Init();
+
     }
     // Update is called once per frame
     void Update()
@@ -109,6 +133,16 @@ public class Eventos : MonoBehaviour
             else
             if (other.GetComponent<ItsItem>().typeItem == ItsItem.TypeItem.PowerUp)
                 Coletar(PwrUp);
+            Destroy(other.gameObject, other. GetComponent<ItsItem>().LifeTime);
+        }
+        if (other.gameObject.tag == "Eventos")
+        {
+            for (int i = 0; i < Cine.Length; i++)
+                if (Cine[i].name == other.gameObject.name)
+                    for (int j = 0; j < Cine[i].Ativars.Length; j++)
+                    {
+                        Cine[i].Ativars[j].SetActive(!Cine[i].Ativars[j].active);
+                    }
         }
     }
 

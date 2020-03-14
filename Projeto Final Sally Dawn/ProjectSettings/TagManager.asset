@@ -16,6 +16,7 @@ TagManager:
   - PlataformaInvisivel
   - PlataformaEscada
   - ChangeSkin
+  - Eventos
   layers:
   - Default
   - TransparentFX
