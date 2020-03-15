@@ -139,13 +139,36 @@ public class Eventos : MonoBehaviour
         {
             for (int i = 0; i < Cine.Length; i++)
                 if (Cine[i].name == other.gameObject.name)
+                {
                     for (int j = 0; j < Cine[i].Ativars.Length; j++)
-                    {
                         Cine[i].Ativars[j].SetActive(!Cine[i].Ativars[j].active);
+                    switch (Cine[i].name)
+                    {
+                        case "Mig0Tornado":
+                            if (Cine[i].Ativars[0].name == "Tornados")
+                                Cine[i].Ativars[0].GetComponent<Animator>().speed = 3 / Cine[i].LifeTime;
+                            else Debug.LogError("animator tornado errado");
+                            GetComponent<AndarPlayer>().CanWalk = false;
+                            Invoke("ColocarMigO", Cine[i].LifeTime / 2);
+                            Invoke("FimTornado", Cine[i].LifeTime);
+                            break;
                     }
+                }
         }
     }
 
+    private void ColocarMigO()
+    {
+        Debug.Log("Mig-0");
+        GetComponent<Ambiente>().TrocaAmbiente();
+        GetComponent<Ambiente>().TrocaConfig();
+
+    }
+    private void FimTornado()
+    {
+        GetComponent<AndarPlayer>().CanWalk = true;
+
+    }
     private void Coletar(Emocoes eme)
     {
 

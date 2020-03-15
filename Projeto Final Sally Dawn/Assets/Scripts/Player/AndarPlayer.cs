@@ -16,9 +16,10 @@ public class AndarPlayer : MonoBehaviour
     private bool Zona_agarrar, Zona_segurar, Zona_interagir, Zona_morrer;
     public enum Zonas { Free, Agarrar, segurar, interagir, morrer, ItsSafe}
     public enum StateMachine { None, Walk, Agachado, Empurrando, Escalando, Pulando, Dancando, Caindo, Ocioso}
+    public bool CanWalk;
     [HideInInspector]
     public bool CameraPressa;
- //   [HideInInspector]
+    [HideInInspector]
     public GameObject NewFocus;
 
     public Zonas OndeTo;
@@ -113,7 +114,12 @@ public class AndarPlayer : MonoBehaviour
         Atualiza();
         Estados();
         ColliderTamanho();
-        Andar();
+        if (CanWalk)
+            Andar();
+        else
+            rb.velocity = Vector3.zero;
+        SetAnimacoes();
+
     }
     void Atualiza()
     {
@@ -276,8 +282,8 @@ public class AndarPlayer : MonoBehaviour
             if (isGrounded) currentJump = 0;
             if (Kjump && !Kbaixo && (isGrounded || MaxJump > currentJump))
             {
-            Debug.Log(Kjump + "&&" + !Kbaixo + "&& (" + isGrounded + "||" + (MaxJump > currentJump) + "). ="+
-                (Kjump && !Kbaixo && (isGrounded || MaxJump > currentJump)));
+      //      Debug.Log(Kjump + "&&" + !Kbaixo + "&& (" + isGrounded + "||" + (MaxJump > currentJump) + "). ="+
+    //            (Kjump && !Kbaixo && (isGrounded || MaxJump > currentJump)));
                 pular = true;
                 currentJump++;
             }
@@ -298,12 +304,12 @@ public class AndarPlayer : MonoBehaviour
         }
         if (vel.y < 0)
         {
-              Debug.Log("funciona esse caralho");
+ //             Debug.Log("funciona esse caralho");
             vel.y += Physics.gravity.y * (AtualConfig.fallMultiplier) * Time.deltaTime;
         }
         else if (vel.y > 0 && !Input.GetButton("Jump"))
         {
-               Debug.Log("entai vai tomar no cu");
+ //              Debug.Log("entai vai tomar no cu");
             vel.y += Physics.gravity.y * (AtualConfig.lowJumpMultiplier - 1) * Time.deltaTime;
         }
         //  vel.y += Physics.gravity.y / 10;
@@ -331,8 +337,6 @@ public class AndarPlayer : MonoBehaviour
             rb.velocity = Vector3.zero;
         }
         Velocity = rb.velocity;
-
-        SetAnimacoes();
 
     }
     void SetAnimacoes()
