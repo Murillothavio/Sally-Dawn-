@@ -43,10 +43,12 @@ public class Eventos : MonoBehaviour
     [HideInInspector] public Text txt;
     [SerializeField] private string stg;
 
+    public Rigidbody Tronco;
     [HideInInspector]
     public Transform SkinAtiva;
     [HideInInspector]
     public string[] Equips;
+
     public PrtMigO[] MigO;
 
     public CineEventos[] Cine;
@@ -151,6 +153,9 @@ public class Eventos : MonoBehaviour
                             GetComponent<AndarPlayer>().CanWalk = false;
                             Invoke("ColocarMigO", Cine[i].LifeTime / 2);
                             Invoke("FimTornado", Cine[i].LifeTime);
+                            break;
+                        case "DerrubarTronco":
+                            Tronco.constraints = RigidbodyConstraints.None;
                             break;
                     }
                 }
