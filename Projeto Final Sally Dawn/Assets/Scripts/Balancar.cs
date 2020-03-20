@@ -10,6 +10,7 @@ public class Balancar : MonoBehaviour
     public float Coeficiente;
     [Range(1, 50)]
     public float MaxSpeed, currentSpeed, MinSpeed;
+    private Vector3 PontoDelta;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +22,7 @@ public class Balancar : MonoBehaviour
         if (Target == null)
             Debug.LogError("Algunlo target not found");
 
-        Vector3 PontoDelta = Target.position - transform.position;
+        PontoDelta = Target.position - transform.position;
         Angulo = Mathf.Atan(PontoDelta.y / PontoDelta.x) * Mathf.Rad2Deg;
         Angulo -= 90;
     }
@@ -29,6 +30,8 @@ public class Balancar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Target.position = transform.position + PontoDelta;
+
         if (CurrentAng == Angulo)
             Angulo = -Angulo;
 
