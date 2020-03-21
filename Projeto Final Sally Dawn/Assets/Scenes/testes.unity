@@ -600,7 +600,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-104116
+  m_Name: pb_Mesh-2260
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -774,6 +774,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2539951348368167489, guid: ff17689c539d83b49929d529b7b0d738,
     type: 3}
   m_PrefabInstance: {fileID: 435274023}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &370431656 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5362958290480781483, guid: ea68eccb683930547b53cd52f12fd633,
+    type: 3}
+  m_PrefabInstance: {fileID: 5362958289943763682}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &389786042 stripped
 Transform:
@@ -1240,6 +1246,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Part (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3569930125521887853, guid: 7f0e12fa9177efd42a62fde11c1e5dd6,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 126
+      objectReference: {fileID: 0}
     - target: {fileID: 177364344352005928, guid: 7f0e12fa9177efd42a62fde11c1e5dd6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1294,11 +1305,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569930125521887853, guid: 7f0e12fa9177efd42a62fde11c1e5dd6,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 126
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8778494686520396596, guid: 7f0e12fa9177efd42a62fde11c1e5dd6, type: 3}
@@ -2433,7 +2439,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Segura: 0
+  segurando: 0
+  s: 0
   Speed: 1
+  Centro: {fileID: 370431656}
+  Angulo: 0
+  Distancia: 0
+  Coeficiente: {x: 0, y: 0, z: 0}
+  DeltaPosi: {x: 0, y: 0, z: 0}
 --- !u!136 &1614823473
 CapsuleCollider:
   m_ObjectHideFlags: 0
