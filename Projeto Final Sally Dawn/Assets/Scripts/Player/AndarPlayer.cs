@@ -24,7 +24,7 @@ public class AndarPlayer : MonoBehaviour
 
     public Zonas OndeTo;
     public StateMachine stateAnimacao;
-    [HideInInspector] public float TempoOcioso;//, moveSpeed;
+    [HideInInspector] public float TempoOcioso;
 
     [Header("Velocidade Atual e Velocidade Animacao")]
     [Range(0, 30)] public float moveSpeed;
@@ -48,6 +48,7 @@ public class AndarPlayer : MonoBehaviour
     private float CurrentDeathDelay = 0;
 
     #region Ground
+    [Header("region Ground")]
     public bool isGrounded;
     private Vector3 GroundSize = new Vector3(1.16f, 1.5f, 0);
     private Vector3 GroundCenter = new Vector3(0, .3f, 0);
@@ -57,7 +58,7 @@ public class AndarPlayer : MonoBehaviour
 
 
     public float horizontal, Arrastar, vertical;
-    public LayerMask mask;
+    public LayerMask Floor;
     private const int MaxJump = 1;
     [SerializeField]
     private int currentJump = 0;
@@ -67,6 +68,7 @@ public class AndarPlayer : MonoBehaviour
     public MoveConfig AtualConfig = new MoveConfig();
 
     #region Collider
+    [Header("Region Collider")]
     [HideInInspector]
     public CapsuleCollider Corpo;
     private float HeightCollider, CenterCollider, RadiusCollider;
@@ -77,6 +79,21 @@ public class AndarPlayer : MonoBehaviour
     public float CurrentCollider = .5f;
     #endregion
 
+    [Header("Corda")]
+    public GameObject CentroCorda;
+    public float Angulo, Distancia;
+    public Vector3 Coeficiente, DeltaPosi;
+    public bool Balancando;
+    [Header("Plataforma")]
+    public bool IsPlataforma;
+    public LayerMask ChaoMove;
+    public Transform Plat;
+    public Vector3 DeltaPlata;
+    /*
+    public bool Segura, segurando, s;
+    public float Speed = 10;
+    private Rigidbody rg;
+    */
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -89,7 +106,6 @@ public class AndarPlayer : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        
         if (isGrounded && OndeTo==Zonas.ItsSafe) 
             SafeZonePosition = transform.position;
         SaveTarget.position = SafeZonePosition;
@@ -114,10 +130,12 @@ public class AndarPlayer : MonoBehaviour
         Atualiza();
         Estados();
         ColliderTamanho();
+        CalcularAngulo();
         if (CanWalk)
             Andar();
         else
             rb.velocity = Vector3.zero;
+        DeltaMovimentaçao();
         SetAnimacoes();
 
     }
@@ -212,8 +230,10 @@ public class AndarPlayer : MonoBehaviour
         if (stateAnimacao == StateMachine.Escalando)
         {
             moveSpeed = Mathf.MoveTowards(moveSpeed, AtualConfig.climbSpeed, AtualConfig.currentSpeed * 4);
-
-            Vector3 v = Vector3.up * vertical * moveSpeed * Time.deltaTime * (Mathf.Pow(AjustDez, 2));
+            Vector3 k = Vector3.up;
+            k = Coeficiente;
+            k.y *= -1;
+            Vector3 v = k * vertical * moveSpeed * Time.deltaTime * (Mathf.Pow(AjustDez, 2));
             //   v.y = rb.velocity.y;
             rb.velocity = v;
 
@@ -275,7 +295,8 @@ public class AndarPlayer : MonoBehaviour
         //Collider[] Grounds = Physics.OverlapBox(GroundCenter, GroundSize / 2, Quaternion.identity, mask);
         //isGrounded = Grounds != nulll;
         Vector3 origem = transform.position + GroundCenter;
-        isGrounded = ((Physics.Raycast(origem, Vector3.down, GroundSize.y, mask)) || (stateAnimacao == StateMachine.Escalando));
+        isGrounded = ((Physics.Raycast(origem, Vector3.down, GroundSize.y, Floor)) || (stateAnimacao == StateMachine.Escalando));
+        IsPlataforma= ((Physics.Raycast(origem, Vector3.down, GroundSize.y, ChaoMove)) || (stateAnimacao == StateMachine.Escalando));
         if (stateAnimacao == StateMachine.Walk || stateAnimacao == StateMachine.Ocioso || stateAnimacao == StateMachine.Escalando
             || stateAnimacao == StateMachine.Pulando || stateAnimacao == StateMachine.Caindo || stateAnimacao==StateMachine.None)
         {
@@ -360,20 +381,35 @@ public class AndarPlayer : MonoBehaviour
         SpeedAnimation = ((moveSpeed - 10) / PesoSpAnimation) + 1;
         Acao.speed = SpeedAnimation;
     }
+    void DeltaMovimentaçao()
+    {
 
+        if ((stateAnimacao==StateMachine.Escalando && Distancia == 0) || vertical != 0)
+            CalcDistancia();
+        if (IsPlataforma)
+        {//(!segurando && s)
+            if (Plat != null)
+                if (horizontal != 0 || DeltaPlata == Vector3.zero)
+                    DeltaPlata = transform.position - Plat.position;
+        }
+        else DeltaPlata = Vector3.zero;
+
+
+        if (stateAnimacao == StateMachine.Escalando)
+        {
+            DeltaPosi = Coeficiente * Distancia;
+            if (Balancando)
+                transform.position = DeltaPosi + CentroCorda.transform.position;
+        }
+     if (IsPlataforma)
+            transform.position = DeltaPlata + Plat.position;
+    }
     private void OnTriggerStay(Collider other)
     {
-        //if (other.gameObject.tag== "CameraFocus")
-        //{
-        //    CameraPressa = true;
-        //    NewFocus = other.gameObject;
-        //}
         if (other.gameObject.tag == "Zona_agarrar")
             OndeTo = Zonas.Agarrar;
-        //Zona_agarrar = true;
         if (other.gameObject.tag == "Zona_morte")
             OndeTo = Zonas.morrer;
-        //Zona_morrer = true;
         if (other.gameObject.tag == "Zona_empurrar")
         {
             OndeTo = Zonas.segurar;
@@ -384,7 +420,30 @@ public class AndarPlayer : MonoBehaviour
             OndeTo = Zonas.ItsSafe;
 
     }
+    void CalcularAngulo()
+    {
+        Balancar b = null;
+        if (CentroCorda != null)
+            b = CentroCorda.GetComponent<Balancar>();
+        else Distancia = 0;
+        Balancando = (b != null);
+        if (Balancando)
+            Angulo = b.CurrentAng;
+        else Angulo = 0;
 
+        float Ang = Mathf.Deg2Rad * Angulo;
+        Coeficiente = new Vector3(Mathf.Sin(Ang), -1 * Mathf.Cos(Ang), 0);
+    }
+    void CalcDistancia()
+    {
+        if (CentroCorda != null)
+        {
+            Vector3 Delta = transform.position - CentroCorda.transform.position;
+            Debug.Log("calculou");
+            Distancia = Mathf.Sqrt((Delta.x * Delta.x) + (Delta.y * Delta.y));
+        }
+        else Debug.Log("SemCorda");
+    }
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("TODO: Prender");
@@ -393,6 +452,11 @@ public class AndarPlayer : MonoBehaviour
             CameraPressa = true;
             NewFocus = other.gameObject.transform.GetChild(0).gameObject;
         }
+        if (other.gameObject.tag == "Zona_agarrar")
+        {
+            CentroCorda = other.gameObject.transform.parent.gameObject;
+        }
+       
     }
 
     private void OnTriggerExit(Collider other)
@@ -401,6 +465,25 @@ public class AndarPlayer : MonoBehaviour
         if (other.gameObject.tag == "CameraFocus")
         {
             CameraPressa = false;
+        }
+        if (other.gameObject.tag == "Zona_agarrar")
+        {
+            CentroCorda = null;
+        }
+        
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "PlataformasMovel")
+        {
+            Plat = collision.gameObject.transform;
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "PlataformasMovel")
+        {
+            Plat = null;
         }
     }
     private void OnDrawGizmos()
