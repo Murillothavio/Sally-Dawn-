@@ -46,7 +46,7 @@ public class Eventos : MonoBehaviour
     public Rigidbody Tronco;
     [HideInInspector]
     public Transform SkinAtiva;
-    [HideInInspector]
+   // [HideInInspector]
     public string[] Equips;
 
     public PrtMigO[] MigO;
@@ -55,9 +55,14 @@ public class Eventos : MonoBehaviour
 
     private void Start()
     {
-        MigO = new PrtMigO[Equips.Length];
         for (int i = 0; i < Cine.Length; i++)
             Cine[i].Init();
+
+        MigO = new PrtMigO[Equips.Length];
+        for (int i = 0; i < MigO.Length; i++)
+            MigO[i].name = Equips[i];
+
+      
 
     }
     // Update is called once per frame
@@ -85,44 +90,47 @@ public class Eventos : MonoBehaviour
             txt.text = stg;
         #endregion
         if (SkinAtiva != null)
-            for (int i = 0; i < Equips.Length; i++)
-            {
-                #region EditMig0
-                MigO[i].name = Equips[i];
-
-                MigO[i].Equip = null;
-                for (int j = 0; j < SkinAtiva.childCount; j++)
-                    if (SkinAtiva.GetChild(j).name == MigO[i].name)
-                        MigO[i].Equip = SkinAtiva.GetChild(j).gameObject;
-                #endregion
-                #region BoolAticves
-                switch (MigO[i].name)
+            if (MigO.Length == 0)
+                MigO = new PrtMigO[Equips.Length];
+            else
+                for (int i = 0; i < Equips.Length; i++)
                 {
-                    case "Antenas":
-                        MigO[i].IsActive = PwrUp.Triste;
-                        break;
-                    case "Bombas":
-                        MigO[i].IsActive = PwrUp.Raiva;
-                        break;
-                    case "Detector":
-                        MigO[i].IsActive = PwrUp.Alegre;
-                        break;
-                    case "Lanterna":
-                        MigO[i].IsActive = PwrUp.Medo;
-                        break;
-                    case "Jatos":
-                        MigO[i].IsActive = PwrUp.Nojo;
-                        break;
-                    case "Migo":
-                        MigO[i].IsActive = PwrUp.Neutro;
-                        break;
+                    #region EditMig0
+                    MigO[i].name = Equips[i];
+
+                    MigO[i].Equip = null;
+                    for (int j = 0; j < SkinAtiva.childCount; j++)
+                        if (SkinAtiva.GetChild(j).name == MigO[i].name)
+                            MigO[i].Equip = SkinAtiva.GetChild(j).gameObject;
+                    #endregion
+                    #region BoolAticves
+                    switch (MigO[i].name)
+                    {
+                        case "Antenas":
+                            MigO[i].IsActive = PwrUp.Triste;
+                            break;
+                        case "Bombas":
+                            MigO[i].IsActive = PwrUp.Raiva;
+                            break;
+                        case "Detector":
+                            MigO[i].IsActive = PwrUp.Alegre;
+                            break;
+                        case "Lanterna":
+                            MigO[i].IsActive = PwrUp.Medo;
+                            break;
+                        case "Jatos":
+                            MigO[i].IsActive = PwrUp.Nojo;
+                            break;
+                        case "Migo":
+                            MigO[i].IsActive = PwrUp.Neutro;
+                            break;
+                    }
+                    #endregion
+                    #region AtivaPwrUp
+                    if (MigO[i].Equip != null)
+                        MigO[i].Equip.SetActive(MigO[i].IsActive);
+                    #endregion
                 }
-                #endregion
-                #region AtivaPwrUp
-                if (MigO[i].Equip != null)
-                    MigO[i].Equip.SetActive(MigO[i].IsActive);
-                #endregion
-            }
 
     }
     private void OnTriggerEnter(Collider other)

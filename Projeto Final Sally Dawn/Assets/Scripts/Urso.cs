@@ -5,8 +5,11 @@ using UnityEngine;
 public class Urso : MonoBehaviour
 {
     private Transform Player;
+
     [Range(0,100)]
     public float Distancia, Longe, Perto;
+
+    [HideInInspector]
     public bool EstaLonge, EstaPerto, Andar, LookLeft, Virando;
     [HideInInspector] public float TVirando, IdleV;
 
@@ -17,11 +20,19 @@ public class Urso : MonoBehaviour
     [Range(10, 50)]
     public float Speed;
     public float DistLife;
+
+    [HideInInspector]
     public float temp, soma;
+
+    [HideInInspector]
     public bool Tchau;
+
+    [HideInInspector]
     public float AnimaTchau, AnimaVira;
+
     [Range(0,3)]
     public float AnimaSpeed = 1;
+
     [HideInInspector]
     public AnimationClip ClipTchau, ClipVira;
 
