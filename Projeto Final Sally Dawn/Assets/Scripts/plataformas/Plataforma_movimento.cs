@@ -112,6 +112,14 @@ public class Plataforma_movimento : MonoBehaviour
             Destroy(gbBlue);
             Destroy(gbRed);
         }
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            GameObject addAttach = transform.GetChild(i).gameObject;
+            Plataforma_Attach pa;
+            if (addAttach != gbRed && addAttach != gbBlue)
+                pa = addAttach.gameObject.AddComponent<Plataforma_Attach>() as Plataforma_Attach;
+        }
     }
     Plat GetCaminho(GameObject gb, float _velociadade)
     {

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class dELETHIS : MonoBehaviour
 {
+    public GameObject addAttach;
     public bool Segura, segurando, s;
     public float Speed = 10;
     public GameObject Centro;
@@ -16,6 +17,7 @@ public class dELETHIS : MonoBehaviour
     private void Start()
     {
         rg = GetComponent<Rigidbody>();
+        Plataforma_Attach pa = addAttach.gameObject.AddComponent<Plataforma_Attach>() as Plataforma_Attach;
     }
 
     // Update is called once per frame

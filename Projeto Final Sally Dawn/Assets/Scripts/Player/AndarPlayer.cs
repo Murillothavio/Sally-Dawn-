@@ -84,16 +84,8 @@ public class AndarPlayer : MonoBehaviour
     public float Angulo, Distancia;
     public Vector3 Coeficiente, DeltaPosi;
     public bool Balancando;
-    [Header("Plataforma")]
-    public bool IsPlataforma;
-    public LayerMask ChaoMove;
-    public Transform Plat;
-    public Vector3 DeltaPlata;
-    /*
-    public bool Segura, segurando, s;
-    public float Speed = 10;
-    private Rigidbody rg;
-    */
+   
+    
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -296,7 +288,6 @@ public class AndarPlayer : MonoBehaviour
         //isGrounded = Grounds != nulll;
         Vector3 origem = transform.position + GroundCenter;
         isGrounded = ((Physics.Raycast(origem, Vector3.down, GroundSize.y, Floor)) || (stateAnimacao == StateMachine.Escalando));
-        IsPlataforma= ((Physics.Raycast(origem, Vector3.down, GroundSize.y, ChaoMove)) || (stateAnimacao == StateMachine.Escalando));
         if (stateAnimacao == StateMachine.Walk || stateAnimacao == StateMachine.Ocioso || stateAnimacao == StateMachine.Escalando
             || stateAnimacao == StateMachine.Pulando || stateAnimacao == StateMachine.Caindo || stateAnimacao==StateMachine.None)
         {
@@ -386,23 +377,14 @@ public class AndarPlayer : MonoBehaviour
 
         if ((stateAnimacao==StateMachine.Escalando && Distancia == 0) || vertical != 0)
             CalcDistancia();
-        if (IsPlataforma)
-        {//(!segurando && s)
-            if (Plat != null)
-                if (horizontal != 0 || DeltaPlata == Vector3.zero)
-                    DeltaPlata = transform.position - Plat.position;
-        }
-        else DeltaPlata = Vector3.zero;
-
-
+  
         if (stateAnimacao == StateMachine.Escalando)
         {
             DeltaPosi = Coeficiente * Distancia;
             if (Balancando)
                 transform.position = DeltaPosi + CentroCorda.transform.position;
         }
-     if (IsPlataforma)
-            transform.position = DeltaPlata + Plat.position;
+     
     }
     private void OnTriggerStay(Collider other)
     {
@@ -472,20 +454,7 @@ public class AndarPlayer : MonoBehaviour
         }
         
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "PlataformasMovel")
-        {
-            Plat = collision.gameObject.transform;
-        }
-    }
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.tag == "PlataformasMovel")
-        {
-            Plat = null;
-        }
-    }
+   
     private void OnDrawGizmos()
     {
         Gizmos.color = new Color(0, 1, 0, .5f);
