@@ -12,7 +12,7 @@ public class Ambiente : MonoBehaviour
     public Color CorAmbiente;
     public float NumFases;
     public AudioClip[] som = new AudioClip[7];
-    private AudioSource AudSrc;
+//    private AudioSource AudSrc;
     private CriarFases cfs;
     public bool Manual = true;
     [HideInInspector]
@@ -26,7 +26,7 @@ public class Ambiente : MonoBehaviour
     {
         cfs = GetComponent<CriarFases>();
 
-        AudSrc = GetComponent<AudioSource>();
+     //   AudSrc = GetComponent<AudioSource>();
         for (int i = 0; i < ConfgFases.Length; i++)
         {
             ConfgFases[i].ModeloName = Skins[i];
@@ -46,7 +46,6 @@ public class Ambiente : MonoBehaviour
         else
             Atual = ManualConfig;
 
-        AudSrc.enabled = true;//mantm som ligado
         GetComponent<AndarPlayer>().SetConfigFase(Atual);
         if (Atual.ModeloName != null)
         {
@@ -89,7 +88,6 @@ public class Ambiente : MonoBehaviour
             ambiente = Fase.Etereo;
         else if (ambiente == Fase.Etereo)
             ambiente = Fase.Neutro;
-        AudSrc.enabled = false;
     }
     public void TrocaConfig()
     {
@@ -108,9 +106,9 @@ public class Ambiente : MonoBehaviour
             NumFases = 5;
         else if (ambiente == Fase.Etereo)
             NumFases = 6;
-        // return NumFases;
         Atual = ConfgFases[(int)NumFases];
         cfs.faseIndex = NumFases;
+        GetComponent<AudioChange>().Trocando = true;
     }
     void TrocaSom(int IdSom)
     {
@@ -128,8 +126,8 @@ public class Ambiente : MonoBehaviour
             IdSom = 5;
         else if (ambiente == Fase.Etereo)
             IdSom = 6;
-
-        AudSrc.clip = som[IdSom];
+        GetComponent<AudioChange>().acFase = som[IdSom];
+//        AudSrc.clip = som[IdSom];
     }
     private void OnTriggerEnter(Collider other)
     {
