@@ -17,6 +17,7 @@ TagManager:
   - PlataformaEscada
   - ChangeSkin
   - Eventos
+  - Emocao
   layers:
   - Default
   - TransparentFX
