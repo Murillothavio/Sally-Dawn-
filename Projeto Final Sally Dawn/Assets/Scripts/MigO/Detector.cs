@@ -19,6 +19,7 @@ public class Detector : MonoBehaviour
 
 
     [SerializeField]
+    private bool Draw = false;
     private float currTm = 09999;
 
     private AudioSource adSrc;
@@ -34,8 +35,7 @@ public class Detector : MonoBehaviour
     void Update()
     {
         Medir();
-
-
+      
         FreqnBeep = FreqnMin + ((FreqnMax - FreqnMin) / (rDisMaior - rDisMenor) * (rDistancia-rDisMenor));
 
         if (rDistancia < rDisMenor)
@@ -70,11 +70,11 @@ public class Detector : MonoBehaviour
             notfound = (Targets[i] == null);
             if (!notfound)
             {
-                CatetoX = Targets[i].transform.position.x - transform.position.x;
-                CatetoY = Targets[i].transform.position.y - transform.position.y;
+                //    CatetoX = Targets[i].transform.position.x - transform.position.x;
+                //  CatetoY = Targets[i].transform.position.y - transform.position.y;
 
-                Hipot = Mathf.Sqrt(CatetoX * CatetoX + CatetoY * CatetoY);
-
+                //Hipot = Mathf.Sqrt(CatetoX * CatetoX + CatetoY * CatetoY);
+                Hipot = GameMaster.CalcularDist(Targets[i].transform, transform);
                 if (Hipot < Menor)
                     Menor = Hipot;
             }
@@ -87,12 +87,14 @@ public class Detector : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = new Color(0, 1, 0, .5f);
-        Gizmos.DrawSphere(transform.position, rDisMaior);
+        if (Draw)
+        {
+            Gizmos.color = new Color(0, 1, 0, .5f);
+            Gizmos.DrawSphere(transform.position, rDisMaior);
 
-        Gizmos.color = new Color(1, 0, 0, .5f);
-        Gizmos.DrawSphere(transform.position, rDisMenor);
-
+            Gizmos.color = new Color(1, 0, 0, .5f);
+            Gizmos.DrawSphere(transform.position, rDisMenor);
+        }
 
     }
 }

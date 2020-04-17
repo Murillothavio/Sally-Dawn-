@@ -20,6 +20,7 @@ public class Codigos : MonoBehaviour
 
     public KeyCode TrocarAmbiente, TrocarSkin, InstaciarFases;
     public KeyCode[] PecasKey = new KeyCode[7];
+    public KeyCode MudarPlat;
 
     private void Awake()
     {
@@ -136,6 +137,9 @@ public class Codigos : MonoBehaviour
                         break;
                 }
         #endregion
+
+        if (Input.GetKeyDown(MudarPlat))
+            GameMaster.InverterPlat();
     }
     void LevarPonto()
     {

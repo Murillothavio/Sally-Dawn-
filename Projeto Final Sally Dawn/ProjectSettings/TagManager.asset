@@ -18,6 +18,8 @@ TagManager:
   - ChangeSkin
   - Eventos
   - Emocao
+  - GameMaster
+  - BotaoInverter
   layers:
   - Default
   - TransparentFX
