@@ -28,6 +28,7 @@ public class Detector : MonoBehaviour
     void Start()
     {
         adSrc = GetComponent<AudioSource>();
+
         Varedura();
     }
 
@@ -35,7 +36,7 @@ public class Detector : MonoBehaviour
     void Update()
     {
         Medir();
-      
+
         FreqnBeep = FreqnMin + ((FreqnMax - FreqnMin) / (rDisMaior - rDisMenor) * (rDistancia-rDisMenor));
 
         if (rDistancia < rDisMenor)
@@ -56,24 +57,21 @@ public class Detector : MonoBehaviour
 
     void Varedura()
     {
+        Debug.Log("wer");
         Targets = GameObject.FindGameObjectsWithTag("Emocao");
     }
     void Medir()
     {
         float Menor=999;
-        float CatetoX, CatetoY, Hipot;
+        float Hipot;
 
-        bool notfound = false;
+        bool notfound = true;
 
         for (int i = 0; i < Targets.Length; i++)
         {
             notfound = (Targets[i] == null);
             if (!notfound)
             {
-                //    CatetoX = Targets[i].transform.position.x - transform.position.x;
-                //  CatetoY = Targets[i].transform.position.y - transform.position.y;
-
-                //Hipot = Mathf.Sqrt(CatetoX * CatetoX + CatetoY * CatetoY);
                 Hipot = GameMaster.CalcularDist(Targets[i].transform, transform);
                 if (Hipot < Menor)
                     Menor = Hipot;
