@@ -16,7 +16,7 @@ MonoBehaviour:
   - gameObject: {fileID: 3839295178495621847, guid: 85366f3fb2f3c894185774d6530cd75f,
       type: 3}
     settings:
-      m_Strength: 82.55036
+      m_Strength: 100
       m_RotationRangeMin: {x: 0, y: 0, z: 0}
       m_RotationRangeMax: {x: 0, y: 0, z: 0}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
@@ -33,12 +33,12 @@ MonoBehaviour:
   - gameObject: {fileID: 3839295178495621847, guid: 85366f3fb2f3c894185774d6530cd75f,
       type: 3}
     settings:
-      m_Strength: 50
+      m_Strength: 100
       m_RotationRangeMin: {x: 0, y: 0, z: 0}
-      m_RotationRangeMax: {x: 0, y: 0, z: 0}
+      m_RotationRangeMax: {x: 0, y: 360, z: 0}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
       m_ScaleRangeMax: {x: 1, y: 1, z: 1}
-      m_UniformScale: {x: 1, y: 1}
+      m_UniformScale: {x: 1, y: 1.25}
       m_UniformBool: 1
       m_XRotationBool: 0
       m_YRotationBool: 1
@@ -81,3 +81,20 @@ MonoBehaviour:
       m_YScaleBool: 0
       m_ZScaleBool: 0
     name: Cogumelo 2
+  - gameObject: {fileID: 3839295178495621847, guid: 85366f3fb2f3c894185774d6530cd75f,
+      type: 3}
+    settings:
+      m_Strength: 100
+      m_RotationRangeMin: {x: 0, y: 0, z: 0}
+      m_RotationRangeMax: {x: 0, y: 360, z: 0}
+      m_ScaleRangeMin: {x: 1, y: 1, z: 1}
+      m_ScaleRangeMax: {x: 1, y: 1, z: 1}
+      m_UniformScale: {x: 1, y: 1.25}
+      m_UniformBool: 1
+      m_XRotationBool: 0
+      m_YRotationBool: 1
+      m_ZRotationBool: 0
+      m_XScaleBool: 0
+      m_YScaleBool: 0
+      m_ZScaleBool: 0
+    name: Folha
