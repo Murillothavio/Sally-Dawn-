@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: AMB_Raiva_Material_FireCartoonUnlit
+  m_Shader: {fileID: -6465566751694194690, guid: 09f1c883c8df41c4785b3a74eeb44b85,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap:
+    MotionVector: User
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_7F0422D8:
+        m_Texture: {fileID: 2800000, guid: 4eba83a901c3e0447958d25fae3f0f91, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_46685D07: 0.15
+    - Vector1_71B1A47E: 6
+    - Vector1_B270CDAD: 2
+    - Vector1_EC14F617: 0.15
+    m_Colors:
+    - Color_33696240: {r: 11.984314, g: 2.3215687, b: 0, a: 0}
+    - Vector2_47CA3711: {r: 0, g: -0.3, b: 0, a: 0}
+    - Vector2_93A7EBA3: {r: -0.1, g: -0.5, b: 0, a: 0}
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
