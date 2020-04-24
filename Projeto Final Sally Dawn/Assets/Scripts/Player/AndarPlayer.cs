@@ -7,6 +7,7 @@ public class AndarPlayer : MonoBehaviour
 {
     public Transform SaveTarget;
     private Vector3 SafeZonePosition;
+    [HideInInspector]
     public bool Kjump, Kbomba, Kinteragir, Kbaixo;
     private bool pular, Kagarrar, Ksegurar;
 

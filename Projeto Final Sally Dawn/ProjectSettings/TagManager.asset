@@ -21,6 +21,7 @@ TagManager:
   - GameMaster
   - BotaoInverter
   - SystemEsconder
+  - Destruir
   layers:
   - Default
   - TransparentFX

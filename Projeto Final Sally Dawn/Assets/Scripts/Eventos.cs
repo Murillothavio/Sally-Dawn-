@@ -8,10 +8,10 @@ public class Eventos : MonoBehaviour
     [System.Serializable]
     public class PrtMigO
     {
-        [HideInInspector]
+      //  [HideInInspector]
         public string name;
         public bool IsActive;
-        public GameObject Equip;
+        public GameObject Equip, System;
     }
 
     [System.Serializable]
@@ -47,7 +47,14 @@ public class Eventos : MonoBehaviour
     [HideInInspector]
     public Transform SkinAtiva;
    // [HideInInspector]
-    public string[] Equips;
+//    public string[] Equips;
+    [System.Serializable]
+    public class NomeEquipamentos
+    {
+        public string name, sistema;
+    }
+    public NomeEquipamentos[] Equipamentos;
+       
 
     public PrtMigO[] MigO;
 
@@ -58,9 +65,9 @@ public class Eventos : MonoBehaviour
         for (int i = 0; i < Cine.Length; i++)
             Cine[i].Init();
 
-        MigO = new PrtMigO[Equips.Length];
+        MigO = new PrtMigO[Equipamentos.Length];
         for (int i = 0; i < MigO.Length; i++)
-            MigO[i].name = Equips[i];
+            MigO[i].name = Equipamentos[i].name;
 
       
 
@@ -91,17 +98,23 @@ public class Eventos : MonoBehaviour
         #endregion
         if (SkinAtiva != null)
             if (MigO.Length == 0)
-                MigO = new PrtMigO[Equips.Length];
+                MigO = new PrtMigO[Equipamentos.Length];
             else
-                for (int i = 0; i < Equips.Length; i++)
+                for (int i = 0; i < Equipamentos.Length; i++)
                 {
                     #region EditMig0
-                    MigO[i].name = Equips[i];
+                    MigO[i].name = Equipamentos[i].name;
 
                     MigO[i].Equip = null;
                     for (int j = 0; j < SkinAtiva.childCount; j++)
                         if (SkinAtiva.GetChild(j).name == MigO[i].name)
                             MigO[i].Equip = SkinAtiva.GetChild(j).gameObject;
+
+                    MigO[i].System = null;
+                    for (int j = 0; j < transform.childCount; j++)
+                        if (Equipamentos[i].sistema != "")
+                            if (transform.GetChild(j).name == Equipamentos[i].sistema)
+                                MigO[i].System = transform.GetChild(j).gameObject;
                     #endregion
                     #region BoolAticves
                     switch (MigO[i].name)
@@ -129,6 +142,9 @@ public class Eventos : MonoBehaviour
                     #region AtivaPwrUp
                     if (MigO[i].Equip != null)
                         MigO[i].Equip.SetActive(MigO[i].IsActive);
+
+                    if (MigO[i].System != null)
+                        MigO[i].System.SetActive(MigO[i].IsActive);
                     #endregion
                 }
 
