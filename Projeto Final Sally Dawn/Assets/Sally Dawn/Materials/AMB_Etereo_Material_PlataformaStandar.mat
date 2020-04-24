@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: VFX_Neutra_Material_BuracoNegro
-  m_Shader: {fileID: -6465566751694194690, guid: 7b15c705a296120469a500b6f57ee896,
+  m_Name: AMB_Etereo_Material_PlataformaStandar
+  m_Shader: {fileID: -6465566751694194690, guid: ecd75ccb99794a54faa73a891f17eedc,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -21,13 +21,10 @@ Material:
   - MOTIONVECTORS
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs:
-    - Texture2D_6DA78389:
-        m_Texture: {fileID: 2800000, guid: 59c3090d2b4e6a54095a740eaa58d828, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+    m_TexEnvs: []
     m_Floats:
-    - Vector1_7BB5139: 0.5
+    - Vector1_8AF1F4C1: 7
+    - Vector1_98AA3C67: -1
     m_Colors:
-    - Color_A30E3226: {r: 0.1358285, g: 1, b: 0, a: 0}
+    - Color_7FA56019: {r: 0, g: 10.680627, b: 9.348207, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
