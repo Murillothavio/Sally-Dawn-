@@ -22,6 +22,8 @@ TagManager:
   - BotaoInverter
   - SystemEsconder
   - Destruir
+  - IdiomaPT
+  - IdiomaENG
   layers:
   - Default
   - TransparentFX
