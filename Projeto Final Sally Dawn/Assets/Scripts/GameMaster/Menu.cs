@@ -62,17 +62,17 @@ public class Menu : MonoBehaviour
             TelaSair.SetActive(tela == Telas.TelaSair);
     }
     #region GoTo
-    public void GoToTelaSair() { tela = Telas.TelaSair; }
-    public void GoToTelasInicial() { tela = Telas.TelasInicial; }
-    public void GoToTelaPrincipal() { tela = Telas.TelaPrincipal; }
-    public void GoToTelaJogar() { tela = Telas.TelaJogar; }
-    public void GoToTelaNovo() { tela = Telas.TelaNovo; }
-    public void GoToTelaContinuar() { tela = Telas.TelaContinuar; }
-    public void GoToTelaJogo() { tela = Telas.TelaJogo; }
-    public void GoToTelaMenu() { tela = Telas.TelaMenu; }
-    public void GoToJanelaLembranca() { tela = Telas.JanelaLembranca; }
-    public void GoToJanelaOpcoes() { tela = Telas.JanelaOpcoes; }
-    public void GoToTelaCredito() { tela = Telas.TelaCredito; }
+    public void GoToTelaSair() { Debug.Log("aaa"); tela = Telas.TelaSair; }
+    public void GoToTelasInicial() { Debug.Log("aaa"); tela = Telas.TelasInicial; }
+    public void GoToTelaPrincipal() { tela = Telas.TelaPrincipal; Debug.Log("aaa"); }
+    public void GoToTelaJogar() { tela = Telas.TelaJogar; Debug.Log("aaa"); }
+    public void GoToTelaNovo() { tela = Telas.TelaNovo; Debug.Log("aaa"); }
+    public void GoToTelaContinuar() { tela = Telas.TelaContinuar; Debug.Log("aaa"); }
+    public void GoToTelaJogo() { tela = Telas.TelaJogo; Debug.Log("aaa"); }
+    public void GoToTelaMenu() { tela = Telas.TelaMenu; Debug.Log("aaa"); }
+    public void GoToJanelaLembranca() { tela = Telas.TelaSair; Debug.Log("aaa"); }
+    public void GoToJanelaOpcoes() { tela = Telas.JanelaOpcoes; Debug.Log("aaa"); }
+    public void GoToTelaCredito() { tela = Telas.TelaCredito; Debug.Log("aaa"); }
     #endregion
     public void Sair()
     {

@@ -2328,7 +2328,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 75158455}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 427459530, guid: c50779decbf0c38428688c9c66c2ab2f, type: 3}
+        m_MethodName: GoToTelaPrincipal
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &75158455
@@ -3545,7 +3556,7 @@ GameObject:
   - component: {fileID: 121740333}
   - component: {fileID: 121740332}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text PT
   m_TagString: IdiomaPT
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3590,7 +3601,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Button
+  m_text: Jogar
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3659,7 +3670,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 121740332}
-    characterCount: 6
+    characterCount: 5
     spriteCount: 0
     spaceCount: 0
     wordCount: 1
@@ -4948,7 +4959,7 @@ GameObject:
   - component: {fileID: 178819235}
   - component: {fileID: 178819234}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: ButtonOpcoes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5016,7 +5027,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 178819235}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 427459530, guid: c50779decbf0c38428688c9c66c2ab2f, type: 3}
+        m_MethodName: GoToJanelaOpcoes
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &178819235
@@ -5871,7 +5893,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 222363135}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 427459530, guid: c50779decbf0c38428688c9c66c2ab2f, type: 3}
+        m_MethodName: GoToJanelaLembranca
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &222363135
@@ -12540,7 +12573,7 @@ GameObject:
   - component: {fileID: 302467318}
   - component: {fileID: 302467317}
   m_Layer: 5
-  m_Name: Button (3)
+  m_Name: ButtonCreditos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12608,7 +12641,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 302467318}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 427459530, guid: c50779decbf0c38428688c9c66c2ab2f, type: 3}
+        m_MethodName: GoToTelaCredito
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &302467318
@@ -14284,7 +14328,7 @@ GameObject:
   - component: {fileID: 390818430}
   - component: {fileID: 390818429}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: ButtonLembrancas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14352,7 +14396,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 390818430}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 427459530, guid: c50779decbf0c38428688c9c66c2ab2f, type: 3}
+        m_MethodName: GoToJanelaLembranca
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &390818430
@@ -14831,52 +14886,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d5cc5ffbe2868240b88135a7d30350c, type: 3}
---- !u!1 &427459529 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7484713560734880950, guid: c50779decbf0c38428688c9c66c2ab2f,
+--- !u!114 &427459530 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 427459530, guid: c50779decbf0c38428688c9c66c2ab2f,
     type: 3}
   m_PrefabInstance: {fileID: 7484713559228733073}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &427459530
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 427459529}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72e3208680995f34eb5d574974753237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tela: 0
-  nLembr: 0
-  DescriLemb:
-  - {fileID: 257372018}
-  - {fileID: 1720596835}
-  - {fileID: 797522084}
-  - {fileID: 1298279795}
-  - {fileID: 1005388919}
-  - {fileID: 1319612006}
-  - {fileID: 1589764307}
-  TemLembr: 000000000000
-  nOpcoes: 0
-  JanOpcoes:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  TelasInicial: {fileID: 1051744059}
-  TelaPrincipal: {fileID: 379090604}
-  TelaJogar: {fileID: 0}
-  TelaNovo: {fileID: 1286828187}
-  TelaContinuar: {fileID: 86026607}
-  TelaJogo: {fileID: 0}
-  TelaMenu: {fileID: 797154656}
-  JanelaLembranca: {fileID: 737137715}
-  JanelaOpcoes: {fileID: 0}
-  TelaCredito: {fileID: 0}
-  TelaSair: {fileID: 2013923445}
 --- !u!1001 &432420296
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21111,7 +21132,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 843178348}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 427459530, guid: c50779decbf0c38428688c9c66c2ab2f, type: 3}
+        m_MethodName: GoToTelaJogo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &843178348
@@ -22068,7 +22100,7 @@ GameObject:
   - component: {fileID: 915897655}
   - component: {fileID: 915897654}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text PT
   m_TagString: IdiomaPT
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22113,7 +22145,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Button
+  m_text: "Op\xE7oes"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -22733,7 +22765,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 942599188}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 427459530, guid: c50779decbf0c38428688c9c66c2ab2f, type: 3}
+        m_MethodName: GoToTelaPrincipal
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &942599188
@@ -22860,7 +22903,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 949173814}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 427459530, guid: c50779decbf0c38428688c9c66c2ab2f, type: 3}
+        m_MethodName: GoToTelaJogo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &949173814
@@ -30528,7 +30582,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1373374219}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 427459530}
+        m_MethodName: GoToTelaMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1373374219
@@ -30593,7 +30658,7 @@ GameObject:
   - component: {fileID: 1421955678}
   - component: {fileID: 1421955677}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ButtonJogar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30661,7 +30726,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1421955678}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 427459530, guid: c50779decbf0c38428688c9c66c2ab2f, type: 3}
+        m_MethodName: GoToTelaJogar
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1421955678
@@ -32375,7 +32451,7 @@ GameObject:
   - component: {fileID: 1491920491}
   - component: {fileID: 1491920490}
   m_Layer: 5
-  m_Name: Button (4)
+  m_Name: ButtonSair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32443,7 +32519,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1491920491}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 427459530, guid: c50779decbf0c38428688c9c66c2ab2f, type: 3}
+        m_MethodName: GoToTelaSair
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1491920491
@@ -33862,7 +33949,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1565596748}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 427459530, guid: c50779decbf0c38428688c9c66c2ab2f, type: 3}
+        m_MethodName: GoToTelaJogo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1565596748
@@ -39811,7 +39909,7 @@ GameObject:
   - component: {fileID: 1951294717}
   - component: {fileID: 1951294716}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: TextPT
   m_TagString: IdiomaPT
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39856,7 +39954,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Button
+  m_text: Creditos
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -39925,12 +40023,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1951294716}
-    characterCount: 6
+    characterCount: 8
     spriteCount: 0
     spaceCount: 0
     wordCount: 1
     linkCount: 0
-    lineCount: 1
+    lineCount: 2
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -41192,7 +41290,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2013236023}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 427459530, guid: c50779decbf0c38428688c9c66c2ab2f, type: 3}
+        m_MethodName: GoToTelaPrincipal
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &2013236023
@@ -42231,7 +42340,7 @@ GameObject:
   - component: {fileID: 2079123863}
   - component: {fileID: 2079123862}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text Pt
   m_TagString: IdiomaPT
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42276,7 +42385,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Button
+  m_text: Lembracas
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -42345,12 +42454,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 2079123862}
-    characterCount: 6
+    characterCount: 9
     spriteCount: 0
     spaceCount: 0
     wordCount: 1
     linkCount: 0
-    lineCount: 1
+    lineCount: 2
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -42394,7 +42503,7 @@ GameObject:
   - component: {fileID: 2092069002}
   - component: {fileID: 2092069001}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: TextPT
   m_TagString: IdiomaPT
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42439,7 +42548,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Button
+  m_text: Sair
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -42467,8 +42576,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 19
+  m_fontSizeBase: 19
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -42508,7 +42617,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 2092069001}
-    characterCount: 6
+    characterCount: 4
     spriteCount: 0
     spaceCount: 0
     wordCount: 1
@@ -44045,11 +44154,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: _GM
       objectReference: {fileID: 0}
-    - target: {fileID: 7484713560734880950, guid: c50779decbf0c38428688c9c66c2ab2f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7484713560734880952, guid: c50779decbf0c38428688c9c66c2ab2f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -44105,5 +44209,61 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 427459530, guid: c50779decbf0c38428688c9c66c2ab2f, type: 3}
+      propertyPath: DescriLemb.Array.data[0]
+      value: 
+      objectReference: {fileID: 257372018}
+    - target: {fileID: 427459530, guid: c50779decbf0c38428688c9c66c2ab2f, type: 3}
+      propertyPath: DescriLemb.Array.data[1]
+      value: 
+      objectReference: {fileID: 1720596835}
+    - target: {fileID: 427459530, guid: c50779decbf0c38428688c9c66c2ab2f, type: 3}
+      propertyPath: DescriLemb.Array.data[2]
+      value: 
+      objectReference: {fileID: 797522084}
+    - target: {fileID: 427459530, guid: c50779decbf0c38428688c9c66c2ab2f, type: 3}
+      propertyPath: DescriLemb.Array.data[3]
+      value: 
+      objectReference: {fileID: 1298279795}
+    - target: {fileID: 427459530, guid: c50779decbf0c38428688c9c66c2ab2f, type: 3}
+      propertyPath: DescriLemb.Array.data[4]
+      value: 
+      objectReference: {fileID: 1005388919}
+    - target: {fileID: 427459530, guid: c50779decbf0c38428688c9c66c2ab2f, type: 3}
+      propertyPath: DescriLemb.Array.data[5]
+      value: 
+      objectReference: {fileID: 1319612006}
+    - target: {fileID: 427459530, guid: c50779decbf0c38428688c9c66c2ab2f, type: 3}
+      propertyPath: DescriLemb.Array.data[6]
+      value: 
+      objectReference: {fileID: 1589764307}
+    - target: {fileID: 427459530, guid: c50779decbf0c38428688c9c66c2ab2f, type: 3}
+      propertyPath: TelasInicial
+      value: 
+      objectReference: {fileID: 1051744059}
+    - target: {fileID: 427459530, guid: c50779decbf0c38428688c9c66c2ab2f, type: 3}
+      propertyPath: TelaPrincipal
+      value: 
+      objectReference: {fileID: 379090604}
+    - target: {fileID: 427459530, guid: c50779decbf0c38428688c9c66c2ab2f, type: 3}
+      propertyPath: TelaNovo
+      value: 
+      objectReference: {fileID: 1286828187}
+    - target: {fileID: 427459530, guid: c50779decbf0c38428688c9c66c2ab2f, type: 3}
+      propertyPath: TelaContinuar
+      value: 
+      objectReference: {fileID: 86026607}
+    - target: {fileID: 427459530, guid: c50779decbf0c38428688c9c66c2ab2f, type: 3}
+      propertyPath: TelaMenu
+      value: 
+      objectReference: {fileID: 797154656}
+    - target: {fileID: 427459530, guid: c50779decbf0c38428688c9c66c2ab2f, type: 3}
+      propertyPath: JanelaLembranca
+      value: 
+      objectReference: {fileID: 737137715}
+    - target: {fileID: 427459530, guid: c50779decbf0c38428688c9c66c2ab2f, type: 3}
+      propertyPath: TelaSair
+      value: 
+      objectReference: {fileID: 2013923445}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c50779decbf0c38428688c9c66c2ab2f, type: 3}
