@@ -11685,16 +11685,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 257372018}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 737137716}
-  m_RootOrder: 15
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.8}
   m_AnchorMax: {x: 0.9, y: 0.8}
-  m_AnchoredPosition: {x: -7.5, y: -44.3}
+  m_AnchoredPosition: {x: -7.5, y: -44.300007}
   m_SizeDelta: {x: 15, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &257372020
@@ -14831,6 +14831,52 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d5cc5ffbe2868240b88135a7d30350c, type: 3}
+--- !u!1 &427459529 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7484713560734880950, guid: c50779decbf0c38428688c9c66c2ab2f,
+    type: 3}
+  m_PrefabInstance: {fileID: 7484713559228733073}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &427459530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 427459529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72e3208680995f34eb5d574974753237, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tela: 0
+  nLembr: 0
+  DescriLemb:
+  - {fileID: 257372018}
+  - {fileID: 1720596835}
+  - {fileID: 797522084}
+  - {fileID: 1298279795}
+  - {fileID: 1005388919}
+  - {fileID: 1319612006}
+  - {fileID: 1589764307}
+  TemLembr: 000000000000
+  nOpcoes: 0
+  JanOpcoes:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  TelasInicial: {fileID: 1051744059}
+  TelaPrincipal: {fileID: 379090604}
+  TelaJogar: {fileID: 0}
+  TelaNovo: {fileID: 1286828187}
+  TelaContinuar: {fileID: 86026607}
+  TelaJogo: {fileID: 0}
+  TelaMenu: {fileID: 797154656}
+  JanelaLembranca: {fileID: 737137715}
+  JanelaOpcoes: {fileID: 0}
+  TelaCredito: {fileID: 0}
+  TelaSair: {fileID: 2013923445}
 --- !u!1001 &432420296
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19479,13 +19525,13 @@ RectTransform:
   - {fileID: 92485437}
   - {fileID: 2075360025}
   - {fileID: 465192593}
-  - {fileID: 1589764308}
+  - {fileID: 257372019}
   - {fileID: 1720596836}
   - {fileID: 797522085}
   - {fileID: 1298279796}
   - {fileID: 1005388920}
   - {fileID: 1319612007}
-  - {fileID: 257372019}
+  - {fileID: 1589764308}
   m_Father: {fileID: 2118129798}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -20776,7 +20822,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 817400803}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 427459530}
+        m_MethodName: GoToTelaSair
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &817400803
@@ -25235,7 +25292,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1056549649}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 427459530}
+        m_MethodName: Sair
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1056549649
@@ -34129,7 +34197,7 @@ GameObject:
   - component: {fileID: 1589764310}
   - component: {fileID: 1589764309}
   m_Layer: 5
-  m_Name: "Descri\xE7aoPt"
+  m_Name: "Descri\xE7aoPt (6)"
   m_TagString: IdiomaPT
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34147,7 +34215,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 737137716}
-  m_RootOrder: 9
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.8}
   m_AnchorMax: {x: 0.9, y: 0.8}
@@ -43976,6 +44044,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: _GM
+      objectReference: {fileID: 0}
+    - target: {fileID: 7484713560734880950, guid: c50779decbf0c38428688c9c66c2ab2f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7484713560734880952, guid: c50779decbf0c38428688c9c66c2ab2f,
         type: 3}
