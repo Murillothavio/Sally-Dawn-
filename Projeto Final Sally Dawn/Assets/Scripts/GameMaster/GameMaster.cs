@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameMaster : MonoBehaviour
 {
     public static GameMaster gm;
+    public bool PAUSADO;
     [SerializeField]
     private static GameObject[] PlataformasDuplas;
     [SerializeField]
@@ -25,7 +26,10 @@ public class GameMaster : MonoBehaviour
 
     }
 
-
+    private void Update()
+    {
+        PAUSADO = GetComponent<Menu>().IsMenu;
+    }
     public static void InverterPlat()
     {
         Debug.Log("wert");

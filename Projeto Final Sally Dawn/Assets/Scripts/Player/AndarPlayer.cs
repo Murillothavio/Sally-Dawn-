@@ -120,7 +120,8 @@ public class AndarPlayer : MonoBehaviour
     }
     void Update()
     {
-        Atualiza();
+        if (!GameMaster.gm.PAUSADO)
+            Atualiza();
         Estados();
         ColliderTamanho();
         CalcularAngulo();

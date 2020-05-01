@@ -6,6 +6,8 @@ public class CameraFollow : MonoBehaviour
 {
     //  public Controller2D target;
     public GameObject target;
+    [Range(0, 20)] public float MenuDelta=10;
+    private float menudlt;
     private CapsuleCollider targetcollider;
     [SerializeField]
     private CapsuleCollider focuCollider;
@@ -222,6 +224,14 @@ public class CameraFollow : MonoBehaviour
         focusPosition += Vector2.right * currentLookAheadX;
         #endregion
         transform.position = (Vector3)focusPosition + Vector3.forward * -25;
+        if (GameMaster.gm.PAUSADO)
+            menudlt = Mathf.MoveTowards(menudlt, MenuDelta, 1);
+        else
+            menudlt = Mathf.MoveTowards(menudlt, 0, 1);
+
+        Vector3 pp = transform.position;
+        pp.x += menudlt;
+        transform.position = pp;
     }
 
     void OnDrawGizmos()

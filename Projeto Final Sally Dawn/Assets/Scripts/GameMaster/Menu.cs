@@ -6,6 +6,7 @@ public class Menu : MonoBehaviour
 {
     public enum Telas { TelasInicial, TelaPrincipal, TelaJogar, TelaNovo, TelaContinuar, TelaJogo, TelaMenu, JanelaLembranca, JanelaOpcoes, TelaCredito, TelaSair }
     public Telas tela;
+    public bool Jogando,IsMenu;
     public int nLembr;
     public GameObject[] DescriLemb = new GameObject[7];
     public bool[] TemLembr = new bool[6];
@@ -23,7 +24,10 @@ public class Menu : MonoBehaviour
     {
         if (tela == Telas.TelasInicial)
             if (Input.anyKeyDown)
-                tela = Telas.TelaJogo;///principal
+            {
+                tela = Telas.TelaPrincipal;
+                TrocarTela();
+            }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -33,8 +37,34 @@ public class Menu : MonoBehaviour
                 tela = Telas.TelaJogo;
             TrocarTela();
         }
-        if (tela != Telas.TelaJogo)
+
+        IsMenu = (tela != Telas.TelaJogo);
+        if (IsMenu)
             TrocarTela();
+
+
+        if (tela == Telas.JanelaLembranca)
+        {
+            if (nLembr != 0)
+                if (!TemLembr[nLembr - 1])
+                    nLembr = 0;
+
+            for (int i = 0; i < DescriLemb.Length; i++)
+                if (DescriLemb[i] != null)
+                    DescriLemb[i].SetActive(i == nLembr);
+        }
+
+        if (tela==Telas.JanelaOpcoes)
+            for (int i = 0; i < JanOpcoes.Length; i++)
+            {
+                JanOpcoes[i].SetActive(i == nOpcoes);
+            }
+
+        if (tela == Telas.TelaPrincipal)
+            Jogando = false;
+        else if (tela == Telas.TelaJogo)
+            Jogando = true;
+
     }
     private void TrocarTela()
     {
@@ -62,23 +92,40 @@ public class Menu : MonoBehaviour
             TelaSair.SetActive(tela == Telas.TelaSair);
     }
     #region GoTo
-    public void GoToTelaSair() { Debug.Log("aaa"); tela = Telas.TelaSair; }
-    public void GoToTelasInicial() { Debug.Log("aaa"); tela = Telas.TelasInicial; }
-    public void GoToTelaPrincipal() { tela = Telas.TelaPrincipal; Debug.Log("aaa"); }
-    public void GoToTelaJogar() { tela = Telas.TelaJogar; Debug.Log("aaa"); }
-    public void GoToTelaNovo() { tela = Telas.TelaNovo; Debug.Log("aaa"); }
-    public void GoToTelaContinuar() { tela = Telas.TelaContinuar; Debug.Log("aaa"); }
-    public void GoToTelaJogo() { tela = Telas.TelaJogo; Debug.Log("aaa"); }
-    public void GoToTelaMenu() { tela = Telas.TelaMenu; Debug.Log("aaa"); }
-    public void GoToJanelaLembranca() { tela = Telas.TelaSair; Debug.Log("aaa"); }
-    public void GoToJanelaOpcoes() { tela = Telas.JanelaOpcoes; Debug.Log("aaa"); }
-    public void GoToTelaCredito() { tela = Telas.TelaCredito; Debug.Log("aaa"); }
+    public void GoToTelaSair() { tela = Telas.TelaSair; }
+    public void GoToTelaMenu() { tela = Telas.TelaMenu; }
+    public void GoToJanelaLembranca() { tela = Telas.JanelaLembranca; }
+    public void GoToTelasInicial() { tela = Telas.TelasInicial; }
+    public void GoToTelaPrincipal() { tela = Telas.TelaPrincipal; }
+    public void GoToTelaJogar() { tela = Telas.TelaJogar; }
+    public void GoToTelaNovo() { tela = Telas.TelaNovo; }
+    public void GoToTelaContinuar() { tela = Telas.TelaContinuar; }
+    public void GoToTelaJogo() { tela = Telas.TelaJogo; TrocarTela(); }
+    public void GoToJanelaOpcoes() { tela = Telas.JanelaOpcoes; }
+    public void GoToTelaCredito() { tela = Telas.TelaCredito; }
+    public void GoToVoltar() {
+        if (Jogando) tela = Telas.TelaMenu;
+        else tela = Telas.TelaPrincipal;
+    }
     #endregion
+    #region Janela Lembrnaças
+    public void LemnbracaNumeroUM() { nLembr = 1; }
+    public void LemnbracaNumeroDOIS() { nLembr = 2; }
+    public void LemnbracaNumeroTRES() { nLembr = 3; }
+    public void LemnbracaNumeroQUATRO() { nLembr = 4; }
+    public void LemnbracaNumeroCINCO() { nLembr = 5; }
+    public void LemnbracaNumeroSEIS() { nLembr = 6; }
+    #endregion
+    #region Janela Opções
+    public void OpcoesQUATRO() { nOpcoes = 3; }
+    public void OpcoesUM() { nOpcoes = 0; }
+    public void OpcoesDOIS() { nOpcoes = 1; }
+    public void OpcoesTRES() { nOpcoes = 2; }
+    #endregion
+
     public void Sair()
     {
         Application.Quit();
         Debug.Log("saiu");
     }
-
-
 }
