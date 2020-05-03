@@ -72,6 +72,7 @@ public class AndarPlayer : MonoBehaviour
     [Header("Region Collider")]
     [HideInInspector]
     public CapsuleCollider Corpo;
+    private BoxCollider CollidAgachado; 
     private float HeightCollider, CenterCollider, RadiusCollider;
     private float HeightColliderCrawl = 2.13f;
     private float CenterColliderCrawl = 0.71f;
@@ -92,6 +93,7 @@ public class AndarPlayer : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         Acao = ActiveSkin.GetComponent<Animator>();
         Corpo = GetComponent<CapsuleCollider>();
+        CollidAgachado = GetComponent<BoxCollider>();
         cntr = GetComponent<Controles>();
         HeightCollider = Corpo.height;
         CenterCollider = Corpo.center.y;
@@ -122,9 +124,12 @@ public class AndarPlayer : MonoBehaviour
     {
         if (!GameMaster.gm.PAUSADO)
             Atualiza();
+        else    DesAtualiza();
+
         Estados();
         ColliderTamanho();
         CalcularAngulo();
+
         if (CanWalk)
             Andar();
         else
@@ -163,6 +168,19 @@ public class AndarPlayer : MonoBehaviour
                     break;
             }
         }
+    }
+    void DesAtualiza()
+    {
+        horizontal = 0;
+        vertical = 0;
+
+        bool ItsPress = false;
+        Kbaixo = ItsPress;
+        Kagarrar = ItsPress;
+        Kbomba = ItsPress;
+        Kinteragir = ItsPress;
+        Kjump = ItsPress;
+        Ksegurar = ItsPress;
     }
     void Estados()
     {
@@ -206,6 +224,7 @@ public class AndarPlayer : MonoBehaviour
     }
     void ColliderTamanho()
     {
+        
         if (stateAnimacao==StateMachine.Agachado)
         {
             Corpo.radius = Mathf.MoveTowards(Corpo.radius, RadiusColliderCrawl, CurrentCollider*2);
@@ -218,6 +237,9 @@ public class AndarPlayer : MonoBehaviour
             Corpo.center = new Vector3(Corpo.center.x, CenterCollider, 0);
             Corpo.height = HeightCollider;
         }
+        
+        Corpo.enabled = (stateAnimacao != StateMachine.Agachado);
+        CollidAgachado.enabled = (stateAnimacao == StateMachine.Agachado);
     }
     void Andar()
     {
