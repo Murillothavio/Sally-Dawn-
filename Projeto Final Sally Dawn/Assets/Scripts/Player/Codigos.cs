@@ -18,6 +18,7 @@ public class Codigos : MonoBehaviour
     public Transform[] PontosAmbiente = new Transform[7];
     private Vector3[] PontoscCord = new Vector3[7];
 
+    public KeyCode Resetar;
     public KeyCode TrocarAmbiente, TrocarSkin, InstaciarFases;
     public KeyCode[] PecasKey = new KeyCode[7];
     public KeyCode MudarPlat;
@@ -79,6 +80,9 @@ public class Codigos : MonoBehaviour
         }
         #endregion
 
+        if (Input.GetKeyUp(Resetar))
+            GetComponent<AndarPlayer>().Morrer();
+            
         if (Input.GetKeyDown(TrocarAmbiente))
             GetComponent<Ambiente>().TrocaAmbiente();
         

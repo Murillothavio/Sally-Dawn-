@@ -194,10 +194,8 @@ public class AndarPlayer : MonoBehaviour
 
         Segurando = (OndeTo == Zonas.segurar && Ksegurar);
         Escalando = (OndeTo == Zonas.Agarrar && Kagarrar);
-        //if (ondeto == zonas.segurar && ksegurar)
-        //    stateanimacao = statemachine.empurrando;
-        //if (ondeto == zonas.agarrar && kagarrar)
-        //    stateanimacao = statemachine.escalando;
+       
+        
 
         stateAnimacao = StateMachine.None;
         if (isGrounded && stateAnimacao != StateMachine.Pulando)
@@ -209,6 +207,8 @@ public class AndarPlayer : MonoBehaviour
 
         if (Kbaixo && (stateAnimacao == StateMachine.Walk || stateAnimacao == StateMachine.Ocioso))
             stateAnimacao = StateMachine.Agachado;
+        if (Caindo)
+            stateAnimacao = StateMachine.Caindo;
         if (!pular)
         {
             if (OndeTo == Zonas.segurar && Ksegurar)
@@ -216,9 +216,7 @@ public class AndarPlayer : MonoBehaviour
             if (OndeTo == Zonas.Agarrar && Kagarrar)
                 stateAnimacao = StateMachine.Escalando;
         }
-        if (Caindo)
-            stateAnimacao = StateMachine.Caindo;
-
+    
         if (!Segurando && (horizontal < -0.5f || horizontal > .5f))
             Arrastar = horizontal;
     }
@@ -269,14 +267,7 @@ public class AndarPlayer : MonoBehaviour
         }
         else if (OndeTo == Zonas.morrer)
         {
-            CurrentDeathDelay += Time.deltaTime;
-            if (CurrentDeathDelay > DeathDelay)
-            {
-                transform.position = SafeZonePosition;
-                rb.velocity = Vector3.zero;
-                CurrentDeathDelay = 0;
-            }
-
+            Morrer();
         }
         else
         {
@@ -374,6 +365,16 @@ public class AndarPlayer : MonoBehaviour
         }
         Velocity = rb.velocity;
 
+    }
+    public void Morrer()
+    {
+        CurrentDeathDelay += Time.deltaTime;
+        if (CurrentDeathDelay > DeathDelay)
+        {
+            transform.position = SafeZonePosition;
+            rb.velocity = Vector3.zero;
+            CurrentDeathDelay = 0;
+        }
     }
     void SetAnimacoes()
     {
