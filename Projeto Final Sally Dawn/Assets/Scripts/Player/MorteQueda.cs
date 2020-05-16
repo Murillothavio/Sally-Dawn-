@@ -8,6 +8,8 @@ public class MorteQueda : MonoBehaviour
     public float Distancia;
     [Range(1,100)]
     public float Max;
+    [SerializeField]
+    private float tdelay = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,8 +20,10 @@ public class MorteQueda : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Cam != null)
-            Distancia = GameMaster.CalcularDist(transform, Cam);
+        if (tdelay < 2)
+            tdelay += Time.deltaTime;
+        else if (Cam != null)
+            Distancia = GameMaster.CalcularDist(transform, Cam); 
 
         if (Distancia > Max)
         {
