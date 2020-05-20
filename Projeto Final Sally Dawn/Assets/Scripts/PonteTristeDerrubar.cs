@@ -11,6 +11,8 @@ public class PonteTristeDerrubar : MonoBehaviour
     public int numTabua;
     public float DeltaX, DeltaY, distancia;
 
+    private float metade, div, k, y, fx;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,13 +20,18 @@ public class PonteTristeDerrubar : MonoBehaviour
             distancia = GameMaster.CalcularDist(Pontos[0], Pontos[1]);
         else Debug.LogError("Sem pontos de distancia");
         numTabua = (int)(distancia / DeltaX) + 1;
-
+        metade = numTabua / 2;
+        div = metade * (metade - numTabua);
+        k = DeltaY / div;
 
         Tabuas = new PonteTriste[numTabua];
         for (int i = 0; i < numTabua; i++)
         {
+            y = i * (i - numTabua);
+            fx = k * y;
             Vector3 pos = Pontos[0].position;
             pos.x += i * DeltaX;
+            pos.y -= fx;
             GameObject t = Instantiate(PrefabTabua, pos, Quaternion.identity) as GameObject;
             t.transform.parent = transform;
             Tabuas[i] = t.GetComponent<PonteTriste>();
