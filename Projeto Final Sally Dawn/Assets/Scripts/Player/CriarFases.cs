@@ -5,7 +5,7 @@ using UnityEngine;
 public class CriarFases : MonoBehaviour
 {
     public bool inAtivo,Criar;
-    [HideInInspector]
+   // [HideInInspector]
     public GameObject[] Vfase, Vtrans;
     [Range(0, 6)]
     public float faseIndex;
@@ -51,11 +51,11 @@ public class CriarFases : MonoBehaviour
         }
         else
         {
-            Destroy(GameObject.Find(Vfase[IndexFase - 1].name + "(Clone)"));
+            Destroy(GameObject.Find(Vfase[Mathf.Clamp(IndexFase - 2, 0, Vfase.Length)].name + "(Clone)"));
             if (IndexFase > 1)
             {
-                Destroy(GameObject.Find(Vtrans[IndexFase - 2].name + "(Clone)"));
-                Destroy(GameObject.Find(Vtrans[IndexFase - 2].name));
+                Destroy(GameObject.Find(Vtrans[Mathf.Clamp(IndexFase - 3, 0, Vtrans.Length)].name + "(Clone)"));
+                Destroy(GameObject.Find(Vtrans[Mathf.Clamp(IndexFase - 3, 0, Vtrans.Length)].name));
             }
             CriarNext();
         }
@@ -63,13 +63,13 @@ public class CriarFases : MonoBehaviour
     void CriarNext()
     {
         Criar = false;
-        Destroy(GameObject.Find(Vfase[IndexFase /*+ 1*/].name + "(Clone)"));
+        Destroy(GameObject.Find(Vfase[IndexFase].name + "(Clone)"));
         if ((IndexFase<6))
-        Destroy(GameObject.Find(Vtrans[IndexFase/* + 1*/].name + "(Clone)"));
+        Destroy(GameObject.Find(Vtrans[IndexFase].name + "(Clone)"));
 
-        Instantiate(Vfase[IndexFase /*+ 1*/]);
+        Instantiate(Vfase[IndexFase]);
         if ((IndexFase<6))
-        Instantiate(Vtrans[IndexFase/* + 1*/]);
+        Instantiate(Vtrans[IndexFase]);
     }
 }
 
