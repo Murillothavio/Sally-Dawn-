@@ -120,6 +120,86 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &33212944
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1440383690}
+    m_Modifications:
+    - target: {fileID: 6493176230406939916, guid: 71b700e4177070c4aad8db31f5f09497,
+        type: 3}
+      propertyPath: m_Name
+      value: Arvore Felicidade 1 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6493176230406939916, guid: 71b700e4177070c4aad8db31f5f09497,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 2223261454724075413, guid: 71b700e4177070c4aad8db31f5f09497,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -16
+      objectReference: {fileID: 0}
+    - target: {fileID: 2223261454724075413, guid: 71b700e4177070c4aad8db31f5f09497,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 20.405277
+      objectReference: {fileID: 0}
+    - target: {fileID: 2223261454724075413, guid: 71b700e4177070c4aad8db31f5f09497,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 2223261454724075413, guid: 71b700e4177070c4aad8db31f5f09497,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2223261454724075413, guid: 71b700e4177070c4aad8db31f5f09497,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.75039953
+      objectReference: {fileID: 0}
+    - target: {fileID: 2223261454724075413, guid: 71b700e4177070c4aad8db31f5f09497,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2223261454724075413, guid: 71b700e4177070c4aad8db31f5f09497,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6609846
+      objectReference: {fileID: 0}
+    - target: {fileID: 2223261454724075413, guid: 71b700e4177070c4aad8db31f5f09497,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2223261454724075413, guid: 71b700e4177070c4aad8db31f5f09497,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2223261454724075413, guid: 71b700e4177070c4aad8db31f5f09497,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 97.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2223261454724075413, guid: 71b700e4177070c4aad8db31f5f09497,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 71b700e4177070c4aad8db31f5f09497, type: 3}
+--- !u!4 &33212945 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2223261454724075413, guid: 71b700e4177070c4aad8db31f5f09497,
+    type: 3}
+  m_PrefabInstance: {fileID: 33212944}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &40979686
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -131,6 +211,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Pedra N6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3761770188292551544, guid: 846d2706d91cbf94c884fe7ca3f4c248,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 1320960345156659501, guid: 846d2706d91cbf94c884fe7ca3f4c248,
         type: 3}
@@ -207,6 +292,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arvore Felicidade 1 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6493176230406939916, guid: 71b700e4177070c4aad8db31f5f09497,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 2223261454724075413, guid: 71b700e4177070c4aad8db31f5f09497,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -282,6 +372,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tronco grande 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3198222854105907523, guid: d50db0a3827be7b4fa964cbe1f606703,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 108198895420480996, guid: d50db0a3827be7b4fa964cbe1f606703,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -345,6 +440,80 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 181469915}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &263181068
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1298594843}
+    m_Modifications:
+    - target: {fileID: 3133204205222867315, guid: 9b0bd37123b0b41418fedd27914fabad,
+        type: 3}
+      propertyPath: m_Name
+      value: Cerca de madeira (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3133204205222867315, guid: 9b0bd37123b0b41418fedd27914fabad,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 2806203693499324293, guid: 9b0bd37123b0b41418fedd27914fabad,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 216
+      objectReference: {fileID: 0}
+    - target: {fileID: 2806203693499324293, guid: 9b0bd37123b0b41418fedd27914fabad,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.3847713
+      objectReference: {fileID: 0}
+    - target: {fileID: 2806203693499324293, guid: 9b0bd37123b0b41418fedd27914fabad,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -22
+      objectReference: {fileID: 0}
+    - target: {fileID: 2806203693499324293, guid: 9b0bd37123b0b41418fedd27914fabad,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2806203693499324293, guid: 9b0bd37123b0b41418fedd27914fabad,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.94483304
+      objectReference: {fileID: 0}
+    - target: {fileID: 2806203693499324293, guid: 9b0bd37123b0b41418fedd27914fabad,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2806203693499324293, guid: 9b0bd37123b0b41418fedd27914fabad,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.32755244
+      objectReference: {fileID: 0}
+    - target: {fileID: 2806203693499324293, guid: 9b0bd37123b0b41418fedd27914fabad,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2806203693499324293, guid: 9b0bd37123b0b41418fedd27914fabad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2806203693499324293, guid: 9b0bd37123b0b41418fedd27914fabad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 141.759
+      objectReference: {fileID: 0}
+    - target: {fileID: 2806203693499324293, guid: 9b0bd37123b0b41418fedd27914fabad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9b0bd37123b0b41418fedd27914fabad, type: 3}
 --- !u!1001 &263987352
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -356,6 +525,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tronco grande (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2811143534203710423, guid: e998788faf8f04e43a500804eb242a84,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 8290154568064814269, guid: e998788faf8f04e43a500804eb242a84,
         type: 3}
@@ -431,6 +605,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tronco grande (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2811143534203710423, guid: e998788faf8f04e43a500804eb242a84,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 8290154568064814269, guid: e998788faf8f04e43a500804eb242a84,
         type: 3}
@@ -541,6 +720,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arvore Felicidade 1 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 6493176230406939916, guid: 71b700e4177070c4aad8db31f5f09497,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 2223261454724075413, guid: 71b700e4177070c4aad8db31f5f09497,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -615,6 +799,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Cerca de madeira
+      objectReference: {fileID: 0}
+    - target: {fileID: 3133204205222867315, guid: 9b0bd37123b0b41418fedd27914fabad,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 2806203693499324293, guid: 9b0bd37123b0b41418fedd27914fabad,
         type: 3}
@@ -691,6 +880,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arvore Felicidade 3 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 457997314514501053, guid: cb4afc88a1cbf1649bc16fa9cbab4d2a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 7286932427519270409, guid: cb4afc88a1cbf1649bc16fa9cbab4d2a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -765,6 +959,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tronco
+      objectReference: {fileID: 0}
+    - target: {fileID: 7209804547720043276, guid: 52f5c9899fa08d24aa88a629efb55ece,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 1189901624999606604, guid: 52f5c9899fa08d24aa88a629efb55ece,
         type: 3}
@@ -844,7 +1043,7 @@ PrefabInstance:
     - target: {fileID: 5477830422515885185, guid: 6e690949dedfe7f4f9bb5403ed90f8d2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 227
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 5477830422515885185, guid: 6e690949dedfe7f4f9bb5403ed90f8d2,
         type: 3}
@@ -958,6 +1157,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cerca de madeira (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3133204205222867315, guid: 9b0bd37123b0b41418fedd27914fabad,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 2806203693499324293, guid: 9b0bd37123b0b41418fedd27914fabad,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1032,6 +1236,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Cerca de madeira (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3133204205222867315, guid: 9b0bd37123b0b41418fedd27914fabad,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 2806203693499324293, guid: 9b0bd37123b0b41418fedd27914fabad,
         type: 3}
@@ -1108,6 +1317,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tronco grande (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2811143534203710423, guid: e998788faf8f04e43a500804eb242a84,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 8290154568064814269, guid: e998788faf8f04e43a500804eb242a84,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1182,6 +1396,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tronco grande (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2811143534203710423, guid: e998788faf8f04e43a500804eb242a84,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 8290154568064814269, guid: e998788faf8f04e43a500804eb242a84,
         type: 3}
@@ -1258,10 +1477,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arvore Felicidade 3 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 457997314514501053, guid: cb4afc88a1cbf1649bc16fa9cbab4d2a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 7286932427519270409, guid: cb4afc88a1cbf1649bc16fa9cbab4d2a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7286932427519270409, guid: cb4afc88a1cbf1649bc16fa9cbab4d2a,
         type: 3}
@@ -1332,6 +1556,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Cerca de madeira (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3133204205222867315, guid: 9b0bd37123b0b41418fedd27914fabad,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 2806203693499324293, guid: 9b0bd37123b0b41418fedd27914fabad,
         type: 3}
@@ -1439,6 +1668,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tronco grande 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3198222854105907523, guid: d50db0a3827be7b4fa964cbe1f606703,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 108198895420480996, guid: d50db0a3827be7b4fa964cbe1f606703,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1514,6 +1748,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arvore Felicidade 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6493176230406939916, guid: 71b700e4177070c4aad8db31f5f09497,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 2223261454724075413, guid: 71b700e4177070c4aad8db31f5f09497,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1588,6 +1827,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Cerca de madeira (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3133204205222867315, guid: 9b0bd37123b0b41418fedd27914fabad,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 2806203693499324293, guid: 9b0bd37123b0b41418fedd27914fabad,
         type: 3}
@@ -1695,6 +1939,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tronco Caido 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8730398234064477719, guid: c04ebe2b1845e0d4095d5b57b700eee3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4327143462231652362, guid: c04ebe2b1845e0d4095d5b57b700eee3,
         type: 3}
@@ -1920,55 +2169,55 @@ MonoBehaviour:
   - m_Vertices: 0b0000000e00000012000000
   m_SharedTextures: []
   m_Positions:
-  - {x: -233, y: -85, z: 446}
-  - {x: 933, y: -85, z: 446}
-  - {x: -233, y: 1, z: 446}
-  - {x: 933, y: 1, z: 446}
-  - {x: 933, y: -85, z: 446}
+  - {x: -233, y: -85, z: 1187}
+  - {x: 933, y: -85, z: 1187}
+  - {x: -233, y: 1, z: 1187}
+  - {x: 933, y: 1, z: 1187}
+  - {x: 933, y: -85, z: 1187}
   - {x: 933, y: -85, z: -54}
-  - {x: 933, y: 1, z: 446}
+  - {x: 933, y: 1, z: 1187}
   - {x: 933, y: 1, z: -54}
   - {x: 933, y: -85, z: -54}
   - {x: -233, y: -85, z: -54}
   - {x: 933, y: 1, z: -54}
   - {x: -233, y: 1, z: -54}
   - {x: -233, y: -85, z: -54}
-  - {x: -233, y: -85, z: 446}
+  - {x: -233, y: -85, z: 1187}
   - {x: -233, y: 1, z: -54}
-  - {x: -233, y: 1, z: 446}
-  - {x: -233, y: 1, z: 446}
-  - {x: 933, y: 1, z: 446}
+  - {x: -233, y: 1, z: 1187}
+  - {x: -233, y: 1, z: 1187}
+  - {x: 933, y: 1, z: 1187}
   - {x: -233, y: 1, z: -54}
   - {x: 933, y: 1, z: -54}
   - {x: -233, y: -85, z: -54}
   - {x: 933, y: -85, z: -54}
-  - {x: -233, y: -85, z: 446}
-  - {x: 933, y: -85, z: 446}
+  - {x: -233, y: -85, z: 1187}
+  - {x: 933, y: -85, z: 1187}
   m_Textures0:
   - {x: 233, y: -85}
   - {x: -933, y: -85}
   - {x: 233, y: 1}
   - {x: -933, y: 1}
-  - {x: 446, y: -85}
+  - {x: 1187, y: -85}
   - {x: -54, y: -85}
-  - {x: 446, y: 1}
+  - {x: 1187, y: 1}
   - {x: -54, y: 1}
   - {x: 933, y: -85}
   - {x: -233, y: -85}
   - {x: 933, y: 1}
   - {x: -233, y: 1}
   - {x: 54, y: -85}
-  - {x: -446, y: -85}
+  - {x: -1187, y: -85}
   - {x: 54, y: 1}
-  - {x: -446, y: 1}
-  - {x: -233, y: 446}
-  - {x: 933, y: 446}
+  - {x: -1187, y: 1}
+  - {x: -233, y: 1187}
+  - {x: 933, y: 1187}
   - {x: -233, y: -54}
   - {x: 933, y: -54}
   - {x: 233, y: -54}
   - {x: -933, y: -54}
-  - {x: 233, y: 446}
-  - {x: -933, y: 446}
+  - {x: 233, y: 1187}
+  - {x: -933, y: 1187}
   m_Textures2: []
   m_Textures3: []
   m_Tangents:
@@ -2005,17 +2254,17 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_IsSelectable: 1
-  m_SelectedFaces: 01000000
+  m_SelectedFaces: 00000000
   m_SelectedEdges:
-  - a: 4
-    b: 5
-  - a: 6
-    b: 4
-  - a: 5
-    b: 7
-  - a: 7
-    b: 6
-  m_SelectedVertices: 04000000050000000600000007000000
+  - a: 0
+    b: 1
+  - a: 2
+    b: 0
+  - a: 1
+    b: 3
+  - a: 3
+    b: 2
+  m_SelectedVertices: 00000000010000000200000003000000
 --- !u!23 &1106632976
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2107,7 +2356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clearColorMode: 0
-  backgroundColorHDR: {r: 0.025, g: 0.07, b: 0.19, a: 0}
+  backgroundColorHDR: {r: 0.46297613, g: 0.5139857, b: 0.6415094, a: 0}
   clearDepth: 1
   volumeLayerMask:
     serializedVersion: 2
@@ -2246,7 +2495,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1127555478}
   m_LocalRotation: {x: 0.043619405, y: 0, z: 0, w: 0.9990483}
-  m_LocalPosition: {x: 518, y: 9, z: -20}
+  m_LocalPosition: {x: 2.9999998, y: 9, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2263,6 +2512,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tronco
+      objectReference: {fileID: 0}
+    - target: {fileID: 7209804547720043276, guid: 52f5c9899fa08d24aa88a629efb55ece,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 1189901624999606604, guid: 52f5c9899fa08d24aa88a629efb55ece,
         type: 3}
@@ -2338,6 +2592,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Arvore Felicidade 3 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 457997314514501053, guid: cb4afc88a1cbf1649bc16fa9cbab4d2a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 7286932427519270409, guid: cb4afc88a1cbf1649bc16fa9cbab4d2a,
         type: 3}
@@ -2489,8 +2748,8 @@ MonoBehaviour:
   lightDimmer: 1
   m_VolumetricDimmer: 1
   lightUnit: 2
-  sunDiskSize: 1
-  sunHaloSize: 0.1
+  sunDiskSize: 45
+  sunHaloSize: 1
   fadeDistance: 10000
   affectDiffuse: 1
   affectSpecular: 1
@@ -2501,7 +2760,7 @@ MonoBehaviour:
   shapeHeight: 0.5
   aspectRatio: 1
   shapeRadius: 0
-  maxSmoothness: 0.99
+  maxSmoothness: 0
   applyRangeAttenuation: 1
   useOldInspector: 0
   useVolumetric: 1
@@ -2591,13 +2850,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1220763836}
-  m_LocalRotation: {x: 0.107422896, y: -0.9178327, z: 0.23191816, w: 0.30373907}
+  m_LocalRotation: {x: 0.062344342, y: -0.9910171, z: 0.08504712, w: 0.08225158}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 282911407}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 29.405, y: -144.35101, z: -3.706}
+  m_LocalEulerAnglesHint: {x: 10.301001, y: -171.08801, z: -6.3940005}
 --- !u!1 &1298594842
 GameObject:
   m_ObjectHideFlags: 0
@@ -2612,7 +2871,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1298594843
 Transform:
@@ -2636,6 +2895,7 @@ Transform:
   - {fileID: 1704339825}
   - {fileID: 1797588373}
   - {fileID: 2052218797}
+  - {fileID: 1467899865}
   m_Father: {fileID: 1951306146}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2650,6 +2910,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tronco grande (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2811143534203710423, guid: e998788faf8f04e43a500804eb242a84,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 8290154568064814269, guid: e998788faf8f04e43a500804eb242a84,
         type: 3}
@@ -2728,7 +2993,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1440383690
 Transform:
@@ -2771,6 +3036,7 @@ Transform:
   - {fileID: 40979687}
   - {fileID: 919211658}
   - {fileID: 525380956}
+  - {fileID: 33212945}
   m_Father: {fileID: 1951306146}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2785,6 +3051,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tronco Caido 2 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8730398234064477719, guid: c04ebe2b1845e0d4095d5b57b700eee3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4327143462231652362, guid: c04ebe2b1845e0d4095d5b57b700eee3,
         type: 3}
@@ -2861,6 +3132,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arvore Felicidade 3
       objectReference: {fileID: 0}
+    - target: {fileID: 457997314514501053, guid: cb4afc88a1cbf1649bc16fa9cbab4d2a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 7286932427519270409, guid: cb4afc88a1cbf1649bc16fa9cbab4d2a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2924,6 +3200,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1446367024}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1467899865 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2806203693499324293, guid: 9b0bd37123b0b41418fedd27914fabad,
+    type: 3}
+  m_PrefabInstance: {fileID: 263181068}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1482849101
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2935,6 +3217,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Arvore Felicidade 3 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 457997314514501053, guid: cb4afc88a1cbf1649bc16fa9cbab4d2a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 7286932427519270409, guid: cb4afc88a1cbf1649bc16fa9cbab4d2a,
         type: 3}
@@ -3011,6 +3298,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tronco grande (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 2811143534203710423, guid: e998788faf8f04e43a500804eb242a84,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 8290154568064814269, guid: e998788faf8f04e43a500804eb242a84,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3080,7 +3372,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh129980
+  m_Name: pb_Mesh22670
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3091,8 +3383,8 @@ Mesh:
     firstVertex: 0
     vertexCount: 24
     localAABB:
-      m_Center: {x: 350, y: -42, z: 196}
-      m_Extent: {x: 583, y: 43, z: 250}
+      m_Center: {x: 350, y: -42, z: 566.5}
+      m_Extent: {x: 583, y: 43, z: 620.5}
   m_Shapes:
     vertices: []
     shapes: []
@@ -3171,7 +3463,7 @@ Mesh:
       format: 0
       dimension: 0
     m_DataSize: 1152
-    _typelessdata: 000069c30000aac20000df4300000000000000000000803f000080bf0000000000000000000080bf000069430000aac2004069440000aac20000df4300000000000000000000803f000080bf0000000000000000000080bf004069c40000aac2000069c30000803f0000df4300000000000000000000803f000080bf0000000000000000000080bf000069430000803f004069440000803f0000df4300000000000000000000803f000080bf0000000000000000000080bf004069c40000803f004069440000aac20000df430000803f000000000000000000000000000000000000803f000080bf0000df430000aac2004069440000aac2000058c20000803f000000000000000000000000000000000000803f000080bf000058c20000aac2004069440000803f0000df430000803f000000000000000000000000000000000000803f000080bf0000df430000803f004069440000803f000058c20000803f000000000000000000000000000000000000803f000080bf000058c20000803f004069440000aac2000058c20000000000000000000080bf0000803f0000000000000000000080bf004069440000aac2000069c30000aac2000058c20000000000000000000080bf0000803f0000000000000000000080bf000069c30000aac2004069440000803f000058c20000000000000000000080bf0000803f0000000000000000000080bf004069440000803f000069c30000803f000058c20000000000000000000080bf0000803f0000000000000000000080bf000069c30000803f000069c30000aac2000058c2000080bf00000000000000000000000000000000000080bf000080bf000058420000aac2000069c30000aac20000df43000080bf00000000000000000000000000000000000080bf000080bf0000dfc30000aac2000069c30000803f000058c2000080bf00000000000000000000000000000000000080bf000080bf000058420000803f000069c30000803f0000df43000080bf00000000000000000000000000000000000080bf000080bf0000dfc30000803f000069c30000803f0000df43000000000000803f000000000000803f0000000000000000000080bf000069c30000df43004069440000803f0000df43000000000000803f000000000000803f0000000000000000000080bf004069440000df43000069c30000803f000058c2000000000000803f000000000000803f0000000000000000000080bf000069c3000058c2004069440000803f000058c2000000000000803f000000000000803f0000000000000000000080bf00406944000058c2000069c30000aac2000058c200000000000080bf00000000000080bf0000000000000000000080bf00006943000058c2004069440000aac2000058c200000000000080bf00000000000080bf0000000000000000000080bf004069c4000058c2000069c30000aac20000df4300000000000080bf00000000000080bf0000000000000000000080bf000069430000df43004069440000aac20000df4300000000000080bf00000000000080bf0000000000000000000080bf004069c40000df43
+    _typelessdata: 000069c30000aac20060944400000000000000000000803f000080bf0000000000000000000080bf000069430000aac2004069440000aac20060944400000000000000000000803f000080bf0000000000000000000080bf004069c40000aac2000069c30000803f0060944400000000000000000000803f000080bf0000000000000000000080bf000069430000803f004069440000803f0060944400000000000000000000803f000080bf0000000000000000000080bf004069c40000803f004069440000aac2006094440000803f000000000000000000000000000000000000803f000080bf006094440000aac2004069440000aac2000058c20000803f000000000000000000000000000000000000803f000080bf000058c20000aac2004069440000803f006094440000803f000000000000000000000000000000000000803f000080bf006094440000803f004069440000803f000058c20000803f000000000000000000000000000000000000803f000080bf000058c20000803f004069440000aac2000058c20000000000000000000080bf0000803f0000000000000000000080bf004069440000aac2000069c30000aac2000058c20000000000000000000080bf0000803f0000000000000000000080bf000069c30000aac2004069440000803f000058c20000000000000000000080bf0000803f0000000000000000000080bf004069440000803f000069c30000803f000058c20000000000000000000080bf0000803f0000000000000000000080bf000069c30000803f000069c30000aac2000058c2000080bf00000000000000000000000000000000000080bf000080bf000058420000aac2000069c30000aac200609444000080bf00000000000000000000000000000000000080bf000080bf006094c40000aac2000069c30000803f000058c2000080bf00000000000000000000000000000000000080bf000080bf000058420000803f000069c30000803f00609444000080bf00000000000000000000000000000000000080bf000080bf006094c40000803f000069c30000803f00609444000000000000803f000000000000803f0000000000000000000080bf000069c300609444004069440000803f00609444000000000000803f000000000000803f0000000000000000000080bf0040694400609444000069c30000803f000058c2000000000000803f000000000000803f0000000000000000000080bf000069c3000058c2004069440000803f000058c2000000000000803f000000000000803f0000000000000000000080bf00406944000058c2000069c30000aac2000058c200000000000080bf00000000000080bf0000000000000000000080bf00006943000058c2004069440000aac2000058c200000000000080bf00000000000080bf0000000000000000000080bf004069c4000058c2000069c30000aac20060944400000000000080bf00000000000080bf0000000000000000000080bf0000694300609444004069440000aac20060944400000000000080bf00000000000080bf0000000000000000000080bf004069c400609444
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -3225,8 +3517,8 @@ Mesh:
       m_BitSize: 0
     m_UVInfo: 0
   m_LocalAABB:
-    m_Center: {x: 350, y: -42, z: 196}
-    m_Extent: {x: 583, y: 43, z: 250}
+    m_Center: {x: 350, y: -42, z: 566.5}
+    m_Extent: {x: 583, y: 43, z: 620.5}
   m_MeshUsageFlags: 0
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
@@ -3248,6 +3540,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Arvore Felicidade 3 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 457997314514501053, guid: cb4afc88a1cbf1649bc16fa9cbab4d2a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 7286932427519270409, guid: cb4afc88a1cbf1649bc16fa9cbab4d2a,
         type: 3}
@@ -3324,6 +3621,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tronco grande
       objectReference: {fileID: 0}
+    - target: {fileID: 2811143534203710423, guid: e998788faf8f04e43a500804eb242a84,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 8290154568064814269, guid: e998788faf8f04e43a500804eb242a84,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3399,6 +3701,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cerca de madeira (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 3133204205222867315, guid: 9b0bd37123b0b41418fedd27914fabad,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 2806203693499324293, guid: 9b0bd37123b0b41418fedd27914fabad,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3473,6 +3780,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Cerca de madeira (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3133204205222867315, guid: 9b0bd37123b0b41418fedd27914fabad,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 2806203693499324293, guid: 9b0bd37123b0b41418fedd27914fabad,
         type: 3}
@@ -3793,6 +4105,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cerca de madeira (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 3133204205222867315, guid: 9b0bd37123b0b41418fedd27914fabad,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 2806203693499324293, guid: 9b0bd37123b0b41418fedd27914fabad,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3868,10 +4185,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arvore Felicidade 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1438695341805798951, guid: 5e6dbdf2808d3fa4db9f45d6d3f568a8,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 8673101409408677045, guid: 5e6dbdf2808d3fa4db9f45d6d3f568a8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 8673101409408677045, guid: 5e6dbdf2808d3fa4db9f45d6d3f568a8,
         type: 3}
@@ -3942,6 +4264,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tronco grande (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2811143534203710423, guid: e998788faf8f04e43a500804eb242a84,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 8290154568064814269, guid: e998788faf8f04e43a500804eb242a84,
         type: 3}
@@ -4017,6 +4344,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Arvore Felicidade 1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6493176230406939916, guid: 71b700e4177070c4aad8db31f5f09497,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 2223261454724075413, guid: 71b700e4177070c4aad8db31f5f09497,
         type: 3}
@@ -4095,7 +4427,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1951306146
 Transform:
@@ -4124,6 +4456,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: "Po\xE7o"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4267118599393480583, guid: 1678d4ac307987c428c1e82128eae1d9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 5279558191389320256, guid: 1678d4ac307987c428c1e82128eae1d9,
         type: 3}
@@ -4200,6 +4537,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tronco grande (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2811143534203710423, guid: e998788faf8f04e43a500804eb242a84,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 8290154568064814269, guid: e998788faf8f04e43a500804eb242a84,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4274,6 +4616,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Arvore Felicidade 1 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6493176230406939916, guid: 71b700e4177070c4aad8db31f5f09497,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 2223261454724075413, guid: 71b700e4177070c4aad8db31f5f09497,
         type: 3}
@@ -4350,6 +4697,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cerca de madeira (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 3133204205222867315, guid: 9b0bd37123b0b41418fedd27914fabad,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 2806203693499324293, guid: 9b0bd37123b0b41418fedd27914fabad,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4425,10 +4777,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arvore Felicidade 1 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 6493176230406939916, guid: 71b700e4177070c4aad8db31f5f09497,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 2223261454724075413, guid: 71b700e4177070c4aad8db31f5f09497,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 2223261454724075413, guid: 71b700e4177070c4aad8db31f5f09497,
         type: 3}
@@ -4499,6 +4856,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tronco caido
+      objectReference: {fileID: 0}
+    - target: {fileID: 7286098509057807155, guid: 8bc0622ae26f1a04781a185ebda7511f,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 3400857926914557067, guid: 8bc0622ae26f1a04781a185ebda7511f,
         type: 3}
@@ -4575,6 +4937,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Moinho
       objectReference: {fileID: 0}
+    - target: {fileID: 3059471009801100091, guid: 4129034cb33a4664c9376d3b7b0f84d6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 5512607709994448347, guid: 4129034cb33a4664c9376d3b7b0f84d6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4629,6 +4996,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8872615505656604161, guid: 4129034cb33a4664c9376d3b7b0f84d6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 3943127887032215457, guid: 4129034cb33a4664c9376d3b7b0f84d6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899520468686123793, guid: 4129034cb33a4664c9376d3b7b0f84d6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1171795854863890185, guid: 4129034cb33a4664c9376d3b7b0f84d6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 6296644502709231657, guid: 4129034cb33a4664c9376d3b7b0f84d6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 7581532272934333726, guid: 4129034cb33a4664c9376d3b7b0f84d6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4129034cb33a4664c9376d3b7b0f84d6, type: 3}
