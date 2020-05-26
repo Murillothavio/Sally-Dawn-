@@ -41,7 +41,7 @@ public class AndarPlayer : MonoBehaviour
 
     [HideInInspector] public Rigidbody rb;
     [HideInInspector] public GameObject ActiveSkin;
-    private GameObject caixote;
+    public GameObject caixote;
     [HideInInspector]
     public Animator Acao;
     [Range(0, 2)]
@@ -241,13 +241,15 @@ public class AndarPlayer : MonoBehaviour
     }
     void Andar()
     {
+        transform.eulerAngles = new Vector3(0, 0, Angulo);
         if (stateAnimacao == StateMachine.Escalando)
         {
             moveSpeed = Mathf.MoveTowards(moveSpeed, AtualConfig.climbSpeed, AtualConfig.currentSpeed * 4);
             Vector3 k = Vector3.up;
             k = Coeficiente;
             k.y *= -1;
-            Vector3 v = k * vertical * moveSpeed * Time.deltaTime * (Mathf.Pow(AjustDez, 2));
+            Debug.Log(k);
+            Vector3 v = k * vertical * moveSpeed /* Time.deltaTime * (Mathf.Pow(AjustDez, 2))*/;
             //   v.y = rb.velocity.y;
             rb.velocity = v;
 
@@ -259,7 +261,7 @@ public class AndarPlayer : MonoBehaviour
         }
         else if (stateAnimacao == StateMachine.Empurrando) 
         {
-            moveSpeed = Mathf.MoveTowards(moveSpeed, AtualConfig.PullshSpeed, AtualConfig.currentSpeed * 3.5f);
+            moveSpeed = Mathf.MoveTowards(moveSpeed, AtualConfig.PullshSpeed, AtualConfig.currentSpeed * 4f);
             Vector3 v = Vector3.right * horizontal * moveSpeed;
             v.y = rb.velocity.y;
             rb.velocity = v;
@@ -453,7 +455,7 @@ public class AndarPlayer : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("TODO: Prender");
+     //   Debug.Log("TODO: Prender");
         if (other.gameObject.tag == "CameraFocus")
         {
             CameraPressa = true;
@@ -463,12 +465,11 @@ public class AndarPlayer : MonoBehaviour
         {
             CentroCorda = other.gameObject.transform.parent.gameObject;
         }
-       
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("TODO: Soltar");
+    //    Debug.Log("TODO: Soltar");
         if (other.gameObject.tag == "CameraFocus")
         {
             CameraPressa = false;
@@ -477,7 +478,6 @@ public class AndarPlayer : MonoBehaviour
         {
             CentroCorda = null;
         }
-        
     }
    
     private void OnDrawGizmos()
@@ -492,8 +492,5 @@ public class AndarPlayer : MonoBehaviour
             new Vector2(0.01f, 1f));
         Gizmos.DrawCube(new Vector2(transform.position.x + GroundCenter.x, transform.position.y + GroundCenter.y),
              new Vector2(1f, 0.01f));
-
-
     }
-
 }

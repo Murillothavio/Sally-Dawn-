@@ -6,7 +6,7 @@ public class DragBox : MonoBehaviour
 {
     private Rigidbody rb;
     private GameObject play;
-    public bool seg;
+    public bool seg, encostado;
     [SerializeField]
     private Vector3 DeltaPosi;
     // Start is called before the first frame update
@@ -21,15 +21,9 @@ public class DragBox : MonoBehaviour
     void Update()
     {
         seg = play.GetComponent<AndarPlayer>().Segurando;
-        if (!seg)
-        {
-            DeltaPosi = Vector3.zero;
-            rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
-        }
-        else
+        if (seg && encostado)
         {
             rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
-
             if (DeltaPosi == Vector3.zero)
             {
                 DeltaPosi = play.transform.position - transform.position;
@@ -37,7 +31,26 @@ public class DragBox : MonoBehaviour
             //rb.velocity = play.GetComponent<Rigidbody>().velocity;
             Vector3 tp = play.transform.position - DeltaPosi;
             transform.position = tp;
-            Debug.Log( tp + ".");
         }
+        else if (encostado)
+        {
+            DeltaPosi = Vector3.zero;
+            rb.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
+        }
+        else
+        {
+            DeltaPosi = Vector3.zero;
+            rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject == play)
+            encostado = true;
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject == play)
+            encostado = false;
     }
 }

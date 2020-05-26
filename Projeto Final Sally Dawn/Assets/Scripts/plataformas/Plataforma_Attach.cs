@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Plataforma_Attach : MonoBehaviour
 {
-    public GameObject Player;
-
+    public GameObject Player, Caixote;
+    
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -16,6 +16,14 @@ public class Plataforma_Attach : MonoBehaviour
                 Player.transform.parent = transform;
             }
         }
+        if (collision.gameObject.tag == "Zona_empurrar")
+        {
+            Caixote = collision.gameObject;
+            if (collision.gameObject == Caixote)
+            {
+                Caixote.transform.parent = transform;
+            }
+        }
     }
     private void OnCollisionExit(Collision collision)
     {
@@ -23,6 +31,11 @@ public class Plataforma_Attach : MonoBehaviour
         {
             Player.transform.parent = null;
             Player = null;
+        }
+        if (collision.gameObject.tag == "Zona_empurrar")
+        {
+            Caixote.transform.parent = null;
+            Caixote = null;
         }
 
     }
