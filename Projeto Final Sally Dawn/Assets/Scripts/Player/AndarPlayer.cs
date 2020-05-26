@@ -241,7 +241,7 @@ public class AndarPlayer : MonoBehaviour
     }
     void Andar()
     {
-        transform.eulerAngles = new Vector3(0, 0, Angulo);
+       // transform.eulerAngles = new Vector3(transform.localRotation.x, transform.localRotation.y, Angulo);
         if (stateAnimacao == StateMachine.Escalando)
         {
             moveSpeed = Mathf.MoveTowards(moveSpeed, AtualConfig.climbSpeed, AtualConfig.currentSpeed * 4);
