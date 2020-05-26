@@ -18,7 +18,7 @@ public class PonteTristeDerrubar : MonoBehaviour
     {
         if (Pontos[0] != null && Pontos[1] != null)
             distancia = GameMaster.CalcularDist(Pontos[0], Pontos[1]);
-        else Debug.LogError("Sem pontos de distancia");
+        else { Debug.LogError("Sem pontos de distancia"); Debug.LogError(gameObject.name); }
         numTabua = (int)(distancia / DeltaX) + 1;
         metade = numTabua / 2;
         div = metade * (metade - numTabua);

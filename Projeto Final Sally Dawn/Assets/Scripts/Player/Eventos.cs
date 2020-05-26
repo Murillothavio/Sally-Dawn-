@@ -65,11 +65,16 @@ public class Eventos : MonoBehaviour
         for (int i = 0; i < Cine.Length; i++)
             Cine[i].Init();
 
-        MigO = new PrtMigO[Equipamentos.Length];
+        Debug.Log(MigO);
+
+        MigO = new PrtMigO[6];
+      //  MigO = new PrtMigO[Equipamentos.Length];
+        Debug.Log(MigO);
         for (int i = 0; i < MigO.Length; i++)
             MigO[i].name = Equipamentos[i].name;
 
-      
+        Debug.Log(MigO);
+
 
     }
     // Update is called once per frame
@@ -100,9 +105,11 @@ public class Eventos : MonoBehaviour
             if (MigO.Length == 0)
                 MigO = new PrtMigO[Equipamentos.Length];
             else
+                if(MigO!=null)
                 for (int i = 0; i < Equipamentos.Length; i++)
                 {
                     #region EditMig0
+                    Debug.Log(MigO[i].name);
                     MigO[i].name = Equipamentos[i].name;
 
                     MigO[i].Equip = null;
