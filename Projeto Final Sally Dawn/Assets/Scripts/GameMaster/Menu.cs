@@ -4,12 +4,25 @@ using UnityEngine;
 
 public class Menu : MonoBehaviour
 {
+    [System.Serializable]
+    public class MenuLembrancas {
+        [HideInInspector]
+        public string name;
+        public bool SeTem;
+        public GameObject Descric, Raiz;
+    }
+
     public enum Telas { TelasInicial, TelaPrincipal, TelaJogar, TelaNovo, TelaContinuar, TelaJogo, TelaMenu, JanelaLembranca, JanelaOpcoes, TelaCredito, TelaSair }
     public Telas tela;
     public bool Jogando,IsMenu;
+
     public int nLembr;
-    public GameObject[] DescriLemb = new GameObject[7];
-    public bool[] TemLembr = new bool[6];
+    public Transform Raizes;
+    [SerializeField]
+    private Animator AnimiRaizes;
+    private Emocoes lmb;
+    public MenuLembrancas[] Lembr= new MenuLembrancas[7];
+
     public int nOpcoes;
     public GameObject[] JanOpcoes = new GameObject[4];
     public GameObject TelasInicial, TelaPrincipal, TelaJogar, TelaNovo, TelaContinuar, TelaJogo, TelaMenu, JanelaLembranca, JanelaOpcoes, TelaCredito, TelaSair;
@@ -17,6 +30,13 @@ public class Menu : MonoBehaviour
     void Start()
     {
         TrocarTela();
+        if (GameMaster.gm.Player != null)
+            lmb = GameMaster.gm.Player.GetComponent<Eventos>().Memorias;
+        if (Raizes == null)
+            Debug.LogError("Sem raizes transform menu");
+        else
+            AnimiRaizes = Raizes.GetChild(0).GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -44,15 +64,41 @@ public class Menu : MonoBehaviour
 
 
         if (tela == Telas.JanelaLembranca)
+            Lembrancas();
+        for (int i = 0; i < Lembr.Length; i++)
         {
-            if (nLembr != 0)
-                if (!TemLembr[nLembr - 1])
-                    nLembr = 0;
+            bool VerTem = false;
+            switch (Lembr[i].name)
+            {
+                case "Neutro":
+                    VerTem = lmb.Neutro;
+                    break;
+                case "Alegre":
+                    VerTem = lmb.Alegre;
+                    break;
+                case "Triste":
+                    VerTem = lmb.Triste;
+                    break;
+                case "Raiva":
+                    VerTem = lmb.Raiva;
+                    break;
+                case "Nojo":
+                    VerTem = lmb.Nojo;
+                    break;
+                case "Medo":
+                    VerTem = lmb.Medo;
+                    break;
+            }
 
-            for (int i = 0; i < DescriLemb.Length; i++)
-                if (DescriLemb[i] != null)
-                    DescriLemb[i].SetActive(i == nLembr);
+            Lembr[i].SeTem = VerTem;
+            if (i != 0)
+                if (Lembr[i].Raiz != null)
+                    Lembr[i].Raiz.SetActive(Lembr[i].SeTem);
+                else Debug.LogError("Menu sem lembranca raiz");
         }
+        AnimiRaizes.SetBool("Up", IsMenu);
+        if (IsMenu)
+            Raizes.position = GameMaster.gm.Player.transform.position;
 
         if (tela==Telas.JanelaOpcoes)
             for (int i = 0; i < JanOpcoes.Length; i++)
@@ -65,6 +111,19 @@ public class Menu : MonoBehaviour
         else if (tela == Telas.TelaJogo)
             Jogando = true;
 
+    }
+    private void Lembrancas()
+    {
+        if (nLembr != 0)
+            if (!Lembr[nLembr].SeTem)
+                nLembr = 0;
+
+        for (int i = 0; i < Lembr.Length; i++)
+        {
+            if (Lembr[i].Descric != null)
+                Lembr[i].Descric.SetActive(i == nLembr);
+            else Debug.LogError("Menu sem lembranca descricao");
+        }
     }
     private void TrocarTela()
     {

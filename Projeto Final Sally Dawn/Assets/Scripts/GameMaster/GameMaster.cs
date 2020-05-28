@@ -5,7 +5,10 @@ using UnityEngine;
 public class GameMaster : MonoBehaviour
 {
     public static GameMaster gm;
+    public GameObject Player;
+
     public bool PAUSADO;
+    
     [SerializeField]
     private static GameObject[] PlataformasDuplas;
     [SerializeField]
@@ -14,10 +17,14 @@ public class GameMaster : MonoBehaviour
     private static GameObject[] PlataformaEscada;
     [SerializeField]
     private static GameObject[] BotoesInverter;
+
+
     void Awake()
     {
         if (gm == null)
             gm = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
+        if (Player == null)
+            Debug.LogError("no player GM");
     }
     // Start is called before the first frame update
     void Start()
