@@ -14,7 +14,7 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: Three Trees Studios
   productName: "Sally Dawn - Ra\xEDzes das Emo\xE7\xF5es"
-  defaultCursor: {fileID: 2800000, guid: 0c53f0321646d7d468853114d60d2214, type: 3}
+  defaultCursor: {fileID: 2800000, guid: f185b4a9f8242ac4d8452b76c21f5887, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1
@@ -272,7 +272,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 0ff2f631d54235143b367e2cbd00108e, type: 3}
+      m_Icon: {fileID: 2800000, guid: 95a6f26898dfb95478e67a3470906551, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0
