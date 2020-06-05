@@ -35,7 +35,6 @@ public class Eventos : MonoBehaviour
         }
     }
     public Emocoes Memorias = new Emocoes();
-    [HideInInspector]
     public Emocoes PwrUp = new Emocoes();
     public enum Fase { Neutro, Alegre, Triste, Raiva, Nojo, Medo, Etereo }
     public Fase ambiente;

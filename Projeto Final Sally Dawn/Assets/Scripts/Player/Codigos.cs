@@ -9,12 +9,12 @@ public class Codigos : MonoBehaviour
     public bool Pull;
     [SerializeField]
     private Color Local;
-    [HideInInspector]
+ //   [HideInInspector]
     public Color[] Locais;
     [SerializeField]
     private string CodigoTxt;
     private float NextCod = 0;
-    [HideInInspector]
+ //   [HideInInspector]
     public Transform[] PontosAmbiente = new Transform[7];
     private Vector3[] PontoscCord = new Vector3[7];
 

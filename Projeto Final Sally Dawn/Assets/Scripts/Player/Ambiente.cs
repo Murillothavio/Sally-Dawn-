@@ -89,6 +89,25 @@ public class Ambiente : MonoBehaviour
         else if (ambiente == Fase.Etereo)
             ambiente = Fase.Neutro;
     }
+    public void SetAmbiente(int nf)
+    {
+        if (nf == 0)
+            ambiente = Fase.Neutro;
+        else if (nf == 1)
+            ambiente = Fase.Alegre;
+        else if (nf == 2)
+            ambiente = Fase.Triste;
+        else if (nf == 3)
+            ambiente = Fase.Raiva;
+        else if (nf == 4)
+            ambiente = Fase.Nojo;
+        else if (nf == 5)
+            ambiente = Fase.Medo;
+        else if (nf == 6)
+            ambiente = Fase.Etereo;
+        
+    }
+
     public void TrocaConfig()
     {
         NumFases = 0;
