@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AMB_Raiva_Material_FireCartoon
-  m_Shader: {fileID: -6465566751694194690, guid: a204b9acac606c345b067c0c5a53f480,
+  m_Name: VFX_Neutro_Material_FireCartoonUnlit
+  m_Shader: {fileID: -6465566751694194690, guid: 09f1c883c8df41c4785b3a74eeb44b85,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -22,16 +22,17 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_59264AB6:
+    - Texture2D_7F0422D8:
         m_Texture: {fileID: 2800000, guid: 4eba83a901c3e0447958d25fae3f0f91, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_57B99CDB: 0.5
-    - Vector1_7A060684: 6
-    - Vector1_98D87D8B: 0.15
-    - Vector1_B2D2BD08: 2
+    - Vector1_46685D07: 0.15
+    - Vector1_71B1A47E: 6
+    - Vector1_B270CDAD: 2
+    - Vector1_EC14F617: 0.15
     m_Colors:
-    - Color_B18B6765: {r: 10.68063, g: 1.5098273, b: 0, a: 0}
-    - Vector2_5FF500C7: {r: 0, g: -0.5, b: 0, a: 0}
-    - Vector2_DE361E2B: {r: -0.1, g: -0.5, b: 0, a: 0}
+    - Color_33696240: {r: 11.984314, g: 2.3215687, b: 0, a: 0}
+    - Vector2_47CA3711: {r: 0, g: -2, b: 0, a: 0}
+    - Vector2_93A7EBA3: {r: -0.1, g: -0.5, b: 0, a: 0}
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
