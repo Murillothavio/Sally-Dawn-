@@ -24,6 +24,7 @@ TagManager:
   - Destruir
   - IdiomaPT
   - IdiomaENG
+  - CheckPoint
   layers:
   - Default
   - TransparentFX

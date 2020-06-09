@@ -1,15 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.IO;
+﻿using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine;
 
 public class GameMaster : MonoBehaviour
 {
     public static GameMaster gm;
     public GameObject Player;
-    public string NameFileS = "saves", TypeSave = "txt", cu;
-   public  string filesave;
+    public string NameFileS = "saves", TypeSave = "txt";
+    [HideInInspector]
+    public  string filesave;
 
     public bool PAUSADO;
     
@@ -22,34 +21,37 @@ public class GameMaster : MonoBehaviour
     [SerializeField]
     private static GameObject[] BotoesInverter;
 
-
+    private Animator anim;
 
     public bool testsalvar, testloadar;
     [Header("save")]
     public float DataNumeroFase;
     public Emocoes DataPowerUps, DataMemorias;
 
-    public Vector3 _savepointsmenu;
-    public Vector3[] SavePointsMenu = new Vector3[7];
+    public Transform _savepointsmenu;
 
     public Color FaseCor;
-    //[HideInInspector]
+    [HideInInspector]
     public Color[] FasesEmCores = new Color[7];
 
     [System.Serializable]
     public class SaveData
     {
         public int NumeroDaFase;
+        public float[] SavePointMenuCoord = new float[3];
         public int[] NumeroMemorias = new int[7], NumeroPowerUp = new int[7];
     }
 
     public SaveData Zero, Atual;
     void Awake()
     {
+        filesave = "/" + NameFileS + "." + TypeSave;
         if (gm == null)
             gm = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
         if (Player == null)
             Debug.LogError("no player GM");
+        anim = GetComponent<Animator>();
+        SetData(Zero);
     }
     void Start()
     {
@@ -63,7 +65,6 @@ public class GameMaster : MonoBehaviour
     void Update()
     {
         PAUSADO = GetComponent<Menu>().IsMenu;
-        filesave = "/" + NameFileS + "." + TypeSave;
 
         if (testloadar)
         {
@@ -77,7 +78,7 @@ public class GameMaster : MonoBehaviour
         }
 
 
-        _savepointsmenu = SavePointsMenu[(int)DataNumeroFase];
+      //  _savepointsmenu = SavePointsMenu[(int)DataNumeroFase];
         FaseCor = FasesEmCores[(int)DataNumeroFase];
     }
 
@@ -85,6 +86,10 @@ public class GameMaster : MonoBehaviour
     {
         DataNumeroFase = GameMaster.gm.Player.GetComponent<Ambiente>().NumFases;
         Atual.NumeroDaFase = (int)DataNumeroFase;
+
+        Atual.SavePointMenuCoord[0] = _savepointsmenu.position.x;
+        Atual.SavePointMenuCoord[1] = _savepointsmenu.position.y;
+        Atual.SavePointMenuCoord[2] = _savepointsmenu.position.z;
 
         Atual.NumeroMemorias[0] = (DataMemorias.Neutro) ? 1 : 0;
         Atual.NumeroMemorias[1] = (DataMemorias.Alegre) ? 1 : 0;
@@ -94,13 +99,13 @@ public class GameMaster : MonoBehaviour
         Atual.NumeroMemorias[5] = (DataMemorias.Medo) ? 1 : 0;
         Atual.NumeroMemorias[6] = (DataMemorias.Etereo) ? 1 : 0;
 
-        Atual.NumeroPowerUp[0] = (DataMemorias.Neutro) ? 1 : 0;
-        Atual.NumeroPowerUp[1] = (DataMemorias.Alegre) ? 1 : 0;
-        Atual.NumeroPowerUp[2] = (DataMemorias.Triste) ? 1 : 0;
-        Atual.NumeroPowerUp[3] = (DataMemorias.Raiva) ? 1 : 0;
-        Atual.NumeroPowerUp[4] = (DataMemorias.Nojo) ? 1 : 0;
-        Atual.NumeroPowerUp[5] = (DataMemorias.Medo) ? 1 : 0;
-        Atual.NumeroPowerUp[6] = (DataMemorias.Etereo) ? 1 : 0;
+        Atual.NumeroPowerUp[0] = (DataPowerUps.Neutro) ? 1 : 0;
+        Atual.NumeroPowerUp[1] = (DataPowerUps.Alegre) ? 1 : 0;
+        Atual.NumeroPowerUp[2] = (DataPowerUps.Triste) ? 1 : 0;
+        Atual.NumeroPowerUp[3] = (DataPowerUps.Raiva) ? 1 : 0;
+        Atual.NumeroPowerUp[4] = (DataPowerUps.Nojo) ? 1 : 0;
+        Atual.NumeroPowerUp[5] = (DataPowerUps.Medo) ? 1 : 0;
+        Atual.NumeroPowerUp[6] = (DataPowerUps.Etereo) ? 1 : 0;
     }
 
     public void SetData(SaveData ds)
@@ -124,6 +129,12 @@ public class GameMaster : MonoBehaviour
         GameMaster.gm.Player.GetComponent<Eventos>().PwrUp.Medo = (ds.NumeroPowerUp[5] == 1);
         GameMaster.gm.Player.GetComponent<Eventos>().PwrUp.Etereo = (ds.NumeroPowerUp[6] == 1);
 
+        Vector3 posicao = Vector3.zero;
+        posicao.x = ds.SavePointMenuCoord[0];
+        posicao.y = ds.SavePointMenuCoord[1];
+        posicao.z = ds.SavePointMenuCoord[2];
+        GameMaster.gm.Player.transform.position = posicao;
+        
     }
     
     public static void InverterPlat()
@@ -196,6 +207,7 @@ public class GameMaster : MonoBehaviour
 
             SaveData data = formattter.Deserialize(stream) as SaveData;
             stream.Close();
+            Atual = data;
             return data;
 
         }
