@@ -14,7 +14,7 @@ public class Menu : MonoBehaviour
 
     public enum Telas { TelasInicial, TelaPrincipal, TelaJogar, TelaNovo, TelaContinuar, TelaJogo, TelaMenu, JanelaLembranca, JanelaOpcoes, TelaCredito, TelaSair }
     public Telas tela;
-    public bool Jogando,IsMenu;
+    public bool load=true, Jogando,IsMenu;
 
     public int nLembr;
     public Transform Raizes;
@@ -44,10 +44,16 @@ public class Menu : MonoBehaviour
     {
         if (tela == Telas.TelasInicial)
             if (Input.anyKeyDown)
-            {
-                tela = Telas.TelaPrincipal;
-                TrocarTela();
-            }
+                if (!load)
+                {
+                    tela = Telas.TelaPrincipal;
+                    TrocarTela();
+                }
+                else
+                {
+                    load = false;
+                    GameMaster.gm.testloadar = true;
+                }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {

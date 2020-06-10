@@ -51,7 +51,7 @@ public class GameMaster : MonoBehaviour
         if (Player == null)
             Debug.LogError("no player GM");
         anim = GetComponent<Animator>();
-        SetData(Zero);
+       
     }
     void Start()
     {
