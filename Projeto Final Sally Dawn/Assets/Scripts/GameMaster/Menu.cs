@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Menu : MonoBehaviour
 {
@@ -14,7 +15,11 @@ public class Menu : MonoBehaviour
 
     public enum Telas { TelasInicial, TelaPrincipal, TelaJogar, TelaNovo, TelaContinuar, TelaJogo, TelaMenu, JanelaLembranca, JanelaOpcoes, TelaCredito, TelaSair }
     public Telas tela;
-    public bool load=true, Jogando,IsMenu;
+    public enum Idiomas { Portugues, English}
+    public Idiomas idoma;
+    [SerializeField]
+    private GameObject[] TxtIdioma;
+    public bool load=true, Jogando,IsMenu, VaiResetar;
 
     public int nLembr;
     public Transform Raizes;
@@ -113,7 +118,10 @@ public class Menu : MonoBehaviour
             }
 
         if (tela == Telas.TelaPrincipal)
+        {
             Jogando = false;
+            VaiResetar = false;
+        }
         else if (tela == Telas.TelaJogo)
             Jogando = true;
 
@@ -155,15 +163,28 @@ public class Menu : MonoBehaviour
             TelaCredito.SetActive(tela == Telas.TelaCredito);
         if (TelaSair != null)
             TelaSair.SetActive(tela == Telas.TelaSair);
+        MudarIdioma();
+    }
+    private void MudarIdioma()
+    {
+        TxtIdioma = GameObject.FindGameObjectsWithTag("IdiomaPT");
+        foreach (var item in TxtIdioma)
+            if (item.GetComponent<TextMeshProUGUI>() != null)
+                item.GetComponent<TextMeshProUGUI>().enabled = (idoma == Idiomas.Portugues);
+
+        TxtIdioma = GameObject.FindGameObjectsWithTag("IdiomaENG");
+        foreach (var item in TxtIdioma)
+            if (item.GetComponent<TextMeshProUGUI>() != null)
+                item.GetComponent<TextMeshProUGUI>().enabled = (idoma == Idiomas.English);
     }
     #region GoTo
     public void GoToTelaSair() { tela = Telas.TelaSair; }
     public void GoToTelaMenu() { tela = Telas.TelaMenu; }
     public void GoToJanelaLembranca() { tela = Telas.JanelaLembranca; }
     public void GoToTelasInicial() { tela = Telas.TelasInicial; }
-    public void GoToTelaPrincipal() { tela = Telas.TelaPrincipal; }
+    public void GoToTelaPrincipal() { tela = Telas.TelaPrincipal;GameMaster.gm.testsalvar = true; }
     public void GoToTelaJogar() { tela = Telas.TelaJogar; }
-    public void GoToTelaNovo() { tela = Telas.TelaNovo; }
+    public void GoToTelaNovo() { tela = Telas.TelaNovo;        if (VaiResetar) GameMaster.gm.Resetar = true;    }
     public void GoToTelaContinuar() { tela = Telas.TelaContinuar; }
     public void GoToTelaJogo() { tela = Telas.TelaJogo; TrocarTela(); }
     public void GoToJanelaOpcoes() { tela = Telas.JanelaOpcoes; }
@@ -186,6 +207,17 @@ public class Menu : MonoBehaviour
     public void OpcoesUM() { nOpcoes = 0; }
     public void OpcoesDOIS() { nOpcoes = 1; }
     public void OpcoesTRES() { nOpcoes = 2; }
+    public void IdiomaPortugues() { idoma = Idiomas.Portugues; }
+    public void IdiomaIngles() { idoma = Idiomas.English; }
+    public  void ControleConjA()
+    {
+        GameMaster.gm.Player.GetComponent<Controles>().SetConjunto = Controles.GetConjunto.ConjuntoA;
+    }
+    public void ControleConjB()
+    {
+        GameMaster.gm.Player.GetComponent<Controles>().SetConjunto = Controles.GetConjunto.ConjuntoB;
+    }
+
     #endregion
 
     public void Sair()

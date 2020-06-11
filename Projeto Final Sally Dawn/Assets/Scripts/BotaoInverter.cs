@@ -39,7 +39,7 @@ public class BotaoInverter : MonoBehaviour
                 if (!Mudou)
                 {
                     Mudou = true;
-                    GameMaster.InverterPlat();
+                    GameMaster.gm.InverterPlat();
                 }
         }
     }

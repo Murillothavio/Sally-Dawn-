@@ -13,17 +13,17 @@ public class GameMaster : MonoBehaviour
     public bool PAUSADO;
     
     [SerializeField]
-    private static GameObject[] PlataformasDuplas;
+    private  GameObject[] PlataformasDuplas;
     [SerializeField]
-    private static GameObject[] PlataformasInvi;
+    private  GameObject[] PlataformasInvi;
     [SerializeField]
-    private static GameObject[] PlataformaEscada;
+    private  GameObject[] PlataformaEscada;
     [SerializeField]
-    private static GameObject[] BotoesInverter;
+    private  GameObject[] BotoesInverter;
 
     private Animator anim;
 
-    public bool testsalvar, testloadar;
+    public bool testsalvar, testloadar, Resetar;
     [Header("save")]
     public float DataNumeroFase;
     public Emocoes DataPowerUps, DataMemorias;
@@ -75,6 +75,11 @@ public class GameMaster : MonoBehaviour
         {
             testsalvar = false;
             SavePlayer();
+        }
+        if (Resetar)
+        {
+            Resetar = false;
+            SetData(Zero);
         }
 
 
@@ -137,7 +142,7 @@ public class GameMaster : MonoBehaviour
         
     }
     
-    public static void InverterPlat()
+    public  void InverterPlat()
     {
         Debug.Log("wert");
         PlataformasDuplas = GameObject.FindGameObjectsWithTag("PlataformasMovel");

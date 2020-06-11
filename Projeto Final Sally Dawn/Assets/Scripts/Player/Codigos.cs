@@ -143,7 +143,7 @@ public class Codigos : MonoBehaviour
         #endregion
 
         if (Input.GetKeyDown(MudarPlat))
-            GameMaster.InverterPlat();
+            GameMaster.gm.InverterPlat();
     }
     void LevarPonto()
     {
