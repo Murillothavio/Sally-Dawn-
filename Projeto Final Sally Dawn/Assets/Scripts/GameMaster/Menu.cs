@@ -30,6 +30,11 @@ public class Menu : MonoBehaviour
 
     public int nOpcoes;
     public GameObject[] JanOpcoes = new GameObject[4];
+
+    public int nObjwtivos;
+    public GameObject[] ListaObjetivos;
+
+    [HideInInspector]
     public GameObject TelasInicial, TelaPrincipal, TelaJogar, TelaNovo, TelaContinuar, TelaJogo, TelaMenu, JanelaLembranca, JanelaOpcoes, TelaCredito, TelaSair;
     // Start is called before the first frame update
     void Start()
@@ -111,11 +116,18 @@ public class Menu : MonoBehaviour
         if (IsMenu)
             Raizes.position = GameMaster.gm.Player.transform.position;
 
-        if (tela==Telas.JanelaOpcoes)
+        if (tela == Telas.JanelaOpcoes)
             for (int i = 0; i < JanOpcoes.Length; i++)
             {
                 JanOpcoes[i].SetActive(i == nOpcoes);
             }
+
+        if (tela == Telas.TelaMenu)
+        {
+            nObjwtivos = (int)GameMaster.gm.Player.GetComponent<Ambiente>().NumFases;
+            for (int i = 0; i < ListaObjetivos.Length; i++)
+                ListaObjetivos[i].SetActive(nObjwtivos == i);
+        }
 
         if (tela == Telas.TelaPrincipal)
         {

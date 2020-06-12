@@ -51,7 +51,8 @@ public class AndarPlayer : MonoBehaviour
     #region Ground
     [Header("region Ground")]
     public bool isGrounded;
-    private Vector3 GroundSize = new Vector3(1.16f, 1.5f, 0);
+    //[HideInInspector]
+    public Vector3 GroundSize = new Vector3(1.16f, 1.75f, 0);
     private Vector3 GroundCenter = new Vector3(0, .3f, 0);
     [HideInInspector] public bool StopVelocidade;
     private Vector3 Velocity;
@@ -84,8 +85,8 @@ public class AndarPlayer : MonoBehaviour
     [Header("Corda")]
     public GameObject CentroCorda;
     public float Angulo, Distancia;
-    public Vector3 Coeficiente, DeltaPosi;
-    public bool Balancando;
+    public Vector3 Coeficiente, DeltaPosi, CorrecaoPosi;
+    public bool Balancando, Torto;
    
     
     void Start()
@@ -253,7 +254,18 @@ public class AndarPlayer : MonoBehaviour
             //   v.y = rb.velocity.y;
             rb.velocity = v;
 
-            Debug.Log(moveSpeed);
+            if (horizontal != 0)
+            {
+                if (Torto)
+                {
+                    Torto = false;
+                    Vector3 corrigir = Vector3.zero;
+                    corrigir.x += (CorrecaoPosi.x * Mathf.Sign(horizontal));
+                //NOT TODAY    transform.position = corrigir;
+                }
+            }
+            else
+                Torto = true;
 
             Vector3 targetOlhar = transform.position;
             targetOlhar.x += horizontal * moveSpeed;
@@ -283,7 +295,7 @@ public class AndarPlayer : MonoBehaviour
 
             Vector3 v = Vector3.right * horizontal * moveSpeed /* Time.deltaTime *  (Mathf.Pow(AjustDez,2))*/;
             v.y = rb.velocity.y;
-            if (!Caindo && (stateAnimacao != StateMachine.Pulando && stateAnimacao != StateMachine.None))
+          //  if (!Caindo && (stateAnimacao != StateMachine.Pulando && stateAnimacao != StateMachine.None))   teste pulo
                 rb.velocity = v;
 
          //   Debug.Log((!Caindo) +" "+ (stateAnimacao != StateMachine.Pulando )+ ".");
@@ -303,8 +315,18 @@ public class AndarPlayer : MonoBehaviour
         var vel = rb.velocity;
         //Collider[] Grounds = Physics.OverlapBox(GroundCenter, GroundSize / 2, Quaternion.identity, mask);
         //isGrounded = Grounds != nulll;
-        Vector3 origem = transform.position + GroundCenter;
-        isGrounded = ((Physics.Raycast(origem, Vector3.down, GroundSize.y, Floor)) || (stateAnimacao == StateMachine.Escalando));
+        Vector3 origem = transform.position + GroundCenter, origemL = transform.position + GroundCenter, origemR = transform.position + GroundCenter;
+        origemL.x -= GroundSize.x / 2;
+        origemR.x += GroundSize.x / 2;
+
+        bool[] Chaos = new bool[3];
+
+        Chaos[0]= ((Physics.Raycast(origemL, Vector3.down, GroundSize.y, Floor)) || (stateAnimacao == StateMachine.Escalando));
+        Chaos[1]= ((Physics.Raycast(origem, Vector3.down, GroundSize.y, Floor)) || (stateAnimacao == StateMachine.Escalando));
+        Chaos[2]= ((Physics.Raycast(origemR, Vector3.down, GroundSize.y, Floor)) || (stateAnimacao == StateMachine.Escalando));
+
+        isGrounded = (Chaos[0] || Chaos[1] || Chaos[2]);
+        //isGrounded = ((Physics.Raycast(origem, Vector3.down, GroundSize.y, Floor)) || (stateAnimacao == StateMachine.Escalando));
         if (stateAnimacao == StateMachine.Walk || stateAnimacao == StateMachine.Ocioso || stateAnimacao == StateMachine.Escalando
             || stateAnimacao == StateMachine.Pulando || stateAnimacao == StateMachine.Caindo || stateAnimacao==StateMachine.None)
         {
@@ -331,10 +353,15 @@ public class AndarPlayer : MonoBehaviour
                 rb.velocity = vel;
             }
         }
+        Caindo = (vel.y < 0) && !isGrounded;
+        if (Caindo)
+            stateAnimacao = StateMachine.Caindo;
         if (vel.y < 0)
         {
- //             Debug.Log("funciona esse caralho");
-            vel.y += Physics.gravity.y * (AtualConfig.fallMultiplier) * Time.deltaTime;
+        if (Caindo)
+                Debug.Log(AtualConfig.fallMultiplier / 4);
+        if (Caindo)
+                vel.y += Physics.gravity.y * (AtualConfig.fallMultiplier/4);// * Time.deltaTime;
         }
         else if (vel.y > 0 && !Input.GetButton("Jump"))
         {
@@ -342,9 +369,7 @@ public class AndarPlayer : MonoBehaviour
             vel.y += Physics.gravity.y * (AtualConfig.lowJumpMultiplier - 1) * Time.deltaTime;
         }
         //  vel.y += Physics.gravity.y / 10;
-        Caindo = (vel.y < 0) && !isGrounded;
-        if (Caindo)
-            stateAnimacao = StateMachine.Caindo;
+       
         rb.velocity = vel;
         // if (!isGrounded)
         // {
@@ -482,10 +507,13 @@ public class AndarPlayer : MonoBehaviour
    
     private void OnDrawGizmos()
     {
-        Gizmos.color = new Color(0, 1, 0, .5f);
+        Gizmos.color = new Color(0, 0, 1, .85f);
 
         Gizmos.DrawCube(new Vector2(transform.position.x + GroundCenter.x, transform.position.y + GroundCenter.y),
             GroundSize);
+
+        Gizmos.color = new Color(1, 1, 0, 1);
+        Gizmos.DrawSphere(CorrecaoPosi+transform.position, 1);
 
         Gizmos.color = new Color(0, 0, 1, .9f);
         Gizmos.DrawCube(new Vector2(transform.position.x + GroundCenter.x, transform.position.y + GroundCenter.y),
