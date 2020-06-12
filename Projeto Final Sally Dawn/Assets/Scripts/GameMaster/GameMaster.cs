@@ -55,7 +55,7 @@ public class GameMaster : MonoBehaviour
     }
     void Start()
     {
-        InverterPlat();
+     //   InverterPlat();
 
         DataMemorias = GameMaster.gm.Player.GetComponent<Eventos>().Memorias;
         DataPowerUps = GameMaster.gm.Player.GetComponent<Eventos>().PwrUp;

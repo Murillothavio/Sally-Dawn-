@@ -153,7 +153,7 @@ public class Eventos : MonoBehaviour
             else
             if (other.GetComponent<ItsItem>().typeItem == ItsItem.TypeItem.PowerUp)
                 Coletar(PwrUp);
-            if (other.gameObject.name == "Mig0Tornado")
+            if (other.gameObject.name != "Mig0Tornado")
                 GetComponent<EfeitosSally>().Coletou();
             Destroy(other.gameObject, other.GetComponent<ItsItem>().LifeTime);
         }
