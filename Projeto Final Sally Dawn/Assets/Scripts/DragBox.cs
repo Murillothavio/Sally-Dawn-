@@ -11,7 +11,7 @@ public class DragBox : MonoBehaviour
     private Vector3 DeltaPosi;
     [Header("_____________")]
     public bool Draw;
-    [Range(1, 100)]
+    [Range(1, 300)]
     public float MaxRange = 30;
     private float MinRange = 5;
     public Vector3 Inicial;
@@ -57,7 +57,7 @@ public class DragBox : MonoBehaviour
         else
         {
             DeltaPosi = Vector3.zero;
-            rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+            rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
         }
     }
     private void OnTriggerEnter(Collider other)

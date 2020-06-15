@@ -19,7 +19,8 @@ public class BotaoInverter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        anim.SetBool("Desativar", DesAtivo);
+        if (anim != null)
+            anim.SetBool("Desativar", DesAtivo);
         if (Mudou)
         {
             currTemp += Time.deltaTime;

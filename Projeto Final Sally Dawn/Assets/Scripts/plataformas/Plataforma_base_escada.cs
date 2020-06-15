@@ -11,6 +11,7 @@ public class Plataforma_base_escada : MonoBehaviour
     public float DeltaTime;
     public bool IsBlue;
     public bool[] Ativo = new bool[5];
+    public GameObject[] Botoes = new GameObject[5];
 
     void Awake()
     {
@@ -55,6 +56,12 @@ public class Plataforma_base_escada : MonoBehaviour
         {
             Colunas[i].GetComponent<Plataforma_escada>().Ativo = Ativo[i];
             Colunas[i].GetComponent<Plataforma_escada>().IsBlue = IsBlue;
+        }
+
+        for (int i = 0; i < Botoes.Length; i++)
+        {
+            if (Botoes[i] != null)
+                Ativo[i] = Botoes[i].GetComponent<BotaoPrecionar>().Ocupado;
         }
     }
 }

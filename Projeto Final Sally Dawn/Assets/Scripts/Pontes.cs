@@ -6,6 +6,8 @@ public class Pontes : MonoBehaviour
 {
     public bool Ativo;
     public Animator anim;
+    [SerializeField]
+    private Collider Pressao;
 
     // Update is called once per frame
     void Update()
@@ -19,9 +21,11 @@ public class Pontes : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Ativo = true;
+        Pressao = other;
     }
     private void OnTriggerExit(Collider other)
     {
-        Ativo = false;
+        if (other == Pressao)
+            Ativo = false;
     }
 }
