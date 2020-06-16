@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BotaoPrecionar : MonoBehaviour
 {
-    public bool CicloB, Ocupado;
+    public bool CicloB, Ocupado, Mudar;
     public float CDTemp=2, passtemp;
     [SerializeField]
     private Collider Pressao;
@@ -12,6 +12,12 @@ public class BotaoPrecionar : MonoBehaviour
 
     void Update()
     {
+        if (CicloB != Mudar)
+        {
+            GameMaster.gm.InverterPlat();
+            Mudar = CicloB;
+        }
+
         if (passtemp >= 0)
             passtemp -= Time.deltaTime;
     }
