@@ -57,7 +57,7 @@ public class DragBox : MonoBehaviour
         else
         {
             DeltaPosi = Vector3.zero;
-            rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
+            rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
         }
     }
     private void OnTriggerEnter(Collider other)

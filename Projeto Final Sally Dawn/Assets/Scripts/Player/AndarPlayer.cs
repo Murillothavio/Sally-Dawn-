@@ -358,10 +358,11 @@ public class AndarPlayer : MonoBehaviour
             stateAnimacao = StateMachine.Caindo;
         if (vel.y < 0)
         {
-        if (Caindo)
-                Debug.Log(AtualConfig.fallMultiplier / 4);
-        if (Caindo)
-                vel.y += Physics.gravity.y * (AtualConfig.fallMultiplier/4);// * Time.deltaTime;
+            if (Caindo)
+            {
+                vel.y += Physics.gravity.y * (AtualConfig.fallMultiplier / 4);// * Time.deltaTime;
+                Debug.Log(vel.y);
+            }
         }
         else if (vel.y > 0 && !Input.GetButton("Jump"))
         {
