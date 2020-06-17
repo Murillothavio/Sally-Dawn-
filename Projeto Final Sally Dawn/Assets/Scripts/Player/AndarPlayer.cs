@@ -360,8 +360,8 @@ public class AndarPlayer : MonoBehaviour
         {
             if (Caindo)
             {
-                vel.y += Physics.gravity.y * (AtualConfig.fallMultiplier / 4);// * Time.deltaTime;
-                Debug.Log(vel.y);
+                vel.y += Physics.gravity.y * (AtualConfig.fallMultiplier / (4 * Time.deltaTime));
+                Debug.Log(Time.deltaTime);
             }
         }
         else if (vel.y > 0 && !Input.GetButton("Jump"))

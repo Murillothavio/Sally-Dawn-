@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameMaster : MonoBehaviour
 {
     public static GameMaster gm;
-    public GameObject Player;
+    public GameObject Player, Cam;
     public string NameFileS = "saves", TypeSave = "txt";
     [HideInInspector]
     public  string filesave;
@@ -50,6 +50,8 @@ public class GameMaster : MonoBehaviour
             gm = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
         if (Player == null)
             Debug.LogError("no player GM");
+        if (Cam == null)
+            Debug.LogError("No com GM");
         anim = GetComponent<Animator>();
        
     }

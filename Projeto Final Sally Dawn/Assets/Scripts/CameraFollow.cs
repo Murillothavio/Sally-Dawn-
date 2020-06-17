@@ -7,7 +7,8 @@ public class CameraFollow : MonoBehaviour
     //  public Controller2D target;
     public GameObject target;
     [Range(0, 20)] public float MenuDelta=10;
-    [Range(10, 100)] public float Afastamento = 25;
+    [Range(20, 50)] public float NovoAfastamento = 25;
+    private float Afasta = 25; 
     private float menudlt;
     private CapsuleCollider targetcollider;
     [SerializeField]
@@ -224,7 +225,10 @@ public class CameraFollow : MonoBehaviour
         focusPosition.y = Mathf.SmoothDamp(transform.position.y, focusPosition.y, ref smoothVelocityY, verticalSmoothTime);
         focusPosition += Vector2.right * currentLookAheadX;
         #endregion
-        transform.position = (Vector3)focusPosition + Vector3.forward * -1 * Afastamento;
+
+        Afasta = Mathf.MoveTowards(Afasta, NovoAfastamento, 1);
+
+        transform.position = (Vector3)focusPosition + Vector3.forward * -1 * Afasta;
         if (GameMaster.gm.PAUSADO)
             menudlt = Mathf.MoveTowards(menudlt, MenuDelta, 1);
         else

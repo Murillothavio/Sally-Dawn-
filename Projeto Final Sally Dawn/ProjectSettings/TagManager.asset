@@ -25,6 +25,7 @@ TagManager:
   - IdiomaPT
   - IdiomaENG
   - CheckPoint
+  - ZoomPoint
   layers:
   - Default
   - TransparentFX
