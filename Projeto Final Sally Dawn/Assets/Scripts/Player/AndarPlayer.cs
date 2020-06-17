@@ -14,6 +14,9 @@ public class AndarPlayer : MonoBehaviour
     [HideInInspector]
     public Controles cntr;
 
+    private float TempQueda;
+    public float AttPSeg = 10;
+
     private bool Zona_agarrar, Zona_segurar, Zona_interagir, Zona_morrer;
     public enum Zonas { Free, Agarrar, segurar, interagir, morrer, ItsSafe}
     public enum StateMachine { None, Walk, Agachado, Empurrando, Escalando, Pulando, Dancando, Caindo, Ocioso}
@@ -360,8 +363,12 @@ public class AndarPlayer : MonoBehaviour
         {
             if (Caindo)
             {
-                vel.y += Physics.gravity.y * (AtualConfig.fallMultiplier / (4 * Time.deltaTime));
-                Debug.Log(Time.deltaTime);
+                TempQueda -= Time.deltaTime;
+                if (TempQueda < 0) {
+                    vel.y += Physics.gravity.y * (AtualConfig.fallMultiplier / 4);
+                    Debug.Log(TempQueda);
+                    TempQueda = 1 / AttPSeg;
+                }
             }
         }
         else if (vel.y > 0 && !Input.GetButton("Jump"))
