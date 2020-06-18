@@ -58,7 +58,12 @@ public class TeleTransporte : MonoBehaviour
             NovPosi.z = Zposi;
 
             other.transform.position = NovPosi;
-
+            other.gameObject.GetComponent<AndarPlayer>().CanWalk = false;
+            Invoke("Libera", 1);
         }
+    }
+    void Libera()
+    {
+        GameMaster.gm.Player.gameObject.GetComponent<AndarPlayer>().CanWalk = true;
     }
 }
