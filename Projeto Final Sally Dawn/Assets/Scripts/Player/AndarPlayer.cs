@@ -329,15 +329,22 @@ public class AndarPlayer : MonoBehaviour
         Chaos[2]= ((Physics.Raycast(origemR, Vector3.down, GroundSize.y, Floor)) || (stateAnimacao == StateMachine.Escalando));
 
         isGrounded = (Chaos[0] || Chaos[1] || Chaos[2]);
-        //isGrounded = ((Physics.Raycast(origem, Vector3.down, GroundSize.y, Floor)) || (stateAnimacao == StateMachine.Escalando));
         if (stateAnimacao == StateMachine.Walk || stateAnimacao == StateMachine.Ocioso || stateAnimacao == StateMachine.Escalando
             || stateAnimacao == StateMachine.Pulando || stateAnimacao == StateMachine.Caindo || stateAnimacao==StateMachine.None)
         {
             if (isGrounded) currentJump = 0;
-            if (Kjump && !Kbaixo && (isGrounded || MaxJump > currentJump))
+
+            #region Jato
+            bool TemJato = GetComponent<Eventos>().PwrUp.Nojo;
+            float Extra;
+
+            if (TemJato) Extra = 1;
+            else Extra = 0;
+
+            #endregion
+
+            if (Kjump && !Kbaixo && (isGrounded || (MaxJump + Extra) > currentJump))
             {
-      //      Debug.Log(Kjump + "&&" + !Kbaixo + "&& (" + isGrounded + "||" + (MaxJump > currentJump) + "). ="+
-    //            (Kjump && !Kbaixo && (isGrounded || MaxJump > currentJump)));
                 pular = true;
                 currentJump++;
             }
@@ -354,6 +361,13 @@ public class AndarPlayer : MonoBehaviour
                 //      moveSpeed = AtualConfig.walkSpeed;
                 vel.y = AtualConfig.jumpforce;
                 rb.velocity = vel;
+
+                #region Efeito
+                if (MaxJump >= currentJump)
+                    GetComponent<EfeitosSally>().EfeitoPular();
+                else
+                    GetComponent<EfeitosSally>().EfeitoJato();
+                #endregion
             }
         }
         Caindo = (vel.y < 0) && !isGrounded;

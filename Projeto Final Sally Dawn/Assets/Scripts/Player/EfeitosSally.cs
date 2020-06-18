@@ -10,16 +10,10 @@ public class EfeitosSally : MonoBehaviour
         public GameObject Visual;
         public AudioClip Audio;
         public float TempoVida = 5;
-    }
-    [System.Serializable]
-    public class ObjetoEfeito
-    {
-        public GameObject Visual;
         public bool Ativo;
     }
-    public ParticleEffect Coletar;
 
-    public ObjetoEfeito Andar, Pular, Jato;
+    public ParticleEffect Coletar, Pular, Jato, Andar;
 
     private void Start()
     {
@@ -36,10 +30,33 @@ public class EfeitosSally : MonoBehaviour
     {
         if (Coletar.Visual != null)
         {
-            GameObject ef = Instantiate(Coletar.Visual,transform.position,Quaternion.identity) as GameObject;
+            GameObject ef = Instantiate(Coletar.Visual, transform.position, Quaternion.identity) as GameObject;
             ef.transform.parent = transform;
-            Debug.Log("efeitou");
-             Destroy(ef, Coletar.TempoVida);
+            Destroy(ef, Coletar.TempoVida);
         }
+        else
+            Debug.LogError("Sem Efeito Coletar");
+    }
+    public void EfeitoPular() {
+        if (Pular.Visual != null)
+        {
+            GameObject ef = Instantiate(Pular.Visual, transform.position, Quaternion.identity) as GameObject;
+            Destroy(ef, Coletar.TempoVida);
+
+        }
+        else Debug.LogError("Sem Efeito Pular");
+    }
+    public void EfeitoJato()
+    {
+        Jato.Ativo = true;
+        if (Jato.Visual != null)
+            Jato.Visual.SetActive(Jato.Ativo);
+        Invoke("DesligaJato", Jato.TempoVida);
+    }
+    void DesligaJato()
+    {
+        Jato.Ativo = false;
+        if (Jato.Visual != null)
+            Jato.Visual.SetActive(Jato.Ativo);
     }
 }
