@@ -34,7 +34,10 @@ public class DragBox : MonoBehaviour
         {
             DistanP = CalcularDistBox(play);
             if (!(DistanP < MinRange))
+            {
                 transform.position = Inicial;
+                transform.eulerAngles = Vector3.zero;
+            }
         }
 
         seg = play.GetComponent<AndarPlayer>().Segurando;

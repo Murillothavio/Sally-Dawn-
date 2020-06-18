@@ -5,7 +5,11 @@ using UnityEngine;
 public class Plataforma_Attach : MonoBehaviour
 {
     public GameObject Player, Caixote;
-    
+
+    private void Start()
+    {
+        Debug.Log(gameObject.name);
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
