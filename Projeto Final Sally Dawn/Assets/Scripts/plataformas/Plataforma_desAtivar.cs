@@ -8,7 +8,7 @@ public class Plataforma_desAtivar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.SetActive(Visivel);
+      //  gameObject.SetActive(Visivel);
 
     }
 

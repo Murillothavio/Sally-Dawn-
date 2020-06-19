@@ -24,6 +24,8 @@ Material:
     m_TexEnvs: []
     m_Floats:
     - Vector1_3A66974D: 0.438
+    - Vector1_A1379391: 0
+    - _Disolve: 0
     m_Colors:
     - Color_ABE3A6A8: {r: 0.9811321, g: 0.6247775, b: 0.6247775, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}

@@ -8,7 +8,7 @@ public class Plataforma_Attach : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log(gameObject.name);
+      //  Debug.Log(gameObject.name);
     }
     private void OnCollisionEnter(Collision collision)
     {
