@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(MeshRenderer))]
 public class Plataforma_desAtivar : MonoBehaviour
 {
     public bool Visivel;
@@ -9,13 +10,27 @@ public class Plataforma_desAtivar : MonoBehaviour
     public Collider cl;
     [SerializeField]
     private float TargetDisolve, ShDisolve;
-    public Shader sh;
+    public Material[] Shaders = new Material[2];
+    public Material sh;
+    [SerializeField]
+    private MeshRenderer mr;
     // Start is called before the first frame update
     void Start()
     {
         //  gameObject.SetActive(Visivel);
         cl = GetComponent<Collider>();
-        sh = GetComponent<Shader>();
+        if (cl == null)
+            Debug.LogError("Sem collider invi");
+
+        mr = GetComponent<MeshRenderer>();
+        sh = Shaders[(Visivel) ? 1 : 0];
+        if (sh == null)
+            Debug.LogError("Sem shader invi");
+        else 
+        {
+            mr.material = sh;
+        }
+
         Mudar = Visivel;
     }
 
@@ -24,6 +39,8 @@ public class Plataforma_desAtivar : MonoBehaviour
     {
         TargetDisolve = (Visivel) ? 1 : -1;
         ShDisolve = Mathf.MoveTowards(ShDisolve, TargetDisolve, Time.deltaTime);
+
+        sh.SetFloat("_Disolve", ShDisolve);
 
         if (Mudar!=Visivel)
         {

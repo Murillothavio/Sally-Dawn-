@@ -160,12 +160,11 @@ public class GameMaster : MonoBehaviour
         PlataformasInvi = GameObject.FindGameObjectsWithTag("PlataformaInvisivel");
         foreach (var item in PlataformasInvi)
         {
-            bool Visivel = item.activeInHierarchy;
-            if (Visivel)
-                Visivel = false;
-            else
-                Visivel = true;
-            item.SetActive(Visivel);
+            if (item.GetComponent<Plataforma_desAtivar>() != null)
+                if (item.GetComponent<Plataforma_desAtivar>().Visivel)
+                    item.GetComponent<Plataforma_desAtivar>().Visivel = false;
+                else
+                    item.GetComponent<Plataforma_desAtivar>().Visivel = true;
         }
 
         PlataformaEscada = GameObject.FindGameObjectsWithTag("PlataformaEscada");
