@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AMB_Tristeza_Material_PlataformaCaixote
+  m_Name: AMB_Tristeza_Shader_Upgrade
   m_Shader: {fileID: -6465566751694194690, guid: 8c43513c7696f39449122dbff84b20eb,
     type: 3}
   m_ShaderKeywords: 
@@ -23,17 +23,13 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_9F38D001:
-        m_Texture: {fileID: 2800000, guid: 666acba7c1763124c82e23dfc5067e44, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7177d2beacb3bbb49950932ab4913e2a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_A4789AB6:
-        m_Texture: {fileID: 2800000, guid: e934e3111efbbc647bca367d1872b117, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_4A878FAB_Texture:
-        m_Texture: {fileID: 2800000, guid: 666acba7c1763124c82e23dfc5067e44, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3e18bc101f4f8934bb219806009a4ca6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats: []
     m_Colors:
-    - Color_3416E365: {r: 785404, g: 415318.34, b: 0, a: 0}
+    - Color_3416E365: {r: 785404, g: 320740.9, b: 0, a: 0}
