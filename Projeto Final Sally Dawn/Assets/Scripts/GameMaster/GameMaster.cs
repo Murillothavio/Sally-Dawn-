@@ -146,14 +146,16 @@ public class GameMaster : MonoBehaviour
     
     public  void InverterPlat()
     {
-        Debug.Log("wert");
+        Debug.Log("inverteu");
         PlataformasDuplas = GameObject.FindGameObjectsWithTag("PlataformasMovel");
         foreach (var item in PlataformasDuplas)
+        {
             if (item.GetComponent<Plataforma_movimento>() != null)
                 if (item.GetComponent<Plataforma_movimento>().Alternado)
                     item.GetComponent<Plataforma_movimento>().Alternado = false;
                 else
                     item.GetComponent<Plataforma_movimento>().Alternado = true;
+        }
 
         PlataformasInvi = GameObject.FindGameObjectsWithTag("PlataformaInvisivel");
         foreach (var item in PlataformasInvi)
@@ -168,10 +170,12 @@ public class GameMaster : MonoBehaviour
 
         PlataformaEscada = GameObject.FindGameObjectsWithTag("PlataformaEscada");
         foreach (var item in PlataformaEscada)
+        {
             if (item.GetComponent<Plataforma_base_escada>() != null)
                 if (item.GetComponent<Plataforma_base_escada>().IsBlue)
                     item.GetComponent<Plataforma_base_escada>().IsBlue = false;
                 else item.GetComponent<Plataforma_base_escada>().IsBlue = true;
+        }
 
         BotoesInverter = GameObject.FindGameObjectsWithTag("BotaoInverter");
         foreach (var item in BotoesInverter)

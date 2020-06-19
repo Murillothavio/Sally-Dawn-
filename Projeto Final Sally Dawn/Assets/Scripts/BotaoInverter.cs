@@ -13,6 +13,8 @@ public class BotaoInverter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        Debug.Log("aaaaaa botao inverter" + gameObject.name);
         anim = GetComponent<Animator>();
     }
 
