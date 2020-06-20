@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class Menu : MonoBehaviour
@@ -181,13 +182,21 @@ public class Menu : MonoBehaviour
     {
         TxtIdioma = GameObject.FindGameObjectsWithTag("IdiomaPT");
         foreach (var item in TxtIdioma)
+        {
             if (item.GetComponent<TextMeshProUGUI>() != null)
                 item.GetComponent<TextMeshProUGUI>().enabled = (idoma == Idiomas.Portugues);
+            if (item.GetComponent<Text>() != null)
+                item.GetComponent<Text>().enabled = (idoma == Idiomas.Portugues);
+        }
 
         TxtIdioma = GameObject.FindGameObjectsWithTag("IdiomaENG");
         foreach (var item in TxtIdioma)
+        {
             if (item.GetComponent<TextMeshProUGUI>() != null)
                 item.GetComponent<TextMeshProUGUI>().enabled = (idoma == Idiomas.English);
+            if (item.GetComponent<Text>() != null)
+                item.GetComponent<Text>().enabled = (idoma == Idiomas.English);
+        }
     }
     #region GoTo
     public void GoToTelaSair() { tela = Telas.TelaSair; }
