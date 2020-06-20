@@ -102,6 +102,8 @@ public class AndarPlayer : MonoBehaviour
         HeightCollider = Corpo.height;
         CenterCollider = Corpo.center.y;
         RadiusCollider = Corpo.radius;
+        if (SaveTarget == null)
+            Debug.LogError("Sem SaveTarget");
     }
     private void FixedUpdate()
     {
