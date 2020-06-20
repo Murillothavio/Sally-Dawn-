@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ReiRatoAni : MonoBehaviour
 {
-    public bool Corra, Reset;
+    public bool Corra, Reset, Ataque;
     private Animator anim;
 
     private void Start()
@@ -17,5 +17,7 @@ public class ReiRatoAni : MonoBehaviour
         anim.SetBool("Corra", Corra);
 
         anim.SetBool("Reset", Reset);
+
+        anim.SetBool("Ataque", Ataque);
     }
 }

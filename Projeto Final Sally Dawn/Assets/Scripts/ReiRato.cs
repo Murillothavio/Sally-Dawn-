@@ -20,7 +20,7 @@ public class ReiRato : MonoBehaviour
             SetT = false;
             if (Corra)
             {
-                anim.SetTrigger("Reset");
+                anim.SetTrigger("Ataque");
                 Corra = false;
                 Gambiarra = false;
             }
@@ -38,7 +38,7 @@ public class ReiRato : MonoBehaviour
             SetT = true;
         }
     }
-    private void OnTriggerExit(Collider other)
+   /* private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player")
         {
@@ -47,5 +47,5 @@ public class ReiRato : MonoBehaviour
             else
                 Gambiarra = true;
         }
-    }
+    }*/
 }

@@ -35,8 +35,12 @@ public class Bomb : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        Debug.Log(other.tag);
         if (dest)
             if (other.gameObject.tag == "Destruir")
+            {
+                Debug.Log(other.gameObject.name);
                 Destroy(other.gameObject);
+            }
     }
 }
