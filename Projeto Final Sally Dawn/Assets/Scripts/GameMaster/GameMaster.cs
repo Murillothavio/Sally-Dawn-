@@ -20,6 +20,8 @@ public class GameMaster : MonoBehaviour
     private  GameObject[] PlataformaEscada;
     [SerializeField]
     private  GameObject[] BotoesInverter;
+    [SerializeField]
+    private GameObject[] PortasMedo;
 
     private Animator anim;
 
@@ -183,6 +185,13 @@ public class GameMaster : MonoBehaviour
                 if (item.GetComponent<BotaoInverter>().DesAtivo)
                     item.GetComponent<BotaoInverter>().DesAtivo = false;
                 else item.GetComponent<BotaoInverter>().DesAtivo = true;
+        }
+
+        PortasMedo= GameObject.FindGameObjectsWithTag("PortaMedo");
+        foreach (var item in PortasMedo)
+        {
+            if (item.GetComponent<Porta_Medo>() != null)
+                item.GetComponent<Porta_Medo>().Ativo = !item.GetComponent<Porta_Medo>().Ativo;
         }
     }
 

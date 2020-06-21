@@ -11,7 +11,8 @@ public class MedoFantasma : MonoBehaviour
     private Vector3 PInicial, PAtual;
     [Range(1,75)]
     public float IrFrente, IrtTras;
-    private float Ir, DistanciaMenor, DistanciaMaior, DistanciaAtual, Ang=90;
+    private float Ir, DistanciaMenor, DistanciaMaior, DistanciaAtual;
+   public float Ang=90;
 
 // Start is called before the first frame update
 void Start()
@@ -27,9 +28,9 @@ void Start()
         DistanciaMenor = PInicial.x - IrtTras;
         DistanciaMaior = PInicial.x + IrFrente;
 
-        if (DistanciaAtual > DistanciaMaior)
+        if (DistanciaAtual >= DistanciaMaior)
             IrB = true;
-        if (DistanciaAtual < DistanciaMenor)
+        if (DistanciaAtual <= DistanciaMenor)
             IrB = false;
 
         if (IndoB!=IrB)

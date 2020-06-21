@@ -26,6 +26,7 @@ TagManager:
   - IdiomaENG
   - CheckPoint
   - ZoomPoint
+  - PortaMedo
   layers:
   - Default
   - TransparentFX

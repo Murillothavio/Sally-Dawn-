@@ -382,7 +382,6 @@ public class AndarPlayer : MonoBehaviour
                 TempQueda -= Time.deltaTime;
                 if (TempQueda < 0) {
                     vel.y += Physics.gravity.y * (AtualConfig.fallMultiplier / 4);
-                    Debug.Log(vel.y);
                     TempQueda = 1 / AttPSeg;
                 }
             }
