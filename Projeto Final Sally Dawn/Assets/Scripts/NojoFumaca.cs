@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(MeshRenderer))]
 public class NojoFumaca : MonoBehaviour
 {
     public GameObject Maquina;
     public Material sh;
+    public MeshRenderer mr;
     public bool Ativo;
     [SerializeField]
     private float dissolve;
@@ -17,7 +19,8 @@ public class NojoFumaca : MonoBehaviour
         if (Maquina == null)
             Debug.LogError("Sem Maquina de Nojo");
 
-        sh = GetComponent<MeshRenderer>().material;
+        mr = GetComponent<MeshRenderer>();
+        sh =mr.material;
         if (sh == null)
             Debug.LogError("SemShader Nojo");
 
@@ -32,8 +35,10 @@ public class NojoFumaca : MonoBehaviour
         Ativo = (Maquina != null);
 
         dissolve = Ativo ? 1 : 0;
+        dissolve = Mathf.MoveTowards(dissolve, (Ativo ? 1 : 0), Time.deltaTime);
 
         Filho.SetActive(Ativo);
-        sh.enableInstancing = Ativo;
+        sh.SetFloat("_Disolve", dissolve);
+        mr.enabled = (dissolve == 0);
     }
 }
