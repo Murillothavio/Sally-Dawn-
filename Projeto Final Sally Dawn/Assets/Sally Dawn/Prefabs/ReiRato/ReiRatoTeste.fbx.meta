@@ -14,7 +14,7 @@ ModelImporter:
     second: Armature|Armature|mixamo.com|Layer0.001
   - first:
       74: 3591740854655688942
-    second: Armature|Armature|mixamo.com|Layer0.002
+    second: Mutant Jump Attack
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -131,11 +131,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|Armature|mixamo.com|Layer0.002
+      name: Mutant Jump Attack
       takeName: Armature|Armature|mixamo.com|Layer0.002
       internalID: 3591740854655688942
       firstFrame: 0
-      lastFrame: 111
+      lastFrame: 50
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
