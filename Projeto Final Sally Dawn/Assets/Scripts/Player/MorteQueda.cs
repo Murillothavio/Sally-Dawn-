@@ -23,12 +23,13 @@ public class MorteQueda : MonoBehaviour
         if (tdelay < 2)
             tdelay += Time.deltaTime;
         else if (Cam != null)
-            Distancia = GameMaster.CalcularDist(transform, Cam); 
+            Distancia = GameMaster.CalcularDist(transform, Cam);
 
-        if (Distancia > Max)
-        {
-            GetComponent<AndarPlayer>().Morrer();
-            Debug.Log("morrer");
-        }
+        if (GetComponent<AndarPlayer>().CanWalk)
+            if (Distancia > Max)
+            {
+                GetComponent<AndarPlayer>().Morrer();
+                Debug.Log("morrer");
+            }
     }
 }
