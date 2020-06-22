@@ -20,13 +20,15 @@ void Start()
         PInicial = transform.position;
         DistanciaAtual = PInicial.x;
         PAtual = PInicial;
+
+        DistanciaMenor = PInicial.x - IrtTras;
+        DistanciaMaior = PInicial.x + IrFrente;
     }
 
     // Update is called once per frame
     void Update()
     {
-        DistanciaMenor = PInicial.x - IrtTras;
-        DistanciaMaior = PInicial.x + IrFrente;
+       
 
         if (DistanciaAtual >= DistanciaMaior)
             IrB = true;
