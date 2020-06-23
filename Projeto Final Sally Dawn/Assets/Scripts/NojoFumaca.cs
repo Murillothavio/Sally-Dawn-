@@ -8,6 +8,7 @@ public class NojoFumaca : MonoBehaviour
     public GameObject Maquina;
     public Material sh;
     public MeshRenderer mr;
+    public Collider cr;
     public bool Ativo;
     [SerializeField]
     private float dissolve;
@@ -27,6 +28,8 @@ public class NojoFumaca : MonoBehaviour
         Filho = transform.GetChild(0).gameObject;
         if (Filho == null)
             Debug.LogError("Sem Morte Fumaca");
+
+        cr = GetComponent<Collider>();
     }
 
     // Update is called once per frame
@@ -37,8 +40,14 @@ public class NojoFumaca : MonoBehaviour
         dissolve = Ativo ? 1 : 0;
         dissolve = Mathf.MoveTowards(dissolve, (Ativo ? 1 : 0), Time.deltaTime);
 
-        Filho.SetActive(Ativo);
-        sh.SetFloat("_Disolve", dissolve);
-        mr.enabled = (dissolve != 0);
+        if (Filho != null)
+        {
+            Filho.SetActive(Ativo);
+            sh.SetFloat("_Disolve", dissolve);
+        }
+        if (mr != null)
+            mr.enabled = (dissolve != 0);
+        if (cr != null)
+            cr.enabled = (dissolve != 0);
     }
 }
