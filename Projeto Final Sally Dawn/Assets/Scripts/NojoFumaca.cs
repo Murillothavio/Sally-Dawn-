@@ -39,6 +39,6 @@ public class NojoFumaca : MonoBehaviour
 
         Filho.SetActive(Ativo);
         sh.SetFloat("_Disolve", dissolve);
-        mr.enabled = (dissolve == 0);
+        mr.enabled = (dissolve != 0);
     }
 }

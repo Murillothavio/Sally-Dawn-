@@ -27,6 +27,7 @@ Material:
     - Vector1_2F13847D: 1
     - Vector1_51C9BAA4: 2
     - Vector1_8FB8E279: 0.1
+    - _Disolve: 1
     m_Colors:
     - Color_265DFBB4: {r: 0, g: 0.7490196, b: 0.07058824, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}

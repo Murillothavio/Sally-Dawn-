@@ -181,10 +181,9 @@ public class GameMaster : MonoBehaviour
         BotoesInverter = GameObject.FindGameObjectsWithTag("BotaoInverter");
         foreach (var item in BotoesInverter)
         {
-            if (item.GetComponent<BotaoInverter>() != null)
-                if (item.GetComponent<BotaoInverter>().DesAtivo)
-                    item.GetComponent<BotaoInverter>().DesAtivo = false;
-                else item.GetComponent<BotaoInverter>().DesAtivo = true;
+            if (item.GetComponent<Plataforma_Botao>() != null)
+                item.GetComponent<Plataforma_Botao>().Ativo =
+                   !item.GetComponent<Plataforma_Botao>().Ativo;
         }
 
         PortasMedo= GameObject.FindGameObjectsWithTag("PortaMedo");

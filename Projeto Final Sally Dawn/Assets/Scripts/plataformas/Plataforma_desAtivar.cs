@@ -32,6 +32,7 @@ public class Plataforma_desAtivar : MonoBehaviour
         }
 
         Mudar = Visivel;
+        MudarCollider();
     }
 
     // Update is called once per frame
