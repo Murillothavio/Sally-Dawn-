@@ -21,11 +21,12 @@ public class NojoFumaca : MonoBehaviour
             Debug.LogError("Sem Maquina de Nojo");
 
         mr = GetComponent<MeshRenderer>();
-        sh =mr.material;
+        sh = mr.material;
         if (sh == null)
             Debug.LogError("SemShader Nojo");
 
-        Filho = transform.GetChild(0).gameObject;
+        if (transform.childCount > 0)
+            Filho = transform.GetChild(0).gameObject;
         if (Filho == null)
             Debug.LogError("Sem Morte Fumaca");
 
