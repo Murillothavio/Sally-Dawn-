@@ -222,17 +222,20 @@ public class AndarPlayer : MonoBehaviour
 
         isTeto = (Tetos[0] || Tetos[1] || Tetos[2]);
 
+        if (!isTeto)
+        {
+            stateAnimacao = StateMachine.None;
+            if (isGrounded && stateAnimacao != StateMachine.Pulando)
+                stateAnimacao = StateMachine.Walk;
+
+            if (stateAnimacao == StateMachine.Walk)
+                if (TempoOcioso > AtualConfig.MaxOcioso)
+                    stateAnimacao = StateMachine.Ocioso;
+
+            if (Kbaixo && (stateAnimacao == StateMachine.Walk || stateAnimacao == StateMachine.Ocioso))
+                stateAnimacao = StateMachine.Agachado;
+        }
         
-        stateAnimacao = StateMachine.None;
-        if (isGrounded && stateAnimacao != StateMachine.Pulando)
-            stateAnimacao = StateMachine.Walk;
-
-        if (stateAnimacao == StateMachine.Walk)  
-            if (TempoOcioso > AtualConfig.MaxOcioso)
-                stateAnimacao = StateMachine.Ocioso;
-
-        if (Kbaixo && (stateAnimacao == StateMachine.Walk || stateAnimacao == StateMachine.Ocioso))
-            stateAnimacao = StateMachine.Agachado;
         if (Caindo)
             stateAnimacao = StateMachine.Caindo;
         if (!pular)
@@ -449,7 +452,7 @@ public class AndarPlayer : MonoBehaviour
     }
     void SetAnimacoes()
     {
-        Acao.SetBool("Agachado", Kbaixo);
+        Acao.SetBool("Agachado", (stateAnimacao == StateMachine.Agachado));
         Acao.SetFloat("Queda", rb.velocity.y);
         if (pular)
             Acao.SetTrigger("Jump");

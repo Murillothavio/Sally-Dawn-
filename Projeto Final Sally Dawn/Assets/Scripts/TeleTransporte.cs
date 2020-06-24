@@ -8,6 +8,8 @@ public class TeleTransporte : MonoBehaviour
     [SerializeField]
     private Transform Saida;
     private float Zposi;
+    private GameObject Garota;
+    public Vector3 NovPosi;
 
     // Start is called before the first frame update
     void Start()
@@ -46,22 +48,29 @@ public class TeleTransporte : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            Garota = other.gameObject;
             if (OutraParte == null)
                 Debug.LogError("Sem portal");
             if (Saida == null)
                 Debug.Log("Sem saida do portal");
 
-            Zposi = other.transform.position.z;
+            Zposi = Garota.transform.position.z;
             Debug.Log(" cant walk");
 
-            Vector3 NovPosi = Saida.position;
+            NovPosi = Saida.position;
             NovPosi.z = Zposi;
-
-            other.transform.position = NovPosi;
             other.gameObject.GetComponent<AndarPlayer>().CanWalk = false;
-            Invoke("Libera", 1);
+            Invoke("Mudar", 1);
+            GameMaster.gm.FadeIN(2);
         }
     }
+
+    void Mandar()
+    {
+        Garota.transform.position = NovPosi;
+        Invoke("Libera", 1);
+    }
+
     void Libera()
     {
         GameMaster.gm.Player.gameObject.GetComponent<AndarPlayer>().CanWalk = true;
