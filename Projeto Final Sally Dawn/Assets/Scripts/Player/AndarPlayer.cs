@@ -461,7 +461,8 @@ public class AndarPlayer : MonoBehaviour
         Acao.SetBool("Agarra", (stateAnimacao == StateMachine.Escalando));// Escalando);
         Acao.SetBool("Dance", stateAnimacao == StateMachine.Ocioso);
         Acao.SetFloat("Dancas", AtualConfig.QlAnimaOcioso);
-        Acao.SetFloat("Wspeed", horizontal * horizontal * moveSpeed / AtualConfig.runSpeed);
+        if (CanWalk)
+            Acao.SetFloat("Wspeed", horizontal * horizontal * moveSpeed / AtualConfig.runSpeed);
         Acao.SetFloat("Arrastar", horizontal * Arrastar);
         Acao.SetBool("IsGround", isGrounded);
         Acao.SetFloat("VerticalSpeed", vertical);
