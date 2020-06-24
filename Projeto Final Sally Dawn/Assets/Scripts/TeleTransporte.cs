@@ -55,12 +55,12 @@ public class TeleTransporte : MonoBehaviour
                 Debug.Log("Sem saida do portal");
 
             Zposi = Garota.transform.position.z;
-            Debug.Log(" cant walk");
 
             NovPosi = Saida.position;
             NovPosi.z = Zposi;
             other.gameObject.GetComponent<AndarPlayer>().CanWalk = false;
-            Invoke("Mudar", 1);
+
+            Invoke("Mandar", 1);
             GameMaster.gm.FadeIN(2);
         }
     }

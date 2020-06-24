@@ -43,11 +43,11 @@ public class Plataforma_movimento : MonoBehaviour
     public Plat Translacaoc = new Plat(Vector3.up, 0, 0, 190, 10);
     public Plat Horarioc = new Plat(Vector3.zero, 0, 0, 8, 0);
     public Plat Anhorarioc = new Plat(Vector3.zero, 0, 0, -8, 0);*/
-    [HideInInspector]
+    //[HideInInspector]
     public Plat AaCaminho;
-    [HideInInspector]
+    //[HideInInspector]
     public Plat BbCaminho;
-    [HideInInspector]
+    //[HideInInspector]
     public Plat NwCaminho;
 
     public bool LookAt;
@@ -134,7 +134,10 @@ public class Plataforma_movimento : MonoBehaviour
         PontoCentro = gb.transform.GetChild(2).transform.position - Ponto0;
 
         PontoDelta = PontoRight - PontoLeft;
-        float ang = Mathf.Atan(PontoDelta.y / PontoDelta.x) * Mathf.Rad2Deg;
+        float ang;
+        if (PontoDelta.x != 0)
+            ang = Mathf.Atan(PontoDelta.y / PontoDelta.x) * Mathf.Rad2Deg;
+        else ang = 0;
         AngDirecao = Mathf.Abs(ang);
 
         Vector3 PClinha = new Vector3(Mathf.Abs(PontoCentro.x), Mathf.Abs(PontoCentro.y), 0);
