@@ -11,17 +11,18 @@ public class GameMaster : MonoBehaviour
     public  string filesave;
 
     public bool PAUSADO;
-    
-    [SerializeField]
+     
+  //  [SerializeField]
     private  GameObject[] PlataformasDuplas;
-    [SerializeField]
+    //[SerializeField]
     private  GameObject[] PlataformasInvi;
-    [SerializeField]
+   // [SerializeField]
     private  GameObject[] PlataformaEscada;
-    [SerializeField]
+    //[SerializeField]
     private  GameObject[] BotoesInverter;
-    [SerializeField]
+   // [SerializeField]
     private GameObject[] PortasMedo;
+    private GameObject[] Ciclo;
 
     private Animator anim, CamFade;
     private float SpeedFade = 1;
@@ -194,6 +195,14 @@ public class GameMaster : MonoBehaviour
             if (item.GetComponent<Porta_Medo>() != null)
                 item.GetComponent<Porta_Medo>().Ativo = !item.GetComponent<Porta_Medo>().Ativo;
         }
+
+        Ciclo = GameObject.FindGameObjectsWithTag("CicloFase");
+        foreach (var item in Ciclo)
+        {
+            if (item.GetComponent<InicioFaseCiclo>() != null)
+                item.GetComponent<InicioFaseCiclo>().Ativo = !item.GetComponent<InicioFaseCiclo>().Ativo;
+        }
+
     }
 
     public static float  CalcularDist(Transform a, Transform b)

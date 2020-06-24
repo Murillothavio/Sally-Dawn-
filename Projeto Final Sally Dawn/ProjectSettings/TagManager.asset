@@ -28,6 +28,7 @@ TagManager:
   - ZoomPoint
   - PortaMedo
   - CantMove
+  - CicloFase
   layers:
   - Default
   - TransparentFX

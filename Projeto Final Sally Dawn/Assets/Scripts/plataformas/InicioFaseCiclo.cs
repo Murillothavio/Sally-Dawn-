@@ -10,8 +10,8 @@ public class InicioFaseCiclo : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-
-            GameMaster.gm.InverterPlat();
+            if (Ativo)
+                GameMaster.gm.InverterPlat();
         }
     }
 }

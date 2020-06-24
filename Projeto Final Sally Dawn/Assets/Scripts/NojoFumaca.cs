@@ -27,8 +27,8 @@ public class NojoFumaca : MonoBehaviour
 
         if (transform.childCount > 0)
             Filho = transform.GetChild(0).gameObject;
-        if (Filho == null)
-            Debug.LogError("Sem Morte Fumaca");
+        //if (Filho == null)
+        //    Debug.LogError("Sem Morte Fumaca");
 
         cr = GetComponent<Collider>();
     }
