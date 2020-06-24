@@ -23,8 +23,9 @@ public class GameMaster : MonoBehaviour
     [SerializeField]
     private GameObject[] PortasMedo;
 
-    private Animator anim;
-
+    private Animator anim, CamFade;
+    private float SpeedFade = 1;
+    
     public bool testsalvar, testloadar, Resetar;
     [Header("save")]
     public float DataNumeroFase;
@@ -54,6 +55,7 @@ public class GameMaster : MonoBehaviour
             Debug.LogError("no player GM");
         if (Cam == null)
             Debug.LogError("No com GM");
+        else CamFade = Cam.GetComponent<Animator>();
         anim = GetComponent<Animator>();
        
     }
@@ -236,4 +238,21 @@ public class GameMaster : MonoBehaviour
         }
     }
 
+    public void FadeIN(float Timer = 3, float Wait = 0)
+    {
+        if (Timer == 0)
+            SpeedFade = 1;
+        else        SpeedFade = 3 / Timer;
+
+
+        CamFade.speed = SpeedFade;
+        CamFade.SetTrigger("Fade");
+        Invoke("FadeOUT", (Timer / 2) + Wait);
+
+    }
+    public void FadeOUT()
+    {
+        CamFade.speed = SpeedFade;
+        CamFade.SetTrigger("Despause");
+    }
 }
