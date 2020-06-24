@@ -129,9 +129,12 @@ public class Plataforma_movimento : MonoBehaviour
         float _tamanhoright, _tamanholeft, _raio;
         LineRenderer lr = gb.GetComponent<LineRenderer>();
 
-        PontoLeft = gb.transform.GetChild(0).transform.position - Ponto0;
-        PontoRight = gb.transform.GetChild(1).transform.position - Ponto0;
-        PontoCentro = gb.transform.GetChild(2).transform.position - Ponto0;
+        
+            PontoLeft = gb.transform.GetChild(0).transform.position - Ponto0;
+            PontoRight = gb.transform.GetChild(1).transform.position - Ponto0;
+            PontoCentro = gb.transform.GetChild(2).transform.position - Ponto0;
+        
+        
 
         PontoDelta = PontoRight - PontoLeft;
         float ang;
@@ -142,7 +145,14 @@ public class Plataforma_movimento : MonoBehaviour
 
         Vector3 PClinha = new Vector3(Mathf.Abs(PontoCentro.x), Mathf.Abs(PontoCentro.y), 0);
         if (PontoDelta != Vector3.zero)
-            _direcao = new Vector3((AngDirecao < 60 ? 1 : 0) * (ang / AngDirecao), AngDirecao > 30 ? 1 : 0, 0);
+        {
+            float XX;
+            if (AngDirecao != 0)
+                XX = (AngDirecao < 60 ? 1 : 0) * (ang / AngDirecao);
+            else XX = 0;
+
+            _direcao = new Vector3(XX, AngDirecao > 30 ? 1 : 0, 0);
+        }
         else if (PontoCentro != Vector3.zero)
             _direcao = new Vector3(PClinha.y <= PClinha.x ? 1 : 0, PClinha.x <= PClinha.y ? 1 : 0, 0);
         else
@@ -161,6 +171,8 @@ public class Plataforma_movimento : MonoBehaviour
         lr.SetPosition(2, _direcao * _tamanhoright);
         lr.SetPosition(3, PontoRight);
 
+        if (name== "PlataformaMovel (XXX)")
+            Debug.Log(PontoCentro);
         return new Plat(_direcao, _tamanhoright, -_tamanholeft, _velociadade, _raio);
     }
     void Update()
