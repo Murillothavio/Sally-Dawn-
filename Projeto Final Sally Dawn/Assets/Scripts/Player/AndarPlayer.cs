@@ -54,13 +54,21 @@ public class AndarPlayer : MonoBehaviour
     #region Ground
     [Header("region Ground")]
     public bool isGrounded;
-    //[HideInInspector]
+    [HideInInspector]
     public Vector3 GroundSize = new Vector3(1.16f, 1.75f, 0);
     private Vector3 GroundCenter = new Vector3(0, .3f, 0);
     [HideInInspector] public bool StopVelocidade;
     private Vector3 Velocity;
     #endregion
 
+    #region Tetos
+    [Header("region Ground")]
+    public bool isTeto;
+    //[HideInInspector]
+    public Vector3 TetoSize = new Vector3(1.16f, 1.75f, 0);
+    [SerializeField]
+    private Vector3 TetoCenter = new Vector3(0, .3f, 0);
+    #endregion
 
     public float horizontal, Arrastar, vertical;
     public LayerMask Floor;
@@ -200,9 +208,21 @@ public class AndarPlayer : MonoBehaviour
 
         Segurando = (OndeTo == Zonas.segurar && Ksegurar);
         Escalando = (OndeTo == Zonas.Agarrar && Kagarrar);
-       
-        
 
+
+
+        Vector3 origem = transform.position + TetoCenter, origemL = transform.position + TetoCenter, origemR = transform.position + TetoCenter;
+        origemL.x -= TetoSize.x / 2;
+        origemR.x += TetoSize.x / 2;
+        bool[] Tetos = new bool[3];
+
+        Tetos[0] = Physics.Raycast(origemL, Vector3.up, TetoSize.y, Floor);
+        Tetos[1] = Physics.Raycast(origem, Vector3.up, TetoSize.y, Floor);
+        Tetos[2] = Physics.Raycast(origemR, Vector3.up, TetoSize.y, Floor);
+
+        isTeto = (Tetos[0] || Tetos[1] || Tetos[2]);
+
+        
         stateAnimacao = StateMachine.None;
         if (isGrounded && stateAnimacao != StateMachine.Pulando)
             stateAnimacao = StateMachine.Walk;
@@ -418,6 +438,7 @@ public class AndarPlayer : MonoBehaviour
     }
     public void Morrer()
     {
+       // GameMaster.gm.FadeIN(1);
         CurrentDeathDelay += Time.deltaTime;
         if (CurrentDeathDelay > DeathDelay)
         {
@@ -530,10 +551,15 @@ public class AndarPlayer : MonoBehaviour
    
     private void OnDrawGizmos()
     {
-        Gizmos.color = new Color(0, 0, 1, .85f);
+        Gizmos.color = new Color(0, 0, 1, .15f);
 
         Gizmos.DrawCube(new Vector2(transform.position.x + GroundCenter.x, transform.position.y + GroundCenter.y),
             GroundSize);
+
+        Gizmos.color = new Color(1, 0 , 1, .85f);
+
+        Gizmos.DrawCube(new Vector2(transform.position.x + TetoCenter.x, transform.position.y + TetoCenter.y),
+           TetoSize);
 
         Gizmos.color = new Color(1, 1, 0, 1);
         Gizmos.DrawSphere(CorrecaoPosi+transform.position, 1);
