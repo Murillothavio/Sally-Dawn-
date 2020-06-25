@@ -14,7 +14,7 @@ public class FINAL : MonoBehaviour
     [System.Serializable]
     public class UmFim
     {
-        [HideInInspector]
+      //  [HideInInspector]
         public string name;
         public GameObject ParteUM, ParteDOIS;
         public AudioClip Musicas;
@@ -73,7 +73,7 @@ public class FINAL : MonoBehaviour
             Final[FinalNum].ParteUM.GetComponent<TextoControle>().TimeLife = TempFraseFade - 2;
             Invoke("LigaPoema", 4);
 
-            //tp
+            //tp   daley
             if (TpFim != null)
             {
                 Vector3 tp = TpFim.transform.position;

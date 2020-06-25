@@ -8,6 +8,7 @@ public class Bomb : MonoBehaviour
     public float speed = 10, atrito = 1, h;
     private bool dest = false;
     private Rigidbody rb;
+    public GameObject Boom;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +24,7 @@ public class Bomb : MonoBehaviour
         if (currTime<0)
         {
             dest = true;
-            Debug.Log("BUUU");
+          //  Debug.Log("BUUU");
         }
         if (currTime < -0.5f)
         {
@@ -35,12 +36,21 @@ public class Bomb : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log(other.tag);
+       // Debug.Log(other.tag);
         if (dest)
             if (other.gameObject.tag == "Destruir")
             {
-                Debug.Log(other.gameObject.name);
+         //       Debug.Log(other.gameObject.name);
                 Destroy(other.gameObject);
             }
+    }
+    private void OnDestroy()
+    {
+        if (Boom != null)
+        {
+            GameObject bm = Instantiate(Boom, transform.position, Quaternion.identity) as GameObject;
+            Destroy(bm, 2);
+        }
+
     }
 }
