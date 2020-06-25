@@ -73,6 +73,6 @@ public class TeleTransporte : MonoBehaviour
 
     void Libera()
     {
-        GameMaster.gm.Player.gameObject.GetComponent<AndarPlayer>().CanWalk = true;
+        GameMaster.gm.LiberaPlayer();
     }
 }

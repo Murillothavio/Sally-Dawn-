@@ -10,8 +10,7 @@ public class TextoControle : MonoBehaviour
     [Range(0,60)]
     public float TimeLife;
     private float life;
-    [SerializeField]
-    private bool Aparecer, Sumir;
+    public bool Aparecer, Sumir;
     // Start is called before the first frame update
     void Start()
     {

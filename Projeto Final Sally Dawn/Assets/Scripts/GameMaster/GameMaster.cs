@@ -264,4 +264,9 @@ public class GameMaster : MonoBehaviour
         CamFade.speed = SpeedFade;
         CamFade.SetTrigger("Despause");
     }
+
+   public void LiberaPlayer()
+    {
+        Player.GetComponent<AndarPlayer>().CanWalk = true;
+    }
 }
