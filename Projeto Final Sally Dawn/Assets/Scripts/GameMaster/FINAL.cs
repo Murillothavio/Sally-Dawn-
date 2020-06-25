@@ -21,11 +21,17 @@ public class FINAL : MonoBehaviour
     }
     public UmFim[] Final = new UmFim[4];
 
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        //if coolider
-        VerColetados();
-        LevarFim();
+        if (other.tag == "Player")
+        {
+            //if coolider
+            VerColetados();
+            Debug.Log("look at");
+            GameMaster.gm.Player.GetComponent<AndarPlayer>().CanWalk = false;
+            
+            Invoke("LevarFim", TempAparecerObj);
+        }
     }
     void VerColetados()
     {
@@ -40,8 +46,9 @@ public class FINAL : MonoBehaviour
         QntdMemorias = 0;
         for (int i = 0; i < Memorias.Length; i++)
         {
-            QntdMemorias++;
-            if (MemoriasColetadas != null)
+            if (Memorias[i])
+                QntdMemorias++;
+            if (MemoriasColetadas[i] != null)
                 MemoriasColetadas[i].SetActive(Memorias[i]);
         }
 
@@ -58,7 +65,6 @@ public class FINAL : MonoBehaviour
 
     void LevarFim()
     {
-        Debug.Log("Parar de andar // look at");
         Invoke("Libera", 6 + TempFraseFade);
         if (FinalNum < Final.Length)
         {
@@ -68,11 +74,13 @@ public class FINAL : MonoBehaviour
             Invoke("LigaPoema", 4);
 
             //tp
-            Debug.Log("TO DO TP");
-
-
-            //Pt 2
-            Debug.Log("ParteDOIS");
+            if (TpFim != null)
+            {
+                Vector3 tp = TpFim.transform.position;
+                tp.z = GameMaster.gm.Player.transform.position.z;
+                GameMaster.gm.Player.transform.position = tp;
+                Debug.Log("look de volta");
+            }
         }
     }
 
@@ -84,7 +92,12 @@ public class FINAL : MonoBehaviour
 
     void Libera()
     {
+        
         // GameMaster.gm.LiberaPlayer();
+        if (FinalNum!=0)
         Debug.Log("libare");
+        //Pt 2
+        Final[FinalNum].ParteDOIS.GetComponent<Collider>().enabled = true;
+        Debug.Log("ParteDOIS");
     }
 }

@@ -277,7 +277,6 @@ public class AndarPlayer : MonoBehaviour
             Vector3 k = Vector3.up;
             k = Coeficiente;
             k.y *= -1;
-            Debug.Log(k);
             Vector3 v = k * vertical * moveSpeed /* Time.deltaTime * (Mathf.Pow(AjustDez, 2))*/;
             //   v.y = rb.velocity.y;
             rb.velocity = v;
