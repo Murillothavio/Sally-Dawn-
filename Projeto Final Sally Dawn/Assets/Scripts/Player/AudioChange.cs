@@ -5,7 +5,7 @@ using UnityEngine.Audio;
 
 public class AudioChange : MonoBehaviour
 {
-    public AudioClip acFase;
+    public AudioClip acFase, acEvento, acAtual;
     public bool Trocando;
     private bool bplay;
     [Range(0, 1)] public float AudioVolume = 1;
@@ -25,6 +25,10 @@ public class AudioChange : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (acEvento == null)
+            acAtual = acFase;
+        else acAtual = acEvento;
+
         if (Trocando)
         {
             tcorrido += Time.deltaTime;
@@ -32,7 +36,7 @@ public class AudioChange : MonoBehaviour
             if ((tcorrido > Tmaximo / 2) && !bplay)
             {
                 bplay = true;
-                AudSrc.clip = acFase;
+                AudSrc.clip = acAtual;
                 AudSrc.Play();
             }
             currVolume += Time.deltaTime * (AudioVolume / (Tmaximo / 2)) * sng;

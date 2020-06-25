@@ -77,6 +77,7 @@ public class GameMaster : MonoBehaviour
         {
             testloadar = false;
             SetData(LoadPlayer());
+            Player.GetComponent<Ambiente>().TrocaConfig();
         }
         if (testsalvar)
         {

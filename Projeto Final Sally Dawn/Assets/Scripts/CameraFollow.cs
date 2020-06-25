@@ -226,7 +226,7 @@ public class CameraFollow : MonoBehaviour
         focusPosition += Vector2.right * currentLookAheadX;
         #endregion
 
-        Afasta = Mathf.MoveTowards(Afasta, NovoAfastamento, 1);
+        Afasta = Mathf.MoveTowards(Afasta, NovoAfastamento, Time.deltaTime);
 
         transform.position = (Vector3)focusPosition + Vector3.forward * -1 * Afasta;
         if (GameMaster.gm.PAUSADO)
