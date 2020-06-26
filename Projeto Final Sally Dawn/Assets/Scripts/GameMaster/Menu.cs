@@ -14,6 +14,7 @@ public class Menu : MonoBehaviour
         public GameObject Descric, Raiz;
     }
 
+    public AudioClip acMenu;
     public enum Telas { TelasInicial, TelaPrincipal, TelaJogar, TelaNovo, TelaContinuar, TelaJogo, TelaMenu, JanelaLembranca, JanelaOpcoes, TelaCredito, TelaSair }
     public Telas tela;
     public enum Idiomas { Portugues, English}

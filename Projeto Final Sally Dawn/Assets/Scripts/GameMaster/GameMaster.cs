@@ -6,6 +6,9 @@ public class GameMaster : MonoBehaviour
 {
     public static GameMaster gm;
     public GameObject Player, Cam;
+    public AudioClip acCredito;
+
+    [HideInInspector]
     public string NameFileS = "saves", TypeSave = "txt";
     [HideInInspector]
     public  string filesave;
@@ -269,5 +272,26 @@ public class GameMaster : MonoBehaviour
    public void LiberaPlayer()
     {
         Player.GetComponent<AndarPlayer>().CanWalk = true;
+    }
+
+    public void DoCreditos()
+    {
+        GameMaster.gm.FadeIN(2, 3);
+        Player.GetComponent<AndarPlayer>().CanWalk = false;
+        Invoke("creditar", 4);
+        Invoke("reiniciar", 1);
+        if (acCredito != null)
+        {
+            Player.GetComponent<AudioChange>().acEvento = acCredito;
+            Player.GetComponent<AudioChange>().Trocando = true;
+        }
+    }
+    void reinicair()
+    {
+        Debug.Log("REINICIAR");
+    }
+    void creditar()
+    {
+        GameMaster.gm.gameObject.GetComponent<Menu>().GoToTelaCredito();
     }
 }

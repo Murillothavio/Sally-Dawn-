@@ -7,7 +7,7 @@ public class FINAL : MonoBehaviour
     public int QntdMemorias, MinMemoria = 1, MaxMemoria = 6, FinalNum=4;
     public bool[] Memorias = new bool[7];
     public bool MigO, Completou;
-    public float TempAparecerObj, TempFraseFade;
+    public float TempAparecerObj, TempFraseFade, TempBadEnd = 10;
     public GameObject[] MemoriasColetadas = new GameObject[7];
     public Transform TpFim;
 
@@ -97,16 +97,26 @@ public class FINAL : MonoBehaviour
             GameMaster.gm.Player.transform.position = tp;
             GameMaster.gm.Player.transform.LookAt(TpFim.transform.position);
 
-            Debug.Log("look de volta");
+            GameMaster.gm.Player.GetComponent<Eventos>().PwrUp.Neutro = (FinalNum == 2);//Mig-0
+            GameMaster.gm.Player.GetComponent<AndarPlayer>().Acao.SetBool("Morta", (FinalNum == 0));//Matar
+
+                
         }
     }
 
     void Libera()
     {
-        if (FinalNum!=0)
+        if (FinalNum != 0)
             GameMaster.gm.LiberaPlayer();
+        else
+            Invoke("BadEnd", TempBadEnd);
         //Pt 2
         Final[FinalNum].ParteDOIS.GetComponent<Collider>().enabled = true;
         Debug.Log("ParteDOIS");
+    }
+    void BadEnd()
+    {
+        GameMaster.gm.DoCreditos();
+
     }
 }
