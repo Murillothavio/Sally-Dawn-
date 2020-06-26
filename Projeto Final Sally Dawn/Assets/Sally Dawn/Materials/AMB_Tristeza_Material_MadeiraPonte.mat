@@ -23,8 +23,8 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Floats:
-    - Vector1_D0E77376: 30
-    - _Dissolve: 1
+    - Vector1_D0E77376: 60
+    - _Dissolve: 0.6
     m_Colors:
     - Color_7E44F116: {r: 0.5471698, g: 0.33473918, b: 0, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
