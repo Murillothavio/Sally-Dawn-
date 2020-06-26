@@ -147,9 +147,9 @@ public class Plataforma_movimento : MonoBehaviour
         if (PontoDelta != Vector3.zero)
         {
             float XX;
-            if (AngDirecao != 0)
+    //        if (AngDirecao != 0)
                 XX = (AngDirecao < 60 ? 1 : 0) * (ang / AngDirecao);
-            else XX = 0;
+      //      else XX = 0;
 
             _direcao = new Vector3(XX, AngDirecao > 30 ? 1 : 0, 0);
         }
@@ -171,8 +171,6 @@ public class Plataforma_movimento : MonoBehaviour
         lr.SetPosition(2, _direcao * _tamanhoright);
         lr.SetPosition(3, PontoRight);
 
-        if (name== "PlataformaMovel (XXX)")
-            Debug.Log(PontoCentro);
         return new Plat(_direcao, _tamanhoright, -_tamanholeft, _velociadade, _raio);
     }
     void Update()
