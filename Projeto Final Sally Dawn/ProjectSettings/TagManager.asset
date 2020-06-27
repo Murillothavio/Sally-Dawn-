@@ -29,6 +29,7 @@ TagManager:
   - PortaMedo
   - CantMove
   - CicloFase
+  - Tuto
   layers:
   - Default
   - TransparentFX

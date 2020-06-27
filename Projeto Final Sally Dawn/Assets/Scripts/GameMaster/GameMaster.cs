@@ -6,7 +6,6 @@ public class GameMaster : MonoBehaviour
 {
     public static GameMaster gm;
     public GameObject Player, Cam;
-    public AudioClip acCredito;
 
     [HideInInspector]
     public string NameFileS = "saves", TypeSave = "txt";
@@ -280,11 +279,7 @@ public class GameMaster : MonoBehaviour
         Player.GetComponent<AndarPlayer>().CanWalk = false;
         Invoke("creditar", 4);
         Invoke("reiniciar", 1);
-        if (acCredito != null)
-        {
-            Player.GetComponent<AudioChange>().acEvento = acCredito;
-            Player.GetComponent<AudioChange>().Trocando = true;
-        }
+        
     }
     void reinicair()
     {

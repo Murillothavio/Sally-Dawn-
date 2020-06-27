@@ -6,7 +6,7 @@ public class TextoControle : MonoBehaviour
 {
     private Animator anim;
     private Rigidbody rb;
-
+    private Collider colli;
     [Range(0,60)]
     public float TimeLife;
     private float life;
@@ -16,12 +16,17 @@ public class TextoControle : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+        colli = GetComponent<Collider>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Aparecer)
+        if (tag == "Tuto")
+            if (colli != null)
+                colli.enabled = (!GameMaster.gm.PAUSADO);
+
+        if (Aparecer && (!GameMaster.gm.PAUSADO))
             TimeLife -= Time.deltaTime;
         if (TimeLife <= 0)
         {

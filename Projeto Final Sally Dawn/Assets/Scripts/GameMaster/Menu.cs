@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 using TMPro;
 
@@ -14,33 +15,60 @@ public class Menu : MonoBehaviour
         public GameObject Descric, Raiz;
     }
 
-    public AudioClip acMenu;
+    public AudioMixer aMixerEffect;
+    public AudioClip acMenu, acCredito;
     public enum Telas { TelasInicial, TelaPrincipal, TelaJogar, TelaNovo, TelaContinuar, TelaJogo, TelaMenu, JanelaLembranca, JanelaOpcoes, TelaCredito, TelaSair }
     public Telas tela;
     public enum Idiomas { Portugues, English}
-    public Idiomas idoma;
+    public Idiomas idioma;
     [SerializeField]
     private GameObject[] TxtIdioma;
-    public bool load=true, Jogando,IsMenu, VaiResetar;
+    public bool load=true, Jogando,IsMenu, VaiResetar, ChegouMenu;
 
+    [HideInInspector]
     public int nLembr;
     public Transform Raizes;
-    [SerializeField]
+  //  [SerializeField]
     private Animator AnimiRaizes;
     private Emocoes lmb;
     public MenuLembrancas[] Lembr= new MenuLembrancas[7];
 
+    [HideInInspector]
     public int nOpcoes;
     public GameObject[] JanOpcoes = new GameObject[4];
 
-    public int nObjwtivos;
+    [HideInInspector]
+    public int nObjetivos;
     public GameObject[] ListaObjetivos;
 
     [HideInInspector]
     public GameObject TelasInicial, TelaPrincipal, TelaJogar, TelaNovo, TelaContinuar, TelaJogo, TelaMenu, JanelaLembranca, JanelaOpcoes, TelaCredito, TelaSair;
-    // Start is called before the first frame update
-    void Start()
+
+    Resolution[] resolutions;
+    public Vector2Int[] resolucoes;
+    public Dropdown resolutionDropdown;
+
+    private void Awake()
     {
+        resolutions = Screen.resolutions;
+        /* resolutionDropdown.ClearOptions();
+
+         List<string> Options=new List<string>();
+         int currentResolutionIndex = 0;
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            string option = resolutions[i].width + " x " + resolutions[i].height;
+            
+                Options.Add(option);
+
+            if (resolutions[i].width == Screen.currentResolution.width &&
+                resolutions[i].height == Screen.currentResolution.height)
+                currentResolutionIndex = i;
+        }
+         resolutionDropdown.AddOptions(Options);
+         resolutionDropdown.value = currentResolutionIndex;
+         resolutionDropdown.RefreshShownValue();*/
+
         TrocarTela();
         if (GameMaster.gm.Player != null)
             lmb = GameMaster.gm.Player.GetComponent<Eventos>().Memorias;
@@ -64,7 +92,6 @@ public class Menu : MonoBehaviour
                 else
                 {
                     load = false;
-                    GameMaster.gm.testloadar = true;
                 }
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -126,18 +153,39 @@ public class Menu : MonoBehaviour
 
         if (tela == Telas.TelaMenu)
         {
-            nObjwtivos = (int)GameMaster.gm.Player.GetComponent<Ambiente>().NumFases;
+            nObjetivos = (int)GameMaster.gm.Player.GetComponent<Ambiente>().NumFases;
             for (int i = 0; i < ListaObjetivos.Length; i++)
-                ListaObjetivos[i].SetActive(nObjwtivos == i);
+                ListaObjetivos[i].SetActive(nObjetivos == i);
         }
 
         if (tela == Telas.TelaPrincipal)
         {
             Jogando = false;
             VaiResetar = false;
+            if (!ChegouMenu)
+            {
+                ChegouMenu = true;
+                if (acMenu != null)
+                {
+                    GameMaster.gm.Player.GetComponent<AudioChange>().acEvento = acMenu;
+                    GameMaster.gm.Player.GetComponent<AudioChange>().Trocando = true;
+                }
+                Debug.Log("carregar");
+            }
         }
         else if (tela == Telas.TelaJogo)
+        {
             Jogando = true;
+            if (ChegouMenu)
+            {
+                ChegouMenu = false;
+                if (GameMaster.gm.Player.GetComponent<AudioChange>().acEvento == acMenu)
+                {
+                    GameMaster.gm.Player.GetComponent<AudioChange>().acEvento = null;
+                    GameMaster.gm.Player.GetComponent<AudioChange>().Trocando = true;
+                }
+            }
+        }
 
     }
     private void Lembrancas()
@@ -185,18 +233,18 @@ public class Menu : MonoBehaviour
         foreach (var item in TxtIdioma)
         {
             if (item.GetComponent<TextMeshProUGUI>() != null)
-                item.GetComponent<TextMeshProUGUI>().enabled = (idoma == Idiomas.Portugues);
+                item.GetComponent<TextMeshProUGUI>().enabled = (idioma == Idiomas.Portugues);
             if (item.GetComponent<Text>() != null)
-                item.GetComponent<Text>().enabled = (idoma == Idiomas.Portugues);
+                item.GetComponent<Text>().enabled = (idioma == Idiomas.Portugues);
         }
 
         TxtIdioma = GameObject.FindGameObjectsWithTag("IdiomaENG");
         foreach (var item in TxtIdioma)
         {
             if (item.GetComponent<TextMeshProUGUI>() != null)
-                item.GetComponent<TextMeshProUGUI>().enabled = (idoma == Idiomas.English);
+                item.GetComponent<TextMeshProUGUI>().enabled = (idioma == Idiomas.English);
             if (item.GetComponent<Text>() != null)
-                item.GetComponent<Text>().enabled = (idoma == Idiomas.English);
+                item.GetComponent<Text>().enabled = (idioma == Idiomas.English);
         }
     }
     #region GoTo
@@ -210,7 +258,14 @@ public class Menu : MonoBehaviour
     public void GoToTelaContinuar() { tela = Telas.TelaContinuar; }
     public void GoToTelaJogo() { tela = Telas.TelaJogo; TrocarTela(); }
     public void GoToJanelaOpcoes() { tela = Telas.JanelaOpcoes; }
-    public void GoToTelaCredito() { tela = Telas.TelaCredito; }
+    public void GoToTelaCredito() { tela = Telas.TelaCredito;
+        if (acCredito != null)
+        {
+            GameMaster.gm.Player.GetComponent<AudioChange>().acEvento = acCredito;
+            GameMaster.gm.Player.GetComponent<AudioChange>().Trocando = true;
+            ChegouMenu = false;
+        }
+    }
     public void GoToVoltar() {
         if (Jogando) tela = Telas.TelaMenu;
         else tela = Telas.TelaPrincipal;
@@ -229,8 +284,8 @@ public class Menu : MonoBehaviour
     public void OpcoesUM() { nOpcoes = 0; }
     public void OpcoesDOIS() { nOpcoes = 1; }
     public void OpcoesTRES() { nOpcoes = 2; }
-    public void IdiomaPortugues() { idoma = Idiomas.Portugues; }
-    public void IdiomaIngles() { idoma = Idiomas.English; }
+    public void IdiomaPortugues() { idioma = Idiomas.Portugues; }
+    public void IdiomaIngles() { idioma = Idiomas.English; }
     public  void ControleConjA()
     {
         GameMaster.gm.Player.GetComponent<Controles>().SetConjunto = Controles.GetConjunto.ConjuntoA;
@@ -241,7 +296,26 @@ public class Menu : MonoBehaviour
     }
 
     #endregion
+    #region Config 
+    public void SetVolumeMusica(float volume)
+    {
+        GameMaster.gm.Player.GetComponent<AudioChange>().AudioVolume = volume;
+    }
+    public void SetVolumeEfeito(float volume)
+    {
+        aMixerEffect.SetFloat("SFXVolume", volume);
+        Debug.Log(volume);
 
+    }
+    public void SetResolution(int index)
+    {
+        Resolution resolution = resolutions[index];
+        Vector2Int r = resolucoes[index];
+        if (r.x != 0 && r.y != 0)
+            Screen.SetResolution(r.x, r.y, Screen.fullScreen);
+    }
+
+    #endregion
     public void Sair()
     {
         Application.Quit();

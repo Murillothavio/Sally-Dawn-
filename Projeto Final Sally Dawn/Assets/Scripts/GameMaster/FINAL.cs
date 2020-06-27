@@ -26,17 +26,20 @@ public class FINAL : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            GameMaster.gm.Player.GetComponent<AndarPlayer>().CanWalk = false;
-            GameMaster.gm.Player.transform.LookAt(transform.position);
-            
-            Invoke("VerColetados", TempAparecerObj/3);
-            Invoke("LevarFim", TempAparecerObj);
+            MigO = GameMaster.gm.Player.GetComponent<Eventos>().PwrUp.Neutro;
+            if (MigO)
+            {
+                GameMaster.gm.Player.GetComponent<AndarPlayer>().CanWalk = false;
+                GameMaster.gm.Player.transform.LookAt(transform.position);
+
+                Invoke("VerColetados", TempAparecerObj / 3);
+                Invoke("LevarFim", TempAparecerObj);
+            }
         }
     }
     
     void VerColetados()
     {
-        MigO = GameMaster.gm.Player.GetComponent<Eventos>().PwrUp.Neutro;
         Memorias[0] = GameMaster.gm.Player.GetComponent<Eventos>().Memorias.Neutro;
         Memorias[1] = GameMaster.gm.Player.GetComponent<Eventos>().Memorias.Alegre;
         Memorias[2] = GameMaster.gm.Player.GetComponent<Eventos>().Memorias.Triste;
@@ -70,8 +73,11 @@ public class FINAL : MonoBehaviour
         }
         else FinalNum = 3;
 
-        GameMaster.gm.Player.GetComponent<AudioChange>().acEvento = Final[FinalNum].Musicas;
-        GameMaster.gm.Player.GetComponent<AudioChange>().Trocando = true;
+        if (Final[FinalNum].Musicas != null)
+        {
+            GameMaster.gm.Player.GetComponent<AudioChange>().acEvento = Final[FinalNum].Musicas;
+            GameMaster.gm.Player.GetComponent<AudioChange>().Trocando = true;
+        }
     }
 
     void LevarFim()
@@ -100,8 +106,9 @@ public class FINAL : MonoBehaviour
             GameMaster.gm.Player.GetComponent<Eventos>().PwrUp.Neutro = (FinalNum == 2);//Mig-0
             GameMaster.gm.Player.GetComponent<AndarPlayer>().Acao.SetBool("Morta", (FinalNum == 0));//Matar
             GameMaster.gm.Cam.GetComponent<CameraFollow>().NovoAfastamento = 25;
-                
         }
+        if (FinalNum == 3)
+            BadEnd();
     }
 
     void Libera()
@@ -111,12 +118,12 @@ public class FINAL : MonoBehaviour
         else
             Invoke("BadEnd", TempBadEnd);
         //Pt 2
-        Final[FinalNum].ParteDOIS.GetComponent<Collider>().enabled = true;
+        if (Final[FinalNum].ParteDOIS != null)
+            Final[FinalNum].ParteDOIS.GetComponent<Collider>().enabled = true;
         Debug.Log("ParteDOIS");
     }
     void BadEnd()
     {
         GameMaster.gm.DoCreditos();
-
     }
 }
