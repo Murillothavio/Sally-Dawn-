@@ -26,16 +26,24 @@ public class EfeitosSally : MonoBehaviour
             Escalar.Visual.SetActive(Escalar.Ativo);
     }
 
-    public void Coletou()
+    public void Coletou(bool memo)
     {
-        if (ColetarMemoria.Visual != null)
+        if (memo)
+            TempEffect(ColetarMemoria);
+        else
+            TempEffect(ColetarPowerUp);
+    }
+
+    private void TempEffect(ParticleEffect pef)
+    {
+        if (pef.Visual != null)
         {
-            GameObject ef = Instantiate(ColetarMemoria.Visual, transform.position, Quaternion.identity) as GameObject;
+            GameObject ef = Instantiate(pef.Visual, transform.position, Quaternion.identity) as GameObject;
             ef.transform.parent = transform;
-            Destroy(ef, ColetarMemoria.TempoVida);
+            Destroy(ef, pef.TempoVida);
         }
         else
-            Debug.LogError("Sem Efeito Coletar");
+            Debug.LogError("Sem Efeito");
     }
     public void EfeitoPular() {
         if (Pular.Visual != null)
