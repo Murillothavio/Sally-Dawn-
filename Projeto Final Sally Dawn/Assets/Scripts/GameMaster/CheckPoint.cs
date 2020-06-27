@@ -26,7 +26,7 @@ public class CheckPoint : MonoBehaviour
         Cor = Mathf.MoveTowards(Cor, (Salvo ? 1 : 0), 0.5f);
         for (int i = 0; i < material.Length; i++)
         {
-            material[0].SetFloat("_TransicaoGirassol", Cor);
+            material[i].SetFloat("_TransicaoGirassol", Cor);
         }
     }
     private void OnTriggerEnter(Collider other)
