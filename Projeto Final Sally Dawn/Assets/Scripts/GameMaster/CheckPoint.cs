@@ -5,7 +5,7 @@ using UnityEngine;
 public class CheckPoint : MonoBehaviour
 {
     public bool Salvo;
-    public float Cor;
+    [Range(0, 1)] public float Cor;
     public MeshRenderer[] mr;
     public Material[] material;
     // Start is called before the first frame update
@@ -21,11 +21,13 @@ public class CheckPoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Salvo = (GameMaster.gm._savepointsmenu == transform);
+
         Cor = Mathf.MoveTowards(Cor, (Salvo ? 1 : 0), 0.5f);
-        // for (int i = 0; i < material.Length; i++)
-        //{
-        material[0].SetFloat("_TransicaoGirassol", Cor);
-       // }
+        for (int i = 0; i < material.Length; i++)
+        {
+            material[0].SetFloat("_TransicaoGirassol", Cor);
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
