@@ -99,7 +99,7 @@ public class FINAL : MonoBehaviour
 
             GameMaster.gm.Player.GetComponent<Eventos>().PwrUp.Neutro = (FinalNum == 2);//Mig-0
             GameMaster.gm.Player.GetComponent<AndarPlayer>().Acao.SetBool("Morta", (FinalNum == 0));//Matar
-
+            GameMaster.gm.Cam.GetComponent<CameraFollow>().NovoAfastamento = 25;
                 
         }
     }

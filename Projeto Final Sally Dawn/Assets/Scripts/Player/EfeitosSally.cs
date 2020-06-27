@@ -13,26 +13,26 @@ public class EfeitosSally : MonoBehaviour
         public bool Ativo;
     }
 
-    public ParticleEffect Coletar, Pular, Jato, Andar;
-
-    private void Start()
-    {
-    }
-
+    public ParticleEffect ColetarMemoria, ColetarPowerUp, Pular, Jato, Andar, Escalar, Morte, Renascer;
+    
     private void Update()
     {
-        Andar.Ativo = GetComponent<AndarPlayer>().isGrounded;
+        Andar.Ativo = (GetComponent<AndarPlayer>().isGrounded && !GetComponent<AndarPlayer>().isClimb);
         if (Andar.Visual != null)
             Andar.Visual.SetActive(Andar.Ativo);
+
+        Escalar.Ativo = (GetComponent<AndarPlayer>().isGrounded && GetComponent<AndarPlayer>().isClimb);
+        if (Escalar.Visual != null)
+            Escalar.Visual.SetActive(Escalar.Ativo);
     }
 
     public void Coletou()
     {
-        if (Coletar.Visual != null)
+        if (ColetarMemoria.Visual != null)
         {
-            GameObject ef = Instantiate(Coletar.Visual, transform.position, Quaternion.identity) as GameObject;
+            GameObject ef = Instantiate(ColetarMemoria.Visual, transform.position, Quaternion.identity) as GameObject;
             ef.transform.parent = transform;
-            Destroy(ef, Coletar.TempoVida);
+            Destroy(ef, ColetarMemoria.TempoVida);
         }
         else
             Debug.LogError("Sem Efeito Coletar");
@@ -41,7 +41,7 @@ public class EfeitosSally : MonoBehaviour
         if (Pular.Visual != null)
         {
             GameObject ef = Instantiate(Pular.Visual, transform.position, Quaternion.identity) as GameObject;
-            Destroy(ef, Coletar.TempoVida);
+            Destroy(ef, Pular.TempoVida);
 
         }
         else Debug.LogError("Sem Efeito Pular");
@@ -58,5 +58,24 @@ public class EfeitosSally : MonoBehaviour
         Jato.Ativo = false;
         if (Jato.Visual != null)
             Jato.Visual.SetActive(Jato.Ativo);
+    }
+    public void EfeitoMorrer()
+    {
+        if (Morte.Visual != null)
+        {
+            GameObject ef = Instantiate(Morte.Visual, transform.position, Quaternion.identity) as GameObject;
+            Destroy(ef, Morte.TempoVida);
+        }
+        Debug.Log("To Do Morrer");
+    }
+    public void EfeitoRenascer()
+    {
+        if (Renascer.Visual != null)
+        {
+            GameObject ef = Instantiate(Renascer.Visual, transform.position, Quaternion.identity) as GameObject;
+            ef.transform.parent = transform;
+            Destroy(ef, Renascer.TempoVida);
+        }
+        Debug.Log("To Do Renascer");
     }
 }

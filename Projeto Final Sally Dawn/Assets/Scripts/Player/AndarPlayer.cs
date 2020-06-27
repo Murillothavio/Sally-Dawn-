@@ -60,13 +60,14 @@ public class AndarPlayer : MonoBehaviour
     [HideInInspector] public bool StopVelocidade;
     private Vector3 Velocity;
     #endregion
+    public bool isClimb;
 
     #region Tetos
-    [Header("region Ground")]
+    [Header("region Teto")]
     public bool isTeto;
-    //[HideInInspector]
+    [HideInInspector]
     public Vector3 TetoSize = new Vector3(1.16f, 1.75f, 0);
-    [SerializeField]
+    //[SerializeField]
     private Vector3 TetoCenter = new Vector3(0, .3f, 0);
     #endregion
 
@@ -98,7 +99,6 @@ public class AndarPlayer : MonoBehaviour
     public float Angulo, Distancia;
     public Vector3 Coeficiente, DeltaPosi, CorrecaoPosi;
     public bool Balancando, Torto;
-   
     
     void Start()
     {
@@ -270,7 +270,8 @@ public class AndarPlayer : MonoBehaviour
     }
     void Andar()
     {
-       // transform.eulerAngles = new Vector3(transform.localRotation.x, transform.localRotation.y, Angulo);
+        // transform.eulerAngles = new Vector3(transform.localRotation.x, transform.localRotation.y, Angulo);
+        isClimb = (stateAnimacao == StateMachine.Escalando);
         if (stateAnimacao == StateMachine.Escalando)
         {
             moveSpeed = Mathf.MoveTowards(moveSpeed, AtualConfig.climbSpeed, AtualConfig.currentSpeed * 4);
@@ -440,18 +441,22 @@ public class AndarPlayer : MonoBehaviour
     }
     public void Morrer()
     {
-       // GameMaster.gm.FadeIN(1);
+        // GameMaster.gm.FadeIN(1);
+        if (CurrentDeathDelay <= 0)
+            GetComponent<EfeitosSally>().EfeitoMorrer();
         CurrentDeathDelay += Time.deltaTime;
         if (CurrentDeathDelay > DeathDelay)
         {
             transform.position = SafeZonePosition;
             rb.velocity = Vector3.zero;
             CurrentDeathDelay = 0;
+            GetComponent<EfeitosSally>().EfeitoRenascer();
         }
     }
     void SetAnimacoes()
     {
-        Acao.SetBool("Agachado", (stateAnimacao == StateMachine.Agachado));
+        if (CanWalk)
+            Acao.SetBool("Agachado", (stateAnimacao == StateMachine.Agachado));
         Acao.SetFloat("Queda", rb.velocity.y);
         if (pular)
             Acao.SetTrigger("Jump");
