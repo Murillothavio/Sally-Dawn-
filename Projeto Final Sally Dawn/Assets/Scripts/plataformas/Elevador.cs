@@ -68,4 +68,9 @@ public class Elevador : MonoBehaviour
             Pp = collision.gameObject;
         }
     }
+    private void OnCollisionExit(Collision collision)
+    {
+        Pp = null;
+        GameMaster.gm.LiberaPlayer();
+    }
 }

@@ -59,7 +59,7 @@ public class TeleTransporte : MonoBehaviour
             NovPosi = Saida.position;
             NovPosi.z = Zposi;
             other.gameObject.GetComponent<AndarPlayer>().CanWalk = false;
-
+            Debug.Log(other.gameObject.GetComponent<AndarPlayer>().CanWalk);
             Invoke("Mandar", 1);
             GameMaster.gm.FadeIN(2);
         }
