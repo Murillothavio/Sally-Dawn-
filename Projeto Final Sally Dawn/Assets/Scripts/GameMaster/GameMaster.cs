@@ -57,7 +57,7 @@ public class GameMaster : MonoBehaviour
         if (Player == null)
             Debug.LogError("no player GM");
         if (Cam == null)
-            Debug.LogError("No com GM");
+            Debug.LogError("No cam GM");
         else CamFade = Cam.GetComponent<Animator>();
         anim = GetComponent<Animator>();
        
@@ -222,7 +222,7 @@ public class GameMaster : MonoBehaviour
         string path = Application.persistentDataPath + filesave;
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        GetData();
+        GetData(); 
 
         formatter.Serialize(stream, Atual);
         stream.Close();

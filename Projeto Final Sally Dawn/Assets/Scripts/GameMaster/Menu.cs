@@ -18,7 +18,7 @@ public class Menu : MonoBehaviour
 
     public AudioMixer aMixerEffect;
     public AudioClip acMenu, acCredito;
-    public enum Telas { TelasInicial, TelaPrincipal, TelaJogar, TelaNovo, TelaContinuar, TelaJogo, TelaMenu, JanelaLembranca, JanelaOpcoes, TelaCredito, TelaSair }
+    public enum Telas { TelasInicial, TelaPrincipal, TelaJogar, TelaNovo, TelaContinuar, TelaJogo, TelaMenu, JanelaLembranca, JanelaOpcoes, TelaCredito, TelaSair, TelaSobre }
     public Telas tela;
     public enum Idiomas { Portugues, English }
     public Idiomas idioma;
@@ -43,7 +43,8 @@ public class Menu : MonoBehaviour
     public GameObject[] ListaObjetivos;
 
     [HideInInspector]
-    public GameObject TelasInicial, TelaPrincipal, TelaJogar, TelaNovo, TelaContinuar, TelaJogo, TelaMenu, JanelaLembranca, JanelaOpcoes, TelaCredito, TelaSair;
+    public GameObject TelasInicial, TelaPrincipal, TelaJogar, TelaNovo, TelaContinuar, TelaJogo, TelaMenu, JanelaLembranca;
+    public GameObject JanelaOpcoes, TelaCredito, TelaSair, TelaSobre;
 
     Resolution[] resolutions;
     public Vector2Int[] resolucoes;
@@ -226,6 +227,8 @@ public class Menu : MonoBehaviour
             TelaCredito.SetActive(tela == Telas.TelaCredito);
         if (TelaSair != null)
             TelaSair.SetActive(tela == Telas.TelaSair);
+        if (TelaSobre != null)
+            TelaSobre.SetActive(tela == Telas.TelaSobre);
         MudarIdioma();
     }
     private void MudarIdioma()
@@ -259,6 +262,7 @@ public class Menu : MonoBehaviour
     public void GoToTelaContinuar() { tela = Telas.TelaContinuar; }
     public void GoToTelaJogo() { tela = Telas.TelaJogo; TrocarTela(); }
     public void GoToJanelaOpcoes() { tela = Telas.JanelaOpcoes; }
+    public void GoToSobre() { tela = Telas.TelaSobre; }
     public void GoToTelaCredito()
     {
         tela = Telas.TelaCredito;
