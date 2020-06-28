@@ -50,7 +50,7 @@ public class Menu : MonoBehaviour
 
     private void Awake()
     {
-        resolutions = Screen.resolutions;
+       // resolutions = Screen.resolutions;
          /*resolutionDropdown.ClearOptions();
 
          List<string> Options=new List<string>();
