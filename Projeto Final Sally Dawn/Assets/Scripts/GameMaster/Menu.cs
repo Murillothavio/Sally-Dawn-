@@ -15,8 +15,8 @@ public class Menu : MonoBehaviour
         public GameObject Descric, Raiz;
     }
 
-    public AudioMixer aMixerEffect;
-    public AudioClip acMenu, acCredito;
+//    public AudioMixer aMixerEffect;
+  //  public AudioClip acMenu, acCredito;
     public enum Telas { TelasInicial, TelaPrincipal, TelaJogar, TelaNovo, TelaContinuar, TelaJogo, TelaMenu, JanelaLembranca, JanelaOpcoes, TelaCredito, TelaSair }
     public Telas tela;
     public enum Idiomas { Portugues, English}
@@ -44,9 +44,9 @@ public class Menu : MonoBehaviour
     [HideInInspector]
     public GameObject TelasInicial, TelaPrincipal, TelaJogar, TelaNovo, TelaContinuar, TelaJogo, TelaMenu, JanelaLembranca, JanelaOpcoes, TelaCredito, TelaSair;
 
-    Resolution[] resolutions;
-    public Vector2Int[] resolucoes;
-    public Dropdown resolutionDropdown;
+   // Resolution[] resolutions;
+   // public Vector2Int[] resolucoes;
+   // public Dropdown resolutionDropdown;
 
     private void Awake()
     {
@@ -297,11 +297,11 @@ public class Menu : MonoBehaviour
 
     #endregion
     #region Config 
-    public void SetVolumeMusica(float volume)
+/*    public void SetVolumeMusica(float volume)
     {
         GameMaster.gm.Player.GetComponent<AudioChange>().AudioVolume = volume;
     }
-    public void SetVolumeEfeito(float volume)
+ //   public void SetVolumeEfeito(float volume)
     {
         aMixerEffect.SetFloat("SFXVolume", volume);
         Debug.Log(volume);
@@ -309,14 +309,14 @@ public class Menu : MonoBehaviour
     }
     public void SetResolution(int index)
     {
-        //  Resolution resolution = resolutions[index];
+  /      //  Resolution resolution = resolutions[index];
         //  Vector2Int r = resolucoes[index];
         //  if (r.x != 0 && r.y != 0)
         //    Screen.SetResolution(r.x, r.y, Screen.fullScreen);
         //       Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
         Debug.Log("Cubemap");
     }
-
+    */
     #endregion
     public void Sair()
     {
