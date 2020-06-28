@@ -48,7 +48,7 @@ public class Menu : MonoBehaviour
    // public Vector2Int[] resolucoes;
    // public Dropdown resolutionDropdown;
 
-    private void Awake()
+    private void Start()
     {
        // resolutions = Screen.resolutions;
          /*resolutionDropdown.ClearOptions();
