@@ -23,7 +23,7 @@ public class CheckPoint : MonoBehaviour
     {
         Salvo = (GameMaster.gm._savepointsmenu == transform);
 
-        Cor = Mathf.MoveTowards(Cor, (Salvo ? 1 : 0), 0.5f);
+        Cor = Mathf.MoveTowards(Cor, (Salvo ? 1 : 0),Time.deltaTime );
         for (int i = 0; i < material.Length; i++)
         {
             material[i].SetFloat("_TransicaoGirassol", Cor);
