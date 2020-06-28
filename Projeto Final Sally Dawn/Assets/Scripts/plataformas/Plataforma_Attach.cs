@@ -10,14 +10,17 @@ public class Plataforma_Attach : MonoBehaviour
     {
       //  Debug.Log(gameObject.name);
     }
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
         {
             Player = collision.gameObject;
             if (collision.gameObject == Player)
             {
-                Player.transform.parent = transform;
+                if (Player.GetComponent<AndarPlayer>().isGrounded)
+                    Player.transform.parent = transform;
+                else Player.transform.parent = null;
             }
         }
         if (collision.gameObject.tag == "Zona_empurrar")
