@@ -72,6 +72,7 @@ public class Plataforma_escada : MonoBehaviour
         AnguloAtual = Mathf.MoveTowards(AnguloAtual, GoToA, VeloAngular * Time.deltaTime);
 
         if (PontoAtual.y != GoToH)
+            if (GameMaster.gm.Player.GetComponent<Ambiente>().ambiente==Ambiente.Fase.Triste)
             cmShake.shakeAmount = Shake / 100;
 
         transform.position = PontoAtual;
