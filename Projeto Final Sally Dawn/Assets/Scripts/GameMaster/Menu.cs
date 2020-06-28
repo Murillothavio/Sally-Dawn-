@@ -23,7 +23,7 @@ public class Menu : MonoBehaviour
     public Idiomas idioma;
     [SerializeField]
     private GameObject[] TxtIdioma;
-    public bool load=true, Jogando,IsMenu, VaiResetar, ChegouMenu;
+    public bool load = true, Jogando, IsMenu, VaiResetar;//, ChegouMenu;
 
     [HideInInspector]
     public int nLembr;
@@ -162,29 +162,29 @@ public class Menu : MonoBehaviour
         {
             Jogando = false;
             VaiResetar = false;
-            if (!ChegouMenu)
-            {
-                ChegouMenu = true;
-                if (acMenu != null)
-                {
-                    GameMaster.gm.Player.GetComponent<AudioChange>().acEvento = acMenu;
-                    GameMaster.gm.Player.GetComponent<AudioChange>().Trocando = true;
-                }
-                Debug.Log("carregar");
-            }
+       //     if (!ChegouMenu)
+           // {
+  //              ChegouMenu = true;
+    //            if (acMenu != null)
+      //          {
+        //            GameMaster.gm.Player.GetComponent<AudioChange>().acEvento = acMenu;
+          //          GameMaster.gm.Player.GetComponent<AudioChange>().Trocando = true;
+            //    }
+              //  Debug.Log("carregar");
+         //   }
         }
         else if (tela == Telas.TelaJogo)
         {
             Jogando = true;
-            if (ChegouMenu)
-            {
-                ChegouMenu = false;
-                if (GameMaster.gm.Player.GetComponent<AudioChange>().acEvento == acMenu)
-                {
-                    GameMaster.gm.Player.GetComponent<AudioChange>().acEvento = null;
-                    GameMaster.gm.Player.GetComponent<AudioChange>().Trocando = true;
-                }
-            }
+       //     if (ChegouMenu)
+         //   {
+           //     ChegouMenu = false;
+             //   if (GameMaster.gm.Player.GetComponent<AudioChange>().acEvento == acMenu)
+               // {
+                 //   GameMaster.gm.Player.GetComponent<AudioChange>().acEvento = null;
+                   // GameMaster.gm.Player.GetComponent<AudioChange>().Trocando = true;
+        //        }
+          //  }
         }
 
     }
@@ -259,12 +259,12 @@ public class Menu : MonoBehaviour
     public void GoToTelaJogo() { tela = Telas.TelaJogo; TrocarTela(); }
     public void GoToJanelaOpcoes() { tela = Telas.JanelaOpcoes; }
     public void GoToTelaCredito() { tela = Telas.TelaCredito;
-        if (acCredito != null)
-        {
-            GameMaster.gm.Player.GetComponent<AudioChange>().acEvento = acCredito;
-            GameMaster.gm.Player.GetComponent<AudioChange>().Trocando = true;
-            ChegouMenu = false;
-        }
+   //     if (acCredito != null)
+     //   {
+       //     GameMaster.gm.Player.GetComponent<AudioChange>().acEvento = acCredito;
+         //   GameMaster.gm.Player.GetComponent<AudioChange>().Trocando = true;
+        //cu    ChegouMenu = false;
+        //}
     }
     public void GoToVoltar() {
         if (Jogando) tela = Telas.TelaMenu;
