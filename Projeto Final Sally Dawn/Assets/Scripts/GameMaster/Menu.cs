@@ -51,7 +51,7 @@ public class Menu : MonoBehaviour
     private void Awake()
     {
         resolutions = Screen.resolutions;
-         resolutionDropdown.ClearOptions();
+         /*resolutionDropdown.ClearOptions();
 
          List<string> Options=new List<string>();
          int currentResolutionIndex = 0;
@@ -67,7 +67,7 @@ public class Menu : MonoBehaviour
         }
          resolutionDropdown.AddOptions(Options);
          resolutionDropdown.value = currentResolutionIndex;
-         resolutionDropdown.RefreshShownValue();
+         resolutionDropdown.RefreshShownValue();*/
 
         TrocarTela();
         if (GameMaster.gm.Player != null)
@@ -309,11 +309,12 @@ public class Menu : MonoBehaviour
     }
     public void SetResolution(int index)
     {
-        Resolution resolution = resolutions[index];
-        Vector2Int r = resolucoes[index];
-      //  if (r.x != 0 && r.y != 0)
+        //  Resolution resolution = resolutions[index];
+        //  Vector2Int r = resolucoes[index];
+        //  if (r.x != 0 && r.y != 0)
         //    Screen.SetResolution(r.x, r.y, Screen.fullScreen);
-            Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        //       Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        Debug.Log("Cubemap");
     }
 
     #endregion
