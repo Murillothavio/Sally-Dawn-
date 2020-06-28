@@ -8,66 +8,67 @@ using TMPro;
 public class Menu : MonoBehaviour
 {
     [System.Serializable]
-    public class MenuLembrancas {
+    public class MenuLembrancas
+    {
         [HideInInspector]
         public string name;
         public bool SeTem;
         public GameObject Descric, Raiz;
     }
 
-//    public AudioMixer aMixerEffect;
-  //  public AudioClip acMenu, acCredito;
+    public AudioMixer aMixerEffect;
+    public AudioClip acMenu, acCredito;
     public enum Telas { TelasInicial, TelaPrincipal, TelaJogar, TelaNovo, TelaContinuar, TelaJogo, TelaMenu, JanelaLembranca, JanelaOpcoes, TelaCredito, TelaSair }
     public Telas tela;
-    public enum Idiomas { Portugues, English}
+    public enum Idiomas { Portugues, English }
     public Idiomas idioma;
     [SerializeField]
     private GameObject[] TxtIdioma;
-    public bool load = true, Jogando, IsMenu, VaiResetar;//, ChegouMenu;
+    public bool load = true, Jogando, IsMenu, VaiResetar, ChegouMenu;
 
     [HideInInspector]
     public int nLembr;
     public Transform Raizes;
-  //  [SerializeField]
+    //  [SerializeField]
     private Animator AnimiRaizes;
     private Emocoes lmb;
-    public MenuLembrancas[] Lembr= new MenuLembrancas[7];
+    public MenuLembrancas[] Lembr = new MenuLembrancas[7];
 
-    [HideInInspector]
+  //  [HideInInspector]
     public int nOpcoes;
     public GameObject[] JanOpcoes = new GameObject[4];
 
-    [HideInInspector]
+  //  [HideInInspector]
     public int nObjetivos;
     public GameObject[] ListaObjetivos;
 
     [HideInInspector]
     public GameObject TelasInicial, TelaPrincipal, TelaJogar, TelaNovo, TelaContinuar, TelaJogo, TelaMenu, JanelaLembranca, JanelaOpcoes, TelaCredito, TelaSair;
 
-   // Resolution[] resolutions;
-   // public Vector2Int[] resolucoes;
-   // public Dropdown resolutionDropdown;
+    Resolution[] resolutions;
+    public Vector2Int[] resolucoes;
+    public Dropdown resolutionDropdown;
 
     private void Start()
     {
-       // resolutions = Screen.resolutions;
-         /*resolutionDropdown.ClearOptions();
+        resolutions = Screen.resolutions;
+        resolutionDropdown.ClearOptions();
 
-         List<string> Options=new List<string>();
-         int currentResolutionIndex = 0;
+        List<string> Options = new List<string>();
+        int currentResolutionIndex = 0;
         for (int i = 0; i < resolutions.Length; i++)
         {
             string option = resolutions[i].width + " x " + resolutions[i].height;
-            
-                Options.Add(option);
+
+            Options.Add(option);
 
             if (resolutions[i].width == Screen.currentResolution.width &&
                 resolutions[i].height == Screen.currentResolution.height)
                 currentResolutionIndex = i;
         }
-         resolutionDropdown.AddOptions(Options);
-         resolutionDropdown.value = currentResolutionIndex;
-         resolutionDropdown.RefreshShownValue();*/
+        resolutionDropdown.AddOptions(Options);
+        resolutionDropdown.value = currentResolutionIndex;
+        resolutionDropdown.RefreshShownValue();
 
         TrocarTela();
         if (GameMaster.gm.Player != null)
@@ -162,29 +163,29 @@ public class Menu : MonoBehaviour
         {
             Jogando = false;
             VaiResetar = false;
-       //     if (!ChegouMenu)
-           // {
-  //              ChegouMenu = true;
-    //            if (acMenu != null)
-      //          {
-        //            GameMaster.gm.Player.GetComponent<AudioChange>().acEvento = acMenu;
-          //          GameMaster.gm.Player.GetComponent<AudioChange>().Trocando = true;
-            //    }
-              //  Debug.Log("carregar");
-         //   }
+            if (!ChegouMenu)
+            {
+                ChegouMenu = true;
+                if (acMenu != null)
+                {
+                    GameMaster.gm.Player.GetComponent<AudioChange>().acEvento = acMenu;
+                    GameMaster.gm.Player.GetComponent<AudioChange>().Trocando = true;
+                }
+                Debug.Log("carregar");
+            }
         }
         else if (tela == Telas.TelaJogo)
         {
             Jogando = true;
-       //     if (ChegouMenu)
-         //   {
-           //     ChegouMenu = false;
-             //   if (GameMaster.gm.Player.GetComponent<AudioChange>().acEvento == acMenu)
-               // {
-                 //   GameMaster.gm.Player.GetComponent<AudioChange>().acEvento = null;
-                   // GameMaster.gm.Player.GetComponent<AudioChange>().Trocando = true;
-        //        }
-          //  }
+            if (ChegouMenu)
+            {
+                ChegouMenu = false;
+                if (GameMaster.gm.Player.GetComponent<AudioChange>().acEvento == acMenu)
+                {
+                    GameMaster.gm.Player.GetComponent<AudioChange>().acEvento = null;
+                    GameMaster.gm.Player.GetComponent<AudioChange>().Trocando = true;
+                }
+            }
         }
 
     }
@@ -252,21 +253,24 @@ public class Menu : MonoBehaviour
     public void GoToTelaMenu() { tela = Telas.TelaMenu; }
     public void GoToJanelaLembranca() { tela = Telas.JanelaLembranca; }
     public void GoToTelasInicial() { tela = Telas.TelasInicial; }
-    public void GoToTelaPrincipal() { tela = Telas.TelaPrincipal;GameMaster.gm.testsalvar = true; }
+    public void GoToTelaPrincipal() { tela = Telas.TelaPrincipal; GameMaster.gm.testsalvar = true; }
     public void GoToTelaJogar() { tela = Telas.TelaJogar; }
-    public void GoToTelaNovo() { tela = Telas.TelaNovo;        if (VaiResetar) GameMaster.gm.Resetar = true;    }
+    public void GoToTelaNovo() { tela = Telas.TelaNovo; if (VaiResetar) GameMaster.gm.Resetar = true; }
     public void GoToTelaContinuar() { tela = Telas.TelaContinuar; }
     public void GoToTelaJogo() { tela = Telas.TelaJogo; TrocarTela(); }
     public void GoToJanelaOpcoes() { tela = Telas.JanelaOpcoes; }
-    public void GoToTelaCredito() { tela = Telas.TelaCredito;
-   //     if (acCredito != null)
-     //   {
-       //     GameMaster.gm.Player.GetComponent<AudioChange>().acEvento = acCredito;
-         //   GameMaster.gm.Player.GetComponent<AudioChange>().Trocando = true;
-        //cu    ChegouMenu = false;
-        //}
+    public void GoToTelaCredito()
+    {
+        tela = Telas.TelaCredito;
+        if (acCredito != null)
+        {
+            GameMaster.gm.Player.GetComponent<AudioChange>().acEvento = acCredito;
+            GameMaster.gm.Player.GetComponent<AudioChange>().Trocando = true;
+            ChegouMenu = false;
+        }
     }
-    public void GoToVoltar() {
+    public void GoToVoltar()
+    {
         if (Jogando) tela = Telas.TelaMenu;
         else tela = Telas.TelaPrincipal;
     }
@@ -286,7 +290,7 @@ public class Menu : MonoBehaviour
     public void OpcoesTRES() { nOpcoes = 2; }
     public void IdiomaPortugues() { idioma = Idiomas.Portugues; }
     public void IdiomaIngles() { idioma = Idiomas.English; }
-    public  void ControleConjA()
+    public void ControleConjA()
     {
         GameMaster.gm.Player.GetComponent<Controles>().SetConjunto = Controles.GetConjunto.ConjuntoA;
     }
@@ -297,11 +301,11 @@ public class Menu : MonoBehaviour
 
     #endregion
     #region Config 
-/*    public void SetVolumeMusica(float volume)
+    public void SetVolumeMusica(float volume)
     {
         GameMaster.gm.Player.GetComponent<AudioChange>().AudioVolume = volume;
     }
- //   public void SetVolumeEfeito(float volume)
+    public void SetVolumeEfeito(float volume)
     {
         aMixerEffect.SetFloat("SFXVolume", volume);
         Debug.Log(volume);
@@ -309,14 +313,14 @@ public class Menu : MonoBehaviour
     }
     public void SetResolution(int index)
     {
-  /      //  Resolution resolution = resolutions[index];
+        Resolution resolution = resolutions[index];
         //  Vector2Int r = resolucoes[index];
-        //  if (r.x != 0 && r.y != 0)
-        //    Screen.SetResolution(r.x, r.y, Screen.fullScreen);
-        //       Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        // if (r.x != 0 && r.y != 0)
+        //   Screen.SetResolution(r.x, r.y, Screen.fullScreen);
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
         Debug.Log("Cubemap");
     }
-    */
+
     #endregion
     public void Sair()
     {
