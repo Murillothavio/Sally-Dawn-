@@ -192,12 +192,13 @@ public class Menu : MonoBehaviour
                 Invoke("GoLoadar", 1);
                 Debug.Log("carregar");
 
-                if (!RecarregarScene)
+                if (RecarregarScene)
                 {
-                    RecarregarScene = true;
+                    RecarregarScene = false;
                     Debug.Log("recarregou");
                     SceneManager.LoadScene("Game");
                 }
+                RecarregarScene = true;
             }
         }
         else if (tela == Telas.TelaJogo)
