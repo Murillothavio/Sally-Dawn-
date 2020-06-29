@@ -67,7 +67,7 @@ public class AndarPlayer : MonoBehaviour
     public bool isTeto;
     [HideInInspector]
     public Vector3 TetoSize = new Vector3(1.16f, 1.75f, 0);
-    //[SerializeField]
+    [SerializeField]
     private Vector3 TetoCenter = new Vector3(0, .3f, 0);
     #endregion
 

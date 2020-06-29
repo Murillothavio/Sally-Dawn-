@@ -6,7 +6,7 @@ public class TextoControle : MonoBehaviour
 {
     private Animator anim;
     private Rigidbody rb;
-    private Collider colli;
+  //  private Collider colli;
     [Range(0,60)]
     public float TimeLife;
     private float life;
@@ -16,15 +16,15 @@ public class TextoControle : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
-        colli = GetComponent<Collider>();
+       // colli = GetComponent<Collider>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (tag == "Tuto")
-            if (colli != null)
-                colli.enabled = (!GameMaster.gm.PAUSADO);
+     //   if (tag == "Tuto")
+     //       if (colli != null)
+    ///            colli.enabled = (!GameMaster.gm.PAUSADO);
 
         if (Aparecer && (!GameMaster.gm.PAUSADO))
             TimeLife -= Time.deltaTime;
@@ -35,7 +35,7 @@ public class TextoControle : MonoBehaviour
             Destroy(gameObject, 2f);
         }       
 
-        anim.SetBool("Aparecer", Aparecer);
+        anim.SetBool("Aparecer", Aparecer && !GameMaster.gm.PAUSADO);
         anim.SetBool("Sumir", Sumir);
     }
     private void OnTriggerEnter(Collider other)
