@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class RaivaPedraAfundar : MonoBehaviour
 {
-    public bool SimEGambiara;
+    public RaivaPedraCair[] Pass;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Player")
+        Debug.Log(other.tag);
+        if (other.tag == "Player")
         {
-            SimEGambiara = true;
+            for (int i = 0; i < Pass.Length; i++)
+            {
+                Pass[i].Afudar = true;
+            }
         }
     }
 }

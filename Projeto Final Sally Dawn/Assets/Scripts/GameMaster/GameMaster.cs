@@ -8,7 +8,7 @@ public class GameMaster : MonoBehaviour
     public GameObject Player, Cam;
 
   //  [HideInInspector]
-    public string NameFileS = "saves", TypeSave = "txt";
+    public string NameFileS = "saves", TypeSave = "dat";
  //   [HideInInspector]
     public  string filesave;
 
@@ -28,8 +28,9 @@ public class GameMaster : MonoBehaviour
 
     private Animator anim, CamFade;
     private float SpeedFade = 1;
-    
+
     public bool testsalvar, testloadar, Resetar;
+
     [Header("save")]
     public float DataNumeroFase;
     public Emocoes DataPowerUps, DataMemorias;
@@ -73,9 +74,10 @@ public class GameMaster : MonoBehaviour
     {
         PAUSADO = GetComponent<Menu>().IsMenu;
 
-        if (testloadar)
+       if (testloadar)
         {
             testloadar = false;
+            Debug.Log("Hii");
             SetData(LoadPlayer());
             Player.GetComponent<Ambiente>().TrocaConfig();
         }
@@ -103,7 +105,6 @@ public class GameMaster : MonoBehaviour
 
     public void GetData()
     {
-        Debug.Log("Get");
         DataNumeroFase = GameMaster.gm.Player.GetComponent<Ambiente>().NumFases;
         Atual.NumeroDaFase = (int)DataNumeroFase;
 
@@ -131,30 +132,29 @@ public class GameMaster : MonoBehaviour
     public void SetData(SaveData ds)
     {
 
-        GameMaster.gm.Player.GetComponent<Ambiente>().SetAmbiente(ds.NumeroDaFase);
+        Player.GetComponent<Ambiente>().SetAmbiente(ds.NumeroDaFase);
 
-        GameMaster.gm.Player.GetComponent<Eventos>().Memorias.Neutro = (ds.NumeroMemorias[0] == 1);
-        GameMaster.gm.Player.GetComponent<Eventos>().Memorias.Alegre = (ds.NumeroMemorias[1] == 1);
-        GameMaster.gm.Player.GetComponent<Eventos>().Memorias.Triste = (ds.NumeroMemorias[2] == 1);
-        GameMaster.gm.Player.GetComponent<Eventos>().Memorias.Raiva = (ds.NumeroMemorias[3] == 1);
-        GameMaster.gm.Player.GetComponent<Eventos>().Memorias.Nojo = (ds.NumeroMemorias[4] == 1);
-        GameMaster.gm.Player.GetComponent<Eventos>().Memorias.Medo = (ds.NumeroMemorias[5] == 1);
-        GameMaster.gm.Player.GetComponent<Eventos>().Memorias.Etereo = (ds.NumeroMemorias[6] == 1);
+        Player.GetComponent<Eventos>().Memorias.Neutro = (ds.NumeroMemorias[0] == 1);
+        Player.GetComponent<Eventos>().Memorias.Alegre = (ds.NumeroMemorias[1] == 1);
+        Player.GetComponent<Eventos>().Memorias.Triste = (ds.NumeroMemorias[2] == 1);
+        Player.GetComponent<Eventos>().Memorias.Raiva = (ds.NumeroMemorias[3] == 1);
+        Player.GetComponent<Eventos>().Memorias.Nojo = (ds.NumeroMemorias[4] == 1);
+        Player.GetComponent<Eventos>().Memorias.Medo = (ds.NumeroMemorias[5] == 1);
+        Player.GetComponent<Eventos>().Memorias.Etereo = (ds.NumeroMemorias[6] == 1);
 
-        GameMaster.gm.Player.GetComponent<Eventos>().PwrUp.Neutro = (ds.NumeroPowerUp[0] == 1);
-        GameMaster.gm.Player.GetComponent<Eventos>().PwrUp.Alegre = (ds.NumeroPowerUp[1] == 1);
-        GameMaster.gm.Player.GetComponent<Eventos>().PwrUp.Triste = (ds.NumeroPowerUp[2] == 1);
-        GameMaster.gm.Player.GetComponent<Eventos>().PwrUp.Raiva = (ds.NumeroPowerUp[3] == 1);
-        GameMaster.gm.Player.GetComponent<Eventos>().PwrUp.Nojo = (ds.NumeroPowerUp[4] == 1);
-        GameMaster.gm.Player.GetComponent<Eventos>().PwrUp.Medo = (ds.NumeroPowerUp[5] == 1);
-        GameMaster.gm.Player.GetComponent<Eventos>().PwrUp.Etereo = (ds.NumeroPowerUp[6] == 1);
+        Player.GetComponent<Eventos>().PwrUp.Neutro = (ds.NumeroPowerUp[0] == 1);
+        Player.GetComponent<Eventos>().PwrUp.Alegre = (ds.NumeroPowerUp[1] == 1);
+        Player.GetComponent<Eventos>().PwrUp.Triste = (ds.NumeroPowerUp[2] == 1);
+        Player.GetComponent<Eventos>().PwrUp.Raiva = (ds.NumeroPowerUp[3] == 1);
+        Player.GetComponent<Eventos>().PwrUp.Nojo = (ds.NumeroPowerUp[4] == 1);
+        Player.GetComponent<Eventos>().PwrUp.Medo = (ds.NumeroPowerUp[5] == 1);
+        Player.GetComponent<Eventos>().PwrUp.Etereo = (ds.NumeroPowerUp[6] == 1);
 
         Vector3 posicao = Vector3.zero;
         posicao.x = ds.SavePointMenuCoord[0];
         posicao.y = ds.SavePointMenuCoord[1];
         posicao.z = ds.SavePointMenuCoord[2];
-        GameMaster.gm.Player.transform.position = posicao;
-        Debug.Log("Carregou " + posicao);
+        Player.transform.position = posicao;
         
     }
     
@@ -224,14 +224,11 @@ public class GameMaster : MonoBehaviour
 
     public  void SavePlayer()
     {
-        Debug.Log("hi");
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + filesave;
-        Debug.Log(path);
         FileStream stream = new FileStream(path, FileMode.Create);
 
         GetData();
-        Debug.Log(Atual.NumeroDaFase);
         formatter.Serialize(stream, Atual);
         stream.Close();
 
@@ -248,6 +245,7 @@ public class GameMaster : MonoBehaviour
             SaveData data = formattter.Deserialize(stream) as SaveData;
             stream.Close();
             Atual = data;
+            Debug.Log("ok");
             return data;
 
         }

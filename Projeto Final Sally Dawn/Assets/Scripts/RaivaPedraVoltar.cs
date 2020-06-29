@@ -4,24 +4,19 @@ using UnityEngine;
 
 public class RaivaPedraVoltar : MonoBehaviour
 {
-    public Transform[] Pedras;
-    // Start is called before the first frame update
-    void Start()
-    {
-        Pedras = new Transform[transform.childCount];
+    public RaivaPedraCair[] Pass;
 
-        for (int i = 0; i < Pedras.Length; i++)
-        {
-            Pedras[i] = transform.GetChild(i);
-        }
-    }
+
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            for (int i = 0; i < Pedras.Length; i++)
-                Pedras[i].GetComponent<RaivaPedraCair>().Resetar = true;
+            Debug.Log("algo");
+            for (int i = 0; i < Pass.Length; i++)
+            {
+                Pass[i].Afudar = false;
+            }
         }
     }
 }

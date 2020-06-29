@@ -1,10 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.Audio;
-using UnityEngine.UI;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using TMPro;
+using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
@@ -16,6 +17,12 @@ public class Menu : MonoBehaviour
         public bool SeTem;
         public GameObject Descric, Raiz;
     }
+    [System.Serializable]
+    public class ConfigData {
+        public int IdiomaData;
+        public float MusicVolumeData, SfxVolumeData;
+    }
+
     #region Variavl
     public AudioMixer aMixerEffect;
     public AudioClip acMenu, acCredito;
@@ -28,6 +35,7 @@ public class Menu : MonoBehaviour
     public bool load = true, Jogando, IsMenu, VaiResetar, ChegouMenu, EsperaCarregou, RecarregarScene;
     #endregion
     public float TempEsperando;
+    public ConfigData Zero, Atual;
     #region Objetos
     [HideInInspector]
     public int nLembr;
@@ -56,6 +64,7 @@ public class Menu : MonoBehaviour
 
     private void Start()
     {
+        #region resolucoes
         resolutions = Screen.resolutions;
         resolutionDropdown.ClearOptions();
 
@@ -74,6 +83,7 @@ public class Menu : MonoBehaviour
         resolutionDropdown.AddOptions(Options);
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
+        #endregion
 
         TrocarTela();
         if (GameMaster.gm.Player != null)
@@ -83,6 +93,8 @@ public class Menu : MonoBehaviour
         else
             AnimiRaizes = Raizes.GetChild(0).GetComponent<Animator>();
 
+        CarregarConfig();
+        Configar(Atual);
     }
 
     // Update is called once per frame
@@ -183,6 +195,14 @@ public class Menu : MonoBehaviour
             if (!ChegouMenu)
             {
                 ChegouMenu = true;
+                if (RecarregarScene)
+                {
+                    RecarregarScene = false;
+                    Debug.Log("recarregou");
+                    SceneManager.LoadScene("Game");
+                }
+                RecarregarScene = true;
+
                 if (acMenu != null)
                 {
                     GameMaster.gm.Player.GetComponent<AudioChange>().acEvento = acMenu;
@@ -192,13 +212,7 @@ public class Menu : MonoBehaviour
                 Invoke("GoLoadar", 1);
                 Debug.Log("carregar");
 
-                if (RecarregarScene)
-                {
-                    RecarregarScene = false;
-                    Debug.Log("recarregou");
-                    SceneManager.LoadScene("Game");
-                }
-                RecarregarScene = true;
+             
             }
         }
         else if (tela == Telas.TelaJogo)
@@ -281,6 +295,8 @@ public class Menu : MonoBehaviour
             if (item.GetComponent<Text>() != null)
                 item.GetComponent<Text>().enabled = (idioma == Idiomas.English);
         }
+        Atual.IdiomaData = (idioma == Idiomas.Portugues) ? 0 : 1;
+          
     }
     #region GoTo
     public void GoToTelaSair() { tela = Telas.TelaSair; }
@@ -342,12 +358,12 @@ public class Menu : MonoBehaviour
     public void SetVolumeMusica(float volume)
     {
         GameMaster.gm.Player.GetComponent<AudioChange>().AudioVolume = volume;
+        Atual.MusicVolumeData = volume;
     }
     public void SetVolumeEfeito(float volume)
     {
         aMixerEffect.SetFloat("SFXVolume", volume);
-        Debug.Log(volume);
-
+        Atual.SfxVolumeData = volume;
     }
     public void SetResolution(int index)
     {
@@ -360,6 +376,47 @@ public class Menu : MonoBehaviour
     }
 
     #endregion
+
+    public void SalvarConfig()
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + "/Config.dat";
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        formatter.Serialize(stream, Atual);
+        stream.Close();
+    }
+    void CarregarConfig()
+    {
+        string path = Application.persistentDataPath + "/Config.dat";
+        if (File.Exists(path))
+        {
+            BinaryFormatter formattter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            ConfigData data = formattter.Deserialize(stream) as ConfigData;
+            stream.Close();
+            Atual = data;
+        }
+        else
+            Debug.LogError("Save file not found in " + path);
+    }
+
+    public void ResetarConfig()
+    {
+        Configar(Zero);
+    }
+    void  Configar(ConfigData data)
+    {
+        if (data.IdiomaData == 0)
+            idioma = Idiomas.Portugues;
+        if (data.IdiomaData == 1)
+            idioma = Idiomas.English;
+
+        SetVolumeEfeito(data.SfxVolumeData);
+        SetVolumeMusica(data.MusicVolumeData);
+    }
+
     public void Sair()
     {
         Application.Quit();
