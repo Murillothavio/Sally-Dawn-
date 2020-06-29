@@ -82,6 +82,7 @@ public class FINAL : MonoBehaviour
 
     void LevarFim()
     {
+        GameMaster.gm.Cam.GetComponent<CameraFollow>().NovoAfastamento = 25;
         Invoke("Libera", 6 + TempFraseFade);
         if (FinalNum < Final.Length)
         {

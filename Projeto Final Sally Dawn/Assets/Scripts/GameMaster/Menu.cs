@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using TMPro;
@@ -102,18 +103,12 @@ public class Menu : MonoBehaviour
                 if (Input.anyKeyDown)
                 {
                     EsperaCarregou = false;
-                    if (!load)
-                    {
                         tela = Telas.TelaPrincipal;
                         TrocarTela();
-                    }
-                    else
-                    {
-                        load = false;
-                    }
                 }
             }
             TxtLoadInicial.SetActive(EsperaCarregou);
+           // Debug.Log(SceneManager.sceneLoaded)
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
