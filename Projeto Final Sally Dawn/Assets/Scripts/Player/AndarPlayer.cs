@@ -57,9 +57,11 @@ public class AndarPlayer : MonoBehaviour
     [HideInInspector]
     public Vector3 GroundSize = new Vector3(1.16f, 1.75f, 0);
     private Vector3 GroundCenter = new Vector3(0, .3f, 0);
-    [HideInInspector] public bool StopVelocidade;
+    [HideInInspector]
+    public bool StopVelocidade;
     private Vector3 Velocity;
-    #endregion
+    private bool[] Chaos = new bool[3];
+#endregion
     public bool isClimb;
 
     #region Tetos
@@ -347,13 +349,13 @@ public class AndarPlayer : MonoBehaviour
         origemL.x -= GroundSize.x / 2;
         origemR.x += GroundSize.x / 2;
 
-        bool[] Chaos = new bool[3];
-
         Chaos[0]= ((Physics.Raycast(origemL, Vector3.down, GroundSize.y, Floor)) || (stateAnimacao == StateMachine.Escalando));
         Chaos[1]= ((Physics.Raycast(origem, Vector3.down, GroundSize.y, Floor)) || (stateAnimacao == StateMachine.Escalando));
         Chaos[2]= ((Physics.Raycast(origemR, Vector3.down, GroundSize.y, Floor)) || (stateAnimacao == StateMachine.Escalando));
 
         isGrounded = (Chaos[0] || Chaos[1] || Chaos[2]);
+
+
         if (stateAnimacao == StateMachine.Walk || stateAnimacao == StateMachine.Ocioso || stateAnimacao == StateMachine.Escalando
             || stateAnimacao == StateMachine.Pulando || stateAnimacao == StateMachine.Caindo || stateAnimacao==StateMachine.None)
         {
@@ -386,7 +388,7 @@ public class AndarPlayer : MonoBehaviour
                 //      moveSpeed = AtualConfig.walkSpeed;
                 vel.y = AtualConfig.jumpforce;
                 rb.velocity = vel;
-
+                Debug.Log(Chaos[0] + " || " + Chaos[1] + " || " + Chaos[2]);
                 #region Efeito
                 if (MaxJump >= currentJump)
                     GetComponent<EfeitosSally>().EfeitoPular();

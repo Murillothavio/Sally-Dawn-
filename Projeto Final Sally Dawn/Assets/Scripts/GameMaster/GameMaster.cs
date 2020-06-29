@@ -7,9 +7,9 @@ public class GameMaster : MonoBehaviour
     public static GameMaster gm;
     public GameObject Player, Cam;
 
-    [HideInInspector]
+  //  [HideInInspector]
     public string NameFileS = "saves", TypeSave = "txt";
-    [HideInInspector]
+ //   [HideInInspector]
     public  string filesave;
 
     public bool PAUSADO;
@@ -103,6 +103,7 @@ public class GameMaster : MonoBehaviour
 
     public void GetData()
     {
+        Debug.Log("Get");
         DataNumeroFase = GameMaster.gm.Player.GetComponent<Ambiente>().NumFases;
         Atual.NumeroDaFase = (int)DataNumeroFase;
 
@@ -223,12 +224,14 @@ public class GameMaster : MonoBehaviour
 
     public  void SavePlayer()
     {
+        Debug.Log("hi");
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + filesave;
+        Debug.Log(path);
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        GetData(); 
-
+        GetData();
+        Debug.Log(Atual.NumeroDaFase);
         formatter.Serialize(stream, Atual);
         stream.Close();
 
