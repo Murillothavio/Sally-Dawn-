@@ -33,9 +33,12 @@ public class CheckPoint : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("salvaar");
-            GameMaster.gm._savepointsmenu = transform;
-            GameMaster.gm.SavePlayer();
+            if (!Salvo)
+            {
+                Debug.Log("salvaar");
+                GameMaster.gm._savepointsmenu = transform;
+                GameMaster.gm.SavePlayer();
+            }
         }
     }
 }

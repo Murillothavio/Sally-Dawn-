@@ -24,7 +24,9 @@ public class Menu : MonoBehaviour
     public Idiomas idioma;
     [SerializeField]
     private GameObject[] TxtIdioma;
-    public bool load = true, Jogando, IsMenu, VaiResetar, ChegouMenu;
+    public bool load = true, Jogando, IsMenu, VaiResetar, ChegouMenu, EsperaCarregou;
+
+    public float TempEsperando;
 
     [HideInInspector]
     public int nLembr;
@@ -44,7 +46,7 @@ public class Menu : MonoBehaviour
 
     [HideInInspector]
     public GameObject TelasInicial, TelaPrincipal, TelaJogar, TelaNovo, TelaContinuar, TelaJogo, TelaMenu, JanelaLembranca;
-    public GameObject JanelaOpcoes, TelaCredito, TelaSair, TelaSobre;
+    public GameObject JanelaOpcoes, TelaCredito, TelaSair, TelaSobre, TxtLoadInicial;
 
     Resolution[] resolutions;
     public Vector2Int[] resolucoes;
@@ -85,16 +87,34 @@ public class Menu : MonoBehaviour
     void Update()
     {
         if (tela == Telas.TelasInicial)
-            if (Input.anyKeyDown)
-                if (!load)
+        {
+            if (!EsperaCarregou)
+            {
+                TempEsperando += Time.deltaTime;
+                if (TempEsperando > 3)
                 {
-                    tela = Telas.TelaPrincipal;
-                    TrocarTela();
+                    EsperaCarregou = true;
+                    TempEsperando = 0;
                 }
-                else
+            }
+            else
+            {
+                if (Input.anyKeyDown)
                 {
-                    load = false;
+                    EsperaCarregou = false;
+                    if (!load)
+                    {
+                        tela = Telas.TelaPrincipal;
+                        TrocarTela();
+                    }
+                    else
+                    {
+                        load = false;
+                    }
                 }
+            }
+            TxtLoadInicial.SetActive(EsperaCarregou);
+        }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -172,11 +192,14 @@ public class Menu : MonoBehaviour
                     GameMaster.gm.Player.GetComponent<AudioChange>().acEvento = acMenu;
                     GameMaster.gm.Player.GetComponent<AudioChange>().Trocando = true;
                 }
+                GameMaster.gm.FadeIN(2,1);
+                Invoke("GoLoadar", 1);
                 Debug.Log("carregar");
             }
         }
         else if (tela == Telas.TelaJogo)
         {
+            VaiResetar = false;
             Jogando = true;
             if (ChegouMenu)
             {
@@ -189,6 +212,10 @@ public class Menu : MonoBehaviour
             }
         }
 
+    }
+    private void GoLoadar()
+    {
+        GameMaster.gm.testloadar = true;
     }
     private void Lembrancas()
     {
@@ -256,11 +283,14 @@ public class Menu : MonoBehaviour
     public void GoToTelaMenu() { tela = Telas.TelaMenu; }
     public void GoToJanelaLembranca() { tela = Telas.JanelaLembranca; }
     public void GoToTelasInicial() { tela = Telas.TelasInicial; }
-    public void GoToTelaPrincipal() { tela = Telas.TelaPrincipal; GameMaster.gm.testsalvar = true; }
+
+    public void GoToTelaPrincipal() { tela = Telas.TelaPrincipal;  }
     public void GoToTelaJogar() { tela = Telas.TelaJogar; }
-    public void GoToTelaNovo() { tela = Telas.TelaNovo; if (VaiResetar) GameMaster.gm.Resetar = true; }
+
+    public void GoToTelaNovo() { tela = Telas.TelaNovo; VaiResetar = true; }
     public void GoToTelaContinuar() { tela = Telas.TelaContinuar; }
-    public void GoToTelaJogo() { tela = Telas.TelaJogo; TrocarTela(); }
+
+    public void GoToTelaJogo() { tela = Telas.TelaJogo; if (VaiResetar) GameMaster.gm.Resetar = true; TrocarTela(); }
     public void GoToJanelaOpcoes() { tela = Telas.JanelaOpcoes; }
     public void GoToSobre() { tela = Telas.TelaSobre; }
     public void GoToTelaCredito()

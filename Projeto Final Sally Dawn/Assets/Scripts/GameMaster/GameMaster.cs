@@ -64,8 +64,6 @@ public class GameMaster : MonoBehaviour
     }
     void Start()
     {
-     //   InverterPlat();
-
         DataMemorias = GameMaster.gm.Player.GetComponent<Eventos>().Memorias;
         DataPowerUps = GameMaster.gm.Player.GetComponent<Eventos>().PwrUp;
     }
@@ -89,12 +87,18 @@ public class GameMaster : MonoBehaviour
         if (Resetar)
         {
             Resetar = false;
-            SetData(Zero);
+            Player.GetComponent<AndarPlayer>().CanWalk = false;
+            FadeIN(2, 1);
+            Invoke("setZero", 1);
+            Invoke("LiberaPlayer", 3);
         }
 
-
-      //  _savepointsmenu = SavePointsMenu[(int)DataNumeroFase];
         FaseCor = FasesEmCores[(int)DataNumeroFase];
+    }
+    void setZero()
+    {
+        SetData(Zero);
+
     }
 
     public void GetData()
@@ -149,6 +153,7 @@ public class GameMaster : MonoBehaviour
         posicao.y = ds.SavePointMenuCoord[1];
         posicao.z = ds.SavePointMenuCoord[2];
         GameMaster.gm.Player.transform.position = posicao;
+        Debug.Log("Carregou " + posicao);
         
     }
     

@@ -27,9 +27,10 @@ public class MorteQueda : MonoBehaviour
 
         if (GetComponent<AndarPlayer>().CanWalk)
             if (Distancia > Max)
-            {
-                GetComponent<AndarPlayer>().Morrer();
-                Debug.Log("morrer");
-            }
+                if (!GameMaster.gm.PAUSADO)
+                {
+                    GetComponent<AndarPlayer>().Morrer();
+                    Debug.Log("morrer");
+                }
     }
 }
