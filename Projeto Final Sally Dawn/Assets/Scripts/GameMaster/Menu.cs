@@ -16,7 +16,7 @@ public class Menu : MonoBehaviour
         public bool SeTem;
         public GameObject Descric, Raiz;
     }
-
+    #region Variavl
     public AudioMixer aMixerEffect;
     public AudioClip acMenu, acCredito;
     public enum Telas { TelasInicial, TelaPrincipal, TelaJogar, TelaNovo, TelaContinuar, TelaJogo, TelaMenu, JanelaLembranca, JanelaOpcoes, TelaCredito, TelaSair, TelaSobre }
@@ -25,10 +25,10 @@ public class Menu : MonoBehaviour
     public Idiomas idioma;
     [SerializeField]
     private GameObject[] TxtIdioma;
-    public bool load = true, Jogando, IsMenu, VaiResetar, ChegouMenu, EsperaCarregou;
-
+    public bool load = true, Jogando, IsMenu, VaiResetar, ChegouMenu, EsperaCarregou, RecarregarScene;
+    #endregion
     public float TempEsperando;
-
+    #region Objetos
     [HideInInspector]
     public int nLembr;
     public Transform Raizes;
@@ -47,8 +47,9 @@ public class Menu : MonoBehaviour
 
     [HideInInspector]
     public GameObject TelasInicial, TelaPrincipal, TelaJogar, TelaNovo, TelaContinuar, TelaJogo, TelaMenu, JanelaLembranca;
+    [HideInInspector]
     public GameObject JanelaOpcoes, TelaCredito, TelaSair, TelaSobre, TxtLoadInicial;
-
+    #endregion
     Resolution[] resolutions;
     public Vector2Int[] resolucoes;
     public Dropdown resolutionDropdown;
@@ -190,6 +191,13 @@ public class Menu : MonoBehaviour
                 GameMaster.gm.FadeIN(2,1);
                 Invoke("GoLoadar", 1);
                 Debug.Log("carregar");
+
+                if (!RecarregarScene)
+                {
+                    RecarregarScene = true;
+                    Debug.Log("recarregou");
+                    SceneManager.LoadScene("Game");
+                }
             }
         }
         else if (tela == Telas.TelaJogo)
