@@ -49,6 +49,7 @@ public class Elevador : MonoBehaviour
             Posi.y = Mathf.MoveTowards(Posi.y, Distancia, Speed);
             ttt -= Time.deltaTime;
         }
+       
 
         if (Mathf.Abs(Posi.y) >= Mathf.Abs(Distancia))
             Ativo = false;
