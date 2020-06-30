@@ -16,7 +16,6 @@ public class RaivaPedraCair : MonoBehaviour
     void Update()
     {
         anim.SetBool("morte", Afudar);
-        Debug.Log("cuuuuuuuu");
     }
     private void OnTriggerEnter(Collider other)
     {

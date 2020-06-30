@@ -77,9 +77,7 @@ public class GameMaster : MonoBehaviour
        if (testloadar)
         {
             testloadar = false;
-            Debug.Log("Hii");
             SetData(LoadPlayer());
-            Player.GetComponent<Ambiente>().TrocaConfig();
         }
         if (testsalvar)
         {
@@ -99,6 +97,7 @@ public class GameMaster : MonoBehaviour
     }
     void setZero()
     {
+       // Atual = Zero;
         SetData(Zero);
 
     }
@@ -133,6 +132,7 @@ public class GameMaster : MonoBehaviour
     {
 
         Player.GetComponent<Ambiente>().SetAmbiente(ds.NumeroDaFase);
+        Player.GetComponent<Ambiente>().TrocaConfig();
 
         Player.GetComponent<Eventos>().Memorias.Neutro = (ds.NumeroMemorias[0] == 1);
         Player.GetComponent<Eventos>().Memorias.Alegre = (ds.NumeroMemorias[1] == 1);
@@ -160,7 +160,6 @@ public class GameMaster : MonoBehaviour
     
     public  void InverterPlat()
     {
-        Debug.Log("inverteu");
         PlataformasDuplas = GameObject.FindGameObjectsWithTag("PlataformasMovel");
         foreach (var item in PlataformasDuplas)
         {
@@ -245,7 +244,6 @@ public class GameMaster : MonoBehaviour
             SaveData data = formattter.Deserialize(stream) as SaveData;
             stream.Close();
             Atual = data;
-            Debug.Log("ok");
             return data;
 
         }
@@ -287,8 +285,9 @@ public class GameMaster : MonoBehaviour
         Invoke("reiniciar", 1);
         
     }
-    void reinicair()
+    void reiniciar()
     {
+        setZero();
         Debug.Log("REINICIAR");
     }
     void creditar()

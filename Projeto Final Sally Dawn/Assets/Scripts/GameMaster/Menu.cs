@@ -93,6 +93,11 @@ public class Menu : MonoBehaviour
         else
             AnimiRaizes = Raizes.GetChild(0).GetComponent<Animator>();
 
+        if (acMenu != null)
+        {
+            GameMaster.gm.Player.GetComponent<AudioChange>().acEvento = acMenu;
+            GameMaster.gm.Player.GetComponent<AudioChange>().Trocando = true;
+        }
         CarregarConfig();
         Configar(Atual);
     }
@@ -210,8 +215,6 @@ public class Menu : MonoBehaviour
                 }
                 GameMaster.gm.FadeIN(2,1);
                 Invoke("GoLoadar", 1);
-                Debug.Log("carregar");
-
              
             }
         }
