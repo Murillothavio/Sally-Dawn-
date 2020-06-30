@@ -375,7 +375,6 @@ public class Menu : MonoBehaviour
         // if (r.x != 0 && r.y != 0)
         //   Screen.SetResolution(r.x, r.y, Screen.fullScreen);
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-        Debug.Log("Cubemap");
     }
 
     #endregion

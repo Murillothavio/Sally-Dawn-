@@ -287,6 +287,7 @@ public class GameMaster : MonoBehaviour
     }
     void reiniciar()
     {
+        Atual.NumeroDaFase = 0;
         setZero();
         Debug.Log("REINICIAR");
     }
