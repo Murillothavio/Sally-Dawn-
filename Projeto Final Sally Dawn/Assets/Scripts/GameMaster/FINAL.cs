@@ -27,7 +27,7 @@ public class FINAL : MonoBehaviour
         if (other.tag == "Player")
         {
             MigO = GameMaster.gm.Player.GetComponent<Eventos>().PwrUp.Neutro;
-            if (MigO)
+            if (MigO || Completou)
             {
                 GameMaster.gm.Player.GetComponent<AndarPlayer>().CanWalk = false;
                 GameMaster.gm.Player.transform.LookAt(transform.position);
